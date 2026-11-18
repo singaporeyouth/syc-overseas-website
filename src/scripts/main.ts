@@ -74,7 +74,8 @@
       const value = btn.getAttribute('data-filter') || 'all';
       const scope = group ? document.querySelector(`[data-filter-scope="${group}"]`) : document;
       if (!scope) return;
-      scope.querySelectorAll<HTMLButtonElement>('[data-filter]').forEach((b) => b.classList.remove('active'));
+      const btnSel = group ? `[data-filter][data-filter-group="${group}"]` : '[data-filter]';
+      document.querySelectorAll<HTMLButtonElement>(btnSel).forEach((b) => b.classList.remove('active'));
       btn.classList.add('active');
       scope.querySelectorAll<HTMLElement>('[data-filter-value]').forEach((card) => {
         const v = card.getAttribute('data-filter-value') || '';

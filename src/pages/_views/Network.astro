@@ -37,8 +37,8 @@ const regions = [
   <section class="section">
     <div class="container">
       <SectionHeader title={L('network.countries.title')} />
-      <div class="filter-bar" data-filter-group="network">
-        {regions.map((r, i) => <button type="button" class:list={['filter-btn', i === 0 && 'active']} data-filter={r.value} data-filter-group="network">{r.label}</button>)}
+      <div class="filter-bar" data-filter-group="countryGrid">
+        {regions.map((r, i) => <button type="button" class:list={['filter-btn', i === 0 && 'active']} data-filter={r.value} data-filter-group="countryGrid">{r.label}</button>)}
       </div>
       <CountryGrid lang={lang} countries={countries} scopeId="countryGrid" />
     </div>

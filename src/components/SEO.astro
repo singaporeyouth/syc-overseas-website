@@ -11,6 +11,7 @@ interface Props {
   type?: 'website' | 'organization';
 }
 const { lang, title, description, pageId, image = '/assets/hero-people.jpg', type = 'website' } = Astro.props;
+const is404 = pageId === '404';
 const canonical = new URL(Astro.url.pathname, Astro.site).href;
 const ogImage = new URL(image, Astro.site).href;
 const enUrl = new URL(pageId === 'index' ? '/' : `/${pageId}/`, Astro.site).href;
@@ -21,8 +22,8 @@ const orgJson = JSON.stringify(SITE.orgJsonLd);
 <title>{title}</title>
 <meta name="description" content={description} />
 <meta name="theme-color" content="#0b214e" />
-<link rel="canonical" href={canonical} />
-<meta name="robots" content={lang === 'zh' ? 'noindex, follow' : 'index, follow'} />
+{!is404 && <link rel="canonical" href={canonical} />}
+<meta name="robots" content={is404 ? 'noindex, nofollow' : lang === 'zh' ? 'noindex, follow' : 'index, follow'} />
 
 <!-- Open Graph -->
 <meta property="og:type" content={type} />
@@ -40,9 +41,11 @@ const orgJson = JSON.stringify(SITE.orgJsonLd);
 <meta name="twitter:image" content={ogImage} />
 
 <!-- Bilingual alternates -->
+{!is404 && <>
 <link rel="alternate" hreflang="en" href={enUrl} />
 <link rel="alternate" hreflang="zh" href={zhUrl} />
 <link rel="alternate" hreflang="x-default" href={enUrl} />
+</>}
 
 <!-- Organization structured data (contact info intentionally omitted until verified) -->
 <script type="application/ld+json" is:inline set:html={orgJson} />
