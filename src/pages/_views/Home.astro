@@ -1,0 +1,93 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Hero from '../../components/Hero.astro';
+import StatsBar from '../../components/StatsBar.astro';
+import DualFeature from '../../components/DualFeature.astro';
+import SectionHeader from '../../components/SectionHeader.astro';
+import CountryGrid from '../../components/CountryGrid.astro';
+import PeopleGrid from '../../components/PeopleGrid.astro';
+import PartnersGrid from '../../components/PartnersGrid.astro';
+import CaseGrid from '../../components/CaseGrid.astro';
+import PlatformGrid from '../../components/PlatformGrid.astro';
+import { t, type Lang } from '../../i18n/ui';
+import { pageHref } from '../../config/site';
+interface Props { lang: Lang }
+const { lang } = Astro.props;
+const L = (k: string) => t(lang, k);
+const [countries, people, partners, cases, platforms, metrics] = await Promise.all([
+  getCollection('countries'), getCollection('people'), getCollection('partners'),
+  getCollection('caseStudies'), getCollection('platforms'), getCollection('metrics'),
+]);
+const mv = (id: string) => metrics.find((m) => m.data.id === id)?.data.display ?? '';
+const panel = [
+  { value: mv('countries') || '36', label: L('home.stat.countries') },
+  { value: mv('reach') || '4.3M+', label: L('home.hero.reach'), note: L('home.hero.reachNote') },
+];
+const stats = metrics.map((m) => ({
+  display: m.data.display,
+  label: lang === 'zh' && m.data.labelZh ? m.data.labelZh : m.data.label,
+  icon: m.data.icon,
+}));
+---
+
+<BaseLayout lang={lang} pageId="index" title={L('seo.index.title')} description={L('seo.index.desc')}>
+  <Hero
+    lang={lang}
+    eyebrow={L('home.hero.eyebrow')}
+    titleHtml={`<span class="grad">${L('home.hero.title1')}</span><br />${L('home.hero.title2')}`}
+    lead={L('home.hero.lead')}
+    image="/assets/hero-people.jpg"
+    primary={{ label: L('common.exploreNetwork'), href: pageHref(lang, 'network') }}
+    secondary={{ label: L('home.hero.cta2'), href: pageHref(lang, 'partnerships') }}
+    panel={panel}
+    panelTitle1={L('home.hero.panelTitle1')}
+    panelTitle2={L('home.hero.panelTitle2')}
+  />
+  <StatsBar stats={stats} />
+
+  <section class="section">
+    <div class="container"><DualFeature lang={lang} countries={countries.map((c) => c.data)} /></div>
+  </section>
+
+  <section class="section section--ice">
+    <div class="container">
+      <SectionHeader kicker={L('home.country.kicker')} title={L('home.country.title')} lead={L('home.country.lead')} />
+      <CountryGrid lang={lang} countries={countries.map((c) => c.data)} limit={6} />
+      <div class="actions" style="margin-top:28px"><a class="btn btn--primary" href={pageHref(lang, 'network')}>{L('common.viewNetwork')} <svg class="icon"><use href="#i-arrow"></use></svg></a></div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <SectionHeader kicker={L('home.people.kicker')} title={L('home.people.title')} lead={L('home.people.lead')} />
+      <PeopleGrid lang={lang} people={people.map((p) => p.data)} limit={3} />
+      <div class="info-note"><svg class="icon"><use href="#i-shield"></use></svg> {L('home.people.note')}</div>
+      <div class="actions" style="margin-top:20px"><a class="btn btn--outline" href={pageHref(lang, 'people')}>{L('home.people.more')} <svg class="icon"><use href="#i-arrow"></use></svg></a></div>
+    </div>
+  </section>
+
+  <section class="section section--ice">
+    <div class="container">
+      <SectionHeader kicker={L('home.partners.kicker')} title={L('home.partners.title')} lead={L('home.partners.lead')} />
+      <PartnersGrid lang={lang} partners={partners.map((p) => p.data)} />
+      <div class="actions" style="margin-top:28px"><a class="btn btn--primary" href={pageHref(lang, 'partnerships')}>{L('home.partners.more')} <svg class="icon"><use href="#i-arrow"></use></svg></a></div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <SectionHeader kicker={L('home.work.kicker')} title={L('home.work.title')} lead={L('home.work.lead')} />
+      <CaseGrid lang={lang} cases={cases.map((c) => c.data)} />
+      <div class="actions" style="margin-top:28px"><a class="btn btn--outline" href={pageHref(lang, 'impact')}>{L('home.work.more')} <svg class="icon"><use href="#i-arrow"></use></svg></a></div>
+    </div>
+  </section>
+
+  <section class="section section--ice">
+    <div class="container">
+      <SectionHeader kicker={L('home.eco.kicker')} title={L('home.eco.title')} lead={L('home.eco.lead')} />
+      <PlatformGrid lang={lang} platforms={platforms.map((p) => p.data)} />
+      <div class="actions" style="margin-top:28px"><a class="btn btn--primary" href={pageHref(lang, 'ai')}>{L('home.eco.more')} <svg class="icon"><use href="#i-arrow"></use></svg></a></div>
+    </div>
+  </section>
+</BaseLayout>

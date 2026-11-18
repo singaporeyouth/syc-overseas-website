@@ -1,0 +1,62 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Hero from '../../components/Hero.astro';
+import SectionHeader from '../../components/SectionHeader.astro';
+import PlatformGrid from '../../components/PlatformGrid.astro';
+import VerificationBadge from '../../components/VerificationBadge.astro';
+import { t, type Lang } from '../../i18n/ui';
+interface Props { lang: Lang }
+const { lang } = Astro.props;
+const L = (k: string) => t(lang, k);
+const platforms = (await getCollection('platforms')).map((p) => p.data);
+const principles = [
+  { icon: 'people', n: '01', title: lang === 'zh' ? '以人为本' : 'People at the centre', body: lang === 'zh' ? 'AI 服务于人，而非取代社区中的真实关系。' : 'AI serves people and never replaces real relationships in our community.' },
+  { icon: 'shield', n: '02', title: lang === 'zh' ? '透明可信' : 'Transparent & accountable', body: lang === 'zh' ? '对外声明须可核验，技术能力须如实描述。' : 'Public claims are verifiable and capabilities are described honestly.' },
+  { icon: 'globe', n: '03', title: lang === 'zh' ? '跨境普惠' : 'Cross-border access', body: lang === 'zh' ? '让不同地区的青年都能获得机遇与工具。' : 'Opportunities and tools are accessible to youth across regions.' },
+];
+---
+
+<BaseLayout lang={lang} pageId="ai" title={L('seo.ai.title')} description={L('seo.ai.desc')}>
+  <Hero lang={lang} compact eyebrow={L('ai.hero.eyebrow')} titleHtml={L('ai.hero.title')} lead={L('ai.hero.lead')} image="/assets/ai-chip.jpg" />
+
+  <section class="section section--ice">
+    <div class="container">
+      <div class="split-feature">
+        <div class="split-visual">
+          <img src="/assets/hero-ai.jpg" alt="AI concept visual — illustrative" loading="lazy" />
+          <div class="ai-orbit orbit-1"></div><div class="ai-orbit orbit-2"></div>
+          <span class="ai-core"><svg class="icon"><use href="#i-ai"></use></svg></span>
+        </div>
+        <div class="split-copy">
+          <div class="kicker">{L('ai.os.kicker')}</div>
+          <h2>{L('ai.os.title')}</h2>
+          <p>{L('ai.os.body')}</p>
+          <VerificationBadge lang={lang} text={lang === 'zh' ? '概念描述待负责人核验' : 'Concept description pending owner sign-off'} />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <SectionHeader kicker={L('home.eco.kicker')} title={L('ai.platforms.title')} lead={L('ai.platforms.lead')} />
+      <PlatformGrid lang={lang} platforms={platforms} />
+    </div>
+  </section>
+
+  <section class="section section--ice">
+    <div class="container">
+      <SectionHeader kicker={L('ai.stance.kicker')} title={L('ai.stance.title')} lead={L('ai.stance.body')} />
+      <div class="card-grid">
+        {principles.map((p) => (
+          <article class="card"><div class="card-body">
+            <div class="platform-icon"><svg class="icon"><use href={`#i-${p.icon}`}></use></svg></div>
+            <span class="card-tag">{p.n}</span>
+            <h3>{p.title}</h3><p>{p.body}</p>
+          </div></article>
+        ))}
+      </div>
+    </div>
+  </section>
+</BaseLayout>

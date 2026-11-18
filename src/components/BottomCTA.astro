@@ -1,0 +1,17 @@
+---
+import { t, type Lang } from '../i18n/ui';
+interface Props { lang: Lang; }
+const { lang } = Astro.props;
+---
+
+<section class="bottom-cta">
+  <div class="container">
+    <div>
+      <h2>{t(lang, 'cta.title')}</h2>
+      <p>{t(lang, 'cta.lead')}</p>
+    </div>
+    <a class="btn btn--light" href={lang === 'zh' ? '/zh/contact/' : '/contact/'}>
+      {t(lang, 'cta.btn')} <svg class="icon"><use href="#i-arrow"></use></svg>
+    </a>
+  </div>
+</section>

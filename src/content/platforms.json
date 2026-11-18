@@ -1,0 +1,6 @@
+[
+  { "id": "youth-uni", "name": "YOUTH UNI", "url": "https://www.youthuni.com/", "description": "Discover international opportunities and prepare for applications.", "icon": "compass", "verificationStatus": "confirmed_url" },
+  { "id": "youth-x-uni", "name": "YOUTH X UNI", "url": "https://www.youthxuni.com/", "description": "Discover global youth communities and local city experiences.", "icon": "people", "verificationStatus": "confirmed_url" },
+  { "id": "youth-x", "name": "YOUTH X", "url": "https://www.youthx.uno/", "description": "Share collaboration needs and explore AI-assisted partner connections.", "icon": "route", "verificationStatus": "confirmed_url" },
+  { "id": "youth-ai-os", "name": "Youth AI OS", "url": "https://www.youthaios.xyz/", "description": "An AI-enabled approach to people, opportunity and partner connections.", "icon": "ai", "verificationStatus": "confirmed_url" }
+]

@@ -1,0 +1,54 @@
+---
+import WorldMap from './WorldMap.astro';
+import VerificationBadge from './VerificationBadge.astro';
+import { t, type Lang } from '../i18n/ui';
+import type { Country } from '../content/config';
+interface Props { lang: Lang; countries: Country[]; }
+const { lang, countries } = Astro.props;
+const features = [
+  { icon: 'compass', title: t(lang, 'home.dual.ai1'), sub: t(lang, 'home.dual.ai1sub') },
+  { icon: 'route', title: t(lang, 'home.dual.ai2'), sub: t(lang, 'home.dual.ai2sub') },
+  { icon: 'spark', title: t(lang, 'home.dual.ai3'), sub: t(lang, 'home.dual.ai3sub') },
+];
+const networkHref = lang === 'zh' ? '/zh/network/' : '/network/';
+const aiHref = lang === 'zh' ? '/zh/ai/' : '/ai/';
+---
+
+<div class="dual-grid">
+  <article class="card map-card">
+    <div class="card-media map-card-media">
+      <WorldMap countries={countries} note={t(lang, 'home.dual.mapNote')} />
+    </div>
+    <div class="card-body">
+      <div class="kicker">{t(lang, 'home.dual.networkKicker')}</div>
+      <h2>{t(lang, 'home.dual.networkTitle')}</h2>
+      <p>{t(lang, 'home.dual.networkLead')}</p>
+      <div style="margin:10px 0 16px"><VerificationBadge lang={lang} /></div>
+      <a class="link-arrow" href={networkHref}>{t(lang, 'home.dual.exploreNetwork')} <svg class="icon"><use href="#i-arrow"></use></svg></a>
+    </div>
+  </article>
+
+  <article class="card ai-feature">
+    <div class="ai-feature-visual">
+      <img src="/assets/ai-chip.jpg" alt="AI concept visual — illustrative" loading="lazy" />
+      <div class="ai-orbit orbit-1"></div>
+      <div class="ai-orbit orbit-2"></div>
+      <div class="ai-orbit orbit-3"></div>
+      <span class="ai-core"><svg class="icon"><use href="#i-ai"></use></svg></span>
+    </div>
+    <div class="card-body">
+      <div class="kicker">{t(lang, 'home.dual.aiKicker')}</div>
+      <h2>{t(lang, 'home.dual.aiTitle')}</h2>
+      <p>{t(lang, 'home.dual.aiLead')}</p>
+      <div class="feature-list">
+        {features.map((f) => (
+          <div class="feature-item">
+            <span class="feature-icon"><svg class="icon"><use href={`#i-${f.icon}`}></use></svg></span>
+            <div><div class="feature-title">{f.title}</div><div class="feature-sub">{f.sub}</div></div>
+          </div>
+        ))}
+      </div>
+      <a class="link-arrow" href={aiHref}>{t(lang, 'home.dual.exploreAI')} <svg class="icon"><use href="#i-arrow"></use></svg></a>
+    </div>
+  </article>
+</div>

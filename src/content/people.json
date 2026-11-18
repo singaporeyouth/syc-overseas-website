@@ -1,0 +1,8 @@
+[
+  { "id": "p1", "name": "Representative name", "role": "role to confirm", "country": "Singapore", "region": "Asia", "photo": "/assets/person-1.jpg", "verificationStatus": "sample_unverified" },
+  { "id": "p2", "name": "Representative name", "role": "role to confirm", "country": "United Kingdom", "region": "Europe", "photo": "/assets/person-2.jpg", "verificationStatus": "sample_unverified" },
+  { "id": "p3", "name": "Representative name", "role": "role to confirm", "country": "China", "region": "Asia", "photo": "/assets/person-3.jpg", "verificationStatus": "sample_unverified" },
+  { "id": "p4", "name": "Representative name", "role": "role to confirm", "country": "Japan", "region": "Asia", "photo": "/assets/person-4.jpg", "verificationStatus": "sample_unverified" },
+  { "id": "p5", "name": "Representative name", "role": "role to confirm", "country": "Germany", "region": "Europe", "photo": "/assets/person-5.jpg", "verificationStatus": "sample_unverified" },
+  { "id": "p6", "name": "Representative name", "role": "role to confirm", "country": "Global Network", "region": "Global", "photo": "/assets/person-6.jpg", "verificationStatus": "sample_unverified" }
+]

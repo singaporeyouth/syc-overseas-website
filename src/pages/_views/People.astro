@@ -1,0 +1,35 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Hero from '../../components/Hero.astro';
+import SectionHeader from '../../components/SectionHeader.astro';
+import PeopleGrid from '../../components/PeopleGrid.astro';
+import { t, type Lang } from '../../i18n/ui';
+interface Props { lang: Lang }
+const { lang } = Astro.props;
+const L = (k: string) => t(lang, k);
+const people = (await getCollection('people')).map((p) => p.data);
+const regions = [
+  { value: 'all', label: L('network.filter.all') },
+  { value: 'Asia', label: L('network.filter.asia') },
+  { value: 'Europe', label: L('network.filter.europe') },
+  { value: 'Americas', label: L('network.filter.americas') },
+  { value: 'Africa', label: L('network.filter.africa') },
+  { value: 'Global', label: L('network.filter.global') },
+];
+---
+
+<BaseLayout lang={lang} pageId="people" title={L('seo.people.title')} description={L('seo.people.desc')}>
+  <Hero lang={lang} compact eyebrow={L('people.hero.eyebrow')} titleHtml={L('people.hero.title')} lead={L('people.hero.lead')} image="/assets/hero-people.jpg" />
+
+  <section class="section">
+    <div class="container">
+      <SectionHeader title={L('people.grid.title')} />
+      <div class="filter-bar" data-filter-group="people">
+        {regions.map((r, i) => <button type="button" class:list={['filter-btn', i === 0 && 'active']} data-filter={r.value} data-filter-group="people">{r.label}</button>)}
+      </div>
+      <PeopleGrid lang={lang} people={people} scopeId="peopleGrid" />
+      <div class="info-note"><svg class="icon"><use href="#i-shield"></use></svg> {L('people.note')}</div>
+    </div>
+  </section>
+</BaseLayout>

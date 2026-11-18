@@ -1,0 +1,30 @@
+---
+import { pages, pageHref } from '../config/site';
+import { t, type Lang } from '../i18n/ui';
+interface Props { lang: Lang; }
+const { lang } = Astro.props;
+const items = [
+  ...pages,
+  { id: 'contact', path: 'contact', navKey: 'nav.contact' },
+];
+---
+
+<div id="siteSearch" class="site-search" role="dialog" aria-label={t(lang, 'common.searchTitle')} aria-modal="true">
+  <div class="site-search-box">
+    <div style="display:flex;justify-content:space-between;gap:15px;align-items:center">
+      <h3 style="margin:0">{t(lang, 'common.searchTitle')}</h3>
+      <button id="closeSearch" type="button" class="btn btn--outline btn--small" aria-label={t(lang, 'common.close')}>{t(lang, 'common.close')} ×</button>
+    </div>
+    <label class="field" style="margin-top:18px">
+      <span class="sr-only">{t(lang, 'nav.search')}</span>
+      <input id="siteSearchInput" type="search" autocomplete="off" placeholder={t(lang, 'common.searchPlaceholder')} />
+    </label>
+    <div id="siteSearchResults" class="search-results">
+      {items.map((item) => (
+        <a class="search-result" data-search-term={`${t(lang, item.navKey)} ${item.id}`} href={pageHref(lang, item.id)}>
+          {t(lang, item.navKey)} <svg class="icon"><use href="#i-arrow"></use></svg>
+        </a>
+      ))}
+    </div>
+  </div>
+</div>

@@ -1,0 +1,24 @@
+---
+import VerificationBadge from './VerificationBadge.astro';
+import { t, type Lang } from '../i18n/ui';
+import type { Country } from '../content/config';
+interface Props { lang: Lang; countries: Country[]; scopeId?: string; limit?: number; }
+const { lang, countries, scopeId = 'countryGrid', limit } = Astro.props;
+const list = limit ? countries.slice(0, limit) : countries;
+---
+
+<div class="card-grid" data-filter-scope={scopeId}>
+  {list.map((c) => (
+    <article class="card card--image" data-filter-value={c.region}>
+      <div class="card-media">
+        <img src={c.photo} alt={`${c.name} — illustrative city image`} loading="lazy" />
+        <span class="card-tag">{lang === 'zh' ? (c.regionZh ?? c.region) : c.region}</span>
+      </div>
+      <div class="card-body">
+        <h3>{lang === 'zh' && c.nameZh ? c.nameZh : c.name}</h3>
+        <p>{lang === 'zh' ? (c.note ?? t(lang, 'common.sampleData')) : c.note}</p>
+        <VerificationBadge lang={lang} />
+      </div>
+    </article>
+  ))}
+</div>

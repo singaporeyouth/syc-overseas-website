@@ -1,0 +1,48 @@
+---
+import { SITE, pageHref } from '../config/site';
+import { t, type Lang } from '../i18n/ui';
+interface Props { lang: Lang; }
+const { lang } = Astro.props;
+---
+
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <a class="brand" href={pageHref(lang, 'index')}>
+          <img class="brand-logo" src={SITE.logo} alt="SYC seal" />
+          <div>
+            <div class="brand-title">Singapore Youth<br />Community</div>
+            <div class="brand-sub">AI-Native Global Youth Community</div>
+          </div>
+        </a>
+        <p style="margin-top:16px">{t(lang, 'footer.about')}</p>
+      </div>
+      <div>
+        <h4>{t(lang, 'footer.explore')}</h4>
+        <a href={pageHref(lang, 'about')}>{t(lang, 'nav.about')}</a>
+        <a href={pageHref(lang, 'network')}>{t(lang, 'nav.network')}</a>
+        <a href={pageHref(lang, 'people')}>{t(lang, 'nav.people')}</a>
+        <a href={pageHref(lang, 'impact')}>{t(lang, 'nav.work')}</a>
+      </div>
+      <div>
+        <h4>{t(lang, 'footer.collaborate')}</h4>
+        <a href={pageHref(lang, 'partnerships')}>{t(lang, 'nav.partnerships')}</a>
+        <a href={pageHref(lang, 'ai')}>{t(lang, 'nav.ai')}</a>
+        <a href={pageHref(lang, 'contact')}>{t(lang, 'nav.contact')}</a>
+      </div>
+      <div>
+        <h4>{t(lang, 'footer.ecosystem')}</h4>
+        <a href="https://www.youthuni.com/" target="_blank" rel="noopener noreferrer">YOUTH UNI</a>
+        <a href="https://www.youthxuni.com/" target="_blank" rel="noopener noreferrer">YOUTH X UNI</a>
+        <a href="https://www.youthx.uno/" target="_blank" rel="noopener noreferrer">YOUTH X</a>
+        <a href="https://www.youthaios.xyz/" target="_blank" rel="noopener noreferrer">Youth AI OS</a>
+        <a href="https://www.singaporeyouth.com/" target="_blank" rel="noopener noreferrer">Official website</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>{t(lang, 'footer.disclaimer')}</span>
+      <span>© {new Date().getFullYear()} Singapore Youth Community · Concept implementation</span>
+    </div>
+  </div>
+</footer>

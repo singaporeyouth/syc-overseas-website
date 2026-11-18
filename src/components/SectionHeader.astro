@@ -1,0 +1,9 @@
+---
+interface Props { kicker?: string; title: string; lead?: string; align?: 'left' | 'center'; id?: string; }
+const { kicker, title, lead, align = 'left', id } = Astro.props;
+---
+<div class:list={['section-head', align === 'center' && 'section-head--center']} id={id}>
+  {kicker && <div class="kicker">{kicker}</div>}
+  <h2>{title}</h2>
+  {lead && <p class="lead">{lead}</p>}
+</div>

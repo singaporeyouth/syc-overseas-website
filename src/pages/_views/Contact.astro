@@ -1,0 +1,44 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Hero from '../../components/Hero.astro';
+import ContactForm from '../../components/ContactForm.astro';
+import SectionHeader from '../../components/SectionHeader.astro';
+import Faq from '../../components/Faq.astro';
+import { t, type Lang } from '../../i18n/ui';
+interface Props { lang: Lang }
+const { lang } = Astro.props;
+const L = (k: string) => t(lang, k);
+const channels = [
+  { icon: 'globe', title: 'Partnerships', body: lang === 'zh' ? '合作咨询邮箱待核验后公布。' : 'Partnership mailbox — pending verification.' },
+  { icon: 'people', title: 'Media & press', body: lang === 'zh' ? '媒体联系人待核验后公布。' : 'Media contact — pending verification.' },
+  { icon: 'building', title: 'General enquiries', body: lang === 'zh' ? '通用联系方式待核验后公布。' : 'General enquiries — pending verification.' },
+];
+const faqs = [{ q: L('contact.faq.q1'), a: L('contact.faq.a1') }, { q: L('contact.faq.q2'), a: L('contact.faq.a2') }];
+---
+
+<BaseLayout lang={lang} pageId="contact" title={L('seo.contact.title')} description={L('seo.contact.desc')}>
+  <Hero lang={lang} compact eyebrow={L('contact.hero.eyebrow')} titleHtml={L('contact.hero.title')} lead={L('contact.hero.lead')} image="/assets/hero-workshop.jpg" />
+  <ContactForm lang={lang} />
+
+  <section class="section">
+    <div class="container">
+      <SectionHeader title={L('contact.channels.title')} />
+      <div class="card-grid">
+        {channels.map((c) => (
+          <article class="card"><div class="card-body">
+            <span class="feature-icon"><svg class="icon"><use href={`#i-${c.icon}`}></use></svg></span>
+            <h3>{c.title}</h3><p>{c.body}</p>
+          </div></article>
+        ))}
+      </div>
+      <div class="info-note"><svg class="icon"><use href="#i-shield"></use></svg> {L('contact.channels.note')}</div>
+    </div>
+  </section>
+
+  <section class="section section--ice">
+    <div class="container narrow">
+      <SectionHeader title={L('contact.faq.title')} />
+      <Faq items={faqs} />
+    </div>
+  </section>
+</BaseLayout>

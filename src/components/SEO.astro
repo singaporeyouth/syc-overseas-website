@@ -1,0 +1,48 @@
+---
+import { SITE } from '../config/site';
+import type { Lang } from '../i18n/ui';
+
+interface Props {
+  lang: Lang;
+  title: string;
+  description: string;
+  pageId: string;
+  image?: string;
+  type?: 'website' | 'organization';
+}
+const { lang, title, description, pageId, image = '/assets/hero-people.jpg', type = 'website' } = Astro.props;
+const canonical = new URL(Astro.url.pathname, Astro.site).href;
+const ogImage = new URL(image, Astro.site).href;
+const enUrl = new URL(pageId === 'index' ? '/' : `/${pageId}/`, Astro.site).href;
+const zhUrl = new URL(pageId === 'index' ? '/zh/' : `/zh/${pageId}/`, Astro.site).href;
+const orgJson = JSON.stringify(SITE.orgJsonLd);
+---
+
+<title>{title}</title>
+<meta name="description" content={description} />
+<meta name="theme-color" content="#0b214e" />
+<link rel="canonical" href={canonical} />
+<meta name="robots" content={lang === 'zh' ? 'noindex, follow' : 'index, follow'} />
+
+<!-- Open Graph -->
+<meta property="og:type" content={type} />
+<meta property="og:site_name" content={SITE.name} />
+<meta property="og:locale" content={lang === 'zh' ? 'zh_CN' : 'en_US'} />
+<meta property="og:title" content={title} />
+<meta property="og:description" content={description} />
+<meta property="og:url" content={canonical} />
+<meta property="og:image" content={ogImage} />
+
+<!-- Twitter -->
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content={title} />
+<meta name="twitter:description" content={description} />
+<meta name="twitter:image" content={ogImage} />
+
+<!-- Bilingual alternates -->
+<link rel="alternate" hreflang="en" href={enUrl} />
+<link rel="alternate" hreflang="zh" href={zhUrl} />
+<link rel="alternate" hreflang="x-default" href={enUrl} />
+
+<!-- Organization structured data (contact info intentionally omitted until verified) -->
+<script type="application/ld+json" is:inline set:html={orgJson} />

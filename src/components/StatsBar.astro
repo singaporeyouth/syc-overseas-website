@@ -1,0 +1,18 @@
+---
+interface Stat { display: string; label: string; icon: string; }
+interface Props { stats: Stat[]; }
+const { stats } = Astro.props;
+---
+<section class="stats" aria-label="Key figures">
+  <div class="container">
+    <div class="stats-grid">
+      {stats.map((s) => (
+        <div class="stat">
+          <svg class="icon"><use href={`#i-${s.icon}`}></use></svg>
+          <div class="stat-num">{s.display}</div>
+          <div class="stat-label">{s.label}</div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>

@@ -1,0 +1,48 @@
+---
+import { SITE, pages, pageHref } from '../config/site';
+import { t, type Lang } from '../i18n/ui';
+interface Props { lang: Lang; currentPage: string; }
+const { lang, currentPage } = Astro.props;
+const nav = [
+  ...pages,
+  { id: 'contact', path: 'contact', navKey: 'nav.contact' },
+];
+---
+
+<header class="site-header">
+  <div class="nav-wrap">
+    <a class="brand" href={pageHref(lang, 'index')} aria-label={`${SITE.name} — home`}>
+      <img class="brand-logo" src={SITE.logo} alt={`${SITE.name} official logo`} />
+      <div>
+        <div class="brand-title">Singapore Youth<br />Community <span style="font-size:.84em">(SYC)</span></div>
+        <div class="brand-sub">{t(lang, 'brand.sub')}</div>
+      </div>
+    </a>
+
+    <nav class="nav-links" id="navLinks" aria-label="Main navigation">
+      {nav.map((item) => (
+        <a
+          href={pageHref(lang, item.id)}
+          aria-current={currentPage === item.id ? 'page' : undefined}
+        >{t(lang, item.navKey)}</a>
+      ))}
+      <a class="btn btn--primary nav-cta" href={pageHref(lang, 'contact')}>
+        {t(lang, 'nav.cta')} <svg class="icon"><use href="#i-arrow"></use></svg>
+      </a>
+    </nav>
+
+    <button type="button" class="btn btn--outline btn--small" id="openSearch" aria-label={t(lang, 'nav.search')} style="padding:10px;margin-left:2px">
+      <svg class="icon"><use href="#i-search"></use></svg>
+    </button>
+
+    <div class="lang-switch" aria-label={t(lang, 'nav.switchLang')}>
+      <a href={pageHref('en', currentPage)} class={lang === 'en' ? 'active' : ''} hreflang="en">EN</a>
+      <span aria-hidden="true">/</span>
+      <a href={pageHref('zh', currentPage)} class={lang === 'zh' ? 'active' : ''} hreflang="zh" title="review draft">中文</a>
+    </div>
+
+    <button type="button" class="menu-toggle" id="menuToggle" aria-controls="navLinks" aria-expanded="false" aria-label={t(lang, 'nav.menu')}>
+      <svg class="icon"><use href="#i-menu"></use></svg>
+    </button>
+  </div>
+</header>

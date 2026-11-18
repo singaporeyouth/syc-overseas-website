@@ -1,0 +1,23 @@
+---
+import VerificationBadge from './VerificationBadge.astro';
+import type { Lang } from '../i18n/ui';
+import type { CaseStudy } from '../content/config';
+interface Props { lang: Lang; cases: CaseStudy[]; }
+const { lang, cases } = Astro.props;
+---
+
+<div class="card-grid">
+  {cases.map((c) => (
+    <article class="card card--image">
+      <div class="card-media">
+        <img src={c.image} alt="Illustrative concept image — not a real project" loading="lazy" />
+        <span class="card-tag">{c.category}</span>
+      </div>
+      <div class="card-body">
+        <h3>{lang === 'zh' && c.titleZh ? c.titleZh : c.title}</h3>
+        <p>{c.summary}</p>
+        <VerificationBadge lang={lang} text={lang === 'zh' ? '示例案例 — 发布前须核验' : 'Sample case — verify before publication'} />
+      </div>
+    </article>
+  ))}
+</div>

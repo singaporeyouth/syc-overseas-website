@@ -1,0 +1,10 @@
+[
+  { "id": "singapore", "name": "Singapore", "nameZh": "新加坡", "region": "Asia", "regionZh": "亚洲", "photo": "/assets/city-1.jpg", "lat": 1.35, "lng": 103.82, "note": "示例国家卡片 — 官方 36 国名单待核验", "verificationStatus": "sample_unverified" },
+  { "id": "australia", "name": "Australia", "nameZh": "澳大利亚", "region": "Oceania", "regionZh": "大洋洲", "photo": "/assets/city-2.jpg", "lat": -33.87, "lng": 151.21, "note": "示例国家卡片 — 官方 36 国名单待核验", "verificationStatus": "sample_unverified" },
+  { "id": "japan", "name": "Japan", "nameZh": "日本", "region": "Asia", "regionZh": "亚洲", "photo": "/assets/city-3.jpg", "lat": 35.68, "lng": 139.69, "note": "示例国家卡片 — 官方 36 国名单待核验", "verificationStatus": "sample_unverified" },
+  { "id": "united-kingdom", "name": "United Kingdom", "nameZh": "英国", "region": "Europe", "regionZh": "欧洲", "photo": "/assets/city-4.jpg", "lat": 51.51, "lng": -0.13, "note": "示例国家卡片 — 官方 36 国名单待核验", "verificationStatus": "sample_unverified" },
+  { "id": "united-states", "name": "United States", "nameZh": "美国", "region": "Americas", "regionZh": "美洲", "photo": "/assets/city-5.jpg", "lat": 38.91, "lng": -77.04, "note": "示例国家卡片 — 官方 36 国名单待核验", "verificationStatus": "sample_unverified" },
+  { "id": "germany", "name": "Germany", "nameZh": "德国", "region": "Europe", "regionZh": "欧洲", "photo": "/assets/city-6.jpg", "lat": 52.52, "lng": 13.40, "note": "示例国家卡片 — 官方 36 国名单待核验", "verificationStatus": "sample_unverified" },
+  { "id": "uae", "name": "United Arab Emirates", "nameZh": "阿联酋", "region": "Middle East", "regionZh": "中东", "photo": "/assets/city-7.jpg", "lat": 25.20, "lng": 55.27, "note": "示例国家卡片 — 官方 36 国名单待核验", "verificationStatus": "sample_unverified" },
+  { "id": "kenya", "name": "Kenya", "nameZh": "肯尼亚", "region": "Africa", "regionZh": "非洲", "photo": "/assets/city-8.jpg", "lat": -1.29, "lng": 36.82, "note": "示例国家卡片 — 官方 36 国名单待核验", "verificationStatus": "sample_unverified" }
+]

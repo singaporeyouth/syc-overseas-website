@@ -1,0 +1,53 @@
+---
+import '../styles/global.css';
+import '../styles/app.css';
+import Icons from '../components/Icons.astro';
+import SEO from '../components/SEO.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import BottomCTA from '../components/BottomCTA.astro';
+import SiteSearch from '../components/SiteSearch.astro';
+import DraftBanner from '../components/DraftBanner.astro';
+import { t, type Lang } from '../i18n/ui';
+
+interface Props {
+  lang: Lang;
+  pageId: string;
+  title: string;
+  description: string;
+  image?: string;
+  type?: 'website' | 'organization';
+  showCta?: boolean;
+}
+const { lang, pageId, title, description, image, type, showCta = true } = Astro.props;
+---
+
+<!doctype html>
+<html lang={lang}>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" href="/assets/syc-logo.png" type="image/png" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet" />
+    <SEO lang={lang} title={title} description={description} pageId={pageId} image={image} type={type} />
+  </head>
+  <body>
+    <Icons />
+    {lang === 'zh' && <DraftBanner lang={lang} />}
+    <Header lang={lang} currentPage={pageId} />
+    <main id="main">
+      <slot />
+    </main>
+    {showCta && <BottomCTA lang={lang} />}
+    <Footer lang={lang} />
+    <button id="backToTop" class="back-to-top" aria-label={t(lang, 'common.backToTop')}>
+      <svg class="icon"><use href="#i-arrow"></use></svg>
+    </button>
+    <SiteSearch lang={lang} />
+    <script>
+      import '../scripts/main';
+    </script>
+  </body>
+</html>

@@ -1,0 +1,46 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Hero from '../../components/Hero.astro';
+import SectionHeader from '../../components/SectionHeader.astro';
+import WorldMap from '../../components/WorldMap.astro';
+import CountryGrid from '../../components/CountryGrid.astro';
+import { t, type Lang } from '../../i18n/ui';
+interface Props { lang: Lang }
+const { lang } = Astro.props;
+const L = (k: string) => t(lang, k);
+const countries = (await getCollection('countries')).map((c) => c.data);
+const regions = [
+  { key: 'all', value: 'all', label: L('network.filter.all') },
+  { key: 'asia', value: 'Asia', label: L('network.filter.asia') },
+  { key: 'europe', value: 'Europe', label: L('network.filter.europe') },
+  { key: 'americas', value: 'Americas', label: L('network.filter.americas') },
+  { key: 'africa', value: 'Africa', label: L('network.filter.africa') },
+  { key: 'oceania', value: 'Oceania', label: L('network.filter.oceania') },
+  { key: 'middleeast', value: 'Middle East', label: L('network.filter.middleeast') },
+  { key: 'global', value: 'Global', label: L('network.filter.global') },
+];
+---
+
+<BaseLayout lang={lang} pageId="network" title={L('seo.network.title')} description={L('seo.network.desc')}>
+  <Hero lang={lang} compact eyebrow={L('network.hero.eyebrow')} titleHtml={L('network.hero.title')} lead={L('network.hero.lead')} image="/assets/city-1.jpg" />
+
+  <section class="section section--ice">
+    <div class="container">
+      <SectionHeader kicker={L('network.map.kicker')} title={L('network.map.title')} />
+      <div class="card" style="padding:clamp(16px,3vw,32px)">
+        <WorldMap countries={countries} note={L('network.map.note')} />
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <SectionHeader title={L('network.countries.title')} />
+      <div class="filter-bar" data-filter-group="network">
+        {regions.map((r, i) => <button type="button" class:list={['filter-btn', i === 0 && 'active']} data-filter={r.value} data-filter-group="network">{r.label}</button>)}
+      </div>
+      <CountryGrid lang={lang} countries={countries} scopeId="countryGrid" />
+    </div>
+  </section>
+</BaseLayout>

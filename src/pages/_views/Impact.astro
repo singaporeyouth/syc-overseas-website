@@ -1,0 +1,27 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Hero from '../../components/Hero.astro';
+import StatsBar from '../../components/StatsBar.astro';
+import SectionHeader from '../../components/SectionHeader.astro';
+import CaseGrid from '../../components/CaseGrid.astro';
+import { t, type Lang } from '../../i18n/ui';
+interface Props { lang: Lang }
+const { lang } = Astro.props;
+const L = (k: string) => t(lang, k);
+const [cases, metrics] = await Promise.all([getCollection('caseStudies'), getCollection('metrics')]);
+const stats = metrics.map((m) => ({ display: m.data.display, label: lang === 'zh' && m.data.labelZh ? m.data.labelZh : m.data.label, icon: m.data.icon }));
+---
+
+<BaseLayout lang={lang} pageId="impact" title={L('seo.impact.title')} description={L('seo.impact.desc')}>
+  <Hero lang={lang} compact eyebrow={L('impact.hero.eyebrow')} titleHtml={L('impact.hero.title')} lead={L('impact.hero.lead')} image="/assets/hero-workshop.jpg" />
+  <StatsBar stats={stats} />
+
+  <section class="section">
+    <div class="container">
+      <SectionHeader title={L('impact.cases.title')} />
+      <CaseGrid lang={lang} cases={cases.map((c) => c.data)} />
+      <div class="info-note"><svg class="icon"><use href="#i-shield"></use></svg> {L('impact.cases.note')}</div>
+    </div>
+  </section>
+</BaseLayout>

@@ -1,0 +1,6 @@
+[
+  { "id": "international-orgs", "name": "International Organisations", "type": "International Organisation", "description": "Exchange, institutional engagement and programme collaboration.", "logo": null, "verificationStatus": "sample_unverified" },
+  { "id": "universities", "name": "Universities & Research", "type": "University & Research", "description": "Youth development, knowledge sharing and practical innovation.", "logo": null, "verificationStatus": "sample_unverified" },
+  { "id": "youth-networks", "name": "Youth Networks", "type": "Youth Network", "description": "Country-level communities and cross-border youth exchange.", "logo": null, "verificationStatus": "sample_unverified" },
+  { "id": "innovation", "name": "Innovation Partners", "type": "Innovation Partner", "description": "AI, digital inclusion and new approaches to youth collaboration.", "logo": null, "verificationStatus": "sample_unverified" }
+]
