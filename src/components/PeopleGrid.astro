@@ -1,5 +1,4 @@
 ---
-import VerificationBadge from './VerificationBadge.astro';
 import { t, type Lang } from '../i18n/ui';
 import type { Person } from '../content/config';
 interface Props { lang: Lang; people: Person[]; scopeId?: string; limit?: number; }
@@ -11,14 +10,13 @@ const list = limit ? people.slice(0, limit) : people;
   {list.map((p) => (
     <article class="card card--person" data-filter-value={p.region}>
       <div class="card-media card-media--portrait">
-        <img src={p.photo} alt="Illustrative placeholder portrait — not a real SYC representative" loading="lazy" />
+        <img src={p.photo} alt={p.name} loading="lazy" />
         <span class="card-tag">{t(lang, 'people.sample')}</span>
       </div>
       <div class="card-body">
         <h3>{p.name}</h3>
-        <div class="person-role">{p.role}</div>
+        <div class="person-role">{lang === "zh" && p.roleZh ? p.roleZh : p.role}</div>
         <div class="person-country"><svg class="icon"><use href="#i-pin"></use></svg> {p.country}</div>
-        <VerificationBadge lang={lang} />
       </div>
     </article>
   ))}

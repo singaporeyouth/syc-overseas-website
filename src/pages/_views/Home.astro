@@ -62,7 +62,6 @@ const stats = metrics.map((m) => ({
     <div class="container">
       <SectionHeader kicker={L('home.people.kicker')} title={L('home.people.title')} lead={L('home.people.lead')} />
       <PeopleGrid lang={lang} people={people.map((p) => p.data)} limit={3} />
-      <div class="info-note"><svg class="icon"><use href="#i-shield"></use></svg> {L('home.people.note')}</div>
       <div class="actions" style="margin-top:20px"><a class="btn btn--outline" href={pageHref(lang, 'people')}>{L('home.people.more')} <svg class="icon"><use href="#i-arrow"></use></svg></a></div>
     </div>
   </section>

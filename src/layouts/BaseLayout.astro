@@ -7,7 +7,6 @@ import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import BottomCTA from '../components/BottomCTA.astro';
 import SiteSearch from '../components/SiteSearch.astro';
-import DraftBanner from '../components/DraftBanner.astro';
 import { t, type Lang } from '../i18n/ui';
 
 interface Props {
@@ -35,7 +34,6 @@ const { lang, pageId, title, description, image, type, showCta = true } = Astro.
   </head>
   <body>
     <Icons />
-    {lang === 'zh' && <DraftBanner lang={lang} />}
     <Header lang={lang} currentPage={pageId} />
     <main id="main">
       <slot />

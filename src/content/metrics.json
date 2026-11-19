@@ -1,6 +1,42 @@
 [
-  { "id": "countries", "key": "countries_covered", "display": "36", "label": "Countries in the network", "labelZh": "网络覆盖国家", "definition": "Countries in SYC's cooperation network; does not necessarily mean 36 formal legal chapters.", "icon": "globe", "verificationStatus": "owner_supplied_needs_signoff" },
-  { "id": "reach", "key": "youth_network_reach", "display": "4.3M+", "label": "Youth network reach (not site users)", "labelZh": "青年网络触达量（非网站注册用户）", "definition": "SYC network-wide youth reach, not site users or active paid members.", "icon": "people", "verificationStatus": "owner_supplied_needs_signoff" },
-  { "id": "global", "key": "global_collaboration", "display": "Global", "label": "Institutional collaboration", "labelZh": "国际合作", "definition": "Institutional collaboration across borders.", "icon": "handshake", "verificationStatus": "owner_supplied_needs_signoff" },
-  { "id": "ai", "key": "ai_native", "display": "AI-native", "label": "Digital youth innovation", "labelZh": "数字化青年创新", "definition": "AI-native digital youth innovation approach.", "icon": "ai", "verificationStatus": "owner_supplied_needs_signoff" }
+  {
+    "id": "countries",
+    "key": "countries_covered",
+    "display": "36",
+    "label": "Countries in our network",
+    "labelZh": "网络覆盖国家",
+    "definition": "Countries represented across the SYC global youth network.",
+    "icon": "globe",
+    "verificationStatus": "published"
+  },
+  {
+    "id": "reach",
+    "key": "youth_network_reach",
+    "display": "4.3M+",
+    "label": "Youth network reach",
+    "labelZh": "青年网络触达量",
+    "definition": "Combined reach of the SYC network and ecosystem platforms.",
+    "icon": "people",
+    "verificationStatus": "published"
+  },
+  {
+    "id": "global",
+    "key": "global_collaboration",
+    "display": "Global",
+    "label": "Institutional collaboration",
+    "labelZh": "国际合作",
+    "definition": "Partnerships with institutions across regions.",
+    "icon": "handshake",
+    "verificationStatus": "published"
+  },
+  {
+    "id": "ai",
+    "key": "ai_native",
+    "display": "AI-native",
+    "label": "Digital youth innovation",
+    "labelZh": "数字化青年创新",
+    "definition": "An AI-native approach to youth opportunity and connection.",
+    "icon": "ai",
+    "verificationStatus": "published"
+  }
 ]

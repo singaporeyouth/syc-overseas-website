@@ -1,6 +1,42 @@
 [
-  { "id": "international-orgs", "name": "International Organisations", "type": "International Organisation", "description": "Exchange, institutional engagement and programme collaboration.", "logo": null, "verificationStatus": "sample_unverified" },
-  { "id": "universities", "name": "Universities & Research", "type": "University & Research", "description": "Youth development, knowledge sharing and practical innovation.", "logo": null, "verificationStatus": "sample_unverified" },
-  { "id": "youth-networks", "name": "Youth Networks", "type": "Youth Network", "description": "Country-level communities and cross-border youth exchange.", "logo": null, "verificationStatus": "sample_unverified" },
-  { "id": "innovation", "name": "Innovation Partners", "type": "Innovation Partner", "description": "AI, digital inclusion and new approaches to youth collaboration.", "logo": null, "verificationStatus": "sample_unverified" }
+  {
+    "id": "international-orgs",
+    "name": "International Organisations",
+    "nameZh": "国际组织",
+    "type": "International Organisation",
+    "description": "Working with international bodies on youth development, cross-border exchange and multilateral programmes that open doors for young people.",
+    "descriptionZh": "与国际组织合作，开展青年发展、跨境交流及为青年创造机会的多边项目。",
+    "logo": null,
+    "verificationStatus": "published"
+  },
+  {
+    "id": "universities",
+    "name": "Universities & Research",
+    "nameZh": "大学与研究机构",
+    "type": "University & Research",
+    "description": "Collaborating with universities and research institutions on youth development, knowledge exchange and applied innovation.",
+    "descriptionZh": "与大学及研究机构合作，推进青年发展、知识交流与应用创新。",
+    "logo": null,
+    "verificationStatus": "published"
+  },
+  {
+    "id": "youth-networks",
+    "name": "Youth Networks",
+    "nameZh": "青年网络",
+    "type": "Youth Network",
+    "description": "Partnering with country-level youth communities to enable local action and peer-to-peer exchange across borders.",
+    "descriptionZh": "与各国青年社区合作，推动本地行动与跨境同伴交流。",
+    "logo": null,
+    "verificationStatus": "published"
+  },
+  {
+    "id": "innovation",
+    "name": "Innovation Partners",
+    "nameZh": "创新合作伙伴",
+    "type": "Innovation Partner",
+    "description": "Working with technology and innovation partners on AI, digital inclusion and new models of youth collaboration.",
+    "descriptionZh": "与科技创新伙伴合作，探索 AI、数字包容与青年协作新模式。",
+    "logo": null,
+    "verificationStatus": "published"
+  }
 ]

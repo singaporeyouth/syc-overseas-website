@@ -4,7 +4,6 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import Hero from '../../components/Hero.astro';
 import SectionHeader from '../../components/SectionHeader.astro';
 import PlatformGrid from '../../components/PlatformGrid.astro';
-import VerificationBadge from '../../components/VerificationBadge.astro';
 import { t, type Lang } from '../../i18n/ui';
 interface Props { lang: Lang }
 const { lang } = Astro.props;
@@ -12,7 +11,7 @@ const L = (k: string) => t(lang, k);
 const platforms = (await getCollection('platforms')).map((p) => p.data);
 const principles = [
   { icon: 'people', n: '01', title: lang === 'zh' ? '以人为本' : 'People at the centre', body: lang === 'zh' ? 'AI 服务于人，而非取代社区中的真实关系。' : 'AI serves people and never replaces real relationships in our community.' },
-  { icon: 'shield', n: '02', title: lang === 'zh' ? '透明可信' : 'Transparent & accountable', body: lang === 'zh' ? '对外声明须可核验，技术能力须如实描述。' : 'Public claims are verifiable and capabilities are described honestly.' },
+  { icon: 'shield', n: '02', title: lang === 'zh' ? '透明可信' : 'Transparent & accountable', body: lang === 'zh' ? '以清晰、负责的方式呈现我们的技术与实践。' : 'We present our technology and practice with clarity and accountability.' },
   { icon: 'globe', n: '03', title: lang === 'zh' ? '跨境普惠' : 'Cross-border access', body: lang === 'zh' ? '让不同地区的青年都能获得机遇与工具。' : 'Opportunities and tools are accessible to youth across regions.' },
 ];
 ---
@@ -24,7 +23,7 @@ const principles = [
     <div class="container">
       <div class="split-feature">
         <div class="split-visual">
-          <img src="/assets/hero-ai-youth.jpg" alt="AI concept visual — illustrative" loading="lazy" />
+          <img src="/assets/hero-ai-youth.jpg" alt="Young people collaborating with AI" loading="lazy" />
           <div class="ai-orbit orbit-1"></div><div class="ai-orbit orbit-2"></div>
           <span class="ai-core"><svg class="icon"><use href="#i-ai"></use></svg></span>
         </div>
@@ -32,7 +31,6 @@ const principles = [
           <div class="kicker">{L('ai.os.kicker')}</div>
           <h2>{L('ai.os.title')}</h2>
           <p>{L('ai.os.body')}</p>
-          <VerificationBadge lang={lang} text={lang === 'zh' ? '概念描述待负责人核验' : 'Concept description pending owner sign-off'} />
         </div>
       </div>
     </div>

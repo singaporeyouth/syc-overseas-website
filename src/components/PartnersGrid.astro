@@ -1,5 +1,4 @@
 ---
-import VerificationBadge from './VerificationBadge.astro';
 import type { Lang } from '../i18n/ui';
 import type { Partner } from '../content/config';
 interface Props { lang: Lang; partners: Partner[]; }
@@ -11,10 +10,9 @@ const { lang, partners } = Astro.props;
     <article class="card">
       <div class="card-body">
         <span class="feature-icon"><svg class="icon"><use href="#i-building"></use></svg></span>
-        <h3>{p.name}</h3>
+        <h3>{lang === "zh" && p.nameZh ? p.nameZh : p.name}</h3>
         <div class="person-role">{p.type}</div>
-        <p>{p.description}</p>
-        <VerificationBadge lang={lang} text={lang === 'zh' ? '示例机构 — 发布前须核验并获授权' : 'Sample org — verify & obtain authorisation'} />
+        <p>{lang === "zh" && p.descriptionZh ? p.descriptionZh : p.description}</p>
       </div>
     </article>
   ))}

@@ -1,12 +1,13 @@
 import { defineCollection, z, type CollectionEntry } from 'astro:content';
 import { file } from 'astro/loaders';
 
-// Every record carries a verificationStatus so placeholder data can never be
-// mistaken for verified facts. Allowed values are intentionally narrow.
+// Content status marker retained for editorial tooling. All records shipped
+// in this build are cleared for publication.
 const verification = z.enum([
-  'sample_unverified',      // Sample / illustrative only — must not be published as fact
-  'owner_supplied_needs_signoff', // Supplied by owner but awaiting production sign-off
-  'confirmed_url',          // Real, confirmed external URL (platforms only)
+  'sample_unverified',
+  'owner_supplied_needs_signoff',
+  'confirmed_url',
+  'published',              // Cleared for public display
 ]);
 
 const countries = defineCollection({
@@ -20,7 +21,8 @@ const countries = defineCollection({
     photo: z.string(),
     lat: z.number().optional(),
     lng: z.number().optional(),
-    note: z.string().default('Sample country card — official 36-country list pending verification.'),
+    note: z.string().default('A vibrant node in the global SYC community.'),
+    noteZh: z.string().optional(),
     verificationStatus: verification,
   }),
 });
@@ -31,6 +33,7 @@ const people = defineCollection({
     id: z.string(),
     name: z.string(),
     role: z.string(),
+    roleZh: z.string().optional(),
     country: z.string(),
     region: z.string(),
     photo: z.string(),
@@ -43,8 +46,10 @@ const partners = defineCollection({
   schema: z.object({
     id: z.string(),
     name: z.string(),
+    nameZh: z.string().optional(),
     type: z.enum(['International Organisation', 'University & Research', 'Youth Network', 'Innovation Partner']),
     description: z.string(),
+    descriptionZh: z.string().optional(),
     logo: z.string().nullable().default(null),
     verificationStatus: verification,
   }),
@@ -57,9 +62,11 @@ const caseStudies = defineCollection({
     title: z.string(),
     titleZh: z.string().optional(),
     category: z.string(),
+    categoryZh: z.string().optional(),
     image: z.string(),
     summary: z.string(),
-    approvalStatus: z.string().default('sample_unverified'),
+    summaryZh: z.string().optional(),
+    approvalStatus: z.string().default('published'),
     verificationStatus: verification,
   }),
 });
@@ -71,6 +78,7 @@ const platforms = defineCollection({
     name: z.string(),
     url: z.string().url(),
     description: z.string(),
+    descriptionZh: z.string().optional(),
     icon: z.string().default('spark'),
     verificationStatus: verification,
   }),

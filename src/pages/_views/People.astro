@@ -29,7 +29,6 @@ const regions = [
         {regions.map((r, i) => <button type="button" class:list={['filter-btn', i === 0 && 'active']} data-filter={r.value} data-filter-group="peopleGrid">{r.label}</button>)}
       </div>
       <PeopleGrid lang={lang} people={people} scopeId="peopleGrid" />
-      <div class="info-note"><svg class="icon"><use href="#i-shield"></use></svg> {L('people.note')}</div>
     </div>
   </section>
 </BaseLayout>

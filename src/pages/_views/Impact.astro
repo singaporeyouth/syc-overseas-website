@@ -21,7 +21,6 @@ const stats = metrics.map((m) => ({ display: m.data.display, label: lang === 'zh
     <div class="container">
       <SectionHeader title={L('impact.cases.title')} />
       <CaseGrid lang={lang} cases={cases.map((c) => c.data)} />
-      <div class="info-note"><svg class="icon"><use href="#i-shield"></use></svg> {L('impact.cases.note')}</div>
     </div>
   </section>
 </BaseLayout>

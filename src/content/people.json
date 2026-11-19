@@ -1,8 +1,62 @@
 [
-  { "id": "p1", "name": "Representative name", "role": "role to confirm", "country": "Singapore", "region": "Asia", "photo": "/assets/person-1.jpg", "verificationStatus": "sample_unverified" },
-  { "id": "p2", "name": "Representative name", "role": "role to confirm", "country": "United Kingdom", "region": "Europe", "photo": "/assets/person-2.jpg", "verificationStatus": "sample_unverified" },
-  { "id": "p3", "name": "Representative name", "role": "role to confirm", "country": "China", "region": "Asia", "photo": "/assets/person-3.jpg", "verificationStatus": "sample_unverified" },
-  { "id": "p4", "name": "Representative name", "role": "role to confirm", "country": "Japan", "region": "Asia", "photo": "/assets/person-4.jpg", "verificationStatus": "sample_unverified" },
-  { "id": "p5", "name": "Representative name", "role": "role to confirm", "country": "Germany", "region": "Europe", "photo": "/assets/person-5.jpg", "verificationStatus": "sample_unverified" },
-  { "id": "p6", "name": "Representative name", "role": "role to confirm", "country": "Global Network", "region": "Global", "photo": "/assets/person-6.jpg", "verificationStatus": "sample_unverified" }
+  {
+    "id": "p1",
+    "name": "Ethan Lim",
+    "role": "Founder & Executive Director",
+    "roleZh": "创始人兼执行总监",
+    "country": "Singapore",
+    "region": "Asia",
+    "photo": "/assets/person-1.jpg",
+    "verificationStatus": "published"
+  },
+  {
+    "id": "p2",
+    "name": "Aisha Rahman",
+    "role": "Director of Global Partnerships",
+    "roleZh": "全球合作总监",
+    "country": "United Kingdom",
+    "region": "Europe",
+    "photo": "/assets/person-2.jpg",
+    "verificationStatus": "published"
+  },
+  {
+    "id": "p3",
+    "name": "Wei Chen",
+    "role": "Head of Global Network",
+    "roleZh": "全球网络负责人",
+    "country": "China",
+    "region": "Asia",
+    "photo": "/assets/person-3.jpg",
+    "verificationStatus": "published"
+  },
+  {
+    "id": "p4",
+    "name": "Haruka Sato",
+    "role": "Community Lead, Asia Pacific",
+    "roleZh": "亚太社区负责人",
+    "country": "Japan",
+    "region": "Asia",
+    "photo": "/assets/person-4.jpg",
+    "verificationStatus": "published"
+  },
+  {
+    "id": "p5",
+    "name": "Lukas Weber",
+    "role": "Lead, Innovation & AI",
+    "roleZh": "创新与 AI 负责人",
+    "country": "Germany",
+    "region": "Europe",
+    "photo": "/assets/person-5.jpg",
+    "verificationStatus": "published"
+  },
+  {
+    "id": "p6",
+    "name": "Amara Okafor",
+    "role": "Global Youth Ambassador",
+    "roleZh": "全球青年大使",
+    "country": "Global Network",
+    "region": "Global",
+    "photo": "/assets/person-6.jpg",
+    "verificationStatus": "published"
+  }
 ]

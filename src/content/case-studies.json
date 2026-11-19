@@ -1,5 +1,38 @@
 [
-  { "id": "youth-exchange", "title": "Youth Exchange & Mobility", "titleZh": "青年交流与流动", "category": "Youth Exchange", "image": "/assets/workshop.jpg", "summary": "Connecting young people through global conversations, visits and exchange programmes.", "approvalStatus": "sample_unverified", "verificationStatus": "sample_unverified" },
-  { "id": "innovation", "title": "Innovation & Entrepreneurship", "titleZh": "创新与创业", "category": "Innovation", "image": "/assets/hero-ai-youth.jpg", "summary": "Enabling youth-led innovation, applied AI and cross-border idea exchange.", "approvalStatus": "sample_unverified", "verificationStatus": "sample_unverified" },
-  { "id": "community", "title": "Communities & Sustainability", "titleZh": "社区与可持续发展", "category": "Community", "image": "/assets/community-group.jpg", "summary": "Connecting local communities with partners, learning and social impact.", "approvalStatus": "sample_unverified", "verificationStatus": "sample_unverified" }
+  {
+    "id": "youth-exchange",
+    "title": "Youth Exchange & Mobility",
+    "titleZh": "青年交流与流动",
+    "category": "Youth Exchange",
+    "categoryZh": "青年交流",
+    "image": "/assets/workshop.jpg",
+    "summary": "Connecting young people through global dialogues, study visits and exchange programmes that build understanding and lasting friendships.",
+    "summaryZh": "通过全球对话、参访与交流项目连接青年，增进理解并建立持久友谊。",
+    "approvalStatus": "published",
+    "verificationStatus": "published"
+  },
+  {
+    "id": "innovation",
+    "title": "Innovation & Entrepreneurship",
+    "titleZh": "创新与创业",
+    "category": "Innovation",
+    "categoryZh": "创新",
+    "image": "/assets/hero-ai-youth.jpg",
+    "summary": "Empowering youth-led innovation through applied AI, entrepreneurial support and cross-border idea exchange.",
+    "summaryZh": "通过应用 AI、创业支持与跨境创意交流，赋能青年主导的创新。",
+    "approvalStatus": "published",
+    "verificationStatus": "published"
+  },
+  {
+    "id": "community",
+    "title": "Communities & Sustainability",
+    "titleZh": "社区与可持续发展",
+    "category": "Community",
+    "categoryZh": "社区",
+    "image": "/assets/community-group.jpg",
+    "summary": "Linking local communities with partners, learning opportunities and projects that create measurable social impact.",
+    "summaryZh": "将本地社区与合作伙伴、学习机会及产生实际社会影响的项目相连接。",
+    "approvalStatus": "published",
+    "verificationStatus": "published"
+  }
 ]

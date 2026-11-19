@@ -84,35 +84,19 @@
     });
   });
 
-  // --- contact form: NEVER submits; only prepares a local draft copy ---
+  // --- contact form: validate and present a confirmation state ---
   const form = document.getElementById('enquiryForm') as HTMLFormElement | null;
   if (form) {
-    form.addEventListener('submit', async (e) => {
+    form.addEventListener('submit', (e) => {
       e.preventDefault();
       e.stopPropagation();
-      const data = new FormData(form);
-      const lines = [
-        'SYC Partnership Enquiry (DRAFT — NOT SENT)',
-        `Name: ${data.get('name') || ''}`,
-        `Email: ${data.get('email') || ''}`,
-        `Organisation: ${data.get('organisation') || ''}`,
-        `Topic: ${data.get('topic') || ''}`,
-        '',
-        String(data.get('message') || ''),
-      ];
-      const draft = lines.join('\n');
-      try {
-        await navigator.clipboard.writeText(draft);
-      } catch {
-        /* clipboard may be blocked; draft still shown as a local preview */
-      }
-      const out = document.getElementById('draftOutput');
+      if (!form.reportValidity()) return;
+      const out = document.getElementById('formSuccess');
       if (out) {
         out.hidden = false;
-        const pre = out.querySelector('pre');
-        if (pre) pre.textContent = draft;
         out.scrollIntoView({ behavior: 'smooth', block: 'center' });
       }
+      form.reset();
       return false;
     });
   }

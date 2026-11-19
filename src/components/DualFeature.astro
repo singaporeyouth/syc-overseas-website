@@ -1,6 +1,5 @@
 ---
 import WorldMap from './WorldMap.astro';
-import VerificationBadge from './VerificationBadge.astro';
 import { t, type Lang } from '../i18n/ui';
 import type { Country } from '../content/config';
 interface Props { lang: Lang; countries: Country[]; }
@@ -23,14 +22,13 @@ const aiHref = lang === 'zh' ? '/zh/ai/' : '/ai/';
       <div class="kicker">{t(lang, 'home.dual.networkKicker')}</div>
       <h2>{t(lang, 'home.dual.networkTitle')}</h2>
       <p>{t(lang, 'home.dual.networkLead')}</p>
-      <div style="margin:10px 0 16px"><VerificationBadge lang={lang} /></div>
       <a class="link-arrow" href={networkHref}>{t(lang, 'home.dual.exploreNetwork')} <svg class="icon"><use href="#i-arrow"></use></svg></a>
     </div>
   </article>
 
   <article class="card ai-feature">
     <div class="ai-feature-visual">
-      <img src="/assets/ai-chip.jpg" alt="AI concept visual — illustrative" loading="lazy" />
+      <img src="/assets/ai-chip.jpg" alt="AI and youth innovation" loading="lazy" />
       <div class="ai-orbit orbit-1"></div>
       <div class="ai-orbit orbit-2"></div>
       <div class="ai-orbit orbit-3"></div>

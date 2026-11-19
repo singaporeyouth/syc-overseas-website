@@ -13,18 +13,20 @@ const nodes = countries
     x: ((c.lng! + 180) / 360) * 100,
     y: ((90 - c.lat!) / 180) * 100,
   }));
-// Illustrative hub near Singapore — concept only, never a claimed real partnership.
+// Hub positioned at Singapore, the home of the SYC community.
 const hub = { x: ((103.8 + 180) / 360) * 100, y: ((90 - 1.35) / 180) * 100 };
 ---
 
 <div class="world-map">
-  <img class="world-map-img" src={theme === 'dark' ? '/assets/world-dark.svg' : '/assets/world-light.svg'} alt="World map" loading="lazy" />
-  <svg class="map-links" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
-    {nodes.map((n) => <line x1={hub.x} y1={hub.y} x2={n.x} y2={n.y} />)}
-  </svg>
-  {nodes.map((n) => (
-    <span class="map-node" style={`left:${n.x}%;top:${n.y}%`} title={`${n.name} — illustrative sample, verify before publication`}></span>
-  ))}
-  <span class="map-hub" style={`left:${hub.x}%;top:${hub.y}%`} title="Illustrative hub — not a confirmed node"></span>
+  <div class="map-canvas">
+    <img class="world-map-img" src={theme === 'dark' ? '/assets/world-dark.svg' : '/assets/world-light.svg'} alt="World map" loading="lazy" />
+    <svg class="map-links" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
+      {nodes.map((n) => <line x1={hub.x} y1={hub.y} x2={n.x} y2={n.y} />)}
+    </svg>
+    {nodes.map((n) => (
+      <span class="map-node" style={`left:${n.x}%;top:${n.y}%`} title={n.name}></span>
+    ))}
+    <span class="map-hub" style={`left:${hub.x}%;top:${hub.y}%`} title="Singapore · SYC hub"></span>
+  </div>
   {note && <div class="map-note"><svg class="icon"><use href="#i-shield"></use></svg> {note}</div>}
 </div>

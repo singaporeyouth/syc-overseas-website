@@ -9,10 +9,6 @@ const { lang } = Astro.props;
     <div class="card" style="padding:clamp(24px,4vw,48px)">
       <div class="kicker">{t(lang, 'contact.form.title')}</div>
       <h2 style="margin-bottom:8px">{t(lang, 'contact.form.title')}</h2>
-      <div class="callout" role="note">
-        <svg class="icon"><use href="#i-shield"></use></svg>
-        <span>{t(lang, 'contact.form.draftBody')}</span>
-      </div>
       <form id="enquiryForm" class="contact-form" novalidate>
         <div class="form-row">
           <label class="field">{t(lang, 'contact.form.name')}<input name="name" type="text" autocomplete="name" /></label>
@@ -34,9 +30,9 @@ const { lang } = Astro.props;
           <button type="submit" class="btn btn--primary">{t(lang, 'contact.form.submit')} <svg class="icon"><use href="#i-arrow"></use></svg></button>
         </div>
       </form>
-      <div id="draftOutput" class="callout callout--success" role="status" hidden>
-        <strong>{t(lang, 'contact.form.draftTitle')}</strong>
-        <pre></pre>
+      <div id="formSuccess" class="callout callout--success" role="status" hidden>
+        <svg class="icon"><use href="#i-spark"></use></svg>
+        <div><strong>{t(lang, 'contact.form.successTitle')}</strong><span>{t(lang, 'contact.form.successBody')}</span></div>
       </div>
     </div>
   </div>

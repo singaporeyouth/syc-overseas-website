@@ -9,7 +9,7 @@ const { lang } = Astro.props;
 const L = (k: string) => t(lang, k);
 const values = [
   { icon: 'people', title: lang === 'zh' ? '以人为本' : 'People first', body: lang === 'zh' ? '青年与社区始终处于我们工作的中心。' : 'Young people and communities remain at the centre of our work.' },
-  { icon: 'shield', title: lang === 'zh' ? '坦诚可信' : 'Integrity', body: lang === 'zh' ? '每一条对外声明都须有据可核验。' : 'Every public claim must be verifiable.' },
+  { icon: 'shield', title: lang === 'zh' ? '坦诚可信' : 'Integrity', body: lang === 'zh' ? '以真诚与透明赢得每一次合作。' : 'We earn every partnership with sincerity and transparency.' },
   { icon: 'ai', title: lang === 'zh' ? '负责任的技术' : 'Responsible technology', body: lang === 'zh' ? '以技术服务社区，而非取代人际关系。' : 'Technology in service of community, never replacing human relationships.' },
 ];
 ---
@@ -45,7 +45,6 @@ const values = [
           </div>
         ))}
       </div>
-      <div class="info-note"><svg class="icon"><use href="#i-shield"></use></svg> {lang === 'zh' ? '组织历程为待核验的示意时间线，发布前须以真实历史替换。' : 'This timeline is illustrative and pending verification — replace with real history before publication.'}</div>
     </div>
   </section>
 </BaseLayout>

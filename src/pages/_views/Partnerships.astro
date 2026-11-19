@@ -18,7 +18,6 @@ const partners = (await getCollection('partners')).map((p) => p.data);
     <div class="container">
       <SectionHeader title={L('partnerships.grid.title')} />
       <PartnersGrid lang={lang} partners={partners} />
-      <div class="info-note"><svg class="icon"><use href="#i-shield"></use></svg> {L('partnerships.note')}</div>
     </div>
   </section>
 </BaseLayout>

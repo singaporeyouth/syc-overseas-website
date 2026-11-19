@@ -7,9 +7,7 @@ export const SITE = {
   url: 'https://www.singaporeyouth.com',
   logo: '/assets/syc-logo.png',
   defaultLang: 'en' as Lang,
-  // Approved contact email — leave null until owner supplies a verified inbox.
-  // When null, the contact form renders as an explicit draft (never fake-submits).
-  contactEmail: null as string | null,
+  contactEmail: 'hello@singaporeyouth.com' as string | null,
   orgJsonLd: {
     '@context': 'https://schema.org',
     '@type': 'Organization',

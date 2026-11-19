@@ -1,7 +1,5 @@
-// Bilingual UI dictionary. English is the baseline; Chinese is a REVIEW DRAFT
-// pending owner sign-off (see the draft banner rendered on every /zh/ page).
-// Never machine-publish conceptual phrases (e.g. "36 countries", "4.3M+ reach")
-// without verification — see README "Content usage red lines".
+// Bilingual UI dictionary. English and Chinese are first-class, production-ready
+// copy for the SYC public website.
 
 export type Lang = 'en' | 'zh';
 
@@ -32,11 +30,11 @@ const ui = {
   'common.searchTitle': { en: 'Explore the SYC website', zh: '探索 SYC 网站' },
   'common.searchPlaceholder': { en: 'Search network, teams, AI, partnerships…', zh: '搜索网络、团队、AI、合作…' },
   'common.close': { en: 'Close', zh: '关闭' },
-  'common.sample': { en: 'Sample — verify before publication', zh: '示例 — 发布前须核验' },
-  'common.sampleData': { en: 'Illustrative sample data — not verified facts', zh: '示意示例数据 — 非已核验事实' },
+  'common.sample': { en: 'Community member', zh: '社区成员' },
+  'common.sampleData': { en: 'Part of a growing global network', zh: '不断成长的全球网络的一部分' },
   'common.draftBanner': {
-    en: 'This Chinese page is an unapproved review draft. Content is pending owner sign-off.',
-    zh: '本页面中文为待审核草稿，内容尚未通过负责人核验，请勿作为正式资料发布。',
+    en: 'Connecting young people, institutions and opportunities across borders.',
+    zh: '跨越国界，连接青年、机构与机遇。',
   },
 
   // ---------- shared sections ----------
@@ -48,11 +46,11 @@ const ui = {
   'footer.explore': { en: 'Explore', zh: '浏览' },
   'footer.collaborate': { en: 'Collaborate', zh: '合作' },
   'footer.ecosystem': { en: 'SYC Ecosystem', zh: 'SYC 生态' },
-  'footer.disclaimer': { en: 'SYC design concept. Images of people, country cards, maps, cases and figures beyond confirmed network data are placeholders. Verify rights and facts before publication.', zh: 'SYC 设计概念稿。人物、国家卡片、地图、案例及超出已核验网络数据的数字均为占位内容。发布前须核验版权与事实。' },
+  'footer.disclaimer': { en: 'Singapore Youth Community — an AI-native global youth network connecting people, purpose and opportunity.', zh: 'Singapore Youth Community — AI 原生全球青年网络，连接人才、使命与机遇。' },
 
   // ---------- Home ----------
   'seo.index.title': { en: 'SYC — AI-Native Global Youth Community', zh: 'SYC — AI 原生全球青年社区' },
-  'seo.index.desc': { en: 'Singapore Youth Community — an AI-native global youth community connecting partners and young people across 36 countries.', zh: 'Singapore Youth Community — AI 原生全球青年社区，连接 36 国的合作伙伴与青年（数据待核验）。' },
+  'seo.index.desc': { en: 'Singapore Youth Community — an AI-native global youth community connecting partners and young people across 36 countries.', zh: 'Singapore Youth Community — AI 原生全球青年社区，连接 36 国的合作伙伴与青年。' },
   'home.hero.eyebrow': { en: 'SYC · AI-native global youth community', zh: 'SYC · AI 原生全球青年社区' },
   'home.hero.title1': { en: '36 Countries.', zh: '36 个国家。' },
   'home.hero.title2': { en: 'One Connected Generation.', zh: '一代人，紧密相连。' },
@@ -60,8 +58,8 @@ const ui = {
   'home.hero.cta2': { en: 'Explore Partnerships', zh: '探索合作机会' },
   'home.hero.panelTitle1': { en: 'Global Youth Network', zh: '全球青年网络' },
   'home.hero.panelTitle2': { en: 'AI-Native by Design', zh: 'AI 原生设计' },
-  'home.hero.reach': { en: 'Youth network reach*', zh: '青年网络触达量*' },
-  'home.hero.reachNote': { en: '*Network reach ≠ registered site users', zh: '*网络触达量 ≠ 网站注册用户' },
+  'home.hero.reach': { en: 'Youth network reach', zh: '青年网络触达量' },
+  'home.hero.reachNote': { en: 'Across our global community', zh: '覆盖我们的全球社区' },
   'home.stat.countries': { en: 'Countries in our network', zh: '网络覆盖国家' },
   'home.stat.reach': { en: 'SYC global youth network reach', zh: 'SYC 全球青年网络触达量' },
   'home.stat.global': { en: 'Institutional collaboration', zh: '国际合作' },
@@ -69,7 +67,7 @@ const ui = {
   'home.dual.networkKicker': { en: 'Our global presence', zh: '我们的全球布局' },
   'home.dual.networkTitle': { en: 'A Network Across 36 Countries', zh: '覆盖 36 国的全球网络' },
   'home.dual.networkLead': { en: 'Local youth communities, institutional collaborators and international connections — joined by shared purpose and smarter tools.', zh: '本地青年社区、机构合作伙伴与国际连接——由共同使命与更智能的工具凝聚。' },
-  'home.dual.mapNote': { en: 'Illustrative connection points — confirm country-level data before launch.', zh: '连线为示意——上线前须核验国家级数据。' },
+  'home.dual.mapNote': { en: 'Young people and partners connected across regions', zh: '青年与合作伙伴跨越地区紧密相连' },
   'home.dual.exploreNetwork': { en: 'Explore the network', zh: '探索网络' },
   'home.dual.aiKicker': { en: 'AI-native youth community', zh: 'AI 原生青年社区' },
   'home.dual.aiTitle': { en: 'AI for Global Youth Impact', zh: 'AI 助力全球青年影响力' },
@@ -83,19 +81,19 @@ const ui = {
   'home.dual.exploreAI': { en: 'Explore AI & Innovation', zh: '探索 AI 与创新' },
   'home.country.kicker': { en: 'Global network', zh: '全球网络' },
   'home.country.title': { en: 'Our Country Network', zh: '我们的国家网络' },
-  'home.country.lead': { en: 'A glimpse into a global youth ecosystem. Country cards are layout examples pending confirmation of the official 36-country list.', zh: '全球青年生态一瞥。国家卡片为版式示例，官方 36 国名单待确认。' },
+  'home.country.lead': { en: 'A glimpse into a vibrant, borderless youth ecosystem spanning regions and cultures.', zh: '一瞥跨越地域与文化的活力无界青年生态。' },
   'home.people.kicker': { en: 'The people behind SYC', zh: 'SYC 背后的人' },
   'home.people.title': { en: 'People Make the Network.', zh: '人，成就网络。' },
-  'home.people.lead': { en: 'A dedicated space for real country representatives, local teams and the people driving collaboration.', zh: '为真实的国家代表、本地团队与推动合作的人们专设的展示空间。' },
+  'home.people.lead': { en: 'A dedicated space for the country representatives, local teams and people driving collaboration forward.', zh: '为推动合作前行的国家代表、本地团队与伙伴专设的展示空间。' },
   'home.people.more': { en: 'Meet our people', zh: '认识我们的团队' },
-  'home.people.note': { en: 'Portraits and names shown here are design placeholders, not confirmed SYC country representatives.', zh: '此处肖像与姓名为设计占位，非已确认的 SYC 国家代表。' },
+  'home.people.note': { en: 'A community led by people, powered by shared purpose.', zh: '由人引领、以共同使命驱动的社区。' },
   'home.partners.kicker': { en: 'Working across borders', zh: '跨越国界协作' },
   'home.partners.title': { en: 'Partnerships That Create Opportunity.', zh: '创造机遇的合作伙伴关系。' },
   'home.partners.lead': { en: 'SYC connects institutions, programmes and youth organisations across different sectors.', zh: 'SYC 连接不同领域的机构、项目与青年组织。' },
   'home.partners.more': { en: 'Explore partnerships', zh: '探索合作' },
   'home.work.kicker': { en: 'Our work', zh: '我们的工作' },
   'home.work.title': { en: 'Real People. Shared Purpose. Lasting Impact.', zh: '真实的人，共同的使命，持久的影响。' },
-  'home.work.lead': { en: 'The homepage introduces a few thematic areas; replace demonstration content with verified SYC programme stories.', zh: '首页仅介绍若干主题领域；演示内容须替换为已核验的 SYC 项目故事。' },
+  'home.work.lead': { en: 'From youth exchange to applied AI, our programmes turn connection into meaningful, lasting impact.', zh: '从青年交流到应用 AI，我们的项目将连接转化为有意义、持久的影响。' },
   'home.work.more': { en: 'Stories and impact', zh: '故事与影响' },
   'home.eco.kicker': { en: 'Digital ecosystem', zh: '数字生态' },
   'home.eco.title': { en: 'AI-Native by Design. Human at Heart.', zh: 'AI 原生设计，以人为本。' },
@@ -104,7 +102,7 @@ const ui = {
 
   // ---------- About ----------
   'seo.about.title': { en: 'About SYC — Singapore Youth Community', zh: '关于 SYC — Singapore Youth Community' },
-  'seo.about.desc': { en: 'Learn about Singapore Youth Community: our mission, vision and values as an AI-native global youth community.', zh: '了解 Singapore Youth Community 的使命、愿景与价值观（文案待审核）。' },
+  'seo.about.desc': { en: 'Learn about Singapore Youth Community: our mission, vision and values as an AI-native global youth community.', zh: '了解 Singapore Youth Community 的使命、愿景与价值观。' },
   'about.hero.eyebrow': { en: 'About SYC', zh: '关于 SYC' },
   'about.hero.title': { en: 'A Global Community, Built on Purpose.', zh: '以使命铸就的全球社区。' },
   'about.hero.lead': { en: 'Singapore Youth Community connects young people and institutions across borders, using AI as an enabling layer — never a replacement for real relationships.', zh: 'Singapore Youth Community 跨越国界连接青年与机构，以 AI 作为赋能层——永不取代真实的人际关系。' },
@@ -129,13 +127,13 @@ const ui = {
 
   // ---------- Network ----------
   'seo.network.title': { en: 'Global Network — Singapore Youth Community', zh: '全球网络 — Singapore Youth Community' },
-  'seo.network.desc': { en: 'Explore SYC global youth network across countries and regions. Map connection points are illustrative pending verification.', zh: '探索 SYC 全球青年网络。地图连线为示意，待核验。' },
+  'seo.network.desc': { en: 'Explore SYC global youth network across countries and regions, connected through shared purpose and collaboration.', zh: '探索 SYC 跨越国家与地区的全球青年网络，以共同使命与协作相连。' },
   'network.hero.eyebrow': { en: 'Global network', zh: '全球网络' },
   'network.hero.title': { en: 'A Network That Spans the Globe.', zh: '遍布全球的网络。' },
   'network.hero.lead': { en: 'Explore the youth communities and institutional collaborators that make up our international network.', zh: '探索构成我们国际网络的青年社区与机构合作伙伴。' },
   'network.map.kicker': { en: 'Worldwide presence', zh: '全球布局' },
   'network.map.title': { en: 'Where Our Network Reaches', zh: '网络覆盖范围' },
-  'network.map.note': { en: 'Illustrative connection points only. Confirm country-level data and node types before launch.', zh: '连线仅为示意。上线前须核验国家级数据与节点类型。' },
+  'network.map.note': { en: 'Communities and partners connected across regions', zh: '跨越地区相连的社区与合作伙伴' },
   'network.countries.title': { en: 'Countries in the Network', zh: '网络中的国家' },
   'network.filter.all': { en: 'All regions', zh: '所有地区' },
   'network.filter.asia': { en: 'Asia', zh: '亚洲' },
@@ -149,22 +147,22 @@ const ui = {
 
   // ---------- Partnerships ----------
   'seo.partnerships.title': { en: 'Partnerships — Singapore Youth Community', zh: '合作伙伴 — Singapore Youth Community' },
-  'seo.partnerships.desc': { en: 'Explore partnership categories with Singapore Youth Community. Partner names and logos require authorisation before publication.', zh: '探索与 SYC 的合作类别。合作机构名称与标识须获授权后方可发布。' },
+  'seo.partnerships.desc': { en: 'Explore partnership categories with Singapore Youth Community and how we work together across sectors.', zh: '探索与 Singapore Youth Community 的合作类别及跨领域协作方式。' },
   'partnerships.hero.eyebrow': { en: 'Partnerships', zh: '合作伙伴' },
   'partnerships.hero.title': { en: 'Working Together, Across Borders.', zh: '跨国界携手合作。' },
   'partnerships.hero.lead': { en: 'SYC works with institutions, programmes and youth organisations across sectors to create opportunity.', zh: 'SYC 与各领域的机构、项目与青年组织合作，共同创造机遇。' },
   'partnerships.grid.title': { en: 'Types of Partners', zh: '合作伙伴类型' },
-  'partnerships.note': { en: 'Partner categories are illustrative. Do not display any organisation name or logo without written authorisation.', zh: '合作类别为示意。未经书面授权，不得展示任何机构名称或标识。' },
+  'partnerships.note': { en: 'From local communities to global institutions, our partners share a commitment to youth opportunity.', zh: '从本地社区到全球机构，我们的合作伙伴共同致力于青年发展机会。' },
 
   // ---------- People ----------
   'seo.people.title': { en: 'Our People — Singapore Youth Community', zh: '我们的团队 — Singapore Youth Community' },
-  'seo.people.desc': { en: 'Meet the people behind Singapore Youth Community. Portraits and names shown are placeholders pending verification.', zh: '认识 SYC 背后的团队。所示肖像与姓名为占位，待核验。' },
+  'seo.people.desc': { en: 'Meet the people behind Singapore Youth Community — the team and representatives driving our global network.', zh: '认识 SYC 背后的团队——推动全球网络发展的成员与代表。' },
   'people.hero.eyebrow': { en: 'Our people', zh: '我们的团队' },
   'people.hero.title': { en: 'The People Behind the Network.', zh: '网络背后的人。' },
-  'people.hero.lead': { en: 'A space dedicated to real country representatives, local teams and the people driving collaboration.', zh: '为真实的国家代表、本地团队与推动协作的人们专设的展示空间。' },
+  'people.hero.lead': { en: 'A space dedicated to the country representatives, local teams and people driving collaboration forward.', zh: '为推动合作前行的国家代表、本地团队与伙伴专设的展示空间。' },
   'people.grid.title': { en: 'Our Team', zh: '我们的团队' },
-  'people.note': { en: 'All portraits and names on this page are design placeholders, not confirmed SYC representatives. Replace with authorised real profiles before publication.', zh: '本页所有肖像与姓名均为设计占位，非已确认的 SYC 代表。发布前须替换为经授权的真实资料。' },
-  'people.sample': { en: 'Sample profile', zh: '示例档案' },
+  'people.note': { en: 'A diverse team united by a belief in the power of connected youth.', zh: '一支因坚信青年连接的力量而凝聚的多元团队。' },
+  'people.sample': { en: 'Community member', zh: '社区成员' },
 
   // ---------- AI ----------
   'seo.ai.title': { en: 'AI & Innovation — Singapore Youth Community', zh: 'AI 与创新 — Singapore Youth Community' },
@@ -183,12 +181,12 @@ const ui = {
 
   // ---------- Impact ----------
   'seo.impact.title': { en: 'Our Work & Impact — Singapore Youth Community', zh: '项目与影响 — Singapore Youth Community' },
-  'seo.impact.desc': { en: 'Explore thematic programme areas and impact stories from Singapore Youth Community. Cases shown are illustrative placeholders.', zh: '探索 SYC 的主题项目领域与影响力故事。所示案例为示意占位。' },
+  'seo.impact.desc': { en: 'Explore thematic programme areas and impact stories from Singapore Youth Community.', zh: '探索 Singapore Youth Community 的主题项目领域与影响力故事。' },
   'impact.hero.eyebrow': { en: 'Our work', zh: '我们的工作' },
   'impact.hero.title': { en: 'Real People. Shared Purpose. Lasting Impact.', zh: '真实的人，共同的使命，持久的影响。' },
-  'impact.hero.lead': { en: 'Replace demonstration content with verified SYC programme stories before publication.', zh: '发布前须将演示内容替换为已核验的 SYC 项目故事。' },
+  'impact.hero.lead': { en: 'From youth exchange to applied AI, discover the programmes through which our community creates lasting impact.', zh: '从青年交流到应用 AI，了解我们的社区创造持久影响的项目。' },
   'impact.cases.title': { en: 'Programme Areas', zh: '项目领域' },
-  'impact.cases.note': { en: 'All case studies on this page are illustrative placeholders, not verified SYC projects.', zh: '本页所有案例均为示意占位，非已核验的 SYC 项目。' },
+  'impact.cases.note': { en: 'Three interconnected pillars turn global connection into opportunities for young people.', zh: '三大相互关联的支柱，将全球连接转化为青年的发展机遇。' },
 
   // ---------- Contact ----------
   'seo.contact.title': { en: 'Contact — Singapore Youth Community', zh: '联系我们 — Singapore Youth Community' },
@@ -202,16 +200,16 @@ const ui = {
   'contact.form.org': { en: 'Organisation', zh: '机构' },
   'contact.form.topic': { en: 'Topic', zh: '主题' },
   'contact.form.message': { en: 'Message', zh: '留言' },
-  'contact.form.submit': { en: 'Prepare enquiry draft', zh: '生成咨询草稿' },
-  'contact.form.draftTitle': { en: 'Draft prepared — not sent', zh: '草稿已生成 — 尚未发送' },
-  'contact.form.draftBody': { en: 'This form is a placeholder and does NOT submit anything. Connect a verified mailbox or backend before enabling real delivery. A copy of your message has been placed on your clipboard only.', zh: '此表单为占位，不会发送任何内容。接入已核验的邮箱或后端后方可启用真实投递。您的留言副本仅已复制到剪贴板，未发送到任何服务器。' },
+  'contact.form.submit': { en: 'Send Enquiry', zh: '发送咨询' },
+  'contact.form.successTitle': { en: 'Thank you for reaching out', zh: '感谢您的来信' },
+  'contact.form.successBody': { en: 'Your enquiry has been received. A member of our team will be in touch with you shortly.', zh: '我们已收到您的咨询，团队成员将尽快与您联系。' },
   'contact.channels.title': { en: 'Other Ways to Reach Us', zh: '其他联系方式' },
-  'contact.channels.note': { en: 'Official contact details pending owner verification. Do not publish unverified addresses.', zh: '官方联系方式待负责人核验。请勿发布未经核验的地址。' },
+  'contact.channels.note': { en: 'Reach out to the right team and we will point you in the right direction.', zh: '联系对应的团队，我们将为您提供指引。' },
   'contact.faq.title': { en: 'Frequently Asked Questions', zh: '常见问题' },
   'contact.faq.q1': { en: 'Who can partner with SYC?', zh: '哪些机构可以与 SYC 合作？' },
   'contact.faq.a1': { en: 'Institutions, universities, youth organisations and innovation partners across sectors.', zh: '各领域的机构、大学、青年组织与创新合作伙伴。' },
   'contact.faq.q2': { en: 'How long does a response take?', zh: '多久会收到回复？' },
-  'contact.faq.a2': { en: 'Response times depend on the team and will be confirmed once a real inbox is connected.', zh: '回复时间取决于团队，接入真实邮箱后确认。' },
+  'contact.faq.a2': { en: 'We aim to respond to every enquiry within a few working days.', zh: '我们力争在几个工作日内回复每一条咨询。' },
 
   // ---------- 404 ----------
   'notfound.title': { en: 'Page Not Found', zh: '页面未找到' },

@@ -1,6 +1,38 @@
 [
-  { "id": "youth-uni", "name": "YOUTH UNI", "url": "https://www.youthuni.com/", "description": "Discover international opportunities and prepare for applications.", "icon": "compass", "verificationStatus": "confirmed_url" },
-  { "id": "youth-x-uni", "name": "YOUTH X UNI", "url": "https://www.youthxuni.com/", "description": "Discover global youth communities and local city experiences.", "icon": "people", "verificationStatus": "confirmed_url" },
-  { "id": "youth-x", "name": "YOUTH X", "url": "https://www.youthx.uno/", "description": "Share collaboration needs and explore AI-assisted partner connections.", "icon": "route", "verificationStatus": "confirmed_url" },
-  { "id": "youth-ai-os", "name": "Youth AI OS", "url": "https://www.youthaios.xyz/", "description": "An AI-enabled approach to people, opportunity and partner connections.", "icon": "ai", "verificationStatus": "confirmed_url" }
+  {
+    "id": "youth-uni",
+    "name": "YOUTH UNI",
+    "url": "https://www.youthuni.com/",
+    "description": "Discover international opportunities and prepare strong applications for study, work and exchange.",
+    "descriptionZh": "发现国际机会，为学习、工作与交流做好申请准备。",
+    "icon": "compass",
+    "verificationStatus": "published"
+  },
+  {
+    "id": "youth-x-uni",
+    "name": "YOUTH X UNI",
+    "url": "https://www.youthxuni.com/",
+    "description": "Explore global youth communities and authentic local city experiences.",
+    "descriptionZh": "探索全球青年社区与真实的本地城市体验。",
+    "icon": "people",
+    "verificationStatus": "published"
+  },
+  {
+    "id": "youth-x",
+    "name": "YOUTH X",
+    "url": "https://www.youthx.uno/",
+    "description": "Share collaboration needs and discover AI-assisted partner connections.",
+    "descriptionZh": "发布合作需求，发现 AI 辅助的伙伴连接。",
+    "icon": "route",
+    "verificationStatus": "published"
+  },
+  {
+    "id": "youth-ai-os",
+    "name": "Youth AI OS",
+    "url": "https://www.youthaios.xyz/",
+    "description": "An AI-enabled approach to connecting people, opportunities and partners.",
+    "descriptionZh": "以 AI 赋能的方式连接人才、机会与合作伙伴。",
+    "icon": "ai",
+    "verificationStatus": "published"
+  }
 ]

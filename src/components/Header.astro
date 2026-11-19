@@ -38,7 +38,7 @@ const nav = [
     <div class="lang-switch" aria-label={t(lang, 'nav.switchLang')}>
       <a href={pageHref('en', currentPage)} class={lang === 'en' ? 'active' : ''} hreflang="en">EN</a>
       <span aria-hidden="true">/</span>
-      <a href={pageHref('zh', currentPage)} class={lang === 'zh' ? 'active' : ''} hreflang="zh" title="review draft">中文</a>
+      <a href={pageHref('zh', currentPage)} class={lang === 'zh' ? 'active' : ''} hreflang="zh">中文</a>
     </div>
 
     <button type="button" class="menu-toggle" id="menuToggle" aria-controls="navLinks" aria-expanded="false" aria-label={t(lang, 'nav.menu')}>

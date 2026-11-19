@@ -9,9 +9,9 @@ interface Props { lang: Lang }
 const { lang } = Astro.props;
 const L = (k: string) => t(lang, k);
 const channels = [
-  { icon: 'globe', title: 'Partnerships', body: lang === 'zh' ? '合作咨询邮箱待核验后公布。' : 'Partnership mailbox — pending verification.' },
-  { icon: 'people', title: 'Media & press', body: lang === 'zh' ? '媒体联系人待核验后公布。' : 'Media contact — pending verification.' },
-  { icon: 'building', title: 'General enquiries', body: lang === 'zh' ? '通用联系方式待核验后公布。' : 'General enquiries — pending verification.' },
+  { icon: 'globe', title: 'Partnerships', body: lang === 'zh' ? '与我们探讨合作、项目与共创机会。' : 'Let’s explore partnerships, programmes and co-creation opportunities.' },
+  { icon: 'people', title: 'Media & press', body: lang === 'zh' ? '媒体与内容合作，欢迎与我们联系。' : 'For media and content collaborations, get in touch with us.' },
+  { icon: 'building', title: 'General enquiries', body: lang === 'zh' ? '其他问题与建议，我们乐意倾听。' : 'For any other questions or ideas, we’d love to hear from you.' },
 ];
 const faqs = [{ q: L('contact.faq.q1'), a: L('contact.faq.a1') }, { q: L('contact.faq.q2'), a: L('contact.faq.a2') }];
 ---
@@ -31,7 +31,6 @@ const faqs = [{ q: L('contact.faq.q1'), a: L('contact.faq.a1') }, { q: L('contac
           </div></article>
         ))}
       </div>
-      <div class="info-note"><svg class="icon"><use href="#i-shield"></use></svg> {L('contact.channels.note')}</div>
     </div>
   </section>
 
