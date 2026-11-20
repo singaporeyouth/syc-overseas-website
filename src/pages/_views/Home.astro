@@ -5,19 +5,13 @@ import Hero from '../../components/Hero.astro';
 import StatsBar from '../../components/StatsBar.astro';
 import DualFeature from '../../components/DualFeature.astro';
 import SectionHeader from '../../components/SectionHeader.astro';
-import CountryGrid from '../../components/CountryGrid.astro';
-import PeopleGrid from '../../components/PeopleGrid.astro';
-import PartnersGrid from '../../components/PartnersGrid.astro';
-import CaseGrid from '../../components/CaseGrid.astro';
-import PlatformGrid from '../../components/PlatformGrid.astro';
 import { t, pick, type Lang } from '../../i18n/ui';
 import { pageHref } from '../../config/site';
 interface Props { lang: Lang }
 const { lang } = Astro.props;
 const L = (k: string) => t(lang, k);
-const [countries, people, partners, cases, platforms, metrics] = await Promise.all([
-  getCollection('countries'), getCollection('people'), getCollection('partners'),
-  getCollection('caseStudies'), getCollection('platforms'), getCollection('metrics'),
+const [countries, metrics] = await Promise.all([
+  getCollection('countries'), getCollection('metrics'),
 ]);
 const mv = (id: string) => metrics.find((m) => m.data.id === id)?.data.display ?? '';
 const panel = [
@@ -29,9 +23,20 @@ const stats = metrics.map((m) => ({
   label: pick(m.data, 'label', lang),
   icon: m.data.icon,
 }));
+
+// Concise "overview + entrance" cards: one line of context, one clear entry point.
+// All copy reuses existing i18n keys so all six languages stay in sync.
+const exploreCards = [
+  { kicker: L('about.mission.kicker'), title: L('nav.about'), lead: L('footer.about'), href: pageHref(lang, 'about'), img: '/assets/community-group.jpg' },
+  { kicker: L('home.country.kicker'), title: L('nav.network'), lead: L('home.country.lead'), href: pageHref(lang, 'network'), img: '/assets/city-1.jpg' },
+  { kicker: L('home.partners.kicker'), title: L('nav.partnerships'), lead: L('home.partners.lead'), href: pageHref(lang, 'partnerships'), img: '/assets/hero-partnership.jpg' },
+  { kicker: L('home.people.kicker'), title: L('nav.people'), lead: L('home.people.lead'), href: pageHref(lang, 'people'), img: '/assets/person-3.jpg' },
+  { kicker: L('home.work.kicker'), title: L('nav.work'), lead: L('home.work.lead'), href: pageHref(lang, 'impact'), img: '/assets/workshop.jpg' },
+  { kicker: L('home.eco.kicker'), title: L('nav.ai'), lead: L('home.eco.lead'), href: pageHref(lang, 'ai'), img: '/assets/ai-chip.jpg' },
+];
 ---
 
-<BaseLayout lang={lang} pageId="index" title={L('seo.index.title')} description={L('seo.index.desc')}>
+<BaseLayout lang={lang} pageId="index" title={L('seo.index.title')} description={L('seo.index.desc')} showCta={true}>
   <Hero
     lang={lang}
     eyebrow={L('home.hero.eyebrow')}
@@ -52,41 +57,22 @@ const stats = metrics.map((m) => ({
 
   <section class="section section--ice">
     <div class="container">
-      <SectionHeader kicker={L('home.country.kicker')} title={L('home.country.title')} lead={L('home.country.lead')} />
-      <CountryGrid lang={lang} countries={countries.map((c) => c.data)} limit={6} />
-      <div class="actions" style="margin-top:28px"><a class="btn btn--primary" href={pageHref(lang, 'network')}>{L('common.viewNetwork')} <svg class="icon"><use href="#i-arrow"></use></svg></a></div>
-    </div>
-  </section>
-
-  <section class="section">
-    <div class="container">
-      <SectionHeader kicker={L('home.people.kicker')} title={L('home.people.title')} lead={L('home.people.lead')} />
-      <PeopleGrid lang={lang} people={people.map((p) => p.data)} limit={3} />
-      <div class="actions" style="margin-top:20px"><a class="btn btn--outline" href={pageHref(lang, 'people')}>{L('home.people.more')} <svg class="icon"><use href="#i-arrow"></use></svg></a></div>
-    </div>
-  </section>
-
-  <section class="section section--ice">
-    <div class="container">
-      <SectionHeader kicker={L('home.partners.kicker')} title={L('home.partners.title')} lead={L('home.partners.lead')} />
-      <PartnersGrid lang={lang} partners={partners.map((p) => p.data)} />
-      <div class="actions" style="margin-top:28px"><a class="btn btn--primary" href={pageHref(lang, 'partnerships')}>{L('home.partners.more')} <svg class="icon"><use href="#i-arrow"></use></svg></a></div>
-    </div>
-  </section>
-
-  <section class="section">
-    <div class="container">
-      <SectionHeader kicker={L('home.work.kicker')} title={L('home.work.title')} lead={L('home.work.lead')} />
-      <CaseGrid lang={lang} cases={cases.map((c) => c.data)} />
-      <div class="actions" style="margin-top:28px"><a class="btn btn--outline" href={pageHref(lang, 'impact')}>{L('home.work.more')} <svg class="icon"><use href="#i-arrow"></use></svg></a></div>
-    </div>
-  </section>
-
-  <section class="section section--ice">
-    <div class="container">
-      <SectionHeader kicker={L('home.eco.kicker')} title={L('home.eco.title')} lead={L('home.eco.lead')} />
-      <PlatformGrid lang={lang} platforms={platforms.map((p) => p.data)} />
-      <div class="actions" style="margin-top:28px"><a class="btn btn--primary" href={pageHref(lang, 'ai')}>{L('home.eco.more')} <svg class="icon"><use href="#i-arrow"></use></svg></a></div>
+      <SectionHeader kicker={L('home.hero.eyebrow')} title={L('common.searchTitle')} />
+      <div class="card-grid">
+        {exploreCards.map((c) => (
+          <a class="card card--image" href={c.href}>
+            <div class="card-media">
+              <img src={c.img} alt="" loading="lazy" />
+              <span class="card-tag">{c.kicker}</span>
+            </div>
+            <div class="card-body">
+              <h3>{c.title}</h3>
+              <p>{c.lead}</p>
+              <span class="link-arrow">{L('common.learnMore')} <svg class="icon"><use href="#i-arrow"></use></svg></span>
+            </div>
+          </a>
+        ))}
+      </div>
     </div>
   </section>
 </BaseLayout>

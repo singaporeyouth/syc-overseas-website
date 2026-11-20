@@ -4,10 +4,11 @@ import { t, LANGS, LANG_META, type Lang } from '../i18n/ui';
 interface Props { lang: Lang; currentPage: string; }
 const { lang, currentPage } = Astro.props;
 
-// Primary items stay in the bar; secondary items move into a "More" dropdown.
+// Four primary items stay in the bar; Our People + Our Work live in one "More" dropdown.
 const primaryIds = ['index', 'about', 'network', 'ai'];
 const primary = pages.filter((p) => primaryIds.includes(p.id));
-const secondary = pages.filter((p) => !primaryIds.includes(p.id));
+const secondaryIds = ['people', 'impact'];
+const secondary = pages.filter((p) => secondaryIds.includes(p.id));
 const current = LANG_META[lang];
 ---
 
@@ -40,19 +41,10 @@ const current = LANG_META[lang];
         </div>
       </div>
 
-      {/* Mobile menu: all pages remain reachable as flat links */}
-      {secondary.map((item) => (
-        <a class="nav-secondary-link" href={pageHref(lang, item.id)} aria-current={currentPage === item.id ? 'page' : undefined}>{t(lang, item.navKey)}</a>
-      ))}
-
       <a class="btn btn--primary nav-cta" href={pageHref(lang, 'contact')}>
         {t(lang, 'nav.cta')} <svg class="icon"><use href="#i-arrow"></use></svg>
       </a>
     </nav>
-
-    <button type="button" class="btn btn--outline btn--small" id="openSearch" aria-label={t(lang, 'nav.search')} style="padding:10px;margin-left:2px">
-      <svg class="icon"><use href="#i-search"></use></svg>
-    </button>
 
     <!-- Single language button + dropdown -->
     <div class="lang-dd" id="langDropdown">

@@ -334,7 +334,6 @@ h3{font-size:1.4rem;font-weight:750}
 .nav-more-menu a{padding:9px 11px;border:0;border-radius:9px;font-size:.82rem;color:#33465e;white-space:nowrap}
 .nav-more-menu a:hover{background:#eef8f5;color:var(--accent-ink)}
 .nav-more-menu a[aria-current='page']{color:var(--accent-ink);font-weight:800}
-.nav-secondary-link{display:none}
 
 /* ---- 6. hero ---- */
 .hero{background:linear-gradient(120deg,#fbfdff 0%,#eef6fb 58%,#e9f2fa 100%);border-bottom:1px solid var(--line2)}
@@ -484,12 +483,16 @@ h3{font-size:1.4rem;font-weight:750}
   .nav-links{background:rgba(255,255,255,.985);border:1px solid var(--line2);box-shadow:0 18px 40px rgba(18,48,88,.14);backdrop-filter:blur(18px)}
   .nav-links a{color:#263c58}
   .nav-links a:hover,.nav-links a[aria-current='page']{color:var(--accent-ink)}
-  .nav-secondary-link{display:block}
-  .nav-more{display:none}
   /* A2: solid dropdown so hero copy cannot bleed through the menu */
   .nav-links{background:#fff}
   .nav-links a.btn--primary{color:#fff}
   .lang-dd-menu{right:auto;left:0}
+}
+/* Single source for secondary nav: the More dropdown expands inline inside the mobile panel. */
+@media(max-width:870px){
+  .nav-more{display:block;width:100%}
+  .nav-more-btn{width:100%;justify-content:space-between;padding:11px 0}
+  .nav-more-menu{position:static;transform:none;width:100%;min-width:0;margin-top:2px;padding:0 0 0 14px;box-shadow:none;background:transparent;border:0;border-radius:0;backdrop-filter:none}
 }
 
 /* ---- 16. editorial polish (portrait frame, map softening, hairline stats, CJK type) ---- */
