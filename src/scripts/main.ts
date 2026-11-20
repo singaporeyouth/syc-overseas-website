@@ -100,4 +100,46 @@
       return false;
     });
   }
+
+  // --- restrained scroll reveal + hero parallax (progressive enhancement) ---
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (!reduceMotion && 'IntersectionObserver' in window) {
+    document.documentElement.classList.add('js-motion');
+    const revealSel = '.section-head, .card, .mission-card, .trust-card, .platform-card, .timeline-step, .person-card, .country-card, .story-card, .partner-tile, .ai-feature, .detail-panel, .faq-item, .bottom-cta .container, .split-feature';
+    const io = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('in-view');
+            io.unobserve(entry.target);
+          }
+        });
+      },
+      { rootMargin: '0px 0px -8% 0px', threshold: 0.08 }
+    );
+    on<HTMLElement>(revealSel, (el) => {
+      el.classList.add('reveal');
+      io.observe(el);
+    });
+
+    const parallaxImgs = document.querySelectorAll<HTMLElement>('.hero-media img, .hero-visual img');
+    if (parallaxImgs.length) {
+      let ticking = false;
+      const applyParallax = () => {
+        const offset = Math.min(window.scrollY * 0.06, 26);
+        parallaxImgs.forEach((img) => img.style.setProperty('--parallax', `${offset.toFixed(1)}px`));
+        ticking = false;
+      };
+      window.addEventListener(
+        'scroll',
+        () => {
+          if (!ticking) {
+            ticking = true;
+            requestAnimationFrame(applyParallax);
+          }
+        },
+        { passive: true }
+      );
+    }
+  }
 })();
