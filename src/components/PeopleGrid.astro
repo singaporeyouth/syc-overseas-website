@@ -1,5 +1,5 @@
 ---
-import { t, pick, type Lang } from '../i18n/ui';
+import { pick, type Lang } from '../i18n/ui';
 import type { Person } from '../content/config';
 interface Props { lang: Lang; people: Person[]; scopeId?: string; limit?: number; }
 const { lang, people, scopeId = 'peopleGrid', limit } = Astro.props;
@@ -11,7 +11,7 @@ const list = limit ? people.slice(0, limit) : people;
     <article class="card card--person" data-filter-value={p.region}>
       <div class="card-media card-media--portrait">
         <img src={p.photo} alt={p.name} loading="lazy" />
-        <span class="card-tag">{t(lang, 'people.sample')}</span>
+        {p.region && <span class="card-tag">{p.region}</span>}
       </div>
       <div class="card-body">
         <h3>{p.name}</h3>

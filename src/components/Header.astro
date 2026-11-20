@@ -3,10 +3,12 @@ import { SITE, pages, pageHref } from '../config/site';
 import { t, LANGS, LANG_META, type Lang } from '../i18n/ui';
 interface Props { lang: Lang; currentPage: string; }
 const { lang, currentPage } = Astro.props;
-const nav = [
-  ...pages,
-  { id: 'contact', path: 'contact', navKey: 'nav.contact' },
-];
+
+// Primary items stay in the bar; secondary items move into a "More" dropdown.
+const primaryIds = ['index', 'about', 'network', 'ai'];
+const primary = pages.filter((p) => primaryIds.includes(p.id));
+const secondary = pages.filter((p) => !primaryIds.includes(p.id));
+const current = LANG_META[lang];
 ---
 
 <header class="site-header">
@@ -19,35 +21,55 @@ const nav = [
       </div>
     </a>
 
-    <nav class="nav-links" id="navLinks" aria-label="Main navigation">
-      {nav.map((item) => (
+    <nav class="nav-links" id="navLinks" aria-label={t(lang, 'nav.menu')}>
+      {primary.map((item) => (
         <a
           href={pageHref(lang, item.id)}
           aria-current={currentPage === item.id ? 'page' : undefined}
         >{t(lang, item.navKey)}</a>
       ))}
+
+      <div class="nav-more" id="moreDropdown">
+        <button type="button" class="nav-more-btn" id="moreToggle" aria-expanded="false" aria-haspopup="true" aria-controls="moreMenu">
+          {t(lang, 'nav.more')} <svg class="icon chev"><use href="#i-arrow"></use></svg>
+        </button>
+        <div class="nav-more-menu" id="moreMenu" role="menu">
+          {secondary.map((item) => (
+            <a role="menuitem" href={pageHref(lang, item.id)} aria-current={currentPage === item.id ? 'page' : undefined}>{t(lang, item.navKey)}</a>
+          ))}
+        </div>
+      </div>
+
+      {/* Mobile menu: all pages remain reachable as flat links */}
+      {secondary.map((item) => (
+        <a class="nav-secondary-link" href={pageHref(lang, item.id)} aria-current={currentPage === item.id ? 'page' : undefined}>{t(lang, item.navKey)}</a>
+      ))}
+
       <a class="btn btn--primary nav-cta" href={pageHref(lang, 'contact')}>
         {t(lang, 'nav.cta')} <svg class="icon"><use href="#i-arrow"></use></svg>
       </a>
-      <!-- Mobile-only language switcher, shown inside the expanded menu -->
-      <div class="lang-switch lang-switch--menu" aria-label={t(lang, 'nav.switchLang')} role="group">
-        {LANGS.map((l) => (
-          <a href={pageHref(l, currentPage)} class={lang === l ? 'active' : ''} hreflang={l} lang={l} aria-current={lang === l ? 'true' : undefined} title={LANG_META[l].native}>{LANG_META[l].label}</a>
-        ))}
-      </div>
     </nav>
 
     <button type="button" class="btn btn--outline btn--small" id="openSearch" aria-label={t(lang, 'nav.search')} style="padding:10px;margin-left:2px">
       <svg class="icon"><use href="#i-search"></use></svg>
     </button>
 
-    <div class="lang-switch lang-switch--inline" aria-label={t(lang, 'nav.switchLang')} role="group">
-      {LANGS.map((l, i) => (
-        <>
-          {i > 0 && <span aria-hidden="true">/</span>}
-          <a href={pageHref(l, currentPage)} class={lang === l ? 'active' : ''} hreflang={l} lang={l} aria-current={lang === l ? 'true' : undefined} title={LANG_META[l].native}>{LANG_META[l].label}</a>
-        </>
-      ))}
+    <!-- Single language button + dropdown -->
+    <div class="lang-dd" id="langDropdown">
+      <button type="button" class="lang-dd-btn" id="langToggle" aria-label={t(lang, 'nav.switchLang')} aria-haspopup="true" aria-expanded="false" aria-controls="langMenu">
+        <svg class="icon"><use href="#i-globe"></use></svg>
+        <span>{current.label}</span>
+        <svg class="icon chev"><use href="#i-arrow"></use></svg>
+      </button>
+      <div class="lang-dd-menu" id="langMenu" role="menu" aria-label={t(lang, 'nav.switchLang')}>
+        {LANGS.map((l) => (
+          <a role="menuitem" href={pageHref(l, currentPage)} class={lang === l ? 'active' : ''} hreflang={l} lang={l} aria-current={lang === l ? 'true' : undefined} title={LANG_META[l].native}>
+            <span class="lang-native">{LANG_META[l].native}</span>
+            <span class="lang-label">{LANG_META[l].label}</span>
+            <svg class="icon"><use href="#i-check"></use></svg>
+          </a>
+        ))}
+      </div>
     </div>
 
     <button type="button" class="menu-toggle" id="menuToggle" aria-controls="navLinks" aria-expanded="false" aria-label={t(lang, 'nav.menu')}>

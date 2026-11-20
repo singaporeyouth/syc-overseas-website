@@ -17,6 +17,7 @@ const ui = {
   'nav.search': { en: 'Search this site', zh: '搜索本站', fr: 'Rechercher sur le site', ru: 'Поиск по сайту', ja: 'サイト内検索', ko: '사이트 검색' },
   'nav.menu': { en: 'Toggle menu', zh: '切换菜单', fr: 'Ouvrir le menu', ru: 'Открыть меню', ja: 'メニューを開く', ko: '메뉴 열기' },
   'nav.switchLang': { en: 'Language', zh: '语言', fr: 'Langue', ru: 'Язык', ja: '言語', ko: '언어' },
+  'nav.more': { en: 'More', zh: '更多', fr: 'Plus', ru: 'Ещё', ja: 'もっと見る', ko: '더보기' },
   'brand.sub': { en: 'People · Purpose · AI-Native', zh: '人才 · 使命 · AI 原生', fr: 'Personnes · Mission · IA native', ru: 'Люди · Цель · ИИ в основе', ja: '人々 · 使命 · AI ネイティブ', ko: '사람 · 목적 · AI 네이티브' },
 
   'common.exploreNetwork': { en: 'Explore Our Network', zh: '探索我们的网络', fr: 'Découvrir notre réseau', ru: 'Изучить нашу сеть', ja: 'ネットワークを見る', ko: '네트워크 살펴보기' },

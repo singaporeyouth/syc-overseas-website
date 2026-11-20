@@ -22,6 +22,39 @@
     );
   }
 
+  // --- generic popover dropdowns (language switcher + "More" nav) ---
+  function bindDropdown(dropdownId: string, toggleId: string) {
+    const dd = document.getElementById(dropdownId);
+    const toggle = document.getElementById(toggleId);
+    if (!dd || !toggle) return;
+    const close = () => {
+      dd.classList.remove('is-open');
+      toggle.setAttribute('aria-expanded', 'false');
+    };
+    toggle.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const willOpen = !dd.classList.contains('is-open');
+      // close any other open dropdown first
+      document.querySelectorAll('.lang-dd.is-open, .nav-more.is-open').forEach((other) => {
+        if (other !== dd) {
+          other.classList.remove('is-open');
+          const t = other.querySelector('[aria-expanded]');
+          t?.setAttribute('aria-expanded', 'false');
+        }
+      });
+      dd.classList.toggle('is-open', willOpen);
+      toggle.setAttribute('aria-expanded', String(willOpen));
+    });
+    document.addEventListener('click', (e) => {
+      if (dd && !dd.contains(e.target as Node)) close();
+    });
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') close();
+    });
+  }
+  bindDropdown('langDropdown', 'langToggle');
+  bindDropdown('moreDropdown', 'moreToggle');
+
   // --- back to top ---
   const topBtn = document.getElementById('backToTop');
   if (topBtn) {
