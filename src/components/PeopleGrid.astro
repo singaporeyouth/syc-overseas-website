@@ -1,5 +1,5 @@
 ---
-import { t, type Lang } from '../i18n/ui';
+import { t, pick, type Lang } from '../i18n/ui';
 import type { Person } from '../content/config';
 interface Props { lang: Lang; people: Person[]; scopeId?: string; limit?: number; }
 const { lang, people, scopeId = 'peopleGrid', limit } = Astro.props;
@@ -15,7 +15,7 @@ const list = limit ? people.slice(0, limit) : people;
       </div>
       <div class="card-body">
         <h3>{p.name}</h3>
-        <div class="person-role">{lang === "zh" && p.roleZh ? p.roleZh : p.role}</div>
+        <div class="person-role">{pick(p, 'role', lang)}</div>
         <div class="person-country"><svg class="icon"><use href="#i-pin"></use></svg> {p.country}</div>
       </div>
     </article>

@@ -10,7 +10,7 @@ import PeopleGrid from '../../components/PeopleGrid.astro';
 import PartnersGrid from '../../components/PartnersGrid.astro';
 import CaseGrid from '../../components/CaseGrid.astro';
 import PlatformGrid from '../../components/PlatformGrid.astro';
-import { t, type Lang } from '../../i18n/ui';
+import { t, pick, type Lang } from '../../i18n/ui';
 import { pageHref } from '../../config/site';
 interface Props { lang: Lang }
 const { lang } = Astro.props;
@@ -26,7 +26,7 @@ const panel = [
 ];
 const stats = metrics.map((m) => ({
   display: m.data.display,
-  label: lang === 'zh' && m.data.labelZh ? m.data.labelZh : m.data.label,
+  label: pick(m.data, 'label', lang),
   icon: m.data.icon,
 }));
 ---

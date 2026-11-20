@@ -10,7 +10,19 @@
     "lng": 103.82,
     "note": "Home of SYC — a vibrant hub connecting young people across the region and around the world.",
     "noteZh": "SYC 的发起地——充满活力的枢纽，连接本区域与全球的青年。",
-    "verificationStatus": "published"
+    "verificationStatus": "published",
+    "nameFr": "Singapour",
+    "nameRu": "Сингапур",
+    "nameJa": "シンガポール",
+    "nameKo": "싱가포르",
+    "regionFr": "Asie",
+    "regionRu": "Азия",
+    "regionJa": "アジア",
+    "regionKo": "아시아",
+    "noteFr": "Siège de SYC — un pôle dynamique qui relie les jeunes de la région et du monde entier.",
+    "noteRu": "Родина SYC — динамичный центр, объединяющий молодёжь региона и всего мира.",
+    "noteJa": "SYC の本拠地——地域と世界の若者をつなぐ活気あるハブ。",
+    "noteKo": "SYC의 본거지 — 지역과 전 세계 청년을 연결하는 활기찬 허브."
   },
   {
     "id": "australia",
@@ -23,7 +35,19 @@
     "lng": 151.21,
     "note": "A dynamic community linking young people and institutions across the Asia-Pacific.",
     "noteZh": "充满活力的社区，连接亚太地区的青年与机构。",
-    "verificationStatus": "published"
+    "verificationStatus": "published",
+    "nameFr": "Australie",
+    "nameRu": "Австралия",
+    "nameJa": "オーストラリア",
+    "nameKo": "호주",
+    "regionFr": "Océanie",
+    "regionRu": "Океания",
+    "regionJa": "オセアニア",
+    "regionKo": "오세아니아",
+    "noteFr": "Une communauté dynamique qui relie les jeunes et les institutions de la région Asie-Pacifique.",
+    "noteRu": "Динамичное сообщество, объединяющее молодёжь и организации Азиатско-Тихоокеанского региона.",
+    "noteJa": "アジア太平洋地域の若者と機関をつなぐ活発なコミュニティ。",
+    "noteKo": "아시아태평양 지역의 청년과 기관을 연결하는 역동적인 커뮤니티."
   },
   {
     "id": "japan",
@@ -36,7 +60,19 @@
     "lng": 139.69,
     "note": "Working with youth communities, educators and innovators across Japan.",
     "noteZh": "与日本各地的青年社区、教育者与创新者携手合作。",
-    "verificationStatus": "published"
+    "verificationStatus": "published",
+    "nameFr": "Japon",
+    "nameRu": "Япония",
+    "nameJa": "日本",
+    "nameKo": "일본",
+    "regionFr": "Asie",
+    "regionRu": "Азия",
+    "regionJa": "アジア",
+    "regionKo": "아시아",
+    "noteFr": "Collaboration avec les communautés de jeunes, les éducateurs et les innovateurs de tout le Japon.",
+    "noteRu": "Сотрудничество с молодёжными сообществами, педагогами и новаторами по всей Японии.",
+    "noteJa": "日本各地の青年コミュニティ、教育者、イノベーターと協力しています。",
+    "noteKo": "일본 전역의 청년 커뮤니티, 교육자, 혁신가와 협력합니다."
   },
   {
     "id": "united-kingdom",
@@ -49,7 +85,19 @@
     "lng": -0.13,
     "note": "Connecting young leaders, universities and organisations across the UK and Europe.",
     "noteZh": "连接英国与欧洲的青年领袖、大学与机构。",
-    "verificationStatus": "published"
+    "verificationStatus": "published",
+    "nameFr": "Royaume-Uni",
+    "nameRu": "Великобритания",
+    "nameJa": "イギリス",
+    "nameKo": "영국",
+    "regionFr": "Europe",
+    "regionRu": "Европа",
+    "regionJa": "ヨーロッパ",
+    "regionKo": "유럽",
+    "noteFr": "Mise en relation des jeunes leaders, des universités et des organismes du Royaume-Uni et d’Europe.",
+    "noteRu": "Объединяем молодых лидеров, университеты и организации Великобритании и Европы.",
+    "noteJa": "英国とヨーロッパの若いリーダー、大学、機関をつなぎます。",
+    "noteKo": "영국과 유럽의 청년 지도자, 대학, 기관을 연결합니다."
   },
   {
     "id": "united-states",
@@ -62,7 +110,19 @@
     "lng": -77.04,
     "note": "Building bridges between youth communities and partners across the Americas.",
     "noteZh": "在美洲地区的青年社区与合作伙伴之间搭建桥梁。",
-    "verificationStatus": "published"
+    "verificationStatus": "published",
+    "nameFr": "États-Unis",
+    "nameRu": "США",
+    "nameJa": "アメリカ",
+    "nameKo": "미국",
+    "regionFr": "Amériques",
+    "regionRu": "Америка",
+    "regionJa": "アメリカ",
+    "regionKo": "아메리카",
+    "noteFr": "Construire des ponts entre les communautés de jeunes et les partenaires des Amériques.",
+    "noteRu": "Строим мосты между молодёжными сообществами и партнёрами стран Америки.",
+    "noteJa": "アメリカ大陸の青年コミュニティとパートナーの間に橋を架けます。",
+    "noteKo": "아메리카 전역의 청년 커뮤니티와 파트너 사이에 가교를 놓습니다."
   },
   {
     "id": "germany",
@@ -75,7 +135,19 @@
     "lng": 13.4,
     "note": "A key European node for youth innovation, exchange and applied AI.",
     "noteZh": "欧洲重要的青年创新、交流与应用 AI 枢纽。",
-    "verificationStatus": "published"
+    "verificationStatus": "published",
+    "nameFr": "Allemagne",
+    "nameRu": "Германия",
+    "nameJa": "ドイツ",
+    "nameKo": "독일",
+    "regionFr": "Europe",
+    "regionRu": "Европа",
+    "regionJa": "ヨーロッパ",
+    "regionKo": "유럽",
+    "noteFr": "Un pôle européen clé pour l’innovation des jeunes, l’échange et l’IA appliquée.",
+    "noteRu": "Ключевой европейский центр молодёжных инноваций, обмена и прикладного ИИ.",
+    "noteJa": "青年のイノベーション、交流、実用 AI の重要な欧州拠点。",
+    "noteKo": "청년 혁신, 교류, 응용 AI의 핵심 유럽 거점."
   },
   {
     "id": "uae",
@@ -88,7 +160,19 @@
     "lng": 55.27,
     "note": "A regional hub connecting young leaders and partners across the Middle East.",
     "noteZh": "连接中东地区青年领袖与合作伙伴的区域枢纽。",
-    "verificationStatus": "published"
+    "verificationStatus": "published",
+    "nameFr": "Émirats arabes unis",
+    "nameRu": "ОАЭ",
+    "nameJa": "アラブ首長国連邦",
+    "nameKo": "아랍에미리트",
+    "regionFr": "Moyen-Orient",
+    "regionRu": "Ближний Восток",
+    "regionJa": "中東",
+    "regionKo": "중동",
+    "noteFr": "Un pôle régional qui relie les jeunes leaders et les partenaires du Moyen-Orient.",
+    "noteRu": "Региональный центр, объединяющий молодых лидеров и партнёров Ближнего Востока.",
+    "noteJa": "中東の若いリーダーとパートナーをつなぐ地域ハブ。",
+    "noteKo": "중동의 청년 지도자와 파트너를 연결하는 지역 허브."
   },
   {
     "id": "kenya",
@@ -101,6 +185,18 @@
     "lng": 36.82,
     "note": "Driving grassroots youth action, community learning and local impact across Africa.",
     "noteZh": "在非洲推动基层青年行动、社区学习与本地影响力。",
-    "verificationStatus": "published"
+    "verificationStatus": "published",
+    "nameFr": "Kenya",
+    "nameRu": "Кения",
+    "nameJa": "ケニア",
+    "nameKo": "케냐",
+    "regionFr": "Afrique",
+    "regionRu": "Африка",
+    "regionJa": "アフリカ",
+    "regionKo": "아프리카",
+    "noteFr": "Promouvoir l’action citoyenne des jeunes, l’apprentissage communautaire et l’impact local en Afrique.",
+    "noteRu": "Развиваем низовую молодёжную активность, communalное обучение и локальное влияние в Африке.",
+    "noteJa": "アフリカで草の根の青年活動、コミュニティ学習、地域インパクトを推進します。",
+    "noteKo": "아프리카에서 풀뿌리 청년 활동, 커뮤니티 학습, 지역 영향을 추진합니다."
   }
 ]

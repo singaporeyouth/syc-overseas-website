@@ -9,9 +9,9 @@ interface Props { lang: Lang }
 const { lang } = Astro.props;
 const L = (k: string) => t(lang, k);
 const channels = [
-  { icon: 'globe', title: 'Partnerships', body: lang === 'zh' ? '与我们探讨合作、项目与共创机会。' : 'Let’s explore partnerships, programmes and co-creation opportunities.' },
-  { icon: 'people', title: 'Media & press', body: lang === 'zh' ? '媒体与内容合作，欢迎与我们联系。' : 'For media and content collaborations, get in touch with us.' },
-  { icon: 'building', title: 'General enquiries', body: lang === 'zh' ? '其他问题与建议，我们乐意倾听。' : 'For any other questions or ideas, we’d love to hear from you.' },
+  { icon: 'globe', title: L('contact.channel1.title'), body: L('contact.channel1.body') },
+  { icon: 'people', title: L('contact.channel2.title'), body: L('contact.channel2.body') },
+  { icon: 'building', title: L('contact.channel3.title'), body: L('contact.channel3.body') },
 ];
 const faqs = [{ q: L('contact.faq.q1'), a: L('contact.faq.a1') }, { q: L('contact.faq.q2'), a: L('contact.faq.a2') }];
 ---

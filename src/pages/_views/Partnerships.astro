@@ -5,6 +5,7 @@ import Hero from '../../components/Hero.astro';
 import SectionHeader from '../../components/SectionHeader.astro';
 import PartnersGrid from '../../components/PartnersGrid.astro';
 import { t, type Lang } from '../../i18n/ui';
+import { localizePath } from '../../config/site';
 interface Props { lang: Lang }
 const { lang } = Astro.props;
 const L = (k: string) => t(lang, k);
@@ -12,7 +13,7 @@ const partners = (await getCollection('partners')).map((p) => p.data);
 ---
 
 <BaseLayout lang={lang} pageId="partnerships" title={L('seo.partnerships.title')} description={L('seo.partnerships.desc')}>
-  <Hero lang={lang} compact eyebrow={L('partnerships.hero.eyebrow')} titleHtml={L('partnerships.hero.title')} lead={L('partnerships.hero.lead')} image="/assets/workshop.jpg" primary={{ label: L('cta.btn'), href: lang === 'zh' ? '/zh/contact/' : '/contact/' }} />
+  <Hero lang={lang} compact eyebrow={L('partnerships.hero.eyebrow')} titleHtml={L('partnerships.hero.title')} lead={L('partnerships.hero.lead')} image="/assets/workshop.jpg" primary={{ label: L('cta.btn'), href: localizePath(lang, 'contact') }} />
 
   <section class="section">
     <div class="container">

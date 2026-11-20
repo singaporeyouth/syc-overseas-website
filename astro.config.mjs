@@ -18,9 +18,8 @@ export default defineConfig({
   },
   integrations: [
     sitemap({
-      // Chinese pages are a review draft (zh) and are intentionally excluded from the sitemap
-      // until content sign-off. Remove this filter after zh copy is approved for publication.
-      filter: (page) => !page.includes('/zh/'),
+      // All six languages (en/zh/fr/ru/ja/ko) are published and indexable.
+      // No filter: every localized page is included in the sitemap.
     }),
   ],
 });

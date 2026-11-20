@@ -1,6 +1,6 @@
 ---
 import { SITE, pages, pageHref } from '../config/site';
-import { t, type Lang } from '../i18n/ui';
+import { t, LANGS, LANG_META, type Lang } from '../i18n/ui';
 interface Props { lang: Lang; currentPage: string; }
 const { lang, currentPage } = Astro.props;
 const nav = [
@@ -29,16 +29,25 @@ const nav = [
       <a class="btn btn--primary nav-cta" href={pageHref(lang, 'contact')}>
         {t(lang, 'nav.cta')} <svg class="icon"><use href="#i-arrow"></use></svg>
       </a>
+      <!-- Mobile-only language switcher, shown inside the expanded menu -->
+      <div class="lang-switch lang-switch--menu" aria-label={t(lang, 'nav.switchLang')} role="group">
+        {LANGS.map((l) => (
+          <a href={pageHref(l, currentPage)} class={lang === l ? 'active' : ''} hreflang={l} lang={l} aria-current={lang === l ? 'true' : undefined} title={LANG_META[l].native}>{LANG_META[l].label}</a>
+        ))}
+      </div>
     </nav>
 
     <button type="button" class="btn btn--outline btn--small" id="openSearch" aria-label={t(lang, 'nav.search')} style="padding:10px;margin-left:2px">
       <svg class="icon"><use href="#i-search"></use></svg>
     </button>
 
-    <div class="lang-switch" aria-label={t(lang, 'nav.switchLang')}>
-      <a href={pageHref('en', currentPage)} class={lang === 'en' ? 'active' : ''} hreflang="en">EN</a>
-      <span aria-hidden="true">/</span>
-      <a href={pageHref('zh', currentPage)} class={lang === 'zh' ? 'active' : ''} hreflang="zh">中文</a>
+    <div class="lang-switch lang-switch--inline" aria-label={t(lang, 'nav.switchLang')} role="group">
+      {LANGS.map((l, i) => (
+        <>
+          {i > 0 && <span aria-hidden="true">/</span>}
+          <a href={pageHref(l, currentPage)} class={lang === l ? 'active' : ''} hreflang={l} lang={l} aria-current={lang === l ? 'true' : undefined} title={LANG_META[l].native}>{LANG_META[l].label}</a>
+        </>
+      ))}
     </div>
 
     <button type="button" class="menu-toggle" id="menuToggle" aria-controls="navLinks" aria-expanded="false" aria-label={t(lang, 'nav.menu')}>

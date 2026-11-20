@@ -1,6 +1,7 @@
 ---
 import WorldMap from './WorldMap.astro';
 import { t, type Lang } from '../i18n/ui';
+import { localizePath } from '../config/site';
 import type { Country } from '../content/config';
 interface Props { lang: Lang; countries: Country[]; }
 const { lang, countries } = Astro.props;
@@ -9,8 +10,8 @@ const features = [
   { icon: 'route', title: t(lang, 'home.dual.ai2'), sub: t(lang, 'home.dual.ai2sub') },
   { icon: 'spark', title: t(lang, 'home.dual.ai3'), sub: t(lang, 'home.dual.ai3sub') },
 ];
-const networkHref = lang === 'zh' ? '/zh/network/' : '/network/';
-const aiHref = lang === 'zh' ? '/zh/ai/' : '/ai/';
+const networkHref = localizePath(lang, 'network');
+const aiHref = localizePath(lang, 'ai');
 ---
 
 <div class="dual-grid">

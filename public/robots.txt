@@ -1,6 +1,4 @@
 User-agent: *
 Allow: /
-# Chinese pages are an unapproved review draft — keep them out of search indexing.
-Disallow: /zh/
 
 Sitemap: https://www.singaporeyouth.com/sitemap-index.xml

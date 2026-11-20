@@ -1,6 +1,6 @@
 ---
-import { SITE } from '../config/site';
-import type { Lang } from '../i18n/ui';
+import { SITE, localizePath } from '../config/site';
+import { LANGS, LANG_META, type Lang } from '../i18n/ui';
 
 interface Props {
   lang: Lang;
@@ -14,8 +14,9 @@ const { lang, title, description, pageId, image = '/assets/hero-people.jpg', typ
 const is404 = pageId === '404';
 const canonical = new URL(Astro.url.pathname, Astro.site).href;
 const ogImage = new URL(image, Astro.site).href;
-const enUrl = new URL(pageId === 'index' ? '/' : `/${pageId}/`, Astro.site).href;
-const zhUrl = new URL(pageId === 'index' ? '/zh/' : `/zh/${pageId}/`, Astro.site).href;
+const pagePath = pageId === 'index' ? '' : pageId;
+const localeUrls = LANGS.map((l) => ({ lang: l, url: new URL(localizePath(l, pagePath), Astro.site).href }));
+const enUrl = localeUrls.find((x) => x.lang === 'en')!.url;
 const orgJson = JSON.stringify(SITE.orgJsonLd);
 ---
 
@@ -23,12 +24,12 @@ const orgJson = JSON.stringify(SITE.orgJsonLd);
 <meta name="description" content={description} />
 <meta name="theme-color" content="#0b214e" />
 {!is404 && <link rel="canonical" href={canonical} />}
-<meta name="robots" content={is404 ? 'noindex, nofollow' : lang === 'zh' ? 'noindex, follow' : 'index, follow'} />
+<meta name="robots" content={is404 ? 'noindex, nofollow' : 'index, follow'} />
 
 <!-- Open Graph -->
 <meta property="og:type" content={type} />
 <meta property="og:site_name" content={SITE.name} />
-<meta property="og:locale" content={lang === 'zh' ? 'zh_CN' : 'en_US'} />
+<meta property="og:locale" content={LANG_META[lang].og} />
 <meta property="og:title" content={title} />
 <meta property="og:description" content={description} />
 <meta property="og:url" content={canonical} />
@@ -40,10 +41,9 @@ const orgJson = JSON.stringify(SITE.orgJsonLd);
 <meta name="twitter:description" content={description} />
 <meta name="twitter:image" content={ogImage} />
 
-<!-- Bilingual alternates -->
+<!-- Language alternates -->
 {!is404 && <>
-<link rel="alternate" hreflang="en" href={enUrl} />
-<link rel="alternate" hreflang="zh" href={zhUrl} />
+{localeUrls.map((x) => <link rel="alternate" hreflang={x.lang} href={x.url} />)}
 <link rel="alternate" hreflang="x-default" href={enUrl} />
 </>}
 

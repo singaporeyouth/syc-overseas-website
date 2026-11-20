@@ -1,5 +1,5 @@
 ---
-import type { Lang } from '../i18n/ui';
+import { pick, type Lang } from '../i18n/ui';
 import type { CaseStudy } from '../content/config';
 interface Props { lang: Lang; cases: CaseStudy[]; }
 const { lang, cases } = Astro.props;
@@ -9,12 +9,12 @@ const { lang, cases } = Astro.props;
   {cases.map((c) => (
     <article class="card card--image">
       <div class="card-media">
-        <img src={c.image} alt={lang === "zh" && c.titleZh ? c.titleZh : c.title} loading="lazy" />
-        <span class="card-tag">{c.category}</span>
+        <img src={c.image} alt={pick(c, 'title', lang)} loading="lazy" />
+        <span class="card-tag">{pick(c, 'category', lang)}</span>
       </div>
       <div class="card-body">
-        <h3>{lang === 'zh' && c.titleZh ? c.titleZh : c.title}</h3>
-        <p>{lang === "zh" && c.summaryZh ? c.summaryZh : c.summary}</p>
+        <h3>{pick(c, 'title', lang)}</h3>
+        <p>{pick(c, 'summary', lang)}</p>
       </div>
     </article>
   ))}

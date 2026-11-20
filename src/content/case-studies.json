@@ -9,7 +9,19 @@
     "summary": "Connecting young people through global dialogues, study visits and exchange programmes that build understanding and lasting friendships.",
     "summaryZh": "通过全球对话、参访与交流项目连接青年，增进理解并建立持久友谊。",
     "approvalStatus": "published",
-    "verificationStatus": "published"
+    "verificationStatus": "published",
+    "titleFr": "Échange et mobilité des jeunes",
+    "titleRu": "Молодёжный обмен и мобильность",
+    "titleJa": "若者の交流と流動性",
+    "titleKo": "청년 교류 및 이동",
+    "categoryFr": "Échange de jeunes",
+    "categoryRu": "Молодёжный обмен",
+    "categoryJa": "若者交流",
+    "categoryKo": "청년 교류",
+    "summaryFr": "Connecter les jeunes par des dialogues mondiaux, des visites d’étude et des programmes d’échange qui favorisent la compréhension et des amitiés durables.",
+    "summaryRu": "Соединяем молодёжь через глобальные диалоги, учебные визиты и программы обмена, которые формируют взаимопонимание и прочную дружбу.",
+    "summaryJa": "グローバルな対話、研修訪問、交換プログラムを通じて若者をつなぎ、相互理解と永続的な友情を築きます。",
+    "summaryKo": "글로벌 대화, 연수 방문, 교류 프로그램을 통해 청년을 연결하고 상호 이해와 지속적인 우정을 쌓습니다."
   },
   {
     "id": "innovation",
@@ -21,7 +33,19 @@
     "summary": "Empowering youth-led innovation through applied AI, entrepreneurial support and cross-border idea exchange.",
     "summaryZh": "通过应用 AI、创业支持与跨境创意交流，赋能青年主导的创新。",
     "approvalStatus": "published",
-    "verificationStatus": "published"
+    "verificationStatus": "published",
+    "titleFr": "Innovation et entrepreneuriat",
+    "titleRu": "Инновации и предпринимательство",
+    "titleJa": "イノベーションと起業",
+    "titleKo": "혁신과 창업",
+    "categoryFr": "Innovation",
+    "categoryRu": "Инновации",
+    "categoryJa": "イノベーション",
+    "categoryKo": "혁신",
+    "summaryFr": "Autonomiser l’innovation portée par les jeunes grâce à l’IA appliquée, au soutien à l’entrepreneuriat et à l’échange transfrontalier d’idées.",
+    "summaryRu": "Поддерживаем инновации молодёжи через прикладной ИИ, предпринимательскую поддержку и трансграничный обмен идеями.",
+    "summaryJa": "実用 AI、起業支援、国境を越えたアイデア交流で、若者主導のイノベーションを後押しします。",
+    "summaryKo": "응용 AI, 창업 지원, 국경을 넘는 아이디어 교류로 청년 주도 혁신을 지원합니다."
   },
   {
     "id": "community",
@@ -33,6 +57,18 @@
     "summary": "Linking local communities with partners, learning opportunities and projects that create measurable social impact.",
     "summaryZh": "将本地社区与合作伙伴、学习机会及产生实际社会影响的项目相连接。",
     "approvalStatus": "published",
-    "verificationStatus": "published"
+    "verificationStatus": "published",
+    "titleFr": "Communautés et durabilité",
+    "titleRu": "Сообщества и устойчивое развитие",
+    "titleJa": "コミュニティと持続可能性",
+    "titleKo": "커뮤니티와 지속가능성",
+    "categoryFr": "Communauté",
+    "categoryRu": "Сообщество",
+    "categoryJa": "コミュニティ",
+    "categoryKo": "커뮤니티",
+    "summaryFr": "Relier les communautés locales à des partenaires, des possibilités d’apprentissage et des projets qui créent un impact social mesurable.",
+    "summaryRu": "Связываем местные сообщества с партнёрами, возможностями обучения и проектами, создающими измеримое социальное влияние.",
+    "summaryJa": "地域コミュニティをパートナー、学習機会、測定可能な社会的インパクトを生むプロジェクトと結びます。",
+    "summaryKo": "지역 커뮤니티를 파트너, 학습 기회, 측정 가능한 사회적 영향을 만드는 프로젝트와 연결합니다."
   }
 ]

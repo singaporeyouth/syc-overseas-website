@@ -7,7 +7,11 @@
     "country": "Singapore",
     "region": "Asia",
     "photo": "/assets/person-1.jpg",
-    "verificationStatus": "published"
+    "verificationStatus": "published",
+    "roleFr": "Fondateur et directeur exécutif",
+    "roleRu": "Основатель и исполнительный директор",
+    "roleJa": "創設者兼エグゼクティブディレクター",
+    "roleKo": "창립자 겸 전무이사"
   },
   {
     "id": "p2",
@@ -17,7 +21,11 @@
     "country": "United Kingdom",
     "region": "Europe",
     "photo": "/assets/person-2.jpg",
-    "verificationStatus": "published"
+    "verificationStatus": "published",
+    "roleFr": "Directrice des partenariats mondiaux",
+    "roleRu": "Директор по глобальным партнёрствам",
+    "roleJa": "グローバルパートナーシップ責任者",
+    "roleKo": "글로벌 파트너십 디렉터"
   },
   {
     "id": "p3",
@@ -27,7 +35,11 @@
     "country": "China",
     "region": "Asia",
     "photo": "/assets/person-3.jpg",
-    "verificationStatus": "published"
+    "verificationStatus": "published",
+    "roleFr": "Responsable du réseau mondial",
+    "roleRu": "Руководитель глобальной сети",
+    "roleJa": "グローバルネットワーク責任者",
+    "roleKo": "글로벌 네트워크 책임자"
   },
   {
     "id": "p4",
@@ -37,7 +49,11 @@
     "country": "Japan",
     "region": "Asia",
     "photo": "/assets/person-4.jpg",
-    "verificationStatus": "published"
+    "verificationStatus": "published",
+    "roleFr": "Responsable communauté, Asie-Pacifique",
+    "roleRu": "Руководитель сообщества, Азиатско-Тихоокеанский регион",
+    "roleJa": "アジア太平洋コミュニティリード",
+    "roleKo": "아시아태평양 커뮤니티 리드"
   },
   {
     "id": "p5",
@@ -47,7 +63,11 @@
     "country": "Germany",
     "region": "Europe",
     "photo": "/assets/person-5.jpg",
-    "verificationStatus": "published"
+    "verificationStatus": "published",
+    "roleFr": "Responsable innovation et IA",
+    "roleRu": "Руководитель по инновациям и ИИ",
+    "roleJa": "イノベーション・AI リード",
+    "roleKo": "혁신 및 AI 리드"
   },
   {
     "id": "p6",
@@ -57,6 +77,10 @@
     "country": "Global Network",
     "region": "Global",
     "photo": "/assets/person-6.jpg",
-    "verificationStatus": "published"
+    "verificationStatus": "published",
+    "roleFr": "Ambassadrice mondiale de la jeunesse",
+    "roleRu": "Глобальный посол молодёжи",
+    "roleJa": "グローバル青年アンバサダー",
+    "roleKo": "글로벌 청년 대사"
   }
 ]

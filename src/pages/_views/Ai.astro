@@ -10,9 +10,9 @@ const { lang } = Astro.props;
 const L = (k: string) => t(lang, k);
 const platforms = (await getCollection('platforms')).map((p) => p.data);
 const principles = [
-  { icon: 'people', n: '01', title: lang === 'zh' ? '以人为本' : 'People at the centre', body: lang === 'zh' ? 'AI 服务于人，而非取代社区中的真实关系。' : 'AI serves people and never replaces real relationships in our community.' },
-  { icon: 'shield', n: '02', title: lang === 'zh' ? '透明可信' : 'Transparent & accountable', body: lang === 'zh' ? '以清晰、负责的方式呈现我们的技术与实践。' : 'We present our technology and practice with clarity and accountability.' },
-  { icon: 'globe', n: '03', title: lang === 'zh' ? '跨境普惠' : 'Cross-border access', body: lang === 'zh' ? '让不同地区的青年都能获得机遇与工具。' : 'Opportunities and tools are accessible to youth across regions.' },
+  { icon: 'people', n: '01', title: L('ai.principle1.title'), body: L('ai.principle1.body') },
+  { icon: 'shield', n: '02', title: L('ai.principle2.title'), body: L('ai.principle2.body') },
+  { icon: 'globe', n: '03', title: L('ai.principle3.title'), body: L('ai.principle3.body') },
 ];
 ---
 

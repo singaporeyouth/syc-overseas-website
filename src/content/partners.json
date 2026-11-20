@@ -7,7 +7,15 @@
     "description": "Working with international bodies on youth development, cross-border exchange and multilateral programmes that open doors for young people.",
     "descriptionZh": "与国际组织合作，开展青年发展、跨境交流及为青年创造机会的多边项目。",
     "logo": null,
-    "verificationStatus": "published"
+    "verificationStatus": "published",
+    "nameFr": "Organisations internationales",
+    "nameRu": "Международные организации",
+    "nameJa": "国際機関",
+    "nameKo": "국제 기관",
+    "descriptionFr": "Collaborer avec des organismes internationaux sur le développement des jeunes, l’échange transfrontalier et des programmes multilatéraux qui ouvrent des portes aux jeunes.",
+    "descriptionRu": "Сотрудничаем с международными структурами в области развития молодёжи, трансграничного обмена и многосторонних программ, открывающих двери молодёжи.",
+    "descriptionJa": "青年の発展、国境を越えた交流、若者に門戸を開く多国間プログラムで国際機関と協力します。",
+    "descriptionKo": "청년 발전, 국경을 넘는 교류, 청년에게 기회를 여는 다자간 프로그램에서 국제 기관과 협력합니다."
   },
   {
     "id": "universities",
@@ -17,7 +25,15 @@
     "description": "Collaborating with universities and research institutions on youth development, knowledge exchange and applied innovation.",
     "descriptionZh": "与大学及研究机构合作，推进青年发展、知识交流与应用创新。",
     "logo": null,
-    "verificationStatus": "published"
+    "verificationStatus": "published",
+    "nameFr": "Universités et recherche",
+    "nameRu": "Университеты и исследования",
+    "nameJa": "大学と研究機関",
+    "nameKo": "대학 및 연구기관",
+    "descriptionFr": "Collaborer avec les universités et les instituts de recherche sur le développement des jeunes, l’échange de connaissances et l’innovation appliquée.",
+    "descriptionRu": "Сотрудничаем с университетами и исследовательскими институтами в области развития молодёжи, обмена знаниями и прикладных инноваций.",
+    "descriptionJa": "青年の発展、知識交流、応用イノベーションで大学・研究機関と協力します。",
+    "descriptionKo": "청년 발전, 지식 교류, 응용 혁신 분야에서 대학·연구기관과 협력합니다."
   },
   {
     "id": "youth-networks",
@@ -27,7 +43,15 @@
     "description": "Partnering with country-level youth communities to enable local action and peer-to-peer exchange across borders.",
     "descriptionZh": "与各国青年社区合作，推动本地行动与跨境同伴交流。",
     "logo": null,
-    "verificationStatus": "published"
+    "verificationStatus": "published",
+    "nameFr": "Réseaux de jeunes",
+    "nameRu": "Молодёжные сети",
+    "nameJa": "青年ネットワーク",
+    "nameKo": "청년 네트워크",
+    "descriptionFr": "S’associer aux communautés de jeunes nationales pour favoriser l’action locale et l’échange entre pairs au-delà des frontières.",
+    "descriptionRu": "Партнёрствуем с национальными молодёжными сообществами ради местных действий и трансграничного обмена между сверстниками.",
+    "descriptionJa": "各国の青年コミュニティと連携し、地域の活動と国境を越えた仲間間の交流を促進します。",
+    "descriptionKo": "각국의 청년 커뮤니티와 협력해 지역 활동과 국경을 넘는 동료 간 교류를 촉진합니다."
   },
   {
     "id": "innovation",
@@ -37,6 +61,14 @@
     "description": "Working with technology and innovation partners on AI, digital inclusion and new models of youth collaboration.",
     "descriptionZh": "与科技创新伙伴合作，探索 AI、数字包容与青年协作新模式。",
     "logo": null,
-    "verificationStatus": "published"
+    "verificationStatus": "published",
+    "nameFr": "Partenaires de l’innovation",
+    "nameRu": "Партнёры по инновациям",
+    "nameJa": "イノベーションパートナー",
+    "nameKo": "혁신 파트너",
+    "descriptionFr": "Travailler avec des partenaires technologiques et de l’innovation sur l’IA, l’inclusion numérique et de nouveaux modèles de collaboration des jeunes.",
+    "descriptionRu": "Работаем с технологическими и инновационными партнёрами над ИИ, цифровой инклюзией и новыми моделями сотрудничества молодёжи.",
+    "descriptionJa": "AI、デジタル・インクルージョン、青年協業の新モデルで技術・イノベーション・パートナーと協働します。",
+    "descriptionKo": "AI, 디지털 포용, 청년 협업의 새 모델을 위해 기술·혁신 파트너와 협력합니다."
   }
 ]

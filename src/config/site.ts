@@ -35,11 +35,11 @@ export const pages: PageMeta[] = [
   { id: 'ai', path: 'ai', navKey: 'nav.ai' },
 ];
 
-/** Build the locale-aware URL for a page path. 'en' lives at root, 'zh' under /zh/. */
+/** Build the locale-aware URL for a page path. 'en' lives at root, others under /<lang>/. */
 export function localizePath(lang: Lang, path: string): string {
   const clean = path.replace(/^\/+|\/+$/g, '');
-  if (lang === 'zh') return clean ? `/zh/${clean}/` : '/zh/';
-  return clean ? `/${clean}/` : '/';
+  if (lang === 'en') return clean ? `/${clean}/` : '/';
+  return clean ? `/${lang}/${clean}/` : `/${lang}/`;
 }
 
 export function pageHref(lang: Lang, id: string): string {

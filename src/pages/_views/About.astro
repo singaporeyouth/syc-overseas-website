@@ -8,9 +8,9 @@ interface Props { lang: Lang }
 const { lang } = Astro.props;
 const L = (k: string) => t(lang, k);
 const values = [
-  { icon: 'people', title: lang === 'zh' ? '以人为本' : 'People first', body: lang === 'zh' ? '青年与社区始终处于我们工作的中心。' : 'Young people and communities remain at the centre of our work.' },
-  { icon: 'shield', title: lang === 'zh' ? '坦诚可信' : 'Integrity', body: lang === 'zh' ? '以真诚与透明赢得每一次合作。' : 'We earn every partnership with sincerity and transparency.' },
-  { icon: 'ai', title: lang === 'zh' ? '负责任的技术' : 'Responsible technology', body: lang === 'zh' ? '以技术服务社区，而非取代人际关系。' : 'Technology in service of community, never replacing human relationships.' },
+  { icon: 'people', title: L('about.value1.title'), body: L('about.value1.body') },
+  { icon: 'shield', title: L('about.value2.title'), body: L('about.value2.body') },
+  { icon: 'ai', title: L('about.value3.title'), body: L('about.value3.body') },
 ];
 ---
 

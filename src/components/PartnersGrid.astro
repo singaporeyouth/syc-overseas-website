@@ -1,5 +1,5 @@
 ---
-import type { Lang } from '../i18n/ui';
+import { pick, type Lang } from '../i18n/ui';
 import type { Partner } from '../content/config';
 interface Props { lang: Lang; partners: Partner[]; }
 const { lang, partners } = Astro.props;
@@ -10,9 +10,9 @@ const { lang, partners } = Astro.props;
     <article class="card">
       <div class="card-body">
         <span class="feature-icon"><svg class="icon"><use href="#i-building"></use></svg></span>
-        <h3>{lang === "zh" && p.nameZh ? p.nameZh : p.name}</h3>
+        <h3>{pick(p, 'name', lang)}</h3>
         <div class="person-role">{p.type}</div>
-        <p>{lang === "zh" && p.descriptionZh ? p.descriptionZh : p.description}</p>
+        <p>{pick(p, 'description', lang)}</p>
       </div>
     </article>
   ))}

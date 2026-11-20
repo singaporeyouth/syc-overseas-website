@@ -18,10 +18,10 @@ const { lang } = Astro.props;
           <label class="field">{t(lang, 'contact.form.org')}<input name="organisation" type="text" autocomplete="organization" /></label>
           <label class="field">{t(lang, 'contact.form.topic')}
             <select name="topic">
-              <option value="partnership">Partnership</option>
-              <option value="programme">Programme</option>
-              <option value="media">Media</option>
-              <option value="other">Other</option>
+              <option value="partnership">{t(lang, 'contact.topic.partnership')}</option>
+              <option value="programme">{t(lang, 'contact.topic.programme')}</option>
+              <option value="media">{t(lang, 'contact.topic.media')}</option>
+              <option value="other">{t(lang, 'contact.topic.other')}</option>
             </select>
           </label>
         </div>

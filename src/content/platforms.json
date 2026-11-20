@@ -6,7 +6,11 @@
     "description": "Discover international opportunities and prepare strong applications for study, work and exchange.",
     "descriptionZh": "发现国际机会，为学习、工作与交流做好申请准备。",
     "icon": "compass",
-    "verificationStatus": "published"
+    "verificationStatus": "published",
+    "descriptionFr": "Découvrez des opportunités internationales et préparez des candidatures solides pour étudier, travailler et échanger.",
+    "descriptionRu": "Открывайте международные возможности и готовьте сильные заявки на учёбу, работу и обмен.",
+    "descriptionJa": "国際的な機会を見つけ、留学・就労・交換プログラムへの申請をしっかり準備できます。",
+    "descriptionKo": "국제 기회를 발견하고 유학·취업·교류 프로그램 지원을 철저히 준비하세요."
   },
   {
     "id": "youth-x-uni",
@@ -15,7 +19,11 @@
     "description": "Explore global youth communities and authentic local city experiences.",
     "descriptionZh": "探索全球青年社区与真实的本地城市体验。",
     "icon": "people",
-    "verificationStatus": "published"
+    "verificationStatus": "published",
+    "descriptionFr": "Explorez les communautés de jeunes du monde entier et les expériences authentiques de villes locales.",
+    "descriptionRu": "Изучайте глобальные молодёжные сообщества и подлинный местный городской опыт.",
+    "descriptionJa": "世界の青年コミュニティと本物の地域都市体験を探索できます。",
+    "descriptionKo": "글로벌 청년 커뮤니티와 진정성 있는 현지 도시 경험을 탐색하세요."
   },
   {
     "id": "youth-x",
@@ -24,7 +32,11 @@
     "description": "Share collaboration needs and discover AI-assisted partner connections.",
     "descriptionZh": "发布合作需求，发现 AI 辅助的伙伴连接。",
     "icon": "route",
-    "verificationStatus": "published"
+    "verificationStatus": "published",
+    "descriptionFr": "Partagez vos besoins de collaboration et découvrez des mises en relation de partenaires assistées par l’IA.",
+    "descriptionRu": "Делитесь потребностями в сотрудничестве и находите партнёров с помощью ИИ.",
+    "descriptionJa": "協業のニーズを共有し、AI によるパートナーとのマッチングを見つけましょう。",
+    "descriptionKo": "협업 수요를 공유하고 AI 기반 파트너 연결을 발견하세요."
   },
   {
     "id": "youth-ai-os",
@@ -33,6 +45,10 @@
     "description": "An AI-enabled approach to connecting people, opportunities and partners.",
     "descriptionZh": "以 AI 赋能的方式连接人才、机会与合作伙伴。",
     "icon": "ai",
-    "verificationStatus": "published"
+    "verificationStatus": "published",
+    "descriptionFr": "Une approche de l’IA pour mettre en relation les personnes, les opportunités et les partenaires.",
+    "descriptionRu": "ИИ-подход к соединению людей, возможностей и партнёров.",
+    "descriptionJa": "AI を活用して人々、機会、パートナーをつなぐアプローチ。",
+    "descriptionKo": "사람, 기회, 파트너를 연결하는 AI 기반 접근법."
   }
 ]

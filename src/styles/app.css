@@ -436,3 +436,59 @@ h3{font-size:1.4rem;font-weight:750}
 html:lang(zh) h1,html:lang(zh) h2,html:lang(zh) h3{letter-spacing:.015em;line-height:1.22}
 html:lang(zh) .hero-copy h1,html:lang(zh) .hero-grid .hero-copy h1,html:lang(zh) .hero--compact .hero-copy h1{letter-spacing:.01em;line-height:1.14}
 html:lang(zh) .section-head p,html:lang(zh) .lead,html:lang(zh) .card-body p{letter-spacing:.012em;line-height:1.75}
+
+/* ============================================================
+   OPTIMIZATION PASS 2026-11-20 — accessibility, contrast, nav alignment
+   ============================================================ */
+/* A1) CTA contrast fix. `.nav-links a` (0,1,1) outranks `.btn--primary` (0,1,0),
+   painting #b6c4da text on the teal CTA (1.09:1). Force the intended dark ink. */
+.nav-links a.btn--primary,
+.nav-links a.btn--primary:visited,
+.nav-links a.btn--primary:hover,
+.nav-links a.btn--primary:focus-visible{color:#04140f}
+.nav-links a.btn--primary:hover{background:linear-gradient(110deg,#2ff0bd,#00d4a0)}
+/* A2) Solid mobile dropdown so hero copy cannot bleed through the menu. */
+@media(max-width:870px){
+  .nav-links{background:#080d18}
+  .nav-links a.btn--primary{color:#04140f}
+}
+/* A3) Keyboard focus visibility (a11y). */
+a:focus-visible,button:focus-visible,summary:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible{
+  outline:2px solid var(--accent);outline-offset:3px;border-radius:6px
+}
+/* A4) Long-script (fr/ru/ja/ko) nav breathing room; keep items on one line. */
+.nav-links a{white-space:nowrap}
+
+/* A5) Mobile header: the inline 6-language switcher is too wide at <=870px and
+   overlapped the menu toggle (click intercepted). Hide it there and expose the
+   language switcher inside the expanded dropdown instead. */
+.lang-switch--menu{display:none}
+@media(max-width:870px){
+  .lang-switch--inline{display:none!important}
+  .nav-links .lang-switch--menu{
+    display:flex;flex-wrap:wrap;gap:6px 12px;margin-top:14px;padding-top:14px;
+    border-top:1px solid var(--line2);font-size:.74rem
+  }
+  .nav-links .lang-switch--menu a{padding:6px 2px;border-bottom:2px solid transparent}
+  .nav-links .lang-switch--menu a.active{color:var(--accent);border-bottom-color:var(--accent)}
+}
+
+/* A6) Desktop nav fit — keep the inline 6-language switcher inside the viewport
+   at 1440px (and 1360px) for every language. Root cause: brand is flex-shrink:0,
+   A4 makes nav items nowrap, and the standalone inline switcher adds ~212px, so
+   long-script navs (fr/ru/ja; slight en) pushed the switcher past the right edge.
+   Tighten desktop spacing; long scripts also get a marginally smaller nav font.
+   Scope >=1121px so <=1120px / <=870px responsive rules stay untouched. */
+@media(min-width:1121px){
+  .nav-wrap{gap:14px}
+  .nav-links{gap:12px}
+  .lang-switch--inline{gap:4px;font-size:.7rem}
+}
+@media(min-width:1121px){
+  html:lang(fr) .nav-links a,
+  html:lang(ru) .nav-links a,
+  html:lang(ja) .nav-links a{font-size:.7rem}
+  html:lang(fr) .nav-links,
+  html:lang(ru) .nav-links,
+  html:lang(ja) .nav-links{gap:7px}
+}
