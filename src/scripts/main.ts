@@ -64,42 +64,6 @@
     topBtn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
   }
 
-  // --- site search dialog ---
-  const search = document.getElementById('siteSearch') as HTMLElement | null;
-  const openSearch = document.getElementById('openSearch');
-  const closeSearch = document.getElementById('closeSearch');
-  const searchInput = document.getElementById('siteSearchInput') as HTMLInputElement | null;
-  const open = () => {
-    search?.classList.add('is-open');
-    if (search) search.style.display = 'flex';
-    searchInput?.focus();
-  };
-  const close = () => {
-    search?.classList.remove('is-open');
-    if (search) search.style.display = 'none';
-    if (searchInput) searchInput.value = '';
-    on<HTMLElement>('.search-result', (r) => (r.style.display = ''));
-  };
-  openSearch?.addEventListener('click', open);
-  closeSearch?.addEventListener('click', close);
-  search?.addEventListener('click', (e) => {
-    if (e.target === search) close();
-  });
-  searchInput?.addEventListener('input', () => {
-    const q = searchInput.value.trim().toLowerCase();
-    on<HTMLElement>('.search-result', (r) => {
-      const term = r.getAttribute('data-search-term') || '';
-      r.style.display = !q || term.toLowerCase().includes(q) ? '' : 'none';
-    });
-  });
-  document.addEventListener('keydown', (e) => {
-    if (e.key === '/' && !/INPUT|TEXTAREA/.test((document.activeElement as HTMLElement)?.tagName || '')) {
-      e.preventDefault();
-      open();
-    }
-    if (e.key === 'Escape') close();
-  });
-
   // --- card filters (data-filter on buttons, data-filter-value on cards) ---
   on<HTMLButtonElement>('[data-filter]', (btn) => {
     btn.addEventListener('click', () => {

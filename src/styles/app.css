@@ -124,15 +124,11 @@
 .faq-item[open] summary:after{content:"−"}
 .faq-item p{padding:0 18px 16px;margin:0;color:var(--muted);font-size:.86rem}
 
-/* ---------- draft banner / search / scroll ---------- */
+/* ---------- draft banner / scroll ---------- */
 .draft-banner{position:relative;z-index:60;display:flex;align-items:center;justify-content:center;gap:10px;flex-wrap:wrap;padding:10px 16px;background:#7c4a06;color:#fff;font-size:.78rem;font-weight:700;text-align:center}
 .draft-banner .icon{flex:none}
 .draft-banner a{color:#ffe6a9;text-decoration:underline}
-.search-result{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:12px;border-radius:11px;background:#f3fafc;color:#133959;font-size:.84rem}
-.search-result:hover{background:#ddf5fa}
-.search-result.hidden{display:none}
 .menu-toggle.is-open .icon,.nav-links.is-open{display:flex}
-.site-search.is-open{display:flex}
 .back-to-top.is-visible{opacity:1;pointer-events:auto}
 
 /* ---------- responsive (4 breakpoints, 375px safe) ---------- */
@@ -259,7 +255,7 @@ h3{font-size:1.4rem;font-weight:750}
 .verify-badge{border-style:dashed;color:#8a6100;background:rgba(214,158,0,.12);border-color:rgba(214,158,0,.38)}
 
 /* ---- 4. cards: light glass, hairline outline, soft layered shadow ---- */
-.card,.stats-bar,.stats-grid,.mission-card,.trust-card,.platform-card,.timeline-step,.detail-panel,.faq-item,.searchbox,.site-search-box,.search-results a,.search-result,.country-card,.person-card{
+.card,.stats-bar,.stats-grid,.mission-card,.trust-card,.platform-card,.timeline-step,.detail-panel,.faq-item,.searchbox,.country-card,.person-card{
   background:var(--glass);border:1px solid var(--line2);box-shadow:var(--shadow);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-radius:18px
 }
 .card:hover{transform:translateY(-4px);border-color:rgba(10,156,134,.34);box-shadow:0 22px 54px rgba(18,48,88,.13)}
@@ -451,12 +447,6 @@ h3{font-size:1.4rem;font-weight:750}
 /* ---- 13. floating layer ---- */
 .back-to-top{background:rgba(255,255,255,.9);border-color:rgba(10,156,134,.4);color:var(--accent-ink);backdrop-filter:blur(8px);box-shadow:var(--shadow)}
 .back-to-top:hover{background:var(--accent);color:#fff}
-.site-search{background:rgba(11,32,54,.5);backdrop-filter:blur(8px)}
-.site-search-box{background:#fff;box-shadow:0 35px 100px rgba(10,30,60,.28)}
-.search-results a,.search-result{background:#f3f8fc;color:#203651}
-.search-results a:hover,.search-result:hover{background:#e6f5f1}
-.search-results small{color:var(--muted)}
-.search-results p{color:#55677e}
 
 /* ---- 14. restrained motion (progressive enhancement; JS opts in) ---- */
 .js-motion .reveal{opacity:0;transform:translateY(20px);transition:opacity .75s cubic-bezier(.2,.7,.2,1),transform .75s cubic-bezier(.2,.7,.2,1);will-change:opacity,transform}
@@ -477,7 +467,6 @@ h3{font-size:1.4rem;font-weight:750}
 .hero-tags .pill{background:#fff;border-color:var(--line3);color:#33465e}
 .person-card strong,.country-card .country-copy strong{font-family:var(--font);font-weight:800}
 .nav-links.is-open,.nav-links.open{display:flex}
-.site-search.is-open,.site-search.open{display:flex}
 .back-to-top.is-visible,.back-to-top.visible{opacity:1;pointer-events:auto}
 @media(max-width:900px){
   .nav-links{background:rgba(255,255,255,.985);border:1px solid var(--line2);box-shadow:0 18px 40px rgba(18,48,88,.14);backdrop-filter:blur(18px)}
