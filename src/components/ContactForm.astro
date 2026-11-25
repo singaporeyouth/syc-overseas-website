@@ -1,16 +1,20 @@
 ---
 import { t, type Lang } from '../i18n/ui';
+import { SITE } from '../config/site';
 interface Props { lang: Lang; }
 const { lang } = Astro.props;
+const email = SITE.contactEmail || 'hello@singaporeyouth.com';
 
 const i18n = {
-  submitting: t(lang, 'contact.form.submitting'),
-  errorTitle: t(lang, 'contact.form.errorTitle'),
-  errorBody: t(lang, 'contact.form.errorBody'),
-  retry: t(lang, 'contact.form.retry'),
   errRequired: t(lang, 'contact.form.errRequired'),
   errEmail: t(lang, 'contact.form.errEmail'),
   errMessage: t(lang, 'contact.form.errMessage'),
+  subjectPrefix: t(lang, 'contact.mailto.subjectPrefix'),
+  labelName: t(lang, 'contact.form.name'),
+  labelEmail: t(lang, 'contact.form.email'),
+  labelOrg: t(lang, 'contact.form.org'),
+  labelTopic: t(lang, 'contact.form.topic'),
+  labelMessage: t(lang, 'contact.form.message'),
 };
 ---
 
@@ -19,8 +23,14 @@ const i18n = {
     <div class="card" style="padding:clamp(24px,4vw,48px)">
       <div class="kicker">{t(lang, 'contact.form.title')}</div>
       <h2 style="margin-bottom:8px">{t(lang, 'contact.form.title')}</h2>
-      <p class="form-demo-note" role="note"><svg class="icon"><use href="#i-shield"></use></svg> {t(lang, 'contact.form.demoNote')}</p>
+      <a class="contact-email-lead" href={`mailto:${email}`}>
+        <svg class="icon"><use href="#i-mail"></use></svg>
+        <span>{email}</span>
+        <svg class="icon contact-email-lead-arrow"><use href="#i-arrow"></use></svg>
+      </a>
+      <p class="form-demo-note" role="note"><svg class="icon"><use href="#i-shield"></use></svg> {t(lang, 'contact.form.mailtoNote')}</p>
       <form id="enquiryForm" class="contact-form" novalidate
+        data-contact-email={email}
         data-form-i18n={JSON.stringify(i18n)}>
         <div class="form-row">
           <label class="field">{t(lang, 'contact.form.name')}<input name="name" type="text" autocomplete="name" required placeholder=" " /></label>
@@ -43,20 +53,6 @@ const i18n = {
         </div>
         <p class="field-error-summary" data-form-summary role="alert" hidden></p>
       </form>
-      <div id="formSuccess" class="callout callout--success" role="status" hidden>
-        <svg class="icon"><use href="#i-spark"></use></svg>
-        <div><strong>{t(lang, 'contact.form.successTitle')}</strong><span>{t(lang, 'contact.form.successBody')}</span>
-          <div class="form-receipt" data-form-receipt hidden>
-            <span class="receipt-label">{t(lang, 'contact.form.receipt')}</span>
-            <span data-receipt-summary></span>
-          </div>
-        </div>
-      </div>
-      <div id="formFailure" class="callout callout--error" role="alert" hidden>
-        <svg class="icon"><use href="#i-close"></use></svg>
-        <div><strong data-failure-title>{i18n.errorTitle}</strong><span data-failure-body>{i18n.errorBody}</span></div>
-        <button type="button" class="btn btn--outline btn--sm" data-form-retry>{i18n.retry}</button>
-      </div>
     </div>
   </div>
 </section>

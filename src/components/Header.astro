@@ -4,13 +4,12 @@ import { t, LANGS, LANG_META, type Lang } from '../i18n/ui';
 interface Props { lang: Lang; currentPage: string; }
 const { lang, currentPage } = Astro.props;
 
-// P1 navigation: five primary sections, ordered per spec.
-const primaryIds = ['impact', 'network', 'ai', 'partnerships'];
+// Five primary sections in the required order; About is pinned first in markup.
+const primaryIds = ['ai', 'impact', 'network', 'partnerships'];
 const primary = primaryIds
   .map((id) => pages.find((p) => p.id === id))
   .filter((p): p is NonNullable<typeof p> => Boolean(p));
 const aboutItem = pages.find((p) => p.id === 'about');
-const aboutSub = pages.filter((p) => p.id === 'people');
 const current = LANG_META[lang];
 ---
 
@@ -21,27 +20,14 @@ const current = LANG_META[lang];
       <div>
         <div class="brand-title">Singapore Youth<br />Community <span style="font-size:.84em">(SYC)</span></div>
         <div class="brand-sub">{t(lang, 'brand.sub')}</div>
-        <div class="brand-slogan">{t(lang, 'brand.slogan')}</div>
       </div>
     </a>
 
     <nav class="nav-links" id="navLinks" aria-label={t(lang, 'nav.menu')}>
-      <!-- About SYC (link) with a chevron that reveals Our People -->
-      <span class="nav-about-group">
-        {aboutItem && (
-          <a href={pageHref(lang, aboutItem.id)} aria-current={currentPage === 'about' ? 'page' : undefined}>{t(lang, aboutItem.navKey)}</a>
-        )}
-        <div class="nav-more" id="moreDropdown">
-          <button type="button" class="nav-more-btn nav-about-btn" id="moreToggle" aria-expanded="false" aria-haspopup="true" aria-controls="moreMenu" aria-label={t(lang, 'nav.people')}>
-            <svg class="icon chev"><use href="#i-arrow"></use></svg>
-          </button>
-          <div class="nav-more-menu" id="moreMenu" role="menu">
-            {aboutSub.map((item) => (
-              <a role="menuitem" href={pageHref(lang, item.id)} aria-current={currentPage === item.id ? 'page' : undefined}>{t(lang, item.navKey)}</a>
-            ))}
-          </div>
-        </div>
-      </span>
+      <!-- About SYC — pinned first; Our People lives inside the About page. -->
+      {aboutItem && (
+        <a href={pageHref(lang, aboutItem.id)} aria-current={currentPage === 'about' ? 'page' : undefined}>{t(lang, aboutItem.navKey)}</a>
+      )}
 
       {primary.map((item) => (
         <a
@@ -51,7 +37,7 @@ const current = LANG_META[lang];
       ))}
 
       <a class="btn btn--primary nav-cta" href={pageHref(lang, 'contact')}>
-        {t(lang, 'common.partnerWithUs')} <svg class="icon"><use href="#i-arrow"></use></svg>
+        {t(lang, 'cta.btn')} <svg class="icon"><use href="#i-arrow"></use></svg>
       </a>
     </nav>
 

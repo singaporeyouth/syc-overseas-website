@@ -13,7 +13,7 @@ const { lang } = Astro.props;
           <span class="brand-logo-plate"><img class="brand-logo" src={SITE.logo} alt="SYC seal" /></span>
           <div>
             <div class="brand-title">Singapore Youth<br />Community</div>
-            <div class="brand-sub">AI-Native Global Youth Community</div>
+            <div class="brand-sub">{t(lang, 'brand.sub')}</div>
           </div>
         </a>
         <p style="margin-top:16px">{t(lang, 'footer.about')}</p>

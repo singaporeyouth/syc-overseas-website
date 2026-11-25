@@ -1,5 +1,6 @@
 // Interaction layer — adapted from the original HTML Kit main.js.
-// All features are progressive-enhancement only; no data is ever sent anywhere.
+// Progressive enhancement only. The enquiry form hands off to the visitor's
+// email client via mailto; nothing is transmitted from this website itself.
 
 (function () {
   function on<T extends Element>(sel: string, fn: (el: T) => void) {
@@ -65,12 +66,15 @@
   }
 
   // --- card filters: active state + result count + empty state + hide empty categories ---
+  // data-filter-value may be a single region ("Middle East") or space-separated
+  // tokens; match either without splitting a multi-word value into pieces.
+  const matches = (raw: string, value: string) => raw === value || raw.split(' ').includes(value);
   function updateFilterMeta(group: string | null, scope: Element | null, value: string) {
     if (!group || !scope) return;
     const cards = Array.from(scope.querySelectorAll<HTMLElement>('[data-filter-value]'));
     const visible = cards.filter((card) => {
       const v = card.getAttribute('data-filter-value') || '';
-      return value === 'all' || v.split(' ').includes(value);
+      return value === 'all' || matches(v, value);
     }).length;
     const meta = document.querySelector(`[data-filter-meta="${group}"]`);
     if (meta) meta.textContent = `${meta.getAttribute('data-showing-prefix') || ''} ${visible} ${meta.getAttribute('data-results-suffix') || ''}`.replace(/\s+/g, ' ').trim();
@@ -81,7 +85,7 @@
     document.querySelectorAll<HTMLButtonElement>(btnSel).forEach((b) => {
       const v = b.getAttribute('data-filter') || 'all';
       if (v === 'all' || b.classList.contains('region-card')) return;
-      const count = cards.filter((card) => (card.getAttribute('data-filter-value') || '').split(' ').includes(v)).length;
+      const count = cards.filter((card) => matches(card.getAttribute('data-filter-value') || '', v)).length;
       b.hidden = count === 0;
     });
   }
@@ -96,7 +100,7 @@
       btn.classList.add('active');
       scope.querySelectorAll<HTMLElement>('[data-filter-value]').forEach((card) => {
         const v = card.getAttribute('data-filter-value') || '';
-        (card as HTMLElement).style.display = value === 'all' || v.split(' ').includes(value) ? '' : 'none';
+        (card as HTMLElement).style.display = value === 'all' || matches(v, value) ? '' : 'none';
       });
       updateFilterMeta(group, scope, value);
     });
@@ -115,16 +119,13 @@
     });
   });
 
-  // --- contact form: field-level validation after interaction + demo state machine ---
+  // --- contact form: field validation, then hand off to the visitor's email client via mailto ---
   const form = document.getElementById('enquiryForm') as HTMLFormElement | null;
   if (form) {
     let i18n: Record<string, string> = {};
     try { i18n = JSON.parse(form.getAttribute('data-form-i18n') || '{}'); } catch (_) { /* noop */ }
-    const success = document.getElementById('formSuccess');
-    const failure = document.getElementById('formFailure');
+    const contactEmail = form.getAttribute('data-contact-email') || 'hello@singaporeyouth.com';
     const summary = form.querySelector<HTMLElement>('[data-form-summary]');
-    const submitBtn = form.querySelector<HTMLButtonElement>('[data-submit-btn]');
-    const retryBtn = document.querySelector<HTMLButtonElement>('[data-form-retry]');
     const fields = Array.from(form.querySelectorAll<HTMLInputElement | HTMLTextAreaElement>('input[required], textarea[required]'));
 
     function messageFor(input: HTMLInputElement | HTMLTextAreaElement): string {
@@ -156,27 +157,10 @@
       });
     });
 
-    function setSubmitting(on: boolean) {
-      if (submitBtn) {
-        submitBtn.disabled = on;
-        submitBtn.classList.toggle('is-busy', on);
-        if (on) submitBtn.setAttribute('data-label-original', submitBtn.innerHTML);
-        const orig = submitBtn.getAttribute('data-label-original');
-        if (on && orig) submitBtn.innerHTML = `<span class="spinner"></span> ${i18n.submitting || ''}`;
-        else if (!on && orig) submitBtn.innerHTML = orig;
-      }
-      form?.setAttribute('aria-busy', String(on));
-    }
-    function resetStates() {
-      if (success) success.hidden = true;
-      if (failure) failure.hidden = true;
-      if (summary) summary.hidden = true;
-    }
-
     form.addEventListener('submit', (e) => {
       e.preventDefault();
       e.stopPropagation();
-      resetStates();
+      if (summary) summary.hidden = true;
       let firstInvalid: HTMLInputElement | HTMLTextAreaElement | undefined;
       for (const input of fields) {
         const msg = messageFor(input);
@@ -191,39 +175,24 @@
         firstInvalid.focus();
         return false;
       }
-      // Demo only: no backend. Brief "submitting" state, then a clearly-labelled preview result.
-      setSubmitting(true);
-      // Capture the user's own input for a local preview receipt (nothing is transmitted).
-      const previewName = (form.querySelector<HTMLInputElement>('input[name="name"]')?.value || '').trim();
-      const previewTopic = form.querySelector<HTMLSelectElement>('select[name="topic"]')?.selectedOptions[0]?.textContent?.trim() || '';
-      const previewEmail = (form.querySelector<HTMLInputElement>('input[name="email"]')?.value || '').trim();
-      window.setTimeout(() => {
-        setSubmitting(false);
-        // Simulated outcome flag; with no backend this always lands on the demo-confirmation state.
-        if (success) {
-          const receipt = success.querySelector<HTMLElement>('[data-form-receipt]');
-          const receiptSummary = success.querySelector<HTMLElement>('[data-receipt-summary]');
-          if (receipt && receiptSummary) {
-            const parts = [previewName, previewEmail, previewTopic].filter(Boolean);
-            receiptSummary.textContent = parts.join(' · ');
-            receipt.hidden = parts.length === 0;
-          }
-          success.hidden = false;
-          success.scrollIntoView({ behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth', block: 'center' });
-        }
-        form.reset();
-        fields.forEach((input) => showError(input, ''));
-      }, 650);
+      // Everything is valid — hand off to the visitor's own email client.
+      // Nothing is transmitted by this website; the visitor sends the email.
+      const val = (name: string) => (form.querySelector<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>(`[name="${name}"]`)?.value || '').trim();
+      const topicSelect = form.querySelector<HTMLSelectElement>('select[name="topic"]');
+      const topicLabel = topicSelect?.selectedOptions[0]?.textContent?.trim() || '';
+      const subject = [i18n.subjectPrefix || 'Website enquiry', topicLabel].filter(Boolean).join(' — ');
+      const body = [
+        `${i18n.labelName || 'Name'}: ${val('name')}`,
+        `${i18n.labelEmail || 'Email'}: ${val('email')}`,
+        `${i18n.labelOrg || 'Organisation'}: ${val('organisation')}`,
+        `${i18n.labelTopic || 'Topic'}: ${topicLabel}`,
+        '',
+        `${i18n.labelMessage || 'Message'}:`,
+        val('message'),
+      ].join('\n');
+      window.location.href = `mailto:${contactEmail}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
       return false;
     });
-
-    if (retryBtn) {
-      retryBtn.addEventListener('click', () => {
-        if (failure) failure.hidden = true;
-        if (summary) summary.hidden = true;
-        fields[0]?.focus();
-      });
-    }
   }
 
   // --- world map: node click updates the detail panel (uses only real country fields) ---

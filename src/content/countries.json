@@ -106,11 +106,10 @@
     "region": "Americas",
     "regionZh": "美洲",
     "photo": "/assets/community-group.jpg",
-    "photoRepresentative": true,
     "lat": 38.91,
     "lng": -77.04,
-    "note": "Building bridges between youth communities and partners across the Americas.",
-    "noteZh": "在美洲地区的青年社区与合作伙伴之间搭建桥梁。",
+    "note": "A selected network node linking youth communities and partners across the Americas.",
+    "noteZh": "精选网络节点，连接美洲地区的青年社区与合作伙伴。",
     "verificationStatus": "published",
     "nameFr": "États-Unis",
     "nameRu": "США",
@@ -120,10 +119,10 @@
     "regionRu": "Америка",
     "regionJa": "アメリカ",
     "regionKo": "아메리카",
-    "noteFr": "Construire des ponts entre les communautés de jeunes et les partenaires des Amériques.",
-    "noteRu": "Строим мосты между молодёжными сообществами и партнёрами стран Америки.",
-    "noteJa": "アメリカ大陸の青年コミュニティとパートナーの間に橋を架けます。",
-    "noteKo": "아메리카 전역의 청년 커뮤니티와 파트너 사이에 가교를 놓습니다."
+    "noteFr": "Un nœud sélectionné du réseau qui relie les communautés de jeunes et les partenaires des Amériques.",
+    "noteRu": "Избранный узел сети, связывающий молодёжные сообщества и партнёров стран Америки.",
+    "noteJa": "アメリカ大陸の青年コミュニティとパートナーをつなぐ、厳選されたネットワーク拠点。",
+    "noteKo": "아메리카 전역의 청년 커뮤니티와 파트너를 연결하는 선별된 네트워크 거점."
   },
   {
     "id": "germany",
@@ -182,11 +181,10 @@
     "region": "Africa",
     "regionZh": "非洲",
     "photo": "/assets/workshop.jpg",
-    "photoRepresentative": true,
     "lat": -1.29,
     "lng": 36.82,
-    "note": "Driving grassroots youth action, community learning and local impact across Africa.",
-    "noteZh": "在非洲推动基层青年行动、社区学习与本地影响力。",
+    "note": "A selected network node for grassroots youth action and community learning in Africa.",
+    "noteZh": "精选网络节点，聚焦非洲的基层青年行动与社区学习。",
     "verificationStatus": "published",
     "nameFr": "Kenya",
     "nameRu": "Кения",
@@ -196,9 +194,9 @@
     "regionRu": "Африка",
     "regionJa": "アフリカ",
     "regionKo": "아프리카",
-    "noteFr": "Promouvoir l’action citoyenne des jeunes, l’apprentissage communautaire et l’impact local en Afrique.",
-    "noteRu": "Развиваем низовую молодёжную активность, communalное обучение и локальное влияние в Африке.",
-    "noteJa": "アフリカで草の根の青年活動、コミュニティ学習、地域インパクトを推進します。",
-    "noteKo": "아프리카에서 풀뿌리 청년 활동, 커뮤니티 학습, 지역 영향을 추진합니다."
+    "noteFr": "Un nœud sélectionné du réseau pour l'action citoyenne des jeunes et l'apprentissage communautaire en Afrique.",
+    "noteRu": "Избранный узел сети для низовой молодёжной активности и общинного обучения в Африке.",
+    "noteJa": "アフリカにおける草の根の青年活動とコミュニティ学習のための厳選されたネットワーク拠点。",
+    "noteKo": "아프리카의 풀뿌리 청년 활동과 커뮤니티 학습을 위한 선별된 네트워크 거점."
   }
 ]

@@ -6,13 +6,14 @@ import StatsBar from '../../components/StatsBar.astro';
 import SectionHeader from '../../components/SectionHeader.astro';
 import CaseGrid from '../../components/CaseGrid.astro';
 import WorldMap from '../../components/WorldMap.astro';
+import PartnersGrid from '../../components/PartnersGrid.astro';
 import { t, pick, type Lang } from '../../i18n/ui';
 import { pageHref } from '../../config/site';
 interface Props { lang: Lang }
 const { lang } = Astro.props;
 const L = (k: string) => t(lang, k);
-const [countries, metrics, cases] = await Promise.all([
-  getCollection('countries'), getCollection('metrics'), getCollection('caseStudies'),
+const [countries, metrics, cases, partners] = await Promise.all([
+  getCollection('countries'), getCollection('metrics'), getCollection('caseStudies'), getCollection('partners'),
 ]);
 const stats = metrics.map((m) => ({
   display: m.data.display,
@@ -21,26 +22,55 @@ const stats = metrics.map((m) => ({
 }));
 // Representative work = 3 real, published case studies from the local collection.
 const work = cases.filter((c) => c.data.approvalStatus === 'published').slice(0, 3);
+// Published partnership categories only — no invented logos or named institutions.
+const partnerItems = partners.map((p) => p.data);
+const yaiDirections = [
+  { icon: 'book', title: L('home.yai.learn.title'), body: L('home.yai.learn.body') },
+  { icon: 'lightbulb', title: L('home.yai.create.title'), body: L('home.yai.create.body') },
+  { icon: 'globe', title: L('home.yai.connect.title'), body: L('home.yai.connect.body') },
+];
 ---
 
 <BaseLayout lang={lang} pageId="index" title={L('seo.index.title')} description={L('seo.index.desc')} showCta={true}>
-  <!-- 1) 品牌首屏：左45/右55，连续标题无空行，双按钮 + YOUTH UNI 文字入口 -->
+  <!-- 1) 首屏：身份 + 青年×AI；数字下移到数据条 -->
   <Hero
     lang={lang}
     eyebrow={L('home.hero.eyebrow')}
     titleHtml={`<span class="grad">${L('home.hero.title1')}</span> <span>${L('home.hero.title2')}</span>`}
     lead={L('home.hero.lead')}
     image="/assets/hero-people.jpg"
-    primary={{ label: L('common.partnerWithUs'), href: pageHref(lang, 'partnerships') }}
-    secondary={{ label: L('common.exploreNetwork'), href: pageHref(lang, 'network') }}
+    primary={{ label: L('common.exploreWork'), href: pageHref(lang, 'impact') }}
+    secondary={{ label: L('common.partnerWithUs'), href: pageHref(lang, 'partnerships') }}
     youthLink={{ label: L('home.hero.youthEntry'), href: 'https://www.youthuni.com/' }}
     photoTag={L('home.hero.panelTitle1')}
   />
 
-  <!-- 2) 精简可信依据 -->
+  <!-- 数据条（辅助） -->
   <StatsBar stats={stats} />
 
-  <!-- 3) 代表项目：内容样本替代原网站目录卡（复用 3 条真实案例） -->
+  <!-- 2) Youth×AI 主张独立段：深色重点板块，三个工作方向 -->
+  <section class="section" aria-labelledby="home-yai-title">
+    <div class="container">
+      <div class="ai-feature home-yai">
+        <div class="kicker">{L('home.yai.kicker')}</div>
+        <h2 id="home-yai-title">{L('home.yai.title')}</h2>
+        <p>{L('home.yai.lead')}</p>
+        <div class="card-grid home-yai-grid">
+          {yaiDirections.map((d) => (
+            <article class="card"><div class="card-body">
+              <span class="feature-icon"><svg class="icon"><use href={`#i-${d.icon}`}></use></svg></span>
+              <h3>{d.title}</h3>
+              <p>{d.body}</p>
+            </div></article>
+          ))}
+        </div>
+        <p class="yai-note">{L('home.yai.note')}</p>
+        <a class="link-arrow" href={pageHref(lang, 'ai')}>{L('home.dual.exploreAI')} <svg class="icon"><use href="#i-arrow"></use></svg></a>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3) 精选工作：3 条真实已发布案例 -->
   <section class="section section--white" aria-labelledby="home-work-title">
     <div class="container">
       <SectionHeader kicker={L('home.work.kicker')} title={L('home.work.title')} lead={L('home.work.lead')} id="home-work-title" />
@@ -66,7 +96,7 @@ const work = cases.filter((c) => c.data.approvalStatus === 'published').slice(0,
     </div>
   </section>
 
-  <!-- 5) AI 与旗下平台：独立板块（真实产品与场景，状态项不虚构） -->
+  <!-- 5) 数字平台：真实产品与能力，状态项不虚构 -->
   <section class="section section--ice" aria-labelledby="home-ai-title">
     <div class="container">
       <SectionHeader kicker={L('home.eco.kicker')} title={L('home.eco.title')} lead={L('home.eco.lead')} id="home-ai-title" />
@@ -81,7 +111,7 @@ const work = cases.filter((c) => c.data.approvalStatus === 'published').slice(0,
     </div>
   </section>
 
-  <!-- 6) 人物与社区：用真实社区照片与文案，示例人物(person-1~6)不发布 -->
+  <!-- 6) 真实的人：只用真实社区照片，示例人物(person-1~6)不发布 -->
   <section class="section" aria-labelledby="home-people-title">
     <div class="container">
       <SectionHeader kicker={L('home.people.kicker')} title={L('home.people.title')} lead={L('home.people.lead')} id="home-people-title" />
@@ -94,6 +124,16 @@ const work = cases.filter((c) => c.data.approvalStatus === 'published').slice(0,
     </div>
   </section>
 
-  <!-- 7) 合作邀请 = BaseLayout 的 BottomCTA（showCta=true） -->
-  <!-- 8) 页脚 = BaseLayout 统一渲染的 Footer -->
+  <!-- 7) 合作与认可：仅用已发布的合作类别，不编造 Logo / 机构名单 -->
+  <section class="section section--ice" aria-labelledby="home-partners-title">
+    <div class="container">
+      <SectionHeader kicker={L('home.partners.kicker')} title={L('home.partners.title')} lead={L('home.partners.lead')} id="home-partners-title" />
+      <PartnersGrid lang={lang} partners={partnerItems} />
+      <div class="section-more">
+        <a class="link-arrow" href={pageHref(lang, 'partnerships')}>{L('home.partners.more')} <svg class="icon"><use href="#i-arrow"></use></svg></a>
+      </div>
+    </div>
+  </section>
+
+  <!-- 8) 参与联系 = BaseLayout 的 BottomCTA（showCta=true），双入口引导青年/机构 -->
 </BaseLayout>

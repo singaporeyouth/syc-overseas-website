@@ -1,11 +1,25 @@
 ---
 import { t, pick, type Lang } from '../i18n/ui';
+import { localizePath } from '../config/site';
 import type { Person } from '../content/config';
 interface Props { lang: Lang; people: Person[]; scopeId?: string; limit?: number; }
 const { lang, people, scopeId = 'peopleGrid', limit } = Astro.props;
 const list = limit ? people.slice(0, limit) : people;
 ---
 
+{list.length === 0 ? (
+  <div class="callout callout--note" role="status">
+    <svg class="icon"><use href="#i-people"></use></svg>
+    <div>
+      <strong>{t(lang, 'people.empty.title')}</strong>
+      <span>{t(lang, 'people.empty.desc')}</span>
+      <span class="pills" style="margin-top:12px">
+        <a class="btn btn--outline btn--small" href={localizePath(lang, 'about')}>{t(lang, 'people.empty.about')}</a>
+        <a class="btn btn--primary btn--small" href={localizePath(lang, 'contact')}>{t(lang, 'people.empty.contact')}</a>
+      </span>
+    </div>
+  </div>
+) : (
 <div class="card-grid" data-filter-scope={scopeId}>
   {list.map((p) => {
     const sample = p.verificationStatus === 'sample_unverified';
@@ -25,3 +39,4 @@ const list = limit ? people.slice(0, limit) : people;
     );
   })}
 </div>
+)}

@@ -5,7 +5,7 @@
     "display": "36",
     "label": "Countries in our network",
     "labelZh": "网络覆盖国家",
-    "definition": "Countries represented across the SYC global youth network.",
+    "definition": "Number of countries connected across the SYC global youth network (network coverage, not direct branches).",
     "icon": "globe",
     "verificationStatus": "published",
     "labelFr": "Pays dans notre réseau",
@@ -17,15 +17,15 @@
     "id": "reach",
     "key": "youth_network_reach",
     "display": "4.3M+",
-    "label": "Youth network reach",
-    "labelZh": "青年网络触达量",
-    "definition": "Combined reach of the SYC network and ecosystem platforms.",
+    "label": "Network & ecosystem reach",
+    "labelZh": "网络与生态综合触达量",
+    "definition": "Combined reach across the SYC youth network and its ecosystem platforms (not registered users, members or active users).",
     "icon": "people",
     "verificationStatus": "published",
-    "labelFr": "Portée du réseau de jeunes",
-    "labelRu": "Охват молодёжной сети",
-    "labelJa": "青年ネットワークのリーチ",
-    "labelKo": "청년 네트워크 도달 범위"
+    "labelFr": "Portée combinée du réseau et de l'écosystème",
+    "labelRu": "Совместный охват сети и экосистемы",
+    "labelJa": "ネットワークとエコシステムの総リーチ",
+    "labelKo": "네트워크와 생태계의 종합 도달 범위"
   },
   {
     "id": "global",
@@ -40,19 +40,5 @@
     "labelRu": "Международное сотрудничество",
     "labelJa": "国際協力",
     "labelKo": "국제 협력"
-  },
-  {
-    "id": "ai",
-    "key": "ai_native",
-    "display": "AI-native",
-    "label": "Digital youth innovation",
-    "labelZh": "数字化青年创新",
-    "definition": "An AI-native approach to youth opportunity and connection.",
-    "icon": "ai",
-    "verificationStatus": "published",
-    "labelFr": "Innovation numérique des jeunes",
-    "labelRu": "Цифровые инновации молодёжи",
-    "labelJa": "デジタル青年イノベーション",
-    "labelKo": "디지털 청년 혁신"
   }
 ]

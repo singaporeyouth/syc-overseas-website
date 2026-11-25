@@ -15,7 +15,7 @@ export const SITE = {
     alternateName: 'SYC',
     url: 'https://www.singaporeyouth.com',
     logo: 'https://www.singaporeyouth.com/assets/syc-logo.png',
-    description: 'An AI-native global youth community connecting partners and young people across borders.',
+    description: 'An international youth organisation connecting young people, communities and partners through global exchange, collaboration and AI-enabled innovation.',
   },
 };
 
@@ -28,11 +28,11 @@ export interface PageMeta {
 export const pages: PageMeta[] = [
   { id: 'index', path: '', navKey: 'nav.home' },
   { id: 'about', path: 'about', navKey: 'nav.about' },
+  { id: 'ai', path: 'ai', navKey: 'nav.ai' },
+  { id: 'impact', path: 'impact', navKey: 'nav.work' },
   { id: 'network', path: 'network', navKey: 'nav.network' },
   { id: 'partnerships', path: 'partnerships', navKey: 'nav.partnerships' },
   { id: 'people', path: 'people', navKey: 'nav.people' },
-  { id: 'impact', path: 'impact', navKey: 'nav.work' },
-  { id: 'ai', path: 'ai', navKey: 'nav.ai' },
 ];
 
 /** Build the locale-aware URL for a page path. 'en' lives at root, others under /<lang>/. */
