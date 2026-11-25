@@ -2,17 +2,12 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Hero from '../../components/Hero.astro';
 import ContactForm from '../../components/ContactForm.astro';
-import SectionHeader from '../../components/SectionHeader.astro';
 import Faq from '../../components/Faq.astro';
+import { SITE } from '../../config/site';
 import { t, type Lang } from '../../i18n/ui';
 interface Props { lang: Lang }
 const { lang } = Astro.props;
 const L = (k: string) => t(lang, k);
-const channels = [
-  { icon: 'globe', title: L('contact.channel1.title'), body: L('contact.channel1.body') },
-  { icon: 'people', title: L('contact.channel2.title'), body: L('contact.channel2.body') },
-  { icon: 'building', title: L('contact.channel3.title'), body: L('contact.channel3.body') },
-];
 const faqs = [{ q: L('contact.faq.q1'), a: L('contact.faq.a1') }, { q: L('contact.faq.q2'), a: L('contact.faq.a2') }];
 ---
 
@@ -20,23 +15,27 @@ const faqs = [{ q: L('contact.faq.q1'), a: L('contact.faq.a1') }, { q: L('contac
   <Hero lang={lang} compact eyebrow={L('contact.hero.eyebrow')} titleHtml={L('contact.hero.title')} lead={L('contact.hero.lead')} image="/assets/workshop.jpg" />
   <ContactForm lang={lang} />
 
-  <section class="section">
-    <div class="container">
-      <SectionHeader title={L('contact.channels.title')} />
-      <div class="card-grid">
-        {channels.map((c) => (
-          <article class="card"><div class="card-body">
-            <span class="feature-icon"><svg class="icon"><use href={`#i-${c.icon}`}></use></svg></span>
-            <h3>{c.title}</h3><p>{c.body}</p>
-          </div></article>
-        ))}
+  <section class="section section--compact">
+    <div class="container narrow">
+      <div class="section-head"><h2>{L('contact.channels.title')}</h2></div>
+      <div class="contact-channel-card">
+        <span class="contact-channel-icon"><svg class="icon"><use href="#i-mail"></use></svg></span>
+        <div class="contact-channel-body">
+          <div class="contact-channel-top">
+            <strong>{L('contact.channel.showcaseTitle')}</strong>
+          </div>
+          {SITE.contactEmail
+            ? <a class="contact-channel-value" href={`mailto:${SITE.contactEmail}`}>{SITE.contactEmail}</a>
+            : <span class="contact-channel-value">{L('contact.channel3.body')}</span>}
+          <span class="contact-channel-note">{L('contact.channel.showcaseNote')}</span>
+        </div>
       </div>
     </div>
   </section>
 
   <section class="section section--ice">
     <div class="container narrow">
-      <SectionHeader title={L('contact.faq.title')} />
+      <div class="section-head"><h2>{L('contact.faq.title')}</h2></div>
       <Faq items={faqs} />
     </div>
   </section>

@@ -1,6 +1,5 @@
 ---
 import { t, type Lang } from '../i18n/ui';
-interface PanelItem { value: string; label: string; note?: string; }
 interface Props {
   lang: Lang;
   eyebrow: string;
@@ -9,15 +8,15 @@ interface Props {
   image?: string;
   primary?: { label: string; href: string };
   secondary?: { label: string; href: string };
-  panel?: PanelItem[];
-  panelTitle1?: string;
-  panelTitle2?: string;
   compact?: boolean;
+  tags?: string[];
+  photoTag?: string;
+  youthLink?: { label: string; href: string };
 }
 const {
   lang, eyebrow, titleHtml, lead,
   image = '/assets/hero-people.jpg',
-  primary, secondary, panel, panelTitle1, panelTitle2, compact = false,
+  primary, secondary, compact = false, tags, photoTag, youthLink,
 } = Astro.props;
 ---
 
@@ -31,29 +30,21 @@ const {
         {primary && <a class="btn btn--primary" href={primary.href}>{primary.label} <svg class="icon"><use href="#i-arrow"></use></svg></a>}
         {secondary && <a class="btn btn--outline" href={secondary.href}>{secondary.label}</a>}
       </div>
+      {youthLink && (
+        <a class="hero-textlink" href={youthLink.href}>
+          {youthLink.label} <svg class="icon"><use href="#i-arrow"></use></svg>
+        </a>
+      )}
+      {tags && tags.length > 0 && (
+        <div class="hero-tags" aria-label={t(lang, 'home.hero.tagLabel') ?? 'Capabilities'}>
+          {tags.map((tag) => <span class="pill">{tag}</span>)}
+        </div>
+      )}
     </div>
     <div class="hero-visual">
       <div class="hero-visual-inner">
         <img src={image} alt="" loading="eager" decoding="async" />
-        {panel && panel.length > 0 && (
-          <div class="float-panel">
-            <div class="float-panel-head">
-              <svg class="icon"><use href="#i-globe"></use></svg>
-              <span>{panelTitle1 ?? t(lang, 'home.hero.panelTitle1')}</span>
-              <svg class="icon"><use href="#i-ai"></use></svg>
-              <span>{panelTitle2 ?? t(lang, 'home.hero.panelTitle2')}</span>
-            </div>
-            <div class="float-panel-grid">
-              {panel.map((p) => (
-                <div class="float-panel-item">
-                  <div class="float-panel-value">{p.value}</div>
-                  <div class="float-panel-label">{p.label}</div>
-                  {p.note && <div class="float-panel-note">{p.note}</div>}
-                </div>
-              ))}
-            </div>
-          </div>
-        )}
+        {photoTag && <span class="hero-photo-tag"><svg class="icon"><use href="#i-globe"></use></svg> {photoTag}</span>}
       </div>
     </div>
   </div>

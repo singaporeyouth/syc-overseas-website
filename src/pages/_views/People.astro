@@ -25,10 +25,19 @@ const regions = [
   <section class="section">
     <div class="container">
       <SectionHeader title={L('people.grid.title')} />
+      <div class="callout callout--note" role="note">
+        <svg class="icon"><use href="#i-spark"></use></svg>
+        <div><strong>{L('common.illustrative')}</strong><span>{L('people.sampleNotice')}</span></div>
+      </div>
       <div class="filter-bar" data-filter-group="peopleGrid">
         {regions.map((r, i) => <button type="button" class:list={['filter-btn', i === 0 && 'active']} data-filter={r.value} data-filter-group="peopleGrid">{r.label}</button>)}
       </div>
+      <p class="filter-meta" data-filter-meta="peopleGrid" data-showing-prefix={L('filter.showing')} data-results-suffix={L('filter.results')} aria-live="polite">{L('filter.showing')} {people.length} {L('filter.results')}</p>
       <PeopleGrid lang={lang} people={people} scopeId="peopleGrid" />
+      <div class="empty-results" data-filter-empty="peopleGrid" hidden>
+        <svg class="icon"><use href="#i-people"></use></svg>
+        <p>{L('network.empty')}</p>
+      </div>
     </div>
   </section>
 </BaseLayout>

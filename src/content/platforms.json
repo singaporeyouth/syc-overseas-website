@@ -29,26 +29,26 @@
     "id": "youth-x",
     "name": "YOUTH X",
     "url": "https://www.youthx.uno/",
-    "description": "Share collaboration needs and discover AI-assisted partner connections.",
-    "descriptionZh": "发布合作需求，发现 AI 辅助的伙伴连接。",
+    "description": "A map-based entry point to the global youth network — share collaboration needs and discover AI-assisted partner connections across borders.",
+    "descriptionZh": "以地图为入口的全球青年网络——发布合作需求，发现跨地区的 AI 辅助伙伴连接。",
     "icon": "route",
     "verificationStatus": "published",
-    "descriptionFr": "Partagez vos besoins de collaboration et découvrez des mises en relation de partenaires assistées par l’IA.",
-    "descriptionRu": "Делитесь потребностями в сотрудничестве и находите партнёров с помощью ИИ.",
-    "descriptionJa": "協業のニーズを共有し、AI によるパートナーとのマッチングを見つけましょう。",
-    "descriptionKo": "협업 수요를 공유하고 AI 기반 파트너 연결을 발견하세요."
+    "descriptionFr": "Un point d’entrée cartographique vers le réseau mondial de jeunes — partagez vos besoins de collaboration et découvrez des partenariats assistés par l’IA au-delà des frontières.",
+    "descriptionRu": "Картографический вход в глобальную молодёжную сеть — делитесь потребностями в сотрудничестве и находите партнёров с помощью ИИ по всему миру.",
+    "descriptionJa": "地図を入口とするグローバル青年ネットワーク——協業ニーズを共有し、AI による地域を越えたパートナー接続を見つけます。",
+    "descriptionKo": "지도를 통한 글로벌 청년 네트워크 진입 — 협업 수요를 공유하고 AI 기반 지역 간 파트너 연결을 발견하세요."
   },
   {
     "id": "youth-ai-os",
     "name": "Youth AI OS",
     "url": "https://www.youthaios.xyz/",
-    "description": "An AI-enabled approach to connecting people, opportunities and partners.",
-    "descriptionZh": "以 AI 赋能的方式连接人才、机会与合作伙伴。",
+    "description": "An operating system for youth opportunity — a personal workspace for documents and project memory, private local compute, and a global network for matching and referrals.",
+    "descriptionZh": "面向青年机会的操作系统——个人工作台承载文档与项目记忆、本地私有算力，以及用于匹配与引荐的全球网络。",
     "icon": "ai",
     "verificationStatus": "published",
-    "descriptionFr": "Une approche de l’IA pour mettre en relation les personnes, les opportunités et les partenaires.",
-    "descriptionRu": "ИИ-подход к соединению людей, возможностей и партнёров.",
-    "descriptionJa": "AI を活用して人々、機会、パートナーをつなぐアプローチ。",
-    "descriptionKo": "사람, 기회, 파트너를 연결하는 AI 기반 접근법."
+    "descriptionFr": "Un système d’exploitation pour les opportunités des jeunes — un espace de travail personnel pour les documents et la mémoire de projet, un calcul local privé et un réseau mondial de mise en relation et de recommandation.",
+    "descriptionRu": "Операционная система для возможностей молодёжи — личное рабочее пространство для документов и памяти проектов, приватные локальные вычисления и глобальная сеть для подбора и рекомендаций.",
+    "descriptionJa": "青年の機会のためのオペレーティングシステム——文書とプロジェクト記憶を扱う個人ワークスペース、ローカルのプライベート計算、そしてマッチングと紹介のグローバルネットワーク。",
+    "descriptionKo": "청년 기회를 위한 운영 체제 — 문서와 프로젝트 메모리를 다루는 개인 작업 공간, 로컬 프라이빗 컴퓨트, 매칭과 추천을 위한 글로벌 네트워크."
   }
 ]

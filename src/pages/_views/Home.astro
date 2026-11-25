@@ -3,76 +3,97 @@ import { getCollection } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Hero from '../../components/Hero.astro';
 import StatsBar from '../../components/StatsBar.astro';
-import DualFeature from '../../components/DualFeature.astro';
 import SectionHeader from '../../components/SectionHeader.astro';
+import CaseGrid from '../../components/CaseGrid.astro';
+import WorldMap from '../../components/WorldMap.astro';
 import { t, pick, type Lang } from '../../i18n/ui';
 import { pageHref } from '../../config/site';
 interface Props { lang: Lang }
 const { lang } = Astro.props;
 const L = (k: string) => t(lang, k);
-const [countries, metrics] = await Promise.all([
-  getCollection('countries'), getCollection('metrics'),
+const [countries, metrics, cases] = await Promise.all([
+  getCollection('countries'), getCollection('metrics'), getCollection('caseStudies'),
 ]);
-const mv = (id: string) => metrics.find((m) => m.data.id === id)?.data.display ?? '';
-const panel = [
-  { value: mv('countries') || '36', label: L('home.stat.countries') },
-  { value: mv('reach') || '4.3M+', label: L('home.hero.reach'), note: L('home.hero.reachNote') },
-];
 const stats = metrics.map((m) => ({
   display: m.data.display,
   label: pick(m.data, 'label', lang),
   icon: m.data.icon,
 }));
-
-// Concise "overview + entrance" cards: one line of context, one clear entry point.
-// All copy reuses existing i18n keys so all six languages stay in sync.
-const exploreCards = [
-  { kicker: L('about.mission.kicker'), title: L('nav.about'), lead: L('footer.about'), href: pageHref(lang, 'about'), img: '/assets/community-group.jpg' },
-  { kicker: L('home.country.kicker'), title: L('nav.network'), lead: L('home.country.lead'), href: pageHref(lang, 'network'), img: '/assets/city-1.jpg' },
-  { kicker: L('home.partners.kicker'), title: L('nav.partnerships'), lead: L('home.partners.lead'), href: pageHref(lang, 'partnerships'), img: '/assets/hero-partnership.jpg' },
-  { kicker: L('home.people.kicker'), title: L('nav.people'), lead: L('home.people.lead'), href: pageHref(lang, 'people'), img: '/assets/person-3.jpg' },
-  { kicker: L('home.work.kicker'), title: L('nav.work'), lead: L('home.work.lead'), href: pageHref(lang, 'impact'), img: '/assets/workshop.jpg' },
-  { kicker: L('home.eco.kicker'), title: L('nav.ai'), lead: L('home.eco.lead'), href: pageHref(lang, 'ai'), img: '/assets/ai-chip.jpg' },
-];
+// Representative work = 3 real, published case studies from the local collection.
+const work = cases.filter((c) => c.data.approvalStatus === 'published').slice(0, 3);
 ---
 
 <BaseLayout lang={lang} pageId="index" title={L('seo.index.title')} description={L('seo.index.desc')} showCta={true}>
+  <!-- 1) 品牌首屏：左45/右55，连续标题无空行，双按钮 + YOUTH UNI 文字入口 -->
   <Hero
     lang={lang}
     eyebrow={L('home.hero.eyebrow')}
-    titleHtml={`<span class="grad">${L('home.hero.title1')}</span> <br />${L('home.hero.title2')}`}
+    titleHtml={`<span class="grad">${L('home.hero.title1')}</span> <span>${L('home.hero.title2')}</span>`}
     lead={L('home.hero.lead')}
     image="/assets/hero-people.jpg"
-    primary={{ label: L('common.exploreNetwork'), href: pageHref(lang, 'network') }}
-    secondary={{ label: L('home.hero.cta2'), href: pageHref(lang, 'partnerships') }}
-    panel={panel}
-    panelTitle1={L('home.hero.panelTitle1')}
-    panelTitle2={L('home.hero.panelTitle2')}
+    primary={{ label: L('common.partnerWithUs'), href: pageHref(lang, 'partnerships') }}
+    secondary={{ label: L('common.exploreNetwork'), href: pageHref(lang, 'network') }}
+    youthLink={{ label: L('home.hero.youthEntry'), href: 'https://www.youthuni.com/' }}
+    photoTag={L('home.hero.panelTitle1')}
   />
+
+  <!-- 2) 精简可信依据 -->
   <StatsBar stats={stats} />
 
-  <section class="section">
-    <div class="container"><DualFeature lang={lang} countries={countries.map((c) => c.data)} /></div>
-  </section>
-
-  <section class="section section--ice">
+  <!-- 3) 代表项目：内容样本替代原网站目录卡（复用 3 条真实案例） -->
+  <section class="section section--white" aria-labelledby="home-work-title">
     <div class="container">
-      <SectionHeader kicker={L('home.hero.eyebrow')} title={L('common.searchTitle')} />
-      <div class="card-grid">
-        {exploreCards.map((c) => (
-          <a class="card card--image" href={c.href}>
-            <div class="card-media">
-              <img src={c.img} alt="" loading="lazy" />
-              <span class="card-tag">{c.kicker}</span>
-            </div>
-            <div class="card-body">
-              <h3>{c.title}</h3>
-              <p>{c.lead}</p>
-              <span class="link-arrow">{L('common.learnMore')} <svg class="icon"><use href="#i-arrow"></use></svg></span>
-            </div>
-          </a>
-        ))}
+      <SectionHeader kicker={L('home.work.kicker')} title={L('home.work.title')} lead={L('home.work.lead')} id="home-work-title" />
+      <CaseGrid lang={lang} cases={work.map((c) => c.data)} />
+      <div class="section-more">
+        <a class="link-arrow" href={pageHref(lang, 'impact')}>{L('home.work.detail')} <svg class="icon"><use href="#i-arrow"></use></svg></a>
       </div>
     </div>
   </section>
+
+  <!-- 4) 全球网络：地图与节点详情同屏 -->
+  <section class="section" aria-labelledby="home-network-title">
+    <div class="container">
+      <SectionHeader kicker={L('home.country.kicker')} title={L('home.country.title')} lead={L('home.country.lead')} id="home-network-title" />
+      <div class="card map-card">
+        <div class="card-media map-card-media">
+          <WorldMap countries={countries.map((c) => c.data)} theme="light" note={L('home.dual.mapNote')} />
+        </div>
+        <div class="card-body">
+          <a class="link-arrow" href={pageHref(lang, 'network')}>{L('home.dual.exploreNetwork')} <svg class="icon"><use href="#i-arrow"></use></svg></a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 5) AI 与旗下平台：独立板块（真实产品与场景，状态项不虚构） -->
+  <section class="section section--ice" aria-labelledby="home-ai-title">
+    <div class="container">
+      <SectionHeader kicker={L('home.eco.kicker')} title={L('home.eco.title')} lead={L('home.eco.lead')} id="home-ai-title" />
+      <div class="feature-list feature-list--home">
+        <div class="feature-item"><span class="feature-icon"><svg class="icon"><use href="#i-compass"></use></svg></span><div><div class="feature-title">{L('home.dual.ai1')}</div><div class="feature-sub">{L('home.dual.ai1sub')}</div></div></div>
+        <div class="feature-item"><span class="feature-icon"><svg class="icon"><use href="#i-route"></use></svg></span><div><div class="feature-title">{L('home.dual.ai2')}</div><div class="feature-sub">{L('home.dual.ai2sub')}</div></div></div>
+        <div class="feature-item"><span class="feature-icon"><svg class="icon"><use href="#i-spark"></use></svg></span><div><div class="feature-title">{L('home.dual.ai3')}</div><div class="feature-sub">{L('home.dual.ai3sub')}</div></div></div>
+      </div>
+      <div class="section-more">
+        <a class="link-arrow" href={pageHref(lang, 'ai')}>{L('home.dual.exploreAI')} <svg class="icon"><use href="#i-arrow"></use></svg></a>
+      </div>
+    </div>
+  </section>
+
+  <!-- 6) 人物与社区：用真实社区照片与文案，示例人物(person-1~6)不发布 -->
+  <section class="section" aria-labelledby="home-people-title">
+    <div class="container">
+      <SectionHeader kicker={L('home.people.kicker')} title={L('home.people.title')} lead={L('home.people.lead')} id="home-people-title" />
+      <div class="community-media">
+        <img src="/assets/community-group.jpg" alt={L('home.community.cta')} loading="lazy" />
+      </div>
+      <div class="section-more">
+        <a class="link-arrow" href={pageHref(lang, 'people')}>{L('home.community.cta')} <svg class="icon"><use href="#i-arrow"></use></svg></a>
+      </div>
+    </div>
+  </section>
+
+  <!-- 7) 合作邀请 = BaseLayout 的 BottomCTA（showCta=true） -->
+  <!-- 8) 页脚 = BaseLayout 统一渲染的 Footer -->
 </BaseLayout>

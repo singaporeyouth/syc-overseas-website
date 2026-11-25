@@ -35,6 +35,7 @@ const countries = defineCollection({
 
     regionKo: z.string().optional(),
     photo: z.string(),
+    photoRepresentative: z.boolean().optional(),
     lat: z.number().optional(),
     lng: z.number().optional(),
     note: z.string().default('A vibrant node in the global SYC community.'),

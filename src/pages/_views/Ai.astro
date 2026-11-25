@@ -38,7 +38,8 @@ const principles = [
 
   <section class="section">
     <div class="container">
-      <SectionHeader kicker={L('home.eco.kicker')} title={L('ai.platforms.title')} lead={L('ai.platforms.lead')} />
+      <SectionHeader kicker={L('ai.platforms.kicker')} title={L('ai.platforms.title')} lead={L('ai.platforms.lead')} />
+      <div class="callout callout--note showcase-note" role="note"><svg class="icon"><use href="#i-shield"></use></svg><div><span>{L('platform.showcaseNote')}</span></div></div>
       <PlatformGrid lang={lang} platforms={platforms} />
     </div>
   </section>

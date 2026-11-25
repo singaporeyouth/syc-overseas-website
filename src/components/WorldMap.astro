@@ -1,32 +1,56 @@
 ---
+import { t, pick, type Lang } from '../i18n/ui';
 import type { Country } from '../content/config';
 interface Props {
   countries: Country[];
+  lang?: Lang;
   theme?: 'light' | 'dark';
   note?: string;
 }
-const { countries, theme = 'light', note } = Astro.props;
+const { countries, lang = 'en', theme = 'light', note } = Astro.props;
 const nodes = countries
   .filter((c) => typeof c.lat === 'number' && typeof c.lng === 'number')
   .map((c) => ({
-    name: c.name,
+    id: c.id,
+    name: pick(c, 'name', lang),
+    region: pick(c, 'region', lang),
+    note: pick(c, 'note', lang),
+    photo: c.photo,
+    representative: Boolean(c.photoRepresentative),
     x: ((c.lng! + 180) / 360) * 100,
     y: ((90 - c.lat!) / 180) * 100,
   }));
 // Hub positioned at Singapore, the home of the SYC community.
 const hub = { x: ((103.8 + 180) / 360) * 100, y: ((90 - 1.35) / 180) * 100 };
+const hubIndex = Math.max(0, nodes.findIndex((n) => n.id === 'singapore'));
+const active = nodes[hubIndex];
 ---
 
-<div class="world-map">
+<div class="world-map" data-map-scope data-nodes={JSON.stringify(nodes)} data-representative-label={t(lang, 'country.representative')}>
   <div class="map-canvas">
     <img class="world-map-img" src={theme === 'dark' ? '/assets/world-dark.svg' : '/assets/world-light.svg'} alt="World map" loading="lazy" />
     <svg class="map-links" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
-      {nodes.map((n) => <line x1={hub.x} y1={hub.y} x2={n.x} y2={n.y} />)}
+      {nodes.map((n, i) => <line class="map-link" style={`--link-i:${i}`} x1={hub.x} y1={hub.y} x2={n.x} y2={n.y} />)}
     </svg>
-    {nodes.map((n) => (
-      <span class="map-node" style={`left:${n.x}%;top:${n.y}%`} title={n.name}></span>
+    {nodes.map((n, i) => (
+      <button type="button" class:list={['map-node', i === hubIndex && 'is-active']} style={`left:${n.x}%;top:${n.y}%`} data-map-node={i} aria-label={n.name} title={n.name}></button>
     ))}
     <span class="map-hub" style={`left:${hub.x}%;top:${hub.y}%`} title="Singapore · SYC hub"></span>
   </div>
+  {active && (
+    <div class="map-detail" data-map-detail>
+      <div class:list={['map-detail-media', !active.photo && 'card-media--pending']}>
+        {active.photo
+          ? <img src={active.photo} alt={`${active.name} — ${active.representative ? t(lang, 'country.representative') : ''}`} loading="lazy" data-detail-photo />
+          : <div class="media-pending"><svg class="icon"><use href="#i-globe"></use></svg></div>}
+        {active.photo && <span class="media-representative" data-detail-representative hidden={!active.representative}>{t(lang, 'country.representative')}</span>}
+      </div>
+      <div class="map-detail-body">
+        <span class="card-tag" data-detail-region>{active.region}</span>
+        <h3 data-detail-name>{active.name}</h3>
+        <p data-detail-note>{active.note}</p>
+      </div>
+    </div>
+  )}
   {note && <div class="map-note"><svg class="icon"><use href="#i-shield"></use></svg> {note}</div>}
 </div>

@@ -1,17 +1,20 @@
 ---
 import { t, pick, type Lang } from '../i18n/ui';
 import type { Country } from '../content/config';
-interface Props { lang: Lang; countries: Country[]; scopeId?: string; limit?: number; }
-const { lang, countries, scopeId = 'countryGrid', limit } = Astro.props;
+interface Props { lang: Lang; countries: Country[]; scopeId?: string; limit?: number; scrollable?: boolean; }
+const { lang, countries, scopeId = 'countryGrid', limit, scrollable = false } = Astro.props;
 const list = limit ? countries.slice(0, limit) : countries;
 ---
 
-<div class="card-grid" data-filter-scope={scopeId}>
+<div class:list={['card-grid', scrollable && 'card-grid--scroll']} data-filter-scope={scopeId}>
   {list.map((c) => (
     <article class="card card--image" data-filter-value={c.region}>
-      <div class="card-media">
-        <img src={c.photo} alt={`${pick(c, 'name', lang)} city view`} loading="lazy" />
+      <div class:list={['card-media', !c.photo && 'card-media--pending']}>
+        {c.photo
+          ? <img src={c.photo} alt={`${pick(c, 'name', lang)} — ${c.photoRepresentative ? t(lang, 'country.representative') : pick(c, 'region', lang)}`} loading="lazy" />
+          : <div class="media-pending"><svg class="icon"><use href="#i-globe"></use></svg><span>{t(lang, 'country.photoPending')}</span></div>}
         <span class="card-tag">{pick(c, 'region', lang)}</span>
+        {c.photoRepresentative && <span class="media-representative">{t(lang, 'country.representative')}</span>}
       </div>
       <div class="card-body">
         <h3>{pick(c, 'name', lang)}</h3>

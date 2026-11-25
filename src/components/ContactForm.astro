@@ -2,6 +2,16 @@
 import { t, type Lang } from '../i18n/ui';
 interface Props { lang: Lang; }
 const { lang } = Astro.props;
+
+const i18n = {
+  submitting: t(lang, 'contact.form.submitting'),
+  errorTitle: t(lang, 'contact.form.errorTitle'),
+  errorBody: t(lang, 'contact.form.errorBody'),
+  retry: t(lang, 'contact.form.retry'),
+  errRequired: t(lang, 'contact.form.errRequired'),
+  errEmail: t(lang, 'contact.form.errEmail'),
+  errMessage: t(lang, 'contact.form.errMessage'),
+};
 ---
 
 <section class="section section--ice">
@@ -9,13 +19,15 @@ const { lang } = Astro.props;
     <div class="card" style="padding:clamp(24px,4vw,48px)">
       <div class="kicker">{t(lang, 'contact.form.title')}</div>
       <h2 style="margin-bottom:8px">{t(lang, 'contact.form.title')}</h2>
-      <form id="enquiryForm" class="contact-form" novalidate>
+      <p class="form-demo-note" role="note"><svg class="icon"><use href="#i-shield"></use></svg> {t(lang, 'contact.form.demoNote')}</p>
+      <form id="enquiryForm" class="contact-form" novalidate
+        data-form-i18n={JSON.stringify(i18n)}>
         <div class="form-row">
-          <label class="field">{t(lang, 'contact.form.name')}<input name="name" type="text" autocomplete="name" required /></label>
-          <label class="field">{t(lang, 'contact.form.email')}<input name="email" type="email" autocomplete="email" required /></label>
+          <label class="field">{t(lang, 'contact.form.name')}<input name="name" type="text" autocomplete="name" required placeholder=" " /></label>
+          <label class="field">{t(lang, 'contact.form.email')}<input name="email" type="email" autocomplete="email" required placeholder=" " /></label>
         </div>
         <div class="form-row">
-          <label class="field">{t(lang, 'contact.form.org')}<input name="organisation" type="text" autocomplete="organization" /></label>
+          <label class="field">{t(lang, 'contact.form.org')}<input name="organisation" type="text" autocomplete="organization" placeholder=" " /></label>
           <label class="field">{t(lang, 'contact.form.topic')}
             <select name="topic">
               <option value="partnership">{t(lang, 'contact.topic.partnership')}</option>
@@ -25,14 +37,25 @@ const { lang } = Astro.props;
             </select>
           </label>
         </div>
-        <label class="field">{t(lang, 'contact.form.message')}<textarea name="message" rows="6" required></textarea></label>
+        <label class="field">{t(lang, 'contact.form.message')}<textarea name="message" rows="6" required placeholder=" "></textarea></label>
         <div class="actions">
-          <button type="submit" class="btn btn--primary">{t(lang, 'contact.form.submit')} <svg class="icon"><use href="#i-arrow"></use></svg></button>
+          <button type="submit" class="btn btn--primary" data-submit-btn>{t(lang, 'contact.form.submit')} <svg class="icon"><use href="#i-arrow"></use></svg></button>
         </div>
+        <p class="field-error-summary" data-form-summary role="alert" hidden></p>
       </form>
       <div id="formSuccess" class="callout callout--success" role="status" hidden>
         <svg class="icon"><use href="#i-spark"></use></svg>
-        <div><strong>{t(lang, 'contact.form.successTitle')}</strong><span>{t(lang, 'contact.form.successBody')}</span></div>
+        <div><strong>{t(lang, 'contact.form.successTitle')}</strong><span>{t(lang, 'contact.form.successBody')}</span>
+          <div class="form-receipt" data-form-receipt hidden>
+            <span class="receipt-label">{t(lang, 'contact.form.receipt')}</span>
+            <span data-receipt-summary></span>
+          </div>
+        </div>
+      </div>
+      <div id="formFailure" class="callout callout--error" role="alert" hidden>
+        <svg class="icon"><use href="#i-close"></use></svg>
+        <div><strong data-failure-title>{i18n.errorTitle}</strong><span data-failure-body>{i18n.errorBody}</span></div>
+        <button type="button" class="btn btn--outline btn--sm" data-form-retry>{i18n.retry}</button>
       </div>
     </div>
   </div>

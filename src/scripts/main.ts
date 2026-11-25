@@ -64,12 +64,32 @@
     topBtn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
   }
 
-  // --- card filters (data-filter on buttons, data-filter-value on cards) ---
+  // --- card filters: active state + result count + empty state + hide empty categories ---
+  function updateFilterMeta(group: string | null, scope: Element | null, value: string) {
+    if (!group || !scope) return;
+    const cards = Array.from(scope.querySelectorAll<HTMLElement>('[data-filter-value]'));
+    const visible = cards.filter((card) => {
+      const v = card.getAttribute('data-filter-value') || '';
+      return value === 'all' || v.split(' ').includes(value);
+    }).length;
+    const meta = document.querySelector(`[data-filter-meta="${group}"]`);
+    if (meta) meta.textContent = `${meta.getAttribute('data-showing-prefix') || ''} ${visible} ${meta.getAttribute('data-results-suffix') || ''}`.replace(/\s+/g, ' ').trim();
+    const empty = document.querySelector<HTMLElement>(`[data-filter-empty="${group}"]`);
+    if (empty) empty.hidden = visible !== 0;
+    // Hide filter buttons that have no matching cards (keep "all").
+    const btnSel = `[data-filter][data-filter-group="${group}"]`;
+    document.querySelectorAll<HTMLButtonElement>(btnSel).forEach((b) => {
+      const v = b.getAttribute('data-filter') || 'all';
+      if (v === 'all' || b.classList.contains('region-card')) return;
+      const count = cards.filter((card) => (card.getAttribute('data-filter-value') || '').split(' ').includes(v)).length;
+      b.hidden = count === 0;
+    });
+  }
   on<HTMLButtonElement>('[data-filter]', (btn) => {
     btn.addEventListener('click', () => {
       const group = btn.getAttribute('data-filter-group');
       const value = btn.getAttribute('data-filter') || 'all';
-      const scope = group ? document.querySelector(`[data-filter-scope="${group}"]`) : document;
+      const scope = (group ? document.querySelector(`[data-filter-scope="${group}"]`) : document) as Element | null;
       if (!scope) return;
       const btnSel = group ? `[data-filter][data-filter-group="${group}"]` : '[data-filter]';
       document.querySelectorAll<HTMLButtonElement>(btnSel).forEach((b) => b.classList.remove('active'));
@@ -78,25 +98,174 @@
         const v = card.getAttribute('data-filter-value') || '';
         (card as HTMLElement).style.display = value === 'all' || v.split(' ').includes(value) ? '' : 'none';
       });
+      updateFilterMeta(group, scope, value);
+    });
+  });
+  // Initialise: hide empty categories + set "all" count, without requiring a click.
+  on<HTMLElement>('[data-filter-scope]', (scope) => {
+    const group = scope.getAttribute('data-filter-scope');
+    if (group) updateFilterMeta(group, scope, 'all');
+  });
+
+  // --- explore-by-region cards: filter countries then scroll to the grid ---
+  on<HTMLButtonElement>('.region-card', (btn) => {
+    btn.addEventListener('click', () => {
+      const countries = document.getElementById('countries');
+      if (countries) countries.scrollIntoView({ behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth', block: 'start' });
     });
   });
 
-  // --- contact form: validate and present a confirmation state ---
+  // --- contact form: field-level validation after interaction + demo state machine ---
   const form = document.getElementById('enquiryForm') as HTMLFormElement | null;
   if (form) {
+    let i18n: Record<string, string> = {};
+    try { i18n = JSON.parse(form.getAttribute('data-form-i18n') || '{}'); } catch (_) { /* noop */ }
+    const success = document.getElementById('formSuccess');
+    const failure = document.getElementById('formFailure');
+    const summary = form.querySelector<HTMLElement>('[data-form-summary]');
+    const submitBtn = form.querySelector<HTMLButtonElement>('[data-submit-btn]');
+    const retryBtn = document.querySelector<HTMLButtonElement>('[data-form-retry]');
+    const fields = Array.from(form.querySelectorAll<HTMLInputElement | HTMLTextAreaElement>('input[required], textarea[required]'));
+
+    function messageFor(input: HTMLInputElement | HTMLTextAreaElement): string {
+      const value = (input.value || '').trim();
+      if (!value) return i18n.errRequired || '';
+      if (input.type === 'email' && value && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)) return i18n.errEmail || '';
+      if (input.tagName === 'TEXTAREA' && value.length < 10) return i18n.errMessage || '';
+      return '';
+    }
+    function showError(input: HTMLInputElement | HTMLTextAreaElement, msg: string) {
+      const field = input.closest<HTMLElement>('.field');
+      if (!field) return;
+      field.classList.toggle('field--invalid', Boolean(msg));
+      input.setAttribute('aria-invalid', msg ? 'true' : 'false');
+      let err = field.querySelector<HTMLElement>('.field-error');
+      if (!err) {
+        err = document.createElement('span');
+        err.className = 'field-error';
+        field.appendChild(err);
+      }
+      err.textContent = msg;
+    }
+    // Errors appear only after a field has been interacted with.
+    fields.forEach((input) => {
+      const validate = () => showError(input, messageFor(input));
+      input.addEventListener('blur', validate);
+      input.addEventListener('input', () => {
+        if (input.closest('.field')?.classList.contains('field--invalid')) validate();
+      });
+    });
+
+    function setSubmitting(on: boolean) {
+      if (submitBtn) {
+        submitBtn.disabled = on;
+        submitBtn.classList.toggle('is-busy', on);
+        if (on) submitBtn.setAttribute('data-label-original', submitBtn.innerHTML);
+        const orig = submitBtn.getAttribute('data-label-original');
+        if (on && orig) submitBtn.innerHTML = `<span class="spinner"></span> ${i18n.submitting || ''}`;
+        else if (!on && orig) submitBtn.innerHTML = orig;
+      }
+      form?.setAttribute('aria-busy', String(on));
+    }
+    function resetStates() {
+      if (success) success.hidden = true;
+      if (failure) failure.hidden = true;
+      if (summary) summary.hidden = true;
+    }
+
     form.addEventListener('submit', (e) => {
       e.preventDefault();
       e.stopPropagation();
-      if (!form.reportValidity()) return;
-      const out = document.getElementById('formSuccess');
-      if (out) {
-        out.hidden = false;
-        out.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      resetStates();
+      let firstInvalid: HTMLInputElement | HTMLTextAreaElement | undefined;
+      for (const input of fields) {
+        const msg = messageFor(input);
+        showError(input, msg);
+        if (msg && !firstInvalid) firstInvalid = input;
       }
-      form.reset();
+      if (firstInvalid) {
+        if (summary) {
+          summary.textContent = i18n.errRequired || '';
+          summary.hidden = false;
+        }
+        firstInvalid.focus();
+        return false;
+      }
+      // Demo only: no backend. Brief "submitting" state, then a clearly-labelled preview result.
+      setSubmitting(true);
+      // Capture the user's own input for a local preview receipt (nothing is transmitted).
+      const previewName = (form.querySelector<HTMLInputElement>('input[name="name"]')?.value || '').trim();
+      const previewTopic = form.querySelector<HTMLSelectElement>('select[name="topic"]')?.selectedOptions[0]?.textContent?.trim() || '';
+      const previewEmail = (form.querySelector<HTMLInputElement>('input[name="email"]')?.value || '').trim();
+      window.setTimeout(() => {
+        setSubmitting(false);
+        // Simulated outcome flag; with no backend this always lands on the demo-confirmation state.
+        if (success) {
+          const receipt = success.querySelector<HTMLElement>('[data-form-receipt]');
+          const receiptSummary = success.querySelector<HTMLElement>('[data-receipt-summary]');
+          if (receipt && receiptSummary) {
+            const parts = [previewName, previewEmail, previewTopic].filter(Boolean);
+            receiptSummary.textContent = parts.join(' · ');
+            receipt.hidden = parts.length === 0;
+          }
+          success.hidden = false;
+          success.scrollIntoView({ behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth', block: 'center' });
+        }
+        form.reset();
+        fields.forEach((input) => showError(input, ''));
+      }, 650);
       return false;
     });
+
+    if (retryBtn) {
+      retryBtn.addEventListener('click', () => {
+        if (failure) failure.hidden = true;
+        if (summary) summary.hidden = true;
+        fields[0]?.focus();
+      });
+    }
   }
+
+  // --- world map: node click updates the detail panel (uses only real country fields) ---
+  on<HTMLElement>('[data-map-scope]', (scope) => {
+    let nodes: Array<{ name: string; region: string; note: string; photo: string; representative: boolean }> = [];
+    try { nodes = JSON.parse(scope.getAttribute('data-nodes') || '[]'); } catch (_) { /* noop */ }
+    const repLabel = scope.getAttribute('data-representative-label') || 'Representative image';
+    const buttons = Array.from(scope.querySelectorAll<HTMLButtonElement>('[data-map-node]'));
+    const detail = scope.querySelector<HTMLElement>('[data-map-detail]');
+    if (!detail || !nodes.length) return;
+    const elName = detail.querySelector<HTMLElement>('[data-detail-name]');
+    const elRegion = detail.querySelector<HTMLElement>('[data-detail-region]');
+    const elNote = detail.querySelector<HTMLElement>('[data-detail-note]');
+    const elMedia = detail.querySelector<HTMLElement>('.map-detail-media');
+    buttons.forEach((btn) => {
+      btn.addEventListener('click', () => {
+        const idx = Number(btn.getAttribute('data-map-node'));
+        const node = nodes[idx];
+        if (!node) return;
+        buttons.forEach((b) => b.classList.toggle('is-active', b === btn));
+        if (elName) elName.textContent = node.name;
+        if (elRegion) elRegion.textContent = node.region;
+        if (elNote) elNote.textContent = node.note;
+        if (elMedia) {
+          if (node.photo) {
+            elMedia.classList.remove('card-media--pending');
+            let img = elMedia.querySelector<HTMLImageElement>('img[data-detail-photo]');
+            if (!img) {
+              elMedia.innerHTML = '<img alt="" loading="lazy" data-detail-photo /><span class="media-representative" data-detail-representative hidden></span>';
+              img = elMedia.querySelector('img');
+            }
+            if (img) { img.src = node.photo; img.alt = `${node.name} — ${node.representative ? repLabel : ''}`; }
+            const rep = elMedia.querySelector<HTMLElement>('[data-detail-representative]');
+            if (rep) { rep.textContent = node.representative ? repLabel : ''; rep.hidden = !node.representative; }
+          } else {
+            elMedia.classList.add('card-media--pending');
+            elMedia.innerHTML = '<div class="media-pending"><svg class="icon"><use href="#i-globe"></use></svg></div>';
+          }
+        }
+      });
+    });
+  });
 
   // --- restrained scroll reveal + hero parallax (progressive enhancement) ---
   const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -115,6 +284,9 @@
       { rootMargin: '0px 0px -8% 0px', threshold: 0.08 }
     );
     on<HTMLElement>(revealSel, (el) => {
+      // Team member cards stay always visible; reveal animation can hide
+      // below-the-fold members (opacity:0) until scroll, showing only 3 of 6.
+      if (el.classList.contains('card--person')) return;
       el.classList.add('reveal');
       io.observe(el);
     });

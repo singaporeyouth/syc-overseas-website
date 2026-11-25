@@ -1,5 +1,5 @@
 ---
-import { pick, type Lang } from '../i18n/ui';
+import { t, pick, type Lang } from '../i18n/ui';
 import type { Person } from '../content/config';
 interface Props { lang: Lang; people: Person[]; scopeId?: string; limit?: number; }
 const { lang, people, scopeId = 'peopleGrid', limit } = Astro.props;
@@ -7,11 +7,14 @@ const list = limit ? people.slice(0, limit) : people;
 ---
 
 <div class="card-grid" data-filter-scope={scopeId}>
-  {list.map((p) => (
-    <article class="card card--person" data-filter-value={p.region}>
+  {list.map((p) => {
+    const sample = p.verificationStatus === 'sample_unverified';
+    return (
+    <article class:list={['card', 'card--person', sample && 'card--sample']} data-filter-value={p.region}>
       <div class="card-media card-media--portrait">
         <img src={p.photo} alt={p.name} loading="lazy" />
-        {p.region && <span class="card-tag">{p.region}</span>}
+        {sample && <span class="sample-flag">{t(lang, 'common.illustrative')}</span>}
+        {p.region && !sample && <span class="card-tag">{p.region}</span>}
       </div>
       <div class="card-body">
         <h3>{p.name}</h3>
@@ -19,5 +22,6 @@ const list = limit ? people.slice(0, limit) : people;
         <div class="person-country"><svg class="icon"><use href="#i-pin"></use></svg> {p.country}</div>
       </div>
     </article>
-  ))}
+    );
+  })}
 </div>

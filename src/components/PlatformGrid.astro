@@ -1,8 +1,8 @@
 ---
-import type { Lang } from '../i18n/ui';
+import { pick, type Lang } from '../i18n/ui';
 import type { Platform } from '../content/config';
 interface Props { lang: Lang; platforms: Platform[]; }
-const { platforms } = Astro.props;
+const { lang, platforms } = Astro.props;
 ---
 
 <div class="card-grid">
@@ -11,7 +11,7 @@ const { platforms } = Astro.props;
       <div class="card-body">
         <div class="platform-icon"><svg class="icon"><use href={`#i-${p.icon}`}></use></svg></div>
         <h3>{p.name}</h3>
-        <p>{p.description}</p>
+        <p>{pick(p, 'description', lang)}</p>
         <a class="link-arrow" href={p.url} target="_blank" rel="noopener noreferrer" aria-label={`Visit ${p.name} (external)`}>
           Visit platform <svg class="icon"><use href="#i-arrow"></use></svg>
         </a>

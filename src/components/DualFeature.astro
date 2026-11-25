@@ -14,30 +14,44 @@ const networkHref = localizePath(lang, 'network');
 const aiHref = localizePath(lang, 'ai');
 ---
 
-<div class="dual-grid">
+<!-- P1: map card and AI card are independent sections, NOT stretched to equal height -->
+<section class="feature-block feature-block--network" aria-labelledby="dual-network-title">
   <article class="card map-card">
     <div class="card-media map-card-media">
       <WorldMap countries={countries} theme="light" note={t(lang, 'home.dual.mapNote')} />
     </div>
     <div class="card-body">
       <div class="kicker">{t(lang, 'home.dual.networkKicker')}</div>
-      <h2>{t(lang, 'home.dual.networkTitle')}</h2>
+      <h2 id="dual-network-title">{t(lang, 'home.dual.networkTitle')}</h2>
       <p>{t(lang, 'home.dual.networkLead')}</p>
       <a class="link-arrow" href={networkHref}>{t(lang, 'home.dual.exploreNetwork')} <svg class="icon"><use href="#i-arrow"></use></svg></a>
     </div>
   </article>
+</section>
 
+<section class="feature-block feature-block--ai" aria-labelledby="dual-ai-title">
   <article class="card ai-feature">
-    <div class="ai-feature-visual">
-      <img src="/assets/ai-chip.jpg" alt="AI and youth innovation" loading="lazy" />
+    <div class="ai-feature-visual ai-cube-stage">
       <div class="ai-orbit orbit-1"></div>
       <div class="ai-orbit orbit-2"></div>
-      <div class="ai-orbit orbit-3"></div>
-      <span class="ai-core"><svg class="icon"><use href="#i-ai"></use></svg></span>
+      <div class="ai-cube">
+        <span class="cube-face face-front"><svg class="icon"><use href="#i-ai"></use></svg></span>
+        <span class="cube-face face-back"></span>
+        <span class="cube-face face-right">SYC</span>
+        <span class="cube-face face-left">AI</span>
+        <span class="cube-face face-top"><svg class="icon"><use href="#i-spark"></use></svg></span>
+        <span class="cube-face face-bottom"></span>
+      </div>
+      <div class="ai-collab-row">
+        <span class="ai-collab"><svg class="icon"><use href="#i-building"></use></svg><small>{t(lang, 'ai.collab1')}</small></span>
+        <span class="ai-collab"><svg class="icon"><use href="#i-route"></use></svg><small>{t(lang, 'ai.collab2')}</small></span>
+        <span class="ai-collab"><svg class="icon"><use href="#i-handshake"></use></svg><small>{t(lang, 'ai.collab3')}</small></span>
+        <span class="ai-collab"><svg class="icon"><use href="#i-chart"></use></svg><small>{t(lang, 'ai.collab4')}</small></span>
+      </div>
     </div>
     <div class="card-body">
       <div class="kicker">{t(lang, 'home.dual.aiKicker')}</div>
-      <h2>{t(lang, 'home.dual.aiTitle')}</h2>
+      <h2 id="dual-ai-title">{t(lang, 'home.dual.aiTitle')}</h2>
       <p>{t(lang, 'home.dual.aiLead')}</p>
       <div class="feature-list">
         {features.map((f) => (
@@ -50,4 +64,4 @@ const aiHref = localizePath(lang, 'ai');
       <a class="link-arrow" href={aiHref}>{t(lang, 'home.dual.exploreAI')} <svg class="icon"><use href="#i-arrow"></use></svg></a>
     </div>
   </article>
-</div>
+</section>

@@ -2,14 +2,25 @@
 import { getCollection } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Hero from '../../components/Hero.astro';
+import StatsBar from '../../components/StatsBar.astro';
 import SectionHeader from '../../components/SectionHeader.astro';
 import WorldMap from '../../components/WorldMap.astro';
 import CountryGrid from '../../components/CountryGrid.astro';
-import { t, type Lang } from '../../i18n/ui';
+import PeopleGrid from '../../components/PeopleGrid.astro';
+import { t, pick, type Lang } from '../../i18n/ui';
 interface Props { lang: Lang }
 const { lang } = Astro.props;
 const L = (k: string) => t(lang, k);
-const countries = (await getCollection('countries')).map((c) => c.data);
+const [countryEntries, peopleEntries, metrics] = await Promise.all([
+  getCollection('countries'), getCollection('people'), getCollection('metrics'),
+]);
+const countries = countryEntries.map((c) => c.data);
+const people = peopleEntries.map((p) => p.data);
+const stats = metrics.map((m) => ({
+  display: m.data.display,
+  label: pick(m.data, 'label', lang),
+  icon: m.data.icon,
+}));
 const regions = [
   { key: 'all', value: 'all', label: L('network.filter.all') },
   { key: 'asia', value: 'Asia', label: L('network.filter.asia') },
@@ -20,27 +31,67 @@ const regions = [
   { key: 'middleeast', value: 'Middle East', label: L('network.filter.middleeast') },
   { key: 'global', value: 'Global', label: L('network.filter.global') },
 ];
+// Explore by Region：仅用现有国家图库的地标图，不标注具体国家数量。
+const regionCards = ['Asia', 'Europe', 'Americas', 'Africa', 'Oceania', 'Middle East']
+  .map((r) => countries.find((c) => c.region === r))
+  .filter((c) => Boolean(c))
+  .map((c) => ({ value: c!.region, label: pick(c!, 'region', lang), photo: c!.photo }));
 ---
 
 <BaseLayout lang={lang} pageId="network" title={L('seo.network.title')} description={L('seo.network.desc')}>
   <Hero lang={lang} compact eyebrow={L('network.hero.eyebrow')} titleHtml={L('network.hero.title')} lead={L('network.hero.lead')} image="/assets/city-1.jpg" />
 
-  <section class="section section--ice">
+  <StatsBar stats={stats} />
+
+  <section class="section section--ice" id="map">
     <div class="container">
       <SectionHeader kicker={L('network.map.kicker')} title={L('network.map.title')} />
       <div class="card" style="padding:clamp(16px,3vw,32px)">
-        <WorldMap countries={countries} theme="light" note={L('network.map.note')} />
+        <WorldMap countries={countries} lang={lang} theme="light" note={L('network.map.note')} />
       </div>
     </div>
   </section>
 
-  <section class="section">
+  <section class="section" id="regions">
     <div class="container">
-      <SectionHeader title={L('network.countries.title')} />
+      <SectionHeader kicker={L('network.region.kicker')} title={L('network.region.title')} lead={L('network.region.lead')} />
+      <div class="region-grid">
+        {regionCards.map((r) => (
+          <button type="button" class="region-card" data-filter={r.value} data-filter-group="countryGrid">
+            <div class:list={['region-card-media', !r.photo && 'card-media--pending']}>
+              {r.photo
+                ? <img src={r.photo} alt="" loading="lazy" />
+                : <div class="media-pending"><svg class="icon"><use href="#i-globe"></use></svg><span>{L('country.photoPending')}</span></div>}
+            </div>
+            <div class="region-card-body">
+              <h3>{r.label}</h3>
+              <span class="link-arrow">{L('common.learnMore')} <svg class="icon"><use href="#i-arrow"></use></svg></span>
+            </div>
+          </button>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--ice" id="countries">
+    <div class="container">
+      <SectionHeader kicker={L('network.countries.kicker')} title={L('network.countries.title')} />
       <div class="filter-bar" data-filter-group="countryGrid">
         {regions.map((r, i) => <button type="button" class:list={['filter-btn', i === 0 && 'active']} data-filter={r.value} data-filter-group="countryGrid">{r.label}</button>)}
       </div>
-      <CountryGrid lang={lang} countries={countries} scopeId="countryGrid" />
+      <p class="filter-meta" data-filter-meta="countryGrid" data-showing-prefix={L('filter.showing')} data-results-suffix={L('filter.results')} aria-live="polite">{L('filter.showing')} {countries.length} {L('filter.results')}</p>
+      <CountryGrid lang={lang} countries={countries} scopeId="countryGrid" scrollable={true} />
+      <div class="empty-results" data-filter-empty="countryGrid" hidden>
+        <svg class="icon"><use href="#i-globe"></use></svg>
+        <p>{L('network.empty')}</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="teams">
+    <div class="container">
+      <SectionHeader kicker={L('network.teams.kicker')} title={L('network.teams.title')} lead={L('network.teams.lead')} />
+      <PeopleGrid lang={lang} people={people} scopeId="teamGrid" />
     </div>
   </section>
 </BaseLayout>

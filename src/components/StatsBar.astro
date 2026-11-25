@@ -5,14 +5,24 @@ const { stats } = Astro.props;
 ---
 <section class="stats" aria-label="Key figures">
   <div class="container">
-    <div class="stats-grid">
-      {stats.map((s) => (
-        <div class="stat">
-          <svg class="icon"><use href={`#i-${s.icon}`}></use></svg>
-          <div class="stat-num">{s.display}</div>
-          <div class="stat-label">{s.label}</div>
-        </div>
-      ))}
+    <div class="stats-panel">
+      <!-- globe wireframe底纹：纯SVG装饰，不引入新数据 -->
+      <svg class="stats-globe" viewBox="0 0 240 140" fill="none" aria-hidden="true" preserveAspectRatio="xMidYMid slice">
+        <circle cx="120" cy="70" r="62" />
+        <ellipse cx="120" cy="70" rx="24" ry="62" />
+        <ellipse cx="120" cy="70" rx="46" ry="62" />
+        <line x1="58" y1="70" x2="182" y2="70" />
+        <path d="M60 42 H180 M60 98 H180" />
+      </svg>
+      <div class="stats-grid">
+        {stats.map((s) => (
+          <div class="stat">
+            <svg class="icon"><use href={`#i-${s.icon}`}></use></svg>
+            <div class="stat-num">{s.display}</div>
+            <div class="stat-label">{s.label}</div>
+          </div>
+        ))}
+      </div>
     </div>
   </div>
 </section>
