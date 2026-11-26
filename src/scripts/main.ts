@@ -111,6 +111,95 @@
     if (group) updateFilterMeta(group, scope, 'all');
   });
 
+  // --- Country Teams directory: search + region filter + result count + load more + empty state ---
+  on<HTMLElement>('[data-td-root]', (root) => {
+    const cards = Array.from(root.querySelectorAll<HTMLElement>('[data-td-card]'));
+    if (!cards.length) return;
+    const input = root.querySelector<HTMLInputElement>('[data-td-input]');
+    const meta = root.querySelector<HTMLElement>('[data-td-meta]');
+    const empty = root.querySelector<HTMLElement>('[data-td-empty]');
+    const loadWrap = root.querySelector<HTMLElement>('[data-td-loadmore-wrap]');
+    const loadBtn = root.querySelector<HTMLButtonElement>('[data-td-loadmore]');
+    const clearBtn = root.querySelector<HTMLButtonElement>('[data-td-clear]');
+    const emptyClear = root.querySelector<HTMLButtonElement>('[data-td-empty-clear]');
+    const regionBtns = Array.from(root.querySelectorAll<HTMLButtonElement>('[data-td-region-btn]'));
+
+    const showingPrefix = root.getAttribute('data-showing-prefix') || '';
+    const teamsWord = root.getAttribute('data-teams-word') || '';
+    const membersWord = root.getAttribute('data-members-word') || '';
+    const INITIAL = 12;
+
+    let region = 'all';
+    let expanded = false;
+
+    const queryOf = () => (input?.value || '').trim().toLowerCase();
+
+    const render = () => {
+      const q = queryOf();
+      const filtering = Boolean(q) || region !== 'all';
+      let shownTeams = 0;
+      let shownMembers = 0;
+      let matched = 0;
+
+      cards.forEach((card, i) => {
+        const hay = (card.getAttribute('data-td-search') || '').toLowerCase();
+        const cardRegion = card.getAttribute('data-td-region') || '';
+        const regionOk = region === 'all' || cardRegion === region;
+        const textOk = !q || hay.indexOf(q) !== -1;
+        const match = regionOk && textOk;
+        if (match) matched++;
+        // Filtering/searching covers all matching countries (ignores the 12-card cap).
+        const visible = match && (filtering || expanded || i < INITIAL);
+        card.hidden = !visible;
+        if (visible) {
+          shownTeams++;
+          shownMembers += Number(card.getAttribute('data-td-members') || '0');
+        }
+      });
+
+      // Result count reflects the countries/members currently on screen.
+      if (meta) {
+        meta.textContent = [showingPrefix, shownTeams, teamsWord, '/', shownMembers, membersWord]
+          .filter(Boolean).join(' ');
+      }
+      if (empty) empty.hidden = matched !== 0;
+      if (loadWrap) loadWrap.hidden = filtering || expanded || matched <= INITIAL;
+      if (clearBtn) clearBtn.hidden = !filtering;
+      regionBtns.forEach((b) =>
+        b.classList.toggle('active', (b.getAttribute('data-td-region-btn') || 'all') === region)
+      );
+    };
+
+    input?.addEventListener('input', () => { expanded = false; render(); });
+    regionBtns.forEach((b) => {
+      b.addEventListener('click', () => {
+        region = b.getAttribute('data-td-region-btn') || 'all';
+        expanded = false;
+        render();
+      });
+    });
+    const clearAll = () => {
+      if (input) input.value = '';
+      region = 'all';
+      expanded = false;
+      render();
+    };
+    clearBtn?.addEventListener('click', clearAll);
+    emptyClear?.addEventListener('click', clearAll);
+    loadBtn?.addEventListener('click', () => { expanded = true; render(); });
+
+    // Deep link from Global Network map: ?country=<English country name> pre-fills the search.
+    try {
+      const presetCountry = new URLSearchParams(window.location.search).get('country');
+      if (presetCountry && input) {
+        input.value = presetCountry;
+        expanded = true;
+      }
+    } catch (_) { /* noop */ }
+
+    render();
+  });
+
   // --- explore-by-region cards: filter countries then scroll to the grid ---
   on<HTMLButtonElement>('.region-card', (btn) => {
     btn.addEventListener('click', () => {
@@ -124,7 +213,8 @@
   if (form) {
     let i18n: Record<string, string> = {};
     try { i18n = JSON.parse(form.getAttribute('data-form-i18n') || '{}'); } catch (_) { /* noop */ }
-    const contactEmail = form.getAttribute('data-contact-email') || 'hello@singaporeyouth.com';
+    const contactEmail = form.getAttribute('data-contact-email') || 'contact@singaporeyouth.com';
+    const partnershipEmail = form.getAttribute('data-partnership-email') || 'partner@singaporeyouth.com';
     const summary = form.querySelector<HTMLElement>('[data-form-summary]');
     const fields = Array.from(form.querySelectorAll<HTMLInputElement | HTMLTextAreaElement>('input[required], textarea[required]'));
 
@@ -179,7 +269,9 @@
       // Nothing is transmitted by this website; the visitor sends the email.
       const val = (name: string) => (form.querySelector<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>(`[name="${name}"]`)?.value || '').trim();
       const topicSelect = form.querySelector<HTMLSelectElement>('select[name="topic"]');
+      const topicValue = topicSelect?.value || '';
       const topicLabel = topicSelect?.selectedOptions[0]?.textContent?.trim() || '';
+      const recipient = topicValue === 'partnership' ? partnershipEmail : contactEmail;
       const subject = [i18n.subjectPrefix || 'Website enquiry', topicLabel].filter(Boolean).join(' — ');
       const body = [
         `${i18n.labelName || 'Name'}: ${val('name')}`,
@@ -190,14 +282,14 @@
         `${i18n.labelMessage || 'Message'}:`,
         val('message'),
       ].join('\n');
-      window.location.href = `mailto:${contactEmail}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+      window.location.href = `mailto:${recipient}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
       return false;
     });
   }
 
   // --- world map: node click updates the detail panel (uses only real country fields) ---
   on<HTMLElement>('[data-map-scope]', (scope) => {
-    let nodes: Array<{ name: string; region: string; note: string; photo: string; representative: boolean }> = [];
+    let nodes: Array<{ name: string; country: string; region: string; note: string; photo: string; representative: boolean }> = [];
     try { nodes = JSON.parse(scope.getAttribute('data-nodes') || '[]'); } catch (_) { /* noop */ }
     const repLabel = scope.getAttribute('data-representative-label') || 'Representative image';
     const buttons = Array.from(scope.querySelectorAll<HTMLButtonElement>('[data-map-node]'));
@@ -206,6 +298,7 @@
     const elName = detail.querySelector<HTMLElement>('[data-detail-name]');
     const elRegion = detail.querySelector<HTMLElement>('[data-detail-region]');
     const elNote = detail.querySelector<HTMLElement>('[data-detail-note]');
+    const elTeam = detail.querySelector<HTMLAnchorElement>('[data-detail-team]');
     const elMedia = detail.querySelector<HTMLElement>('.map-detail-media');
     buttons.forEach((btn) => {
       btn.addEventListener('click', () => {
@@ -216,6 +309,11 @@
         if (elName) elName.textContent = node.name;
         if (elRegion) elRegion.textContent = node.region;
         if (elNote) elNote.textContent = node.note;
+        if (elTeam && node.country) {
+          const u = new URL(elTeam.href, window.location.href);
+          u.searchParams.set('country', node.country);
+          elTeam.href = u.toString();
+        }
         if (elMedia) {
           if (node.photo) {
             elMedia.classList.remove('card-media--pending');

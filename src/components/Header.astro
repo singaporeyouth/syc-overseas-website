@@ -4,12 +4,13 @@ import { t, LANGS, LANG_META, type Lang } from '../i18n/ui';
 interface Props { lang: Lang; currentPage: string; }
 const { lang, currentPage } = Astro.props;
 
-// Five primary sections in the required order; About is pinned first in markup.
-const primaryIds = ['ai', 'impact', 'network', 'partnerships'];
+// Five primary sections in the required order:
+// About SYC / AI Lab / Global Network / Country Teams / Partnerships.
+// "Our Work" (impact) is intentionally not a primary item; it stays in the footer and home case entry.
+const primaryIds = ['about', 'ai', 'network', 'people', 'partnerships'];
 const primary = primaryIds
   .map((id) => pages.find((p) => p.id === id))
   .filter((p): p is NonNullable<typeof p> => Boolean(p));
-const aboutItem = pages.find((p) => p.id === 'about');
 const current = LANG_META[lang];
 ---
 
@@ -24,11 +25,6 @@ const current = LANG_META[lang];
     </a>
 
     <nav class="nav-links" id="navLinks" aria-label={t(lang, 'nav.menu')}>
-      <!-- About SYC — pinned first; Our People lives inside the About page. -->
-      {aboutItem && (
-        <a href={pageHref(lang, aboutItem.id)} aria-current={currentPage === 'about' ? 'page' : undefined}>{t(lang, aboutItem.navKey)}</a>
-      )}
-
       {primary.map((item) => (
         <a
           href={pageHref(lang, item.id)}

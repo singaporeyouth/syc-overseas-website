@@ -5,20 +5,48 @@ import Hero from '../../components/Hero.astro';
 import SectionHeader from '../../components/SectionHeader.astro';
 import PartnersGrid from '../../components/PartnersGrid.astro';
 import { t, type Lang } from '../../i18n/ui';
-import { localizePath } from '../../config/site';
+import { SITE, localizePath } from '../../config/site';
 interface Props { lang: Lang }
 const { lang } = Astro.props;
 const L = (k: string) => t(lang, k);
 const partners = (await getCollection('partners')).map((p) => p.data);
+const generalEmail = SITE.contactEmail ?? 'contact@singaporeyouth.com';
+const partnerEmail = SITE.partnershipEmail ?? 'partner@singaporeyouth.com';
+const how = [
+  { icon: 'compass', title: L('partnerships.how1.title'), body: L('partnerships.how1.body') },
+  { icon: 'building', title: L('partnerships.how2.title'), body: L('partnerships.how2.body') },
+  { icon: 'handshake', title: L('partnerships.how3.title'), body: L('partnerships.how3.body') },
+];
 ---
 
 <BaseLayout lang={lang} pageId="partnerships" title={L('seo.partnerships.title')} description={L('seo.partnerships.desc')}>
   <Hero lang={lang} compact eyebrow={L('partnerships.hero.eyebrow')} titleHtml={L('partnerships.hero.title')} lead={L('partnerships.hero.lead')} image="/assets/workshop.jpg" primary={{ label: L('cta.btn'), href: localizePath(lang, 'contact') }} />
 
+  <section class="section section--ice">
+    <div class="container">
+      <SectionHeader kicker={L('partnerships.how.kicker')} title={L('partnerships.how.title')} lead={L('partnerships.how.lead')} />
+      <div class="card-grid">
+        {how.map((h) => (
+          <article class="card"><div class="card-body"><span class="feature-icon"><svg class="icon"><use href={`#i-${h.icon}`}></use></svg></span><h3>{h.title}</h3><p>{h.body}</p></div></article>
+        ))}
+      </div>
+    </div>
+  </section>
+
   <section class="section">
     <div class="container">
-      <SectionHeader title={L('partnerships.grid.title')} />
+      <SectionHeader title={L('partnerships.grid.title')} lead={L('partnerships.note')} />
       <PartnersGrid lang={lang} partners={partners} />
+    </div>
+  </section>
+
+  <section class="section section--ice">
+    <div class="container">
+      <SectionHeader title={L('partnerships.email.title')} lead={L('partnerships.email.lead')} />
+      <div class="card-grid">
+        <article class="card"><div class="card-body"><span class="feature-icon"><svg class="icon"><use href="#i-building"></use></svg></span><h3>{L('contact.email.generalLabel')}</h3><p><a href={`mailto:${generalEmail}`}>{generalEmail}</a></p></div></article>
+        <article class="card"><div class="card-body"><span class="feature-icon"><svg class="icon"><use href="#i-handshake"></use></svg></span><h3>{L('contact.email.partnershipLabel')}</h3><p><a href={`mailto:${partnerEmail}`}>{partnerEmail}</a></p></div></article>
+      </div>
     </div>
   </section>
 </BaseLayout>

@@ -7,7 +7,10 @@ export const SITE = {
   url: 'https://www.singaporeyouth.com',
   logo: '/assets/syc-logo.png',
   defaultLang: 'en' as Lang,
-  contactEmail: 'hello@singaporeyouth.com' as string | null,
+  contactEmail: 'contact@singaporeyouth.com' as string | null,
+  partnershipEmail: 'partner@singaporeyouth.com' as string | null,
+  positioning: 'An AI-Native International Youth Organisation' as string,
+  narrative: 'Connecting the AI Generation. Building a Shared Future.' as string,
   orgJsonLd: {
     '@context': 'https://schema.org',
     '@type': 'Organization',
@@ -15,7 +18,7 @@ export const SITE = {
     alternateName: 'SYC',
     url: 'https://www.singaporeyouth.com',
     logo: 'https://www.singaporeyouth.com/assets/syc-logo.png',
-    description: 'An international youth organisation connecting young people, communities and partners through global exchange, collaboration and AI-enabled innovation.',
+    description: 'Singapore Youth Community is an AI-Native international youth organisation focused on global youth development and international cooperation in the AI era. Connecting the AI Generation. Building a Shared Future.',
   },
 };
 
@@ -29,10 +32,11 @@ export const pages: PageMeta[] = [
   { id: 'index', path: '', navKey: 'nav.home' },
   { id: 'about', path: 'about', navKey: 'nav.about' },
   { id: 'ai', path: 'ai', navKey: 'nav.ai' },
-  { id: 'impact', path: 'impact', navKey: 'nav.work' },
   { id: 'network', path: 'network', navKey: 'nav.network' },
-  { id: 'partnerships', path: 'partnerships', navKey: 'nav.partnerships' },
   { id: 'people', path: 'people', navKey: 'nav.people' },
+  { id: 'partnerships', path: 'partnerships', navKey: 'nav.partnerships' },
+  { id: 'impact', path: 'impact', navKey: 'nav.work' },
+  { id: 'contact', path: 'contact', navKey: 'nav.contact' },
 ];
 
 /** Build the locale-aware URL for a page path. 'en' lives at root, others under /<lang>/. */

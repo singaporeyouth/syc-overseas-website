@@ -2,48 +2,36 @@
 import { getCollection } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Hero from '../../components/Hero.astro';
-import SectionHeader from '../../components/SectionHeader.astro';
-import PeopleGrid from '../../components/PeopleGrid.astro';
+import TeamDirectory from '../../components/TeamDirectory.astro';
 import { t, type Lang } from '../../i18n/ui';
 interface Props { lang: Lang }
 const { lang } = Astro.props;
 const L = (k: string) => t(lang, k);
 const people = (await getCollection('people')).map((p) => p.data);
-const regions = [
-  { value: 'all', label: L('network.filter.all') },
-  { value: 'Asia', label: L('network.filter.asia') },
-  { value: 'Europe', label: L('network.filter.europe') },
-  { value: 'Americas', label: L('network.filter.americas') },
-  { value: 'Africa', label: L('network.filter.africa') },
-  { value: 'Global', label: L('network.filter.global') },
-];
+const countries = (await getCollection('countries')).map((c) => c.data);
 ---
 
 <BaseLayout lang={lang} pageId="people" title={L('seo.people.title')} description={L('seo.people.desc')}>
-  <Hero lang={lang} compact eyebrow={L('people.hero.eyebrow')} titleHtml={L('people.hero.title')} lead={L('people.hero.lead')} image="/assets/hero-people.jpg" />
+  <Hero
+    lang={lang}
+    compact
+    eyebrow={L('nav.people')}
+    titleHtml={L('people.hero.title')}
+    lead={L('people.hero.lead')}
+    image="/assets/hero-people.jpg"
+  />
 
-  <section class="section">
+  <section class="section section--compact">
     <div class="container">
-      <SectionHeader title={L('people.grid.title')} />
-      {people.length > 0 && (
-        <>
-          <div class="callout callout--note" role="note">
-            <svg class="icon"><use href="#i-spark"></use></svg>
-            <div><strong>{L('common.illustrative')}</strong><span>{L('people.sampleNotice')}</span></div>
-          </div>
-          <div class="filter-bar" data-filter-group="peopleGrid">
-            {regions.map((r, i) => <button type="button" class:list={['filter-btn', i === 0 && 'active']} data-filter={r.value} data-filter-group="peopleGrid">{r.label}</button>)}
-          </div>
-          <p class="filter-meta" data-filter-meta="peopleGrid" data-showing-prefix={L('filter.showing')} data-results-suffix={L('filter.results')} aria-live="polite">{L('filter.showing')} {people.length} {L('filter.results')}</p>
-        </>
-      )}
-      <PeopleGrid lang={lang} people={people} scopeId="peopleGrid" />
-      {people.length > 0 && (
-        <div class="empty-results" data-filter-empty="peopleGrid" hidden>
-          <svg class="icon"><use href="#i-people"></use></svg>
-          <p>{L('network.empty')}</p>
+      <div class="callout callout--note td-demo-note" role="note">
+        <svg class="icon"><use href="#i-spark"></use></svg>
+        <div>
+          <strong>{L('people.preview.notice')}</strong>
+          <span>{L('people.preview.note')}</span>
         </div>
-      )}
+      </div>
+
+      <TeamDirectory lang={lang} people={people} countries={countries} />
     </div>
   </section>
 </BaseLayout>

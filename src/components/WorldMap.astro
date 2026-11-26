@@ -6,13 +6,16 @@ interface Props {
   lang?: Lang;
   theme?: 'light' | 'dark';
   note?: string;
+  teamBaseHref?: string;
+  viewTeamLabel?: string;
 }
-const { countries, lang = 'en', theme = 'light', note } = Astro.props;
+const { countries, lang = 'en', theme = 'light', note, teamBaseHref, viewTeamLabel } = Astro.props;
 const nodes = countries
   .filter((c) => typeof c.lat === 'number' && typeof c.lng === 'number')
   .map((c) => ({
     id: c.id,
     name: pick(c, 'name', lang),
+    country: c.name,
     region: pick(c, 'region', lang),
     note: pick(c, 'note', lang),
     photo: c.photo,
@@ -49,6 +52,11 @@ const active = nodes[hubIndex];
         <span class="card-tag" data-detail-region>{active.region}</span>
         <h3 data-detail-name>{active.name}</h3>
         <p data-detail-note>{active.note}</p>
+        {teamBaseHref && (
+          <a class="link-arrow map-team-link" data-detail-team href={`${teamBaseHref}?country=${encodeURIComponent(active.country)}`}>
+            {viewTeamLabel ?? t(lang, 'network.map.viewTeam')} <svg class="icon"><use href="#i-arrow"></use></svg>
+          </a>
+        )}
       </div>
     </div>
   )}

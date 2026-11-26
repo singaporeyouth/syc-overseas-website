@@ -22,10 +22,22 @@ const faqs = [{ q: L('contact.faq.q1'), a: L('contact.faq.a1') }, { q: L('contac
         <span class="contact-channel-icon"><svg class="icon"><use href="#i-mail"></use></svg></span>
         <div class="contact-channel-body">
           <div class="contact-channel-top">
-            <strong>{L('contact.channel.showcaseTitle')}</strong>
+            <strong>{L('contact.email.generalLabel')}</strong>
           </div>
           {SITE.contactEmail
             ? <a class="contact-channel-value" href={`mailto:${SITE.contactEmail}`}>{SITE.contactEmail}</a>
+            : <span class="contact-channel-value">{L('contact.channel3.body')}</span>}
+          <span class="contact-channel-note">{L('contact.channel.showcaseNote')}</span>
+        </div>
+      </div>
+      <div class="contact-channel-card">
+        <span class="contact-channel-icon"><svg class="icon"><use href="#i-mail"></use></svg></span>
+        <div class="contact-channel-body">
+          <div class="contact-channel-top">
+            <strong>{L('contact.email.partnershipLabel')}</strong>
+          </div>
+          {SITE.partnershipEmail
+            ? <a class="contact-channel-value" href={`mailto:${SITE.partnershipEmail}`}>{SITE.partnershipEmail}</a>
             : <span class="contact-channel-value">{L('contact.channel3.body')}</span>}
           <span class="contact-channel-note">{L('contact.channel.showcaseNote')}</span>
         </div>

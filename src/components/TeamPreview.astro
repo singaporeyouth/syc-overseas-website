@@ -1,0 +1,65 @@
+---
+import type { Lang } from '../i18n/ui';
+
+interface TeamMember {
+  id: string;
+  name: string;
+  role: string;
+  photo: string;
+  country: string;
+  countryName: string;
+  isDemo: boolean;
+}
+interface Props {
+  lang: Lang;
+  members: TeamMember[];
+  notice: string;
+  note: string;
+  peopleHref: string;
+}
+const { members, notice, note, peopleHref } = Astro.props;
+
+// Group by country (people.json is already country-ordered): first 6 countries, 3 people each.
+const groups: { country: string; countryName: string; members: TeamMember[] }[] = [];
+const byCountry = new Map<string, { country: string; countryName: string; members: TeamMember[] }>();
+for (const m of members) {
+  let g = byCountry.get(m.country);
+  if (!g) {
+    if (groups.length >= 6) continue;
+    g = { country: m.country, countryName: m.countryName, members: [] };
+    byCountry.set(m.country, g);
+    groups.push(g);
+  }
+  if (g.members.length < 3) g.members.push(m);
+}
+---
+
+<section class="team-preview" aria-label="Featured country teams">
+  <div class="team-preview-banner">
+    <span class="sample-flag">Preview</span>
+    <p class="team-preview-notice">{notice}</p>
+    <p class="team-preview-note">{note}</p>
+  </div>
+  <div class="team-grid">
+    {groups.map((g) => (
+      <article class="team-country">
+        <a class="team-country-head" href={peopleHref}>
+          <svg class="icon"><use href="#i-pin"></use></svg>
+          <span>{g.countryName}</span>
+          <svg class="icon team-country-arrow"><use href="#i-arrow"></use></svg>
+        </a>
+        <ul class="team-member-list">
+          {g.members.map((m) => (
+            <li class="team-member">
+              <img class="team-avatar" src={m.photo} alt={m.name} loading="lazy" />
+              <div class="team-meta">
+                <span class="team-name">{m.name}</span>
+                <span class="team-role">{m.role}</span>
+              </div>
+            </li>
+          ))}
+        </ul>
+      </article>
+    ))}
+  </div>
+</section>

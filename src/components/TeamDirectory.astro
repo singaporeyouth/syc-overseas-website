@@ -1,0 +1,171 @@
+---
+import { t, pick, type Lang } from '../i18n/ui';
+import type { Person, Country } from '../content/config';
+
+interface Props {
+  lang: Lang;
+  people: Person[];
+  countries: Country[];
+}
+const { lang, people, countries } = Astro.props;
+const L = (k: string) => t(lang, k);
+
+// Optional small flag per country (name matches countries.json `name` / people.json `country`).
+const FLAGS: Record<string, string> = {
+  Singapore: '🇸🇬', Japan: '🇯🇵', China: '🇨🇳', 'South Korea': '🇰🇷', India: '🇮🇳',
+  Indonesia: '🇮🇩', Malaysia: '🇲🇾', Thailand: '🇹🇭', Vietnam: '🇻🇳', Philippines: '🇵🇭',
+  'United Kingdom': '🇬🇧', Germany: '🇩🇪', France: '🇫🇷', Italy: '🇮🇹', Spain: '🇪🇸',
+  Netherlands: '🇳🇱', Sweden: '🇸🇪', Switzerland: '🇨🇭', Poland: '🇵🇱',
+  'United States': '🇺🇸', Canada: '🇨🇦', Brazil: '🇧🇷', Mexico: '🇲🇽', Argentina: '🇦🇷',
+  Chile: '🇨🇱', Colombia: '🇨🇴', Kenya: '🇰🇪', Nigeria: '🇳🇬', 'South Africa': '🇿🇦',
+  Egypt: '🇪🇬', Ghana: '🇬🇭', Australia: '🇦🇺', 'New Zealand': '🇳🇿',
+  'United Arab Emirates': '🇦🇪', 'Saudi Arabia': '🇸🇦', Israel: '🇮🇱',
+};
+
+const NAME_FIELDS = ['name', 'nameZh', 'nameFr', 'nameRu', 'nameJa', 'nameKo'];
+const REGION_FIELDS = ['region', 'regionZh', 'regionFr', 'regionRu', 'regionJa', 'regionKo'];
+const ROLE_FIELDS = ['role', 'roleZh', 'roleFr', 'roleRu', 'roleJa', 'roleKo'];
+
+interface Member {
+  name: string;
+  role: string;
+  photo: string;
+  initials: string;
+}
+interface Group {
+  countryEn: string;
+  countryName: string;
+  regionEn: string;
+  regionName: string;
+  flag: string;
+  members: Member[];
+  search: string;
+  index: number;
+}
+
+const countryByEn = new Map<string, Country>(countries.map((c) => [c.name, c]));
+const groups: Group[] = [];
+const indexByCountry = new Map<string, number>();
+
+for (const p of people) {
+  let idx = indexByCountry.get(p.country);
+  if (idx === undefined) {
+    idx = groups.length;
+    indexByCountry.set(p.country, idx);
+    const c = countryByEn.get(p.country);
+    groups.push({
+      countryEn: p.country,
+      countryName: c ? pick(c, 'name', lang) : p.country,
+      regionEn: c?.region ?? p.region,
+      regionName: c ? pick(c, 'region', lang) : p.region,
+      flag: FLAGS[p.country] ?? '',
+      members: [],
+      search: '',
+      index: idx,
+    });
+  }
+  const g = groups[idx];
+  const parts: string[] = [p.country, p.name, p.region];
+  const c = countryByEn.get(p.country);
+  if (c) {
+    for (const f of NAME_FIELDS) { const v = (c as Record<string, any>)[f]; if (v) parts.push(v); }
+    for (const f of REGION_FIELDS) { const v = (c as Record<string, any>)[f]; if (v) parts.push(v); }
+  }
+  for (const f of ROLE_FIELDS) { const v = (p as Record<string, any>)[f]; if (v) parts.push(v); }
+  g.search = (g.search ? g.search + ' ' : '') + parts.join(' ');
+  g.members.push({
+    name: p.name,
+    role: pick(p, 'role', lang),
+    photo: p.photo,
+    initials: p.name.split(/\s+/).map((w) => w[0]).join('').slice(0, 2).toUpperCase(),
+  });
+}
+
+const regions = [
+  { value: 'all', label: L('network.filter.all') },
+  { value: 'Asia', label: L('network.filter.asia') },
+  { value: 'Europe', label: L('network.filter.europe') },
+  { value: 'Americas', label: L('network.filter.americas') },
+  { value: 'Africa', label: L('network.filter.africa') },
+  { value: 'Oceania', label: L('network.filter.oceania') },
+  { value: 'Middle East', label: L('network.filter.middleeast') },
+];
+const INITIAL = 12;
+---
+
+<div
+  class="td-root"
+  data-td-root
+  data-showing-prefix={L('people.search.showing')}
+  data-teams-word={L('people.search.teams')}
+  data-members-word={L('people.search.members')}
+>
+  <div class="td-toolbar">
+    <div class="searchbox td-search">
+      <svg class="icon"><use href="#i-search"></use></svg>
+      <input type="search" data-td-input placeholder={L('people.search.placeholder')} aria-label={L('people.search.placeholder')} autocomplete="off" />
+    </div>
+    <div class="filter-bar td-region-bar" data-td-region-bar role="group" aria-label={L('people.search.placeholder')}>
+      {regions.map((r, i) => (
+        <button type="button" class:list={['filter-btn', i === 0 && 'active']} data-td-region-btn={r.value}>{r.label}</button>
+      ))}
+    </div>
+    <button type="button" class="btn btn--outline td-clear" data-td-clear hidden>{L('people.search.clear')}</button>
+  </div>
+
+  <p class="filter-meta td-meta" data-td-meta aria-live="polite"></p>
+
+  <div class="team-grid" data-td-grid>
+    {groups.map((g) => (
+      <article
+        class="team-country td-card"
+        data-td-card
+        data-td-region={g.regionEn}
+        data-td-index={g.index}
+        data-td-members={g.members.length}
+        data-td-search={g.search.toLowerCase()}
+        hidden={g.index >= INITIAL}
+      >
+        <div class="team-country-head td-country-head">
+          {g.flag && <span class="td-flag" aria-hidden="true">{g.flag}</span>}
+          <span class="td-country-name">{g.countryName}</span>
+          <span class="td-region-name">{g.regionName}</span>
+        </div>
+        <ul class="team-member-list">
+          {g.members.map((m) => (
+            <li class="team-member">
+              {m.photo
+                ? <img class="team-avatar" src={m.photo} alt={m.name} loading="lazy" />
+                : <span class="team-avatar team-avatar--initials" aria-hidden="true">{m.initials}</span>}
+              <div class="team-meta">
+                <span class="team-name">{m.name}</span>
+                <span class="team-role">{m.role}</span>
+              </div>
+            </li>
+          ))}
+        </ul>
+      </article>
+    ))}
+  </div>
+
+  <div class="empty-results td-empty" data-td-empty hidden>
+    <svg class="icon"><use href="#i-people"></use></svg>
+    <p>{L('people.search.emptyTitle')}</p>
+    <p class="td-empty-note">{L('people.search.emptyDesc')}</p>
+    <button type="button" class="btn btn--outline" data-td-empty-clear>{L('people.search.clear')}</button>
+  </div>
+
+  <div class="td-loadmore-wrap" data-td-loadmore-wrap>
+    <button type="button" class="btn btn--outline" data-td-loadmore>{L('people.loadmore.label')}</button>
+  </div>
+
+  <aside class="td-contact contact-channel-card" role="note">
+    <div class="contact-channel-icon"><svg class="icon"><use href="#i-people"></use></svg></div>
+    <div class="contact-channel-body">
+      <span class="panel-label">{L('people.contact.kicker')}</span>
+      <strong>{L('people.contact.title')}</strong>
+      <a class="contact-channel-value" href="mailto:contact@singaporeyouth.com">{L('people.contact.cta')}</a>
+      <p class="contact-channel-note">{L('people.contact.desc')}</p>
+    </div>
+  </aside>
+</div>

@@ -19,7 +19,7 @@ const stats = metrics.map((m) => ({ display: m.data.display, label: pick(m.data,
 
   <section class="section">
     <div class="container">
-      <SectionHeader title={L('impact.cases.title')} />
+      <SectionHeader kicker={L('impact.library.kicker')} title={L('impact.library.title')} lead={L('impact.library.lead')} />
       <CaseGrid lang={lang} cases={cases.map((c) => c.data)} />
     </div>
   </section>

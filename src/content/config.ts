@@ -70,6 +70,7 @@ const people = defineCollection({
     country: z.string(),
     region: z.string(),
     photo: z.string(),
+    isDemo: z.boolean().optional(),
     verificationStatus: verification,
   }),
 });

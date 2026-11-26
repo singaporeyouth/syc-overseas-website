@@ -30,6 +30,8 @@ const { lang } = Astro.props;
         <a href={pageHref(lang, 'partnerships')}>{t(lang, 'nav.partnerships')}</a>
         <a href={pageHref(lang, 'ai')}>{t(lang, 'nav.ai')}</a>
         <a href={pageHref(lang, 'contact')}>{t(lang, 'nav.contact')}</a>
+        {SITE.contactEmail && <a href={`mailto:${SITE.contactEmail}`}>{SITE.contactEmail}</a>}
+        {SITE.partnershipEmail && <a href={`mailto:${SITE.partnershipEmail}`}>{SITE.partnershipEmail}</a>}
       </div>
       <div>
         <h4>{t(lang, 'footer.ecosystem')}</h4>

@@ -1,7 +1,9 @@
 ---
+import { getCollection } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Hero from '../../components/Hero.astro';
 import SectionHeader from '../../components/SectionHeader.astro';
+import PartnersGrid from '../../components/PartnersGrid.astro';
 import { t, type Lang } from '../../i18n/ui';
 import { pageHref } from '../../config/site';
 interface Props { lang: Lang }
@@ -12,12 +14,29 @@ const values = [
   { icon: 'shield', title: L('about.value2.title'), body: L('about.value2.body') },
   { icon: 'ai', title: L('about.value3.title'), body: L('about.value3.body') },
 ];
+const pillars = [
+  { icon: 'building', title: L('about.pillar1.title'), body: L('about.pillar1.body') },
+  { icon: 'globe', title: L('about.pillar2.title'), body: L('about.pillar2.body') },
+  { icon: 'ai', title: L('about.pillar3.title'), body: L('about.pillar3.body') },
+];
+const partners = (await getCollection('partners')).map((p) => p.data);
 ---
 
 <BaseLayout lang={lang} pageId="about" title={L('seo.about.title')} description={L('seo.about.desc')}>
   <Hero lang={lang} compact eyebrow={L('about.hero.eyebrow')} titleHtml={L('about.hero.title')} lead={L('about.hero.lead')} image="/assets/workshop.jpg" primary={{ label: L('common.learnMore'), href: pageHref(lang, 'network') }} />
 
   <section class="section">
+    <div class="container">
+      <SectionHeader kicker={L('about.pillar.kicker')} title={L('about.pillar.title')} />
+      <div class="card-grid">
+        {pillars.map((p) => (
+          <article class="card"><div class="card-body"><span class="feature-icon"><svg class="icon"><use href={`#i-${p.icon}`}></use></svg></span><h3>{p.title}</h3><p>{p.body}</p></div></article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--ice">
     <div class="container">
       <SectionHeader kicker={L('about.mission.kicker')} title={L('about.mission.title')} />
       <div class="card-grid">
@@ -28,7 +47,7 @@ const values = [
     </div>
   </section>
 
-  <section class="section section--ice">
+  <section class="section">
     <div class="container">
       <div class="card-grid" style="margin-bottom:36px">
         {values.map((v) => (
@@ -45,6 +64,14 @@ const values = [
           </div>
         ))}
       </div>
+    </div>
+  </section>
+
+  <section class="section section--ice">
+    <div class="container">
+      <SectionHeader kicker={L('about.recognition.kicker')} title={L('about.recognition.title')} lead={L('about.recognition.note')} />
+      <PartnersGrid lang={lang} partners={partners} />
+      <p style="margin-top:24px"><a class="link-arrow" href={pageHref(lang, 'partnerships')}>{L('common.partnerWithUs')} <svg class="icon"><use href="#i-arrow"></use></svg></a></p>
     </div>
   </section>
 </BaseLayout>

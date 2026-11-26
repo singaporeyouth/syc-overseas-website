@@ -8,6 +8,7 @@ import WorldMap from '../../components/WorldMap.astro';
 import CountryGrid from '../../components/CountryGrid.astro';
 import PeopleGrid from '../../components/PeopleGrid.astro';
 import { t, pick, type Lang } from '../../i18n/ui';
+import { pageHref } from '../../config/site';
 interface Props { lang: Lang }
 const { lang } = Astro.props;
 const L = (k: string) => t(lang, k);
@@ -21,6 +22,7 @@ const stats = metrics.map((m) => ({
   label: pick(m.data, 'label', lang),
   icon: m.data.icon,
 }));
+const peopleHref = pageHref(lang, 'people');
 const regions = [
   { key: 'all', value: 'all', label: L('network.filter.all') },
   { key: 'asia', value: 'Asia', label: L('network.filter.asia') },
@@ -31,24 +33,40 @@ const regions = [
   { key: 'middleeast', value: 'Middle East', label: L('network.filter.middleeast') },
   { key: 'global', value: 'Global', label: L('network.filter.global') },
 ];
-// Explore by Region：仅用现有国家图库的地标图，不标注具体国家数量。
 const regionCards = ['Asia', 'Europe', 'Americas', 'Africa', 'Oceania', 'Middle East']
   .map((r) => countries.find((c) => c.region === r))
   .filter((c) => Boolean(c))
   .map((c) => ({ value: c!.region, label: pick(c!, 'region', lang), photo: c!.photo }));
+const roles = [
+  { icon: 'globe', title: L('network.role1.title'), body: L('network.role1.body') },
+  { icon: 'handshake', title: L('network.role2.title'), body: L('network.role2.body') },
+  { icon: 'building', title: L('network.role3.title'), body: L('network.role3.body') },
+];
 ---
 
 <BaseLayout lang={lang} pageId="network" title={L('seo.network.title')} description={L('seo.network.desc')}>
-  <Hero lang={lang} compact eyebrow={L('network.hero.eyebrow')} titleHtml={L('network.hero.title')} lead={L('network.hero.lead')} image="/assets/city-1.jpg" />
+  <Hero lang={lang} compact eyebrow={L('network.hero.eyebrow')} titleHtml={L('network.hero.title')} lead={L('network.hero.lead')} image="/assets/city-1.jpg" primary={{ label: L('common.meetTeams'), href: peopleHref }} />
 
   <StatsBar stats={stats} />
+
+  <section class="section">
+    <div class="container">
+      <SectionHeader kicker={L('network.role.kicker')} title={L('network.role.title')} />
+      <div class="card-grid">
+        {roles.map((r) => (
+          <article class="card"><div class="card-body"><span class="feature-icon"><svg class="icon"><use href={`#i-${r.icon}`}></use></svg></span><h3>{r.title}</h3><p>{r.body}</p></div></article>
+        ))}
+      </div>
+    </div>
+  </section>
 
   <section class="section section--ice" id="map">
     <div class="container">
       <SectionHeader kicker={L('network.map.kicker')} title={L('network.map.title')} />
       <div class="card" style="padding:clamp(16px,3vw,32px)">
-        <WorldMap countries={countries} lang={lang} theme="light" note={L('network.map.note')} />
+        <WorldMap countries={countries} lang={lang} theme="light" note={L('network.map.note')} teamBaseHref={peopleHref} viewTeamLabel={L('network.map.viewTeam')} />
       </div>
+      <p style="margin-top:20px"><a class="link-arrow" href={peopleHref}>{L('common.meetTeams')} <svg class="icon"><use href="#i-arrow"></use></svg></a></p>
     </div>
   </section>
 
@@ -92,6 +110,7 @@ const regionCards = ['Asia', 'Europe', 'Americas', 'Africa', 'Oceania', 'Middle 
     <div class="container">
       <SectionHeader kicker={L('network.teams.kicker')} title={L('network.teams.title')} lead={L('network.teams.lead')} />
       <PeopleGrid lang={lang} people={people} scopeId="teamGrid" />
+      <p style="margin-top:24px"><a class="link-arrow" href={peopleHref}>{L('common.meetTeams')} <svg class="icon"><use href="#i-arrow"></use></svg></a></p>
     </div>
   </section>
 </BaseLayout>

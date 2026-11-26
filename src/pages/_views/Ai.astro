@@ -5,21 +5,36 @@ import Hero from '../../components/Hero.astro';
 import SectionHeader from '../../components/SectionHeader.astro';
 import PlatformGrid from '../../components/PlatformGrid.astro';
 import { t, type Lang } from '../../i18n/ui';
+import { pageHref } from '../../config/site';
 interface Props { lang: Lang }
 const { lang } = Astro.props;
 const L = (k: string) => t(lang, k);
 const platforms = (await getCollection('platforms')).map((p) => p.data);
-const principles = [
-  { icon: 'people', n: '01', title: L('ai.principle1.title'), body: L('ai.principle1.body') },
-  { icon: 'shield', n: '02', title: L('ai.principle2.title'), body: L('ai.principle2.body') },
-  { icon: 'globe', n: '03', title: L('ai.principle3.title'), body: L('ai.principle3.body') },
+
+const capabilities = [1, 2, 3, 4, 5].map((n) => L(`ai.ecosystem.cap${n}`));
+
+const directions = [
+  { icon: 'layers', title: L('ai.direction1.title'), mission: L('ai.direction1.mission'), forms: L('ai.direction1.forms') },
+  { icon: 'book', title: L('ai.direction2.title'), mission: L('ai.direction2.mission'), forms: L('ai.direction2.forms') },
+  { icon: 'lightbulb', title: L('ai.direction3.title'), mission: L('ai.direction3.mission'), forms: L('ai.direction3.forms') },
+  { icon: 'spark', title: L('ai.direction4.title'), mission: L('ai.direction4.mission'), forms: L('ai.direction4.forms') },
+  { icon: 'globe', title: L('ai.direction5.title'), mission: L('ai.direction5.mission'), forms: L('ai.direction5.forms') },
+  { icon: 'people', title: L('ai.direction6.title'), mission: L('ai.direction6.mission'), forms: L('ai.direction6.forms') },
+];
+
+const paths = [
+  { icon: 'people', title: L('ai.path1.title'), body: L('ai.path1.body') },
+  { icon: 'building', title: L('ai.path2.title'), body: L('ai.path2.body') },
+  { icon: 'pin', title: L('ai.path3.title'), body: L('ai.path3.body') },
 ];
 ---
 
 <BaseLayout lang={lang} pageId="ai" title={L('seo.ai.title')} description={L('seo.ai.desc')}>
+  <!-- 1. 宏观愿景首屏 -->
   <Hero lang={lang} compact eyebrow={L('ai.hero.eyebrow')} titleHtml={L('ai.hero.title')} lead={L('ai.hero.lead')} image="/assets/ai-chip.jpg" />
 
-  <section class="section section--ice">
+  <!-- 2. AI 协作生态图 -->
+  <section class="section section--ice" aria-labelledby="ai-eco-title">
     <div class="container">
       <div class="split-feature">
         <div class="split-visual">
@@ -29,32 +44,74 @@ const principles = [
         </div>
         <div class="split-copy">
           <div class="kicker">{L('ai.os.kicker')}</div>
-          <h2>{L('ai.os.title')}</h2>
+          <h2 id="ai-eco-title">{L('ai.os.title')}</h2>
           <p>{L('ai.os.body')}</p>
+          <ul class="eco-cap-list">
+            {capabilities.map((c) => <li><svg class="icon"><use href="#i-check"></use></svg><span>{c}</span></li>)}
+          </ul>
         </div>
       </div>
     </div>
   </section>
 
-  <section class="section">
+  <!-- 3. 六大重点方向 -->
+  <section class="section" aria-labelledby="ai-directions-title">
     <div class="container">
-      <SectionHeader kicker={L('ai.platforms.kicker')} title={L('ai.platforms.title')} lead={L('ai.platforms.lead')} />
+      <SectionHeader kicker={L('ai.directions.kicker')} title={L('ai.directions.title')} lead={L('ai.directions.lead')} id="ai-directions-title" />
+      <div class="direction-grid">
+        {directions.map((d) => (
+          <article class="card direction-card">
+            <div class="card-body">
+              <span class="feature-icon"><svg class="icon"><use href={`#i-${d.icon}`}></use></svg></span>
+              <h3>{d.title}</h3>
+              <p class="direction-mission">{d.mission}</p>
+              <div class="direction-forms">
+                <span class="direction-forms-label">{L('ai.direction.formsLabel')}</span>
+                <p>{d.forms}</p>
+              </div>
+            </div>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- 4. 参与路径 -->
+  <section class="section section--ice" aria-labelledby="ai-paths-title">
+    <div class="container">
+      <SectionHeader kicker={L('ai.paths.kicker')} title={L('ai.paths.title')} lead={L('ai.paths.lead')} id="ai-paths-title" />
+      <div class="card-grid path-grid">
+        {paths.map((p) => (
+          <article class="card"><div class="card-body">
+            <span class="feature-icon"><svg class="icon"><use href={`#i-${p.icon}`}></use></svg></span>
+            <h3>{p.title}</h3>
+            <p>{p.body}</p>
+          </div></article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- 5. 典型实践 Selected Initiatives（精简区） -->
+  <section class="section section--compact" aria-labelledby="ai-initiatives-title">
+    <div class="container">
+      <SectionHeader kicker={L('ai.initiatives.kicker')} title={L('ai.initiatives.title')} lead={L('ai.initiatives.lead')} id="ai-initiatives-title" />
       <div class="callout callout--note showcase-note" role="note"><svg class="icon"><use href="#i-shield"></use></svg><div><span>{L('platform.showcaseNote')}</span></div></div>
       <PlatformGrid lang={lang} platforms={platforms} />
     </div>
   </section>
 
-  <section class="section section--ice">
+  <!-- 6. 合作邀请 -->
+  <section class="section ai-invite" aria-labelledby="ai-invite-title">
     <div class="container">
-      <SectionHeader kicker={L('ai.stance.kicker')} title={L('ai.stance.title')} lead={L('ai.stance.body')} />
-      <div class="card-grid">
-        {principles.map((p) => (
-          <article class="card"><div class="card-body">
-            <div class="platform-icon"><svg class="icon"><use href={`#i-${p.icon}`}></use></svg></div>
-            <span class="card-tag">{p.n}</span>
-            <h3>{p.title}</h3><p>{p.body}</p>
-          </div></article>
-        ))}
+      <div class="ai-invite-inner">
+        <div class="kicker">{L('ai.invite.kicker')}</div>
+        <h2 id="ai-invite-title">{L('ai.invite.title')}</h2>
+        <p>{L('ai.invite.lead')}</p>
+        <div class="ai-invite-actions">
+          <a class="btn btn--primary" href="mailto:partner@singaporeyouth.com">{L('ai.invite.emailBtn')} <svg class="icon"><use href="#i-arrow"></use></svg></a>
+          <a class="btn btn--outline" href={pageHref(lang, 'partnerships')}>{L('ai.invite.partnerBtn')} <svg class="icon"><use href="#i-arrow"></use></svg></a>
+        </div>
       </div>
     </div>
   </section>
