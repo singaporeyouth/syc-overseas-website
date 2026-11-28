@@ -19,19 +19,14 @@ interface Props {
 }
 const { members, notice, note, peopleHref } = Astro.props;
 
-// Group by country (people.json is already country-ordered): first 6 countries, 3 people each.
-const groups: { country: string; countryName: string; members: TeamMember[] }[] = [];
-const byCountry = new Map<string, { country: string; countryName: string; members: TeamMember[] }>();
-for (const m of members) {
-  let g = byCountry.get(m.country);
-  if (!g) {
-    if (groups.length >= 6) continue;
-    g = { country: m.country, countryName: m.countryName, members: [] };
-    byCountry.set(m.country, g);
-    groups.push(g);
-  }
-  if (g.members.length < 3) g.members.push(m);
-}
+// Cross-region demo line-up (illustrative preview, not confirmed real teams).
+const featuredCountries = ['Singapore', 'United Kingdom', 'Canada', 'Kenya', 'Australia', 'United Arab Emirates'];
+const groups = featuredCountries
+  .map((name) => {
+    const list = members.filter((m) => m.country === name).slice(0, 3);
+    return { country: name, countryName: list[0]?.countryName ?? name, members: list };
+  })
+  .filter((g) => g.members.length > 0);
 ---
 
 <section class="team-preview" aria-label="Featured country teams">
@@ -43,7 +38,7 @@ for (const m of members) {
   <div class="team-grid">
     {groups.map((g) => (
       <article class="team-country">
-        <a class="team-country-head" href={peopleHref}>
+        <a class="team-country-head" href={`${peopleHref}?country=${encodeURIComponent(g.country)}`}>
           <svg class="icon"><use href="#i-pin"></use></svg>
           <span>{g.countryName}</span>
           <svg class="icon team-country-arrow"><use href="#i-arrow"></use></svg>

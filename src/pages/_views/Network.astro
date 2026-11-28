@@ -6,17 +6,15 @@ import StatsBar from '../../components/StatsBar.astro';
 import SectionHeader from '../../components/SectionHeader.astro';
 import WorldMap from '../../components/WorldMap.astro';
 import CountryGrid from '../../components/CountryGrid.astro';
-import PeopleGrid from '../../components/PeopleGrid.astro';
 import { t, pick, type Lang } from '../../i18n/ui';
 import { pageHref } from '../../config/site';
 interface Props { lang: Lang }
 const { lang } = Astro.props;
 const L = (k: string) => t(lang, k);
-const [countryEntries, peopleEntries, metrics] = await Promise.all([
-  getCollection('countries'), getCollection('people'), getCollection('metrics'),
+const [countryEntries, metrics] = await Promise.all([
+  getCollection('countries'), getCollection('metrics'),
 ]);
 const countries = countryEntries.map((c) => c.data);
-const people = peopleEntries.map((p) => p.data);
 const stats = metrics.map((m) => ({
   display: m.data.display,
   label: pick(m.data, 'label', lang),
@@ -106,11 +104,15 @@ const roles = [
     </div>
   </section>
 
-  <section class="section" id="teams">
-    <div class="container">
-      <SectionHeader kicker={L('network.teams.kicker')} title={L('network.teams.title')} lead={L('network.teams.lead')} />
-      <PeopleGrid lang={lang} people={people} scopeId="teamGrid" />
-      <p style="margin-top:24px"><a class="link-arrow" href={peopleHref}>{L('common.meetTeams')} <svg class="icon"><use href="#i-arrow"></use></svg></a></p>
+  <!-- 区块4 / Block 4: 前往 Country Teams 的明确入口 -->
+  <section class="section section--ice" id="teams">
+    <div class="container" style="text-align:center">
+      <div class="kicker">{L('network.teams.kicker')}</div>
+      <h2>{L('network.teams.title')}</h2>
+      <p>{L('network.teams.lead')}</p>
+      <div class="section-more" style="justify-content:center;margin-top:24px">
+        <a class="btn btn--primary" href={peopleHref}>{L('common.meetTeams')} <svg class="icon"><use href="#i-arrow"></use></svg></a>
+      </div>
     </div>
   </section>
 </BaseLayout>

@@ -11,15 +11,15 @@ const { lang } = Astro.props;
 const L = (k: string) => t(lang, k);
 const platforms = (await getCollection('platforms')).map((p) => p.data);
 
-const capabilities = [1, 2, 3, 4, 5].map((n) => L(`ai.ecosystem.cap${n}`));
+const capabilities = [1, 2, 3, 4, 5, 6].map((n) => L(`ai.direction${n}.title`));
 
 const directions = [
-  { icon: 'layers', title: L('ai.direction1.title'), mission: L('ai.direction1.mission'), forms: L('ai.direction1.forms') },
-  { icon: 'book', title: L('ai.direction2.title'), mission: L('ai.direction2.mission'), forms: L('ai.direction2.forms') },
-  { icon: 'lightbulb', title: L('ai.direction3.title'), mission: L('ai.direction3.mission'), forms: L('ai.direction3.forms') },
-  { icon: 'spark', title: L('ai.direction4.title'), mission: L('ai.direction4.mission'), forms: L('ai.direction4.forms') },
-  { icon: 'globe', title: L('ai.direction5.title'), mission: L('ai.direction5.mission'), forms: L('ai.direction5.forms') },
-  { icon: 'people', title: L('ai.direction6.title'), mission: L('ai.direction6.mission'), forms: L('ai.direction6.forms') },
+  { icon: 'layers', title: L('ai.direction1.title'), mission: L('ai.direction1.mission'), who: L('ai.direction1.who'), forms: L('ai.direction1.forms') },
+  { icon: 'book', title: L('ai.direction2.title'), mission: L('ai.direction2.mission'), who: L('ai.direction2.who'), forms: L('ai.direction2.forms') },
+  { icon: 'lightbulb', title: L('ai.direction3.title'), mission: L('ai.direction3.mission'), who: L('ai.direction3.who'), forms: L('ai.direction3.forms') },
+  { icon: 'spark', title: L('ai.direction4.title'), mission: L('ai.direction4.mission'), who: L('ai.direction4.who'), forms: L('ai.direction4.forms') },
+  { icon: 'globe', title: L('ai.direction5.title'), mission: L('ai.direction5.mission'), who: L('ai.direction5.who'), forms: L('ai.direction5.forms') },
+  { icon: 'people', title: L('ai.direction6.title'), mission: L('ai.direction6.mission'), who: L('ai.direction6.who'), forms: L('ai.direction6.forms') },
 ];
 
 const paths = [
@@ -64,9 +64,16 @@ const paths = [
             <div class="card-body">
               <span class="feature-icon"><svg class="icon"><use href={`#i-${d.icon}`}></use></svg></span>
               <h3>{d.title}</h3>
-              <p class="direction-mission">{d.mission}</p>
+              <div class="direction-q">
+                <span class="direction-forms-label">{L('ai.direction.problemLabel')}</span>
+                <p class="direction-mission">{d.mission}</p>
+              </div>
+              <div class="direction-q">
+                <span class="direction-forms-label">{L('ai.direction.whoLabel')}</span>
+                <p>{d.who}</p>
+              </div>
               <div class="direction-forms">
-                <span class="direction-forms-label">{L('ai.direction.formsLabel')}</span>
+                <span class="direction-forms-label">{L('ai.direction.actionLabel')}</span>
                 <p>{d.forms}</p>
               </div>
             </div>

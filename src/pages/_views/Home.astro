@@ -22,6 +22,7 @@ const stats = metrics.map((m) => ({
 }));
 // Typical practice = 2-3 published case studies from the local collection.
 const work = cases.filter((c) => c.data.approvalStatus === 'published').slice(0, 3);
+const peopleHref = pageHref(lang, 'people');
 // Localized country name lookup, keyed by the English name stored on people.
 const countryNames: Record<string, string> = {};
 for (const c of countries) countryNames[c.data.name] = pick(c.data, 'name', lang);
@@ -89,7 +90,7 @@ const joinGroups = [
       <SectionHeader kicker={L('home.team.kicker')} title={L('home.team.title')} lead={L('home.team.lead')} id="home-network-title" />
       <div class="card map-card">
         <div class="card-media map-card-media">
-          <WorldMap countries={countries.map((c) => c.data)} theme="light" note={L('home.dual.mapNote')} />
+          <WorldMap countries={countries.map((c) => c.data)} lang={lang} theme="light" note={L('home.dual.mapNote')} teamBaseHref={peopleHref} viewTeamLabel={L('network.map.viewTeam')} />
         </div>
       </div>
       <TeamPreview
