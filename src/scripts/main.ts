@@ -215,14 +215,29 @@
     try { i18n = JSON.parse(form.getAttribute('data-form-i18n') || '{}'); } catch (_) { /* noop */ }
     const contactEmail = form.getAttribute('data-contact-email') || 'contact@singaporeyouth.com';
     const partnershipEmail = form.getAttribute('data-partnership-email') || 'partner@singaporeyouth.com';
+    // Single source of truth for topic routing: general/youth-participation/
+    // country-team/programme/media/other -> contact@ ; partnership -> partner@.
+    let topicMap: Record<string, string> = {};
+    try { topicMap = JSON.parse(form.getAttribute('data-topic-map') || '{}'); } catch (_) { /* noop */ }
+    const recipientFor = (topic: string): string =>
+      topicMap[topic] || (topic === 'partnership' ? partnershipEmail : contactEmail);
     const summary = form.querySelector<HTMLElement>('[data-form-summary]');
+    const recipientLine = form.parentElement?.querySelector<HTMLElement>('[data-form-recipient]') || document.querySelector<HTMLElement>('[data-form-recipient]');
+    const copyBtn = form.querySelector<HTMLButtonElement>('[data-copy-draft]');
+    const copyFeedback = form.querySelector<HTMLElement>('[data-copy-feedback]');
+    const topicSelect = form.querySelector<HTMLSelectElement>('select[name="topic"]');
+    const subjectInput = form.querySelector<HTMLInputElement>('input[name="subject"]');
     const fields = Array.from(form.querySelectorAll<HTMLInputElement | HTMLTextAreaElement>('input[required], textarea[required]'));
 
     function messageFor(input: HTMLInputElement | HTMLTextAreaElement): string {
       const value = (input.value || '').trim();
-      if (!value) return i18n.errRequired || '';
+      if (!value) {
+        const name = input.getAttribute('name');
+        if (name === 'subject') return i18n.errSubject || '';
+        if (name === 'message') return i18n.errMessage || '';
+        return i18n.errRequired || '';
+      }
       if (input.type === 'email' && value && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)) return i18n.errEmail || '';
-      if (input.tagName === 'TEXTAREA' && value.length < 10) return i18n.errMessage || '';
       return '';
     }
     function showError(input: HTMLInputElement | HTMLTextAreaElement, msg: string) {
@@ -247,6 +262,62 @@
       });
     });
 
+    const val = (name: string) => (form.querySelector<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>(`[name="${name}"]`)?.value || '').trim();
+    const currentTopic = () => topicSelect?.value || 'general';
+    // The highlighted recipient, the mailto target and the copied draft are all
+    // generated from the same topic -> email mapping.
+    function syncRecipient() {
+      if (recipientLine) recipientLine.textContent = recipientFor(currentTopic());
+    }
+    function buildDraft() {
+      const topicValue = currentTopic();
+      const topicLabel = topicSelect?.selectedOptions[0]?.textContent?.trim() || '';
+      const recipient = recipientFor(topicValue);
+      const subject = val('subject') || i18n.subjectPrefix || 'Website enquiry';
+      const body = [
+        `${i18n.labelName || 'Name'}: ${val('name')}`,
+        `${i18n.labelEmail || 'Email'}: ${val('email')}`,
+        `${i18n.labelOrg || 'Organisation'}: ${val('organisation')}`,
+        `${i18n.labelTopic || 'Topic'}: ${topicLabel}`,
+        '',
+        `${i18n.labelMessage || 'Message'}:`,
+        val('message'),
+      ].join('\n');
+      return { recipient, subject, body, mailto: `mailto:${recipient}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}` };
+    }
+    function flash(msg: string) {
+      if (!copyFeedback) return;
+      copyFeedback.textContent = msg;
+      copyFeedback.hidden = false;
+      window.setTimeout(() => { copyFeedback.hidden = true; }, 4000);
+    }
+    function copyText(text: string, okMsg: string) {
+      if (navigator.clipboard?.writeText) {
+        navigator.clipboard.writeText(text).then(() => flash(okMsg)).catch(() => flash(i18n.copyFail || ''));
+      } else {
+        flash(i18n.copyFail || '');
+      }
+    }
+
+    topicSelect?.addEventListener('change', syncRecipient);
+    copyBtn?.addEventListener('click', () => copyText(buildDraft().mailto.replace(/^mailto:[^?]+\?/, ''), i18n.copiedDraft || ''));
+
+    // URL prefill: /contact/?topic=...&area=...&country=...
+    try {
+      const params = new URLSearchParams(window.location.search);
+      const presetTopic = params.get('topic');
+      if (presetTopic && topicSelect && Array.from(topicSelect.options).some((o) => o.value === presetTopic)) {
+        topicSelect.value = presetTopic;
+      }
+      const presetArea = params.get('area');
+      const presetCountry = params.get('country');
+      const context = [presetArea, presetCountry].filter(Boolean).join(' — ');
+      if (context && subjectInput && !val('subject')) {
+        subjectInput.value = context;
+      }
+    } catch (_) { /* noop */ }
+    syncRecipient();
+
     form.addEventListener('submit', (e) => {
       e.preventDefault();
       e.stopPropagation();
@@ -267,22 +338,7 @@
       }
       // Everything is valid — hand off to the visitor's own email client.
       // Nothing is transmitted by this website; the visitor sends the email.
-      const val = (name: string) => (form.querySelector<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>(`[name="${name}"]`)?.value || '').trim();
-      const topicSelect = form.querySelector<HTMLSelectElement>('select[name="topic"]');
-      const topicValue = topicSelect?.value || '';
-      const topicLabel = topicSelect?.selectedOptions[0]?.textContent?.trim() || '';
-      const recipient = topicValue === 'partnership' ? partnershipEmail : contactEmail;
-      const subject = [i18n.subjectPrefix || 'Website enquiry', topicLabel].filter(Boolean).join(' — ');
-      const body = [
-        `${i18n.labelName || 'Name'}: ${val('name')}`,
-        `${i18n.labelEmail || 'Email'}: ${val('email')}`,
-        `${i18n.labelOrg || 'Organisation'}: ${val('organisation')}`,
-        `${i18n.labelTopic || 'Topic'}: ${topicLabel}`,
-        '',
-        `${i18n.labelMessage || 'Message'}:`,
-        val('message'),
-      ].join('\n');
-      window.location.href = `mailto:${recipient}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+      window.location.href = buildDraft().mailto;
       return false;
     });
   }

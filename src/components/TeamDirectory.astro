@@ -1,5 +1,6 @@
 ---
 import { t, pick, type Lang } from '../i18n/ui';
+import { pageHref } from '../config/site';
 import type { Person, Country } from '../content/config';
 
 interface Props {
@@ -9,6 +10,7 @@ interface Props {
 }
 const { lang, people, countries } = Astro.props;
 const L = (k: string) => t(lang, k);
+const contactHref = pageHref(lang, 'contact');
 
 // Optional small flag per country (name matches countries.json `name` / people.json `country`).
 const FLAGS: Record<string, string> = {
@@ -29,7 +31,8 @@ const ROLE_FIELDS = ['role', 'roleZh', 'roleFr', 'roleRu', 'roleJa', 'roleKo'];
 interface Member {
   name: string;
   role: string;
-  photo: string;
+  avatar: string;
+  avatarAlt: string;
   initials: string;
 }
 interface Group {
@@ -76,7 +79,9 @@ for (const p of people) {
   g.members.push({
     name: p.name,
     role: pick(p, 'role', lang),
-    photo: p.photo,
+    // 阶段2A-3：头像取每人独立 SVG 字段（avatar），保留 photo 兼容与姓名缩写回退。
+    avatar: (p as any).avatar || p.photo || '',
+    avatarAlt: (p as any).avatarAlt || p.name,
     initials: p.name.split(/\s+/).map((w) => w[0]).join('').slice(0, 2).toUpperCase(),
   });
 }
@@ -96,9 +101,8 @@ const INITIAL = 12;
 <div
   class="td-root"
   data-td-root
-  data-showing-prefix={L('people.search.showing')}
-  data-teams-word={L('people.search.teams')}
-  data-members-word={L('people.search.members')}
+  data-count-initial={L('people.search.showing')}
+  data-count-filtered={L('people.search.teams')}
 >
   <div class="td-toolbar">
     <div class="searchbox td-search">
@@ -113,7 +117,8 @@ const INITIAL = 12;
     <button type="button" class="btn btn--outline td-clear" data-td-clear hidden>{L('people.search.clear')}</button>
   </div>
 
-  <p class="filter-meta td-meta" data-td-meta aria-live="polite"></p>
+  <!-- 计数文案逐字：初始 people.search.showing / 筛选 people.search.teams，见组件脚本 -->
+  <p class="filter-meta td-meta" data-td-count aria-live="polite">{L('people.search.showing')}</p>
 
   <div class="team-grid" data-td-grid>
     {groups.map((g) => (
@@ -134,8 +139,8 @@ const INITIAL = 12;
         <ul class="team-member-list">
           {g.members.map((m) => (
             <li class="team-member">
-              {m.photo
-                ? <img class="team-avatar" src={m.photo} alt={m.name} loading="lazy" />
+              {m.avatar
+                ? <img class="team-avatar" src={m.avatar} alt={m.avatarAlt} data-initials={m.initials} loading="lazy" />
                 : <span class="team-avatar team-avatar--initials" aria-hidden="true">{m.initials}</span>}
               <div class="team-meta">
                 <span class="team-name">{m.name}</span>
@@ -162,10 +167,87 @@ const INITIAL = 12;
   <aside class="td-contact contact-channel-card" role="note">
     <div class="contact-channel-icon"><svg class="icon"><use href="#i-people"></use></svg></div>
     <div class="contact-channel-body">
-      <span class="panel-label">{L('people.contact.kicker')}</span>
+      <span class="panel-label">{L('people.hero.eyebrow')}</span>
       <strong>{L('people.contact.title')}</strong>
-      <a class="contact-channel-value" href="mailto:contact@singaporeyouth.com">{L('people.contact.cta')}</a>
+      <a class="contact-channel-value" href={`${contactHref}?topic=country-team`}>{L('people.interest.cta')}</a>
       <p class="contact-channel-note">{L('people.contact.desc')}</p>
     </div>
   </aside>
 </div>
+
+<script>
+  // 阶段2A-3：计数文案逐字渲染（初始 / 筛选二态）。
+  // main.ts 仍负责筛选、地区、展开、清除、URL 预填等交互；本脚本只按可见状态切换计数文案，
+  // 从而保留已修好的功能，同时让计数显示为 ui.ts 的逐字整句。
+  document.querySelectorAll<HTMLElement>('[data-td-root]').forEach((root) => {
+    const grid = root.querySelector<HTMLElement>('[data-td-grid]');
+    const count = root.querySelector<HTMLElement>('[data-td-count]');
+    if (!grid || !count) return;
+    const cards = Array.from(grid.querySelectorAll<HTMLElement>('[data-td-card]'));
+    const input = root.querySelector<HTMLInputElement>('[data-td-input]');
+    const regionBtns = Array.from(root.querySelectorAll<HTMLButtonElement>('[data-td-region-btn]'));
+    const tplInitial = root.getAttribute('data-count-initial') || '';
+    const tplFiltered = root.getAttribute('data-count-filtered') || '';
+
+    // 头像加载失败 → 姓名缩写回退，绝不显示破图。
+    root.querySelectorAll<HTMLImageElement>('img.team-avatar').forEach((img) => {
+      img.addEventListener('error', () => {
+        const span = document.createElement('span');
+        span.className = 'team-avatar team-avatar--initials';
+        span.setAttribute('aria-hidden', 'true');
+        span.textContent = img.getAttribute('data-initials') || '';
+        img.replaceWith(span);
+      });
+    });
+
+    const update = () => {
+      const q = (input?.value || '').trim().toLowerCase();
+      const activeBtn = regionBtns.find((b) => b.classList.contains('active'));
+      const region = activeBtn?.getAttribute('data-td-region-btn') || 'all';
+      const filtering = Boolean(q) || region !== 'all';
+      count.textContent = filtering ? tplFiltered : tplInitial;
+    };
+
+    input?.addEventListener('input', update);
+    regionBtns.forEach((b) => b.addEventListener('click', () => window.setTimeout(update, 0)));
+    root.querySelectorAll('[data-td-clear], [data-td-empty-clear], [data-td-loadmore]').forEach((el) =>
+      el.addEventListener('click', () => window.setTimeout(update, 0))
+    );
+    if (typeof MutationObserver !== 'undefined') {
+      const mo = new MutationObserver(update);
+      mo.observe(grid, { attributes: true, attributeFilter: ['hidden'], subtree: true });
+    }
+    update();
+
+    // 国家链接进入后：在 main.ts 应用筛选后滚动定位到首个匹配卡片。
+    try {
+      const preset = new URLSearchParams(window.location.search).get('country');
+      if (preset) {
+        window.setTimeout(() => {
+          const first = cards.find((c) => !c.hidden);
+          if (first) first.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }, 140);
+      }
+    } catch (_) { /* noop */ }
+  });
+</script>
+
+<style>
+  /* 阶段2A-3：卡片尺寸/间距/字号按 V3 2.3 校准（scope 样式覆盖全局 app.css） */
+  .team-grid { gap: 18px; }
+  .team-country { padding: 20px; border-radius: 16px; }
+  .td-country-head .td-country-name { font-size: 19px; white-space: normal; overflow: visible; text-overflow: clip; }
+  .team-avatar { width: 40px; height: 40px; }
+  .team-name { font-size: 16px; }
+  .team-role { font-size: 14px; line-height: 1.45; white-space: normal; }
+  .team-meta { min-width: 0; }
+  .team-member { align-items: flex-start; }
+  /* 搜索占满可用宽度；地区标签可换行 */
+  .td-toolbar .searchbox { flex: 1 1 320px; margin-left: 0; }
+  .td-toolbar .filter-bar { flex: 0 1 auto; flex-wrap: wrap; }
+  .td-meta { margin-top: 8px; margin-bottom: 2px; }
+  @media (max-width: 600px) {
+    .td-toolbar .searchbox { flex: 1 1 100%; }
+    .td-toolbar .filter-bar { flex: 1 1 100%; }
+  }
+</style>

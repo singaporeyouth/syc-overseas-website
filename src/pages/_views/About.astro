@@ -1,77 +1,73 @@
 ---
-import { getCollection } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Hero from '../../components/Hero.astro';
 import SectionHeader from '../../components/SectionHeader.astro';
-import PartnersGrid from '../../components/PartnersGrid.astro';
 import { t, type Lang } from '../../i18n/ui';
 import { pageHref } from '../../config/site';
 interface Props { lang: Lang }
 const { lang } = Astro.props;
 const L = (k: string) => t(lang, k);
-const values = [
-  { icon: 'people', title: L('about.value1.title'), body: L('about.value1.body') },
-  { icon: 'shield', title: L('about.value2.title'), body: L('about.value2.body') },
-  { icon: 'ai', title: L('about.value3.title'), body: L('about.value3.body') },
+
+const aiNativePoints = [
+  { body: L('about.knowledge.body'), icon: 'globe' },
+  { body: L('about.connection.body'), icon: 'compass' },
+  { body: L('about.collaboration.body'), icon: 'handshake' },
 ];
-const pillars = [
-  { icon: 'building', title: L('about.pillar1.title'), body: L('about.pillar1.body') },
-  { icon: 'globe', title: L('about.pillar2.title'), body: L('about.pillar2.body') },
-  { icon: 'ai', title: L('about.pillar3.title'), body: L('about.pillar3.body') },
-];
-const partners = (await getCollection('partners')).map((p) => p.data);
+const principles = [L('about.principle1'), L('about.principle2'), L('about.principle3')];
 ---
 
 <BaseLayout lang={lang} pageId="about" title={L('seo.about.title')} description={L('seo.about.desc')}>
-  <Hero lang={lang} compact eyebrow={L('about.hero.eyebrow')} titleHtml={L('about.hero.title')} lead={L('about.hero.lead')} image="/assets/workshop.jpg" primary={{ label: L('common.learnMore'), href: pageHref(lang, 'network') }} />
+  <!-- 首屏：文字主导 + 独立青年 AI 交流场景图（非合影，不与 Partnerships 共用） -->
+  <Hero lang={lang} compact eyebrow={L('about.hero.eyebrow')} titleHtml={L('about.hero.title')} lead={L('about.hero.lead')} image="/assets/hero-ai-youth.jpg" primary={{ label: L('cta.exploreOurAiAgenda'), href: pageHref(lang, 'ai') }} />
 
-  <section class="section">
+  <!-- 区块1：Our Purpose -->
+  <section class="section" aria-labelledby="about-purpose-title">
+    <div class="container narrow">
+      <SectionHeader title={L('about.purpose.title')} id="about-purpose-title" />
+      <p class="lead">{L('about.purpose.body')}</p>
+    </div>
+  </section>
+
+  <!-- 区块2：What AI-Native Means to Us（正文 + Knowledge / Connection / Collaboration 三条） -->
+  <section class="section section--ice" aria-labelledby="about-ainative-title">
     <div class="container">
-      <SectionHeader kicker={L('about.pillar.kicker')} title={L('about.pillar.title')} />
+      <SectionHeader title={L('about.ainative.title')} lead={L('about.ainative.body')} id="about-ainative-title" />
       <div class="card-grid">
-        {pillars.map((p) => (
-          <article class="card"><div class="card-body"><span class="feature-icon"><svg class="icon"><use href={`#i-${p.icon}`}></use></svg></span><h3>{p.title}</h3><p>{p.body}</p></div></article>
+        {aiNativePoints.map((p) => (
+          <article class="card"><div class="card-body">
+            <span class="feature-icon"><svg class="icon"><use href={`#i-${p.icon}`}></use></svg></span>
+            <p>{p.body}</p>
+          </div></article>
         ))}
       </div>
     </div>
   </section>
 
-  <section class="section section--ice">
+  <!-- 区块3：A Global Outlook. Local Connections. -->
+  <section class="section" aria-labelledby="about-global-title">
     <div class="container">
-      <SectionHeader kicker={L('about.mission.kicker')} title={L('about.mission.title')} />
+      <SectionHeader title={L('about.global.title')} lead={L('about.global.body')} id="about-global-title" />
+      <p><a class="link-arrow" href={pageHref(lang, 'people')}>{L('common.meetTeams')} <svg class="icon"><use href="#i-arrow"></use></svg></a></p>
+    </div>
+  </section>
+
+  <!-- 区块4：The Principles Behind Our Work（三条原则） -->
+  <section class="section section--ice" aria-labelledby="about-principles-title">
+    <div class="container">
+      <SectionHeader title={L('about.principles.title')} id="about-principles-title" />
       <div class="card-grid">
-        <article class="card"><div class="card-body"><span class="feature-icon"><svg class="icon"><use href="#i-compass"></use></svg></span><h3>{L('about.vision.title')}</h3><p>{L('about.vision.body')}</p></div></article>
-        <article class="card"><div class="card-body"><span class="feature-icon"><svg class="icon"><use href="#i-globe"></use></svg></span><h3>{L('about.mission.vtitle')}</h3><p>{L('about.mission.mbody')}</p></div></article>
-        <article class="card"><div class="card-body"><span class="feature-icon"><svg class="icon"><use href="#i-shield"></use></svg></span><h3>{L('about.values.title')}</h3><p>{L('about.values.body')}</p></div></article>
-      </div>
-    </div>
-  </section>
-
-  <section class="section">
-    <div class="container">
-      <div class="card-grid" style="margin-bottom:36px">
-        {values.map((v) => (
-          <article class="card"><div class="card-body"><span class="feature-icon"><svg class="icon"><use href={`#i-${v.icon}`}></use></svg></span><h3>{v.title}</h3><p>{v.body}</p></div></article>
-        ))}
-      </div>
-      <SectionHeader kicker={L('about.timeline.kicker')} title={L('about.timeline.title')} />
-      <div class="timeline">
-        {[1, 2, 3, 4].map((n) => (
-          <div class="timeline-item">
-            <span class="timeline-dot"></span>
-            <h3>{L(`about.timeline.s${n}`)}</h3>
-            <p>{L(`about.timeline.s${n}d`)}</p>
-          </div>
+        {principles.map((p) => (
+          <article class="card"><div class="card-body"><p>{p}</p></div></article>
         ))}
       </div>
     </div>
   </section>
 
-  <section class="section section--ice">
+  <!-- 区块5：Collaboration Across the Ecosystem -->
+  <section class="section section--compact" aria-labelledby="about-ecosystem-title">
     <div class="container">
-      <SectionHeader kicker={L('about.recognition.kicker')} title={L('about.recognition.title')} lead={L('about.recognition.note')} />
-      <PartnersGrid lang={lang} partners={partners} />
-      <p style="margin-top:24px"><a class="link-arrow" href={pageHref(lang, 'partnerships')}>{L('common.partnerWithUs')} <svg class="icon"><use href="#i-arrow"></use></svg></a></p>
+      <SectionHeader title={L('about.ecosystem.title')} lead={L('about.ecosystem.body')} id="about-ecosystem-title" />
+      <p><a class="link-arrow" href={pageHref(lang, 'partnerships')}>{L('cta.explorePartnershipPossibilities')} <svg class="icon"><use href="#i-arrow"></use></svg></a></p>
     </div>
   </section>
 </BaseLayout>

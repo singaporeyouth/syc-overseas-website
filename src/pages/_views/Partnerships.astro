@@ -1,51 +1,73 @@
 ---
-import { getCollection } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Hero from '../../components/Hero.astro';
 import SectionHeader from '../../components/SectionHeader.astro';
-import PartnersGrid from '../../components/PartnersGrid.astro';
 import { t, type Lang } from '../../i18n/ui';
 import { SITE, localizePath } from '../../config/site';
 interface Props { lang: Lang }
 const { lang } = Astro.props;
 const L = (k: string) => t(lang, k);
-const partners = (await getCollection('partners')).map((p) => p.data);
-const generalEmail = SITE.contactEmail ?? 'contact@singaporeyouth.com';
 const partnerEmail = SITE.partnershipEmail ?? 'partner@singaporeyouth.com';
-const how = [
-  { icon: 'compass', title: L('partnerships.how1.title'), body: L('partnerships.how1.body') },
-  { icon: 'building', title: L('partnerships.how2.title'), body: L('partnerships.how2.body') },
-  { icon: 'handshake', title: L('partnerships.how3.title'), body: L('partnerships.how3.body') },
+const contactPath = localizePath(lang, 'contact');
+
+const directions = [
+  { title: L('partnerships.d1.title'), body: L('partnerships.d1.body'), cta: L('impact.area1.cta'), area: 'exchange' },
+  { title: L('partnerships.d2.title'), body: L('partnerships.d2.body'), cta: L('cta.discussResourceCollaboration'), area: 'ai-infrastructure' },
+  { title: L('partnerships.d3.title'), body: L('partnerships.d3.body'), cta: L('cta.proposeJointInitiative'), area: 'research' },
+  { title: L('partnerships.d4.title'), body: L('partnerships.d4.body'), cta: L('cta.discussCommunityCollaboration'), area: 'community' },
+];
+const steps = [
+  { title: L('partnerships.step1.title'), body: L('partnerships.step1.body') },
+  { title: L('partnerships.step2.title'), body: L('partnerships.step2.body') },
+  { title: L('partnerships.step3.title'), body: L('partnerships.step3.body') },
 ];
 ---
 
 <BaseLayout lang={lang} pageId="partnerships" title={L('seo.partnerships.title')} description={L('seo.partnerships.desc')}>
-  <Hero lang={lang} compact eyebrow={L('partnerships.hero.eyebrow')} titleHtml={L('partnerships.hero.title')} lead={L('partnerships.hero.lead')} image="/assets/workshop.jpg" primary={{ label: L('cta.btn'), href: localizePath(lang, 'contact') }} />
+  <!-- 首屏：紧凑文字 + 独立合作场景图（非合影，不与 About 共用） -->
+  <Hero lang={lang} compact eyebrow={L('partnerships.hero.eyebrow')} titleHtml={L('partnerships.hero.title')} lead={L('partnerships.hero.lead')} image="/assets/hero-partnership.jpg" primary={{ label: L('cta.discussPartnership'), href: `${contactPath}?topic=partnership` }} secondary={{ label: L('cta.exploreOurAiAgenda'), href: localizePath(lang, 'ai') }} />
 
-  <section class="section section--ice">
+  <!-- 区块1：Where We Can Collaborate（引导句 + 4 方向卡，带 area 参数） -->
+  <section class="section" aria-labelledby="partnerships-areas-title">
     <div class="container">
-      <SectionHeader kicker={L('partnerships.how.kicker')} title={L('partnerships.how.title')} lead={L('partnerships.how.lead')} />
+      <SectionHeader title={L('partnerships.grid.title')} lead={L('partnerships.grid.lead')} id="partnerships-areas-title" />
       <div class="card-grid">
-        {how.map((h) => (
-          <article class="card"><div class="card-body"><span class="feature-icon"><svg class="icon"><use href={`#i-${h.icon}`}></use></svg></span><h3>{h.title}</h3><p>{h.body}</p></div></article>
+        {directions.map((d) => (
+          <article class="card"><div class="card-body">
+            <h3>{d.title}</h3>
+            <p>{d.body}</p>
+            <a class="link-arrow" href={`${contactPath}?topic=partnership&area=${d.area}`}>{d.cta} <svg class="icon"><use href="#i-arrow"></use></svg></a>
+          </div></article>
         ))}
       </div>
     </div>
   </section>
 
-  <section class="section">
+  <!-- 区块2：Start with a Shared Goal（引导句 + 三步流程） -->
+  <section class="section section--ice" aria-labelledby="partnerships-steps-title">
     <div class="container">
-      <SectionHeader title={L('partnerships.grid.title')} lead={L('partnerships.note')} />
-      <PartnersGrid lang={lang} partners={partners} />
+      <SectionHeader title={L('partnerships.how.title')} lead={L('partnerships.how.lead')} id="partnerships-steps-title" />
+      <div class="card-grid">
+        {steps.map((s) => (
+          <article class="card"><div class="card-body">
+            <h3>{s.title}</h3>
+            <p>{s.body}</p>
+          </div></article>
+        ))}
+      </div>
     </div>
   </section>
 
-  <section class="section section--ice">
+  <!-- 区块3：Have a Partnership in Mind?（partner@ 主渠道 + 询价按钮） -->
+  <section class="section section--compact" aria-labelledby="partnerships-email-title">
     <div class="container">
-      <SectionHeader title={L('partnerships.email.title')} lead={L('partnerships.email.lead')} />
+      <SectionHeader title={L('partnerships.email.title')} lead={L('partnerships.email.lead')} id="partnerships-email-title" />
       <div class="card-grid">
-        <article class="card"><div class="card-body"><span class="feature-icon"><svg class="icon"><use href="#i-building"></use></svg></span><h3>{L('contact.email.generalLabel')}</h3><p><a href={`mailto:${generalEmail}`}>{generalEmail}</a></p></div></article>
-        <article class="card"><div class="card-body"><span class="feature-icon"><svg class="icon"><use href="#i-handshake"></use></svg></span><h3>{L('contact.email.partnershipLabel')}</h3><p><a href={`mailto:${partnerEmail}`}>{partnerEmail}</a></p></div></article>
+        <article class="card"><div class="card-body">
+          <h3>{L('partnerships.email.label')}</h3>
+          <p><a href={`mailto:${partnerEmail}`}>{partnerEmail}</a></p>
+          <a class="link-arrow" href={`${contactPath}?topic=partnership`}>{L('partnerships.email.cta')} <svg class="icon"><use href="#i-arrow"></use></svg></a>
+        </div></article>
       </div>
     </div>
   </section>

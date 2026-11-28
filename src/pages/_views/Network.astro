@@ -1,11 +1,9 @@
 ---
 import { getCollection } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import Hero from '../../components/Hero.astro';
 import StatsBar from '../../components/StatsBar.astro';
 import SectionHeader from '../../components/SectionHeader.astro';
-import WorldMap from '../../components/WorldMap.astro';
-import CountryGrid from '../../components/CountryGrid.astro';
+import NetworkExplorer from '../../components/NetworkExplorer.astro';
 import { t, pick, type Lang } from '../../i18n/ui';
 import { pageHref } from '../../config/site';
 interface Props { lang: Lang }
@@ -15,12 +13,13 @@ const [countryEntries, metrics] = await Promise.all([
   getCollection('countries'), getCollection('metrics'),
 ]);
 const countries = countryEntries.map((c) => c.data);
-const stats = metrics.map((m) => ({
+const stats = metrics.slice(0, 2).map((m) => ({
   display: m.data.display,
   label: pick(m.data, 'label', lang),
   icon: m.data.icon,
 }));
 const peopleHref = pageHref(lang, 'people');
+const contactHref = pageHref(lang, 'contact');
 const regions = [
   { key: 'all', value: 'all', label: L('network.filter.all') },
   { key: 'asia', value: 'Asia', label: L('network.filter.asia') },
@@ -31,88 +30,72 @@ const regions = [
   { key: 'middleeast', value: 'Middle East', label: L('network.filter.middleeast') },
   { key: 'global', value: 'Global', label: L('network.filter.global') },
 ];
-const regionCards = ['Asia', 'Europe', 'Americas', 'Africa', 'Oceania', 'Middle East']
-  .map((r) => countries.find((c) => c.region === r))
-  .filter((c) => Boolean(c))
-  .map((c) => ({ value: c!.region, label: pick(c!, 'region', lang), photo: c!.photo }));
 const roles = [
   { icon: 'globe', title: L('network.role1.title'), body: L('network.role1.body') },
   { icon: 'handshake', title: L('network.role2.title'), body: L('network.role2.body') },
   { icon: 'building', title: L('network.role3.title'), body: L('network.role3.body') },
 ];
+// Render the V3 two-line H1 from the existing ui.ts key (no new hard-coded copy).
+const titleParts = L('network.hero.title').split(/(?<=\.)\s+/);
 ---
 
 <BaseLayout lang={lang} pageId="network" title={L('seo.network.title')} description={L('seo.network.desc')}>
-  <Hero lang={lang} compact eyebrow={L('network.hero.eyebrow')} titleHtml={L('network.hero.title')} lead={L('network.hero.lead')} image="/assets/city-1.jpg" primary={{ label: L('common.meetTeams'), href: peopleHref }} />
+  <!-- Compact header: no city hero image; first screen text directly visible -->
+  <header class="net-head">
+    <div class="container net-head-inner">
+      <div>
+        <p class="eyebrow">{L('network.hero.eyebrow')}</p>
+        <h1 class="net-title">{titleParts.map((part, i) => <Fragment>{i > 0 && <br />}{part}</Fragment>)}</h1>
+        <p class="lead net-lead">{L('network.hero.lead')}</p>
+        <div class="net-cta">
+          <a class="btn btn--primary" href={peopleHref}>{L('common.meetTeams')} <svg class="icon" aria-hidden="true"><use href="#i-arrow"></use></svg></a>
+        </div>
+      </div>
+    </div>
+  </header>
 
   <StatsBar stats={stats} />
 
-  <section class="section">
+  <!-- Core component starts inside the first screen: map + filter + list + detail -->
+  <section class="section section--ice section--compact" id="network-explorer">
+    <div class="container">
+      <NetworkExplorer countries={countries} lang={lang} regions={regions} peopleHref={peopleHref} contactHref={contactHref} />
+    </div>
+  </section>
+
+  <!-- Below the map: three collaboration notes + one participation entry. No country/member long list. -->
+  <section class="section" id="collaboration">
     <div class="container">
       <SectionHeader kicker={L('network.role.kicker')} title={L('network.role.title')} />
-      <div class="card-grid">
+      <div class="grid grid--3">
         {roles.map((r) => (
-          <article class="card"><div class="card-body"><span class="feature-icon"><svg class="icon"><use href={`#i-${r.icon}`}></use></svg></span><h3>{r.title}</h3><p>{r.body}</p></div></article>
+          <article class="card card--flat card--soft">
+            <div class="card-body">
+              <span class="feature-icon"><svg class="icon" aria-hidden="true"><use href={`#i-${r.icon}`}></use></svg></span>
+              <h3>{r.title}</h3>
+              <p>{r.body}</p>
+            </div>
+          </article>
         ))}
       </div>
-    </div>
-  </section>
-
-  <section class="section section--ice" id="map">
-    <div class="container">
-      <SectionHeader kicker={L('network.map.kicker')} title={L('network.map.title')} />
-      <div class="card" style="padding:clamp(16px,3vw,32px)">
-        <WorldMap countries={countries} lang={lang} theme="light" note={L('network.map.note')} teamBaseHref={peopleHref} viewTeamLabel={L('network.map.viewTeam')} />
-      </div>
-      <p style="margin-top:20px"><a class="link-arrow" href={peopleHref}>{L('common.meetTeams')} <svg class="icon"><use href="#i-arrow"></use></svg></a></p>
-    </div>
-  </section>
-
-  <section class="section" id="regions">
-    <div class="container">
-      <SectionHeader kicker={L('network.region.kicker')} title={L('network.region.title')} lead={L('network.region.lead')} />
-      <div class="region-grid">
-        {regionCards.map((r) => (
-          <button type="button" class="region-card" data-filter={r.value} data-filter-group="countryGrid">
-            <div class:list={['region-card-media', !r.photo && 'card-media--pending']}>
-              {r.photo
-                ? <img src={r.photo} alt="" loading="lazy" />
-                : <div class="media-pending"><svg class="icon"><use href="#i-globe"></use></svg><span>{L('country.photoPending')}</span></div>}
-            </div>
-            <div class="region-card-body">
-              <h3>{r.label}</h3>
-              <span class="link-arrow">{L('common.learnMore')} <svg class="icon"><use href="#i-arrow"></use></svg></span>
-            </div>
-          </button>
-        ))}
-      </div>
-    </div>
-  </section>
-
-  <section class="section section--ice" id="countries">
-    <div class="container">
-      <SectionHeader kicker={L('network.countries.kicker')} title={L('network.countries.title')} />
-      <div class="filter-bar" data-filter-group="countryGrid">
-        {regions.map((r, i) => <button type="button" class:list={['filter-btn', i === 0 && 'active']} data-filter={r.value} data-filter-group="countryGrid">{r.label}</button>)}
-      </div>
-      <p class="filter-meta" data-filter-meta="countryGrid" data-showing-prefix={L('filter.showing')} data-results-suffix={L('filter.results')} aria-live="polite">{L('filter.showing')} {countries.length} {L('filter.results')}</p>
-      <CountryGrid lang={lang} countries={countries} scopeId="countryGrid" scrollable={true} />
-      <div class="empty-results" data-filter-empty="countryGrid" hidden>
-        <svg class="icon"><use href="#i-globe"></use></svg>
-        <p>{L('network.empty')}</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- 区块4 / Block 4: 前往 Country Teams 的明确入口 -->
-  <section class="section section--ice" id="teams">
-    <div class="container" style="text-align:center">
-      <div class="kicker">{L('network.teams.kicker')}</div>
-      <h2>{L('network.teams.title')}</h2>
-      <p>{L('network.teams.lead')}</p>
-      <div class="section-more" style="justify-content:center;margin-top:24px">
-        <a class="btn btn--primary" href={peopleHref}>{L('common.meetTeams')} <svg class="icon"><use href="#i-arrow"></use></svg></a>
+      <div class="net-join">
+        <p class="lead">{L('network.map.note')}</p>
+        <a class="btn btn--primary" href={peopleHref}>{L('common.meetTeams')} <svg class="icon" aria-hidden="true"><use href="#i-arrow"></use></svg></a>
       </div>
     </div>
   </section>
 </BaseLayout>
+
+<style>
+  .net-head{padding:44px 0 26px;background:linear-gradient(125deg,#f3faff,#fff 72%)}
+  .net-head-inner{display:block}
+  .net-title{font-size:clamp(2.6rem,5vw,4.15rem);margin:6px 0 14px;max-width:16ch}
+  .net-lead{max-width:720px}
+  .net-cta{margin-top:18px}
+  .net-join{display:flex;align-items:center;justify-content:space-between;gap:24px;flex-wrap:wrap;margin-top:34px;padding-top:26px;border-top:1px solid var(--border,#dce8f0)}
+  .net-join .lead{margin:0}
+  @media(max-width:600px){
+    .net-head{padding:30px 0 20px}
+    .net-join{flex-direction:column;align-items:flex-start}
+  }
+</style>

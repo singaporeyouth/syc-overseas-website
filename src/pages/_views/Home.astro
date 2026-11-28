@@ -1,10 +1,7 @@
 ---
 import { getCollection } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import Hero from '../../components/Hero.astro';
-import StatsBar from '../../components/StatsBar.astro';
 import SectionHeader from '../../components/SectionHeader.astro';
-import CaseGrid from '../../components/CaseGrid.astro';
 import WorldMap from '../../components/WorldMap.astro';
 import TeamPreview from '../../components/TeamPreview.astro';
 import { t, pick, type Lang } from '../../i18n/ui';
@@ -12,21 +9,20 @@ import { pageHref } from '../../config/site';
 interface Props { lang: Lang }
 const { lang } = Astro.props;
 const L = (k: string) => t(lang, k);
-const [countries, metrics, cases, people] = await Promise.all([
-  getCollection('countries'), getCollection('metrics'), getCollection('caseStudies'), getCollection('people'),
+const [countries, cases, people] = await Promise.all([
+  getCollection('countries'), getCollection('caseStudies'), getCollection('people'),
 ]);
-const stats = metrics.map((m) => ({
-  display: m.data.display,
-  label: pick(m.data, 'label', lang),
-  icon: m.data.icon,
-}));
-// Typical practice = 2-3 published case studies from the local collection.
+// 2-3 concise items from Our Work — kept secondary on the home page.
 const work = cases.filter((c) => c.data.approvalStatus === 'published').slice(0, 3);
 const peopleHref = pageHref(lang, 'people');
+const contactHref = pageHref(lang, 'contact');
+const aiHref = pageHref(lang, 'ai');
+const networkHref = pageHref(lang, 'network');
+const impactHref = pageHref(lang, 'impact');
 // Localized country name lookup, keyed by the English name stored on people.
 const countryNames: Record<string, string> = {};
 for (const c of countries) countryNames[c.data.name] = pick(c.data, 'name', lang);
-// Demo members from people.json (isDemo), localized role + country name for the preview.
+// Demo members with their own independent SVG avatars from people.json.
 const teamMembers = people.map((p) => ({
   id: p.data.id,
   name: p.data.name,
@@ -41,124 +37,186 @@ const visionDirections = [
   { icon: 'lightbulb', title: L('home.vision.create.title'), body: L('home.vision.create.body') },
   { icon: 'globe', title: L('home.vision.connect.title'), body: L('home.vision.connect.body') },
 ];
-const joinGroups = [
-  { icon: 'people', title: L('home.join.youth.title'), body: L('home.join.youth.body') },
-  { icon: 'building', title: L('home.join.university.title'), body: L('home.join.university.body') },
-  { icon: 'spark', title: L('home.join.industry.title'), body: L('home.join.industry.body') },
-  { icon: 'leaf', title: L('home.join.city.title'), body: L('home.join.city.body') },
+// Six directions overview, placed before the global network; each links to its AI anchor.
+const directionAnchors = ['infrastructure', 'talent', 'research', 'enterprise', 'exchange', 'community'];
+const directions = directionAnchors.map((anchor, i) => ({
+  title: L(`ai.direction${i + 1}.title`),
+  detail: L(`ai.direction${i + 1}.forms`),
+  href: `${aiHref}#${anchor}`,
+}));
+// Four visitor routes into the contact form, each with a real topic/area parameter.
+const visitorRoutes = [
+  { icon: 'people', title: L('home.join.youth.title'), body: L('home.join.youth.body'), href: `${contactHref}?topic=youth-participation`, cta: L('cta.expressInterest') },
+  { icon: 'building', title: L('home.join.university.title'), body: L('home.join.university.body'), href: `${contactHref}?topic=partnership&area=academic`, cta: L('cta.exploreAcademicCollaboration') },
+  { icon: 'spark', title: L('home.join.industry.title'), body: L('home.join.industry.body'), href: `${contactHref}?topic=partnership&area=technology`, cta: L('cta.discussResourceCollaboration') },
+  { icon: 'leaf', title: L('home.join.city.title'), body: L('home.join.city.body'), href: `${contactHref}?topic=partnership&area=community`, cta: L('cta.shareLocalOpportunity') },
 ];
 ---
 
 <BaseLayout lang={lang} pageId="index" title={L('seo.index.title')} description={L('seo.index.desc')} showCta={true}>
-  <!-- 板块1 / Section 1: 首屏，沿用现有 Hero -->
-  <Hero
-    lang={lang}
-    eyebrow={L('home.hero.eyebrow')}
-    titleHtml={`<span class="grad">${L('home.hero.title1')}</span> <span>${L('home.hero.title2')}</span>`}
-    lead={L('home.hero.lead')}
-    image="/assets/hero-people.jpg"
-    primary={{ label: L('home.hero.primaryBtn'), href: pageHref(lang, 'ai') }}
-    secondary={{ label: L('home.hero.secondaryBtn'), href: pageHref(lang, 'people') }}
-    youthLink={{ label: L('home.hero.partnerBtn'), href: pageHref(lang, 'partnerships') }}
-    photoTag={L('home.hero.panelTitle1')}
-  />
+  <!-- 区块1 / Section 1: 全新首屏 —— 原创青年协作 SVG 叙事图替换海边主图 -->
+  <section class="home-hero">
+    <div class="container home-hero-grid">
+      <div class="home-hero-copy">
+        <div class="eyebrow"><svg class="icon"><use href="#i-spark"></use></svg> {L('home.hero.eyebrow')}</div>
+        <h1><span class="grad">{L('home.hero.title1')}</span> <span>{L('home.hero.title2')}</span></h1>
+        <p class="lead">{L('home.hero.lead')}</p>
+        <div class="actions">
+          <a class="btn btn--primary" href={aiHref}>{L('home.hero.primaryBtn')} <svg class="icon"><use href="#i-arrow"></use></svg></a>
+          <a class="btn btn--outline" href={peopleHref}>{L('home.hero.secondaryBtn')}</a>
+        </div>
+      </div>
+      <div class="home-hero-visual">
+        <svg viewBox="0 0 460 460" role="img" aria-label={L('home.hero.panelTitle1')} preserveAspectRatio="xMidYMid meet">
+          <defs>
+            <linearGradient id="heroNarrBg" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0" stop-color="#12324D" /><stop offset="1" stop-color="#1769C2" />
+            </linearGradient>
+            <radialGradient id="heroNarrGlow">
+              <stop offset="0" stop-color="#24A6B5" stop-opacity=".55" /><stop offset="1" stop-color="#24A6B5" stop-opacity="0" />
+            </radialGradient>
+          </defs>
+          <rect x="0" y="0" width="460" height="460" rx="36" fill="url(#heroNarrBg)" />
+          <circle cx="230" cy="230" r="205" fill="url(#heroNarrGlow)" />
+          <g fill="none" stroke="#7FD9EA" stroke-width="1.4" opacity=".5">
+            <ellipse cx="230" cy="230" rx="192" ry="88" transform="rotate(-18 230 230)" />
+            <ellipse cx="230" cy="230" rx="88" ry="192" transform="rotate(18 230 230)" />
+            <circle cx="230" cy="230" r="152" stroke-dasharray="4 9" />
+          </g>
+          <g stroke="#7FD9EA" stroke-width="1.6" opacity=".75">
+            <line x1="230" y1="70" x2="230" y2="230" /><line x1="358" y1="142" x2="230" y2="230" />
+            <line x1="358" y1="318" x2="230" y2="230" /><line x1="230" y1="390" x2="230" y2="230" />
+            <line x1="102" y1="318" x2="230" y2="230" /><line x1="102" y1="142" x2="230" y2="230" />
+          </g>
+          <g fill="#24A6B5" stroke="#FFFFFF" stroke-width="2">
+            <circle cx="230" cy="70" r="13" /><circle cx="358" cy="142" r="13" /><circle cx="358" cy="318" r="13" />
+            <circle cx="230" cy="390" r="13" /><circle cx="102" cy="318" r="13" /><circle cx="102" cy="142" r="13" />
+          </g>
+          <g fill="#FFFFFF" font-size="13" font-weight="700" font-family="sans-serif" text-anchor="middle">
+            <text x="230" y="75">1</text><text x="358" y="147">2</text><text x="358" y="323">3</text>
+            <text x="230" y="395">4</text><text x="102" y="323">5</text><text x="102" y="147">6</text>
+          </g>
+          <circle cx="230" cy="230" r="78" fill="#F5F8FB" opacity=".97" />
+          <circle cx="230" cy="230" r="66" fill="none" stroke="#24A6B5" stroke-width="2" />
+          <g fill="#1769C2"><circle cx="230" cy="186" r="14" /><circle cx="280" cy="252" r="14" /><circle cx="180" cy="252" r="14" /></g>
+          <g fill="#12324D">
+            <path d="M205 212 q25 -18 50 0 q10 8 8 26 h-66 q-2 -18 8 -26Z" />
+            <path d="M255 268 q20 -16 44 2 q10 8 8 24 h-60 q-2 -16 8 -26Z" />
+            <path d="M161 270 q20 -16 44 2 q10 8 8 24 h-60 q-2 -16 8 -26Z" />
+          </g>
+          <circle cx="230" cy="238" r="17" fill="#24A6B5" />
+          <path d="M230 228 l3.4 7.6 7.6 3.4 -7.6 3.4 -3.4 7.6 -3.4 -7.6 -7.6 -3.4 7.6 -3.4Z" fill="#FFFFFF" />
+        </svg>
+      </div>
+    </div>
+  </section>
 
-  <!-- 板块2 / Section 2: Our Vision 三项使命（深色重点）+ 数字条 -->
+  <!-- 区块2 / Section 2: 紧凑规模条 + 身份句 -->
+  <section class="home-scale" aria-label="Key figures">
+    <div class="container">
+      <div class="scale-grid">
+        <div class="scale-num"><svg class="icon"><use href="#i-globe"></use></svg>{L('home.stat.countries')}</div>
+        <div class="scale-num"><svg class="icon"><use href="#i-spark"></use></svg>{L('home.stat.reach')}</div>
+      </div>
+      <p class="scale-identity">{L('home.stat.global')}</p>
+    </div>
+  </section>
+
+  <!-- 区块3 / Section 3: 愿景原则三栏编辑式 -->
   <section class="section" aria-labelledby="home-vision-title">
     <div class="container">
-      <div class="ai-feature home-vision">
+      <div class="vision-head">
         <div class="kicker">{L('home.vision.kicker')}</div>
         <h2 id="home-vision-title">{L('home.vision.title')}</h2>
         <p>{L('home.vision.lead')}</p>
-        <div class="card-grid home-vision-grid">
-          {visionDirections.map((d) => (
-            <article class="card"><div class="card-body">
-              <span class="feature-icon"><svg class="icon"><use href={`#i-${d.icon}`}></use></svg></span>
-              <h3>{d.title}</h3>
-              <p>{d.body}</p>
-            </div></article>
-          ))}
-        </div>
       </div>
-    </div>
-    <StatsBar stats={stats} />
-  </section>
-
-  <!-- 板块3 / Section 3: 全球网络与各国团队（提前出现） -->
-  <section class="section section--white" aria-labelledby="home-network-title">
-    <div class="container">
-      <SectionHeader kicker={L('home.team.kicker')} title={L('home.team.title')} lead={L('home.team.lead')} id="home-network-title" />
-      <div class="card map-card">
-        <div class="card-media map-card-media">
-          <WorldMap countries={countries.map((c) => c.data)} lang={lang} theme="light" note={L('home.dual.mapNote')} teamBaseHref={peopleHref} viewTeamLabel={L('network.map.viewTeam')} />
-        </div>
-      </div>
-      <TeamPreview
-        lang={lang}
-        members={teamMembers}
-        notice={L('home.team.demoNotice')}
-        note={L('home.team.demoNote')}
-        peopleHref={pageHref(lang, 'people')}
-      />
-      <div class="section-more team-entries">
-        <a class="link-arrow" href={pageHref(lang, 'network')}>{L('home.team.exploreNetwork')} <svg class="icon"><use href="#i-arrow"></use></svg></a>
-        <a class="link-arrow" href={pageHref(lang, 'people')}>{L('home.team.meetTeams')} <svg class="icon"><use href="#i-arrow"></use></svg></a>
+      <div class="vision-editorial">
+        {visionDirections.map((d) => (
+          <div class="ve-item">
+            <span class="feature-icon"><svg class="icon"><use href={`#i-${d.icon}`}></use></svg></span>
+            <h3>{d.title}</h3>
+            <p>{d.body}</p>
+          </div>
+        ))}
       </div>
     </div>
   </section>
 
-  <!-- 板块4 / Section 4: AI Lab 引导区 -->
-  <section class="section section--ice" aria-labelledby="home-ai-title">
+  <!-- 区块4 / Section 4: 六方向概览（在全球网络之前） -->
+  <section class="section section--ice" aria-labelledby="home-dir-title">
     <div class="container">
-      <SectionHeader kicker={L('home.lab.kicker')} title={L('home.lab.title')} lead={L('home.lab.lead')} id="home-ai-title" />
-      <div class="feature-list feature-list--home">
-        <div class="feature-item"><span class="feature-icon"><svg class="icon"><use href="#i-compass"></use></svg></span><div><div class="feature-title">{L('home.dual.ai1')}</div><div class="feature-sub">{L('home.dual.ai1sub')}</div></div></div>
-        <div class="feature-item"><span class="feature-icon"><svg class="icon"><use href="#i-route"></use></svg></span><div><div class="feature-title">{L('home.dual.ai2')}</div><div class="feature-sub">{L('home.dual.ai2sub')}</div></div></div>
-        <div class="feature-item"><span class="feature-icon"><svg class="icon"><use href="#i-spark"></use></svg></span><div><div class="feature-title">{L('home.dual.ai3')}</div><div class="feature-sub">{L('home.dual.ai3sub')}</div></div></div>
-      </div>
-      <div class="section-more">
-        <a class="link-arrow" href={pageHref(lang, 'ai')}>{L('home.lab.more')} <svg class="icon"><use href="#i-arrow"></use></svg></a>
-      </div>
-    </div>
-  </section>
-
-  <!-- 板块5 / Section 5: 典型实践 Our Vision in Practice（小比例） -->
-  <section class="section" aria-labelledby="home-practice-title">
-    <div class="container">
-      <SectionHeader kicker={L('home.practice.kicker')} title={L('home.practice.title')} lead={L('home.practice.lead')} id="home-practice-title" />
-      <div class="card-grid practice-grid">
-        {work.map((c) => (
-          <article class="card card--image">
-            <div class="card-media">
-              <img src={c.data.image} alt={pick(c.data, 'title', lang)} loading="lazy" />
-              <span class="card-tag">{pick(c.data, 'category', lang)}</span>
-            </div>
-            <div class="card-body">
-              <h3>{pick(c.data, 'title', lang)}</h3>
-              <p>{pick(c.data, 'summary', lang)}</p>
-              <p class="practice-dir">{L('home.practice.direction')}: {pick(c.data, 'category', lang)}</p>
-              <a class="link-arrow" href={pageHref(lang, 'impact')}>{L('home.practice.view')} <svg class="icon"><use href="#i-arrow"></use></svg></a>
-            </div>
-          </article>
+      <SectionHeader kicker={L('home.lab.kicker')} title={L('home.lab.title')} lead={L('home.lab.lead')} id="home-dir-title" />
+      <div class="dir-grid">
+        {directions.map((d, i) => (
+          <a class="dir-item" href={d.href}>
+            <span class="dir-no">0{i + 1}</span>
+            <h3>{d.title}</h3>
+            <p>{d.detail}</p>
+            <span class="dir-go"><svg class="icon"><use href="#i-arrow"></use></svg></span>
+          </a>
         ))}
       </div>
       <div class="section-more">
-        <a class="link-arrow" href={pageHref(lang, 'impact')}>{L('home.practice.more')} <svg class="icon"><use href="#i-arrow"></use></svg></a>
+        <a class="link-arrow" href={aiHref}>{L('home.lab.more')} <svg class="icon"><use href="#i-arrow"></use></svg></a>
       </div>
     </div>
   </section>
 
-  <!-- 板块6 / Section 6: 合作与参与收尾（四类参与者） -->
-  <section class="section section--ice" aria-labelledby="home-join-title">
+  <!-- 区块5 / Section 5: 全球网络摘要（轻量静态地图 + 说明，不复刻 Network） -->
+  <section class="section section--white" aria-labelledby="home-network-title">
+    <div class="container home-network-grid">
+      <div class="network-copy">
+        <SectionHeader kicker={L('home.dual.networkKicker')} title={L('home.dual.networkTitle')} lead={L('home.dual.networkLead')} id="home-network-title" />
+        <a class="link-arrow" href={networkHref}>{L('home.dual.exploreNetwork')} <svg class="icon"><use href="#i-arrow"></use></svg></a>
+      </div>
+      <div class="network-map">
+        <WorldMap countries={countries.map((c) => c.data)} lang={lang} theme="light" note={L('home.dual.mapNote')} teamBaseHref={peopleHref} viewTeamLabel={L('network.teamBtn')} />
+      </div>
+    </div>
+  </section>
+
+  <!-- 区块6 / Section 6: 全球国家团队预览（跨地区六国，独立 SVG 头像，带国家筛选参数） -->
+  <section class="section" aria-labelledby="home-team-title">
+    <div class="container">
+      <SectionHeader kicker={L('home.team.kicker')} title={L('home.team.title')} lead={L('home.team.lead')} id="home-team-title" />
+      <TeamPreview lang={lang} members={teamMembers} notice={L('home.team.demoNotice')} note={L('home.team.demoNote')} peopleHref={peopleHref} />
+      <div class="section-more">
+        <a class="link-arrow" href={peopleHref}>{L('home.team.meetTeams')} <svg class="icon"><use href="#i-arrow"></use></svg></a>
+      </div>
+    </div>
+  </section>
+
+  <!-- 区块7 / Section 7: 少量实践 Ideas Taking Shape（次要） -->
+  <section class="section section--ice" aria-labelledby="home-work-title">
+    <div class="container">
+      <SectionHeader kicker={L('home.work.kicker')} title={L('home.work.title')} lead={L('home.work.lead')} id="home-work-title" />
+      <ul class="work-list">
+        {work.map((c) => (
+          <li class="work-item">
+            <span class="work-tag">{pick(c.data, 'category', lang)}</span>
+            <h3>{pick(c.data, 'title', lang)}</h3>
+            <p>{pick(c.data, 'summary', lang)}</p>
+          </li>
+        ))}
+      </ul>
+      <div class="section-more">
+        <a class="link-arrow" href={impactHref}>{L('home.work.more')} <svg class="icon"><use href="#i-arrow"></use></svg></a>
+      </div>
+    </div>
+  </section>
+
+  <!-- 区块8 / Section 8: 按访客身份提供下一步（四类真按钮带参数进 /contact/） -->
+  <section class="section section--white" aria-labelledby="home-join-title">
     <div class="container">
       <SectionHeader kicker={L('home.join.kicker')} title={L('home.join.title')} lead={L('home.join.lead')} id="home-join-title" />
-      <div class="card-grid join-grid">
-        {joinGroups.map((g) => (
-          <article class="card"><div class="card-body">
+      <div class="join-grid">
+        {visitorRoutes.map((g) => (
+          <article class="join-item">
             <span class="feature-icon"><svg class="icon"><use href={`#i-${g.icon}`}></use></svg></span>
             <h3>{g.title}</h3>
             <p>{g.body}</p>
-          </div></article>
+            <a class="btn btn--outline join-btn" href={g.href}>{g.cta} <svg class="icon"><use href="#i-arrow"></use></svg></a>
+          </article>
         ))}
       </div>
     </div>
@@ -166,3 +224,65 @@ const joinGroups = [
 
   <!-- 底部 CTA 由 BaseLayout 提供（双入口与双邮箱） -->
 </BaseLayout>
+
+<style>
+  .home-hero{position:relative;background:linear-gradient(120deg,#fbfdff 0%,#eef6fb 58%,#e9f2fa 100%);border-bottom:1px solid var(--line2)}
+  .home-hero-grid{display:grid;grid-template-columns:56fr 44fr;gap:32px;align-items:center;min-height:580px;padding-block:54px}
+  .home-hero-copy h1{font-size:clamp(2.1rem,4.6vw,4.15rem);line-height:1.08;margin-bottom:18px}
+  .home-hero-copy h1 span{display:block}
+  .home-hero-copy .lead{max-width:38em}
+  .home-hero-visual{min-height:430px;display:grid;place-items:center}
+  .home-hero-visual svg{width:100%;height:auto;max-height:520px;border-radius:24px;box-shadow:0 24px 60px rgba(7,26,46,.18)}
+
+  .home-scale{padding:26px 0;background:#fff;border-bottom:1px solid var(--line2)}
+  .scale-grid{display:flex;gap:56px;flex-wrap:wrap;align-items:center;justify-content:center}
+  .scale-num{display:flex;align-items:center;gap:10px;font-weight:800;color:var(--navy);font-size:1.05rem}
+  .scale-num .icon{color:var(--accent2)}
+  .scale-identity{text-align:center;margin:12px 0 0;color:var(--accent-ink);font-weight:700;letter-spacing:.03em}
+
+  .vision-head{max-width:760px;margin-bottom:26px}
+  .vision-editorial{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));border-top:1px solid var(--line2)}
+  .ve-item{padding:24px 28px 8px 0;border-right:1px solid var(--line2)}
+  .ve-item + .ve-item{padding-left:28px}
+  .ve-item:last-child{border-right:0}
+  .ve-item h3{margin:12px 0 8px}
+  .ve-item .feature-icon{background:rgba(36,166,181,.12);color:#0E7490}
+
+  .dir-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;margin:24px 0}
+  .dir-item{position:relative;display:block;padding:22px;border:1px solid var(--line2);border-radius:16px;background:#fff;text-decoration:none;color:inherit;transition:transform .18s,border-color .18s,box-shadow .18s}
+  .dir-item:hover{transform:translateY(-3px);border-color:var(--accent);box-shadow:0 14px 32px rgba(16,43,76,.12)}
+  .dir-no{font:800 12px/1 var(--font);color:var(--accent2);letter-spacing:.1em}
+  .dir-item h3{margin:10px 0 8px;font-size:1.05rem}
+  .dir-item p{color:#55677e;font-size:.9rem;margin:0;padding-right:18px}
+  .dir-go{position:absolute;right:18px;bottom:18px;color:var(--accent-ink)}
+
+  .home-network-grid{display:grid;grid-template-columns:36fr 64fr;gap:36px;align-items:center}
+  .network-map{max-height:380px;overflow:hidden;border:1px solid var(--line2);border-radius:16px;background:#f6fafc}
+  .network-copy .link-arrow{margin-top:8px}
+
+  .work-list{list-style:none;margin:24px 0;padding:0;display:grid;gap:14px}
+  .work-item{display:grid;grid-template-columns:auto 1fr;gap:4px 18px;padding:18px 20px;border:1px solid var(--line2);border-radius:14px;background:#fff}
+  .work-tag{grid-row:span 2;align-self:start;font-size:.7rem;font-weight:800;text-transform:uppercase;letter-spacing:.08em;color:var(--accent-ink);padding-top:3px}
+  .work-item h3{margin:0;font-size:1.05rem}
+  .work-item p{margin:0;color:#55677e}
+
+  .join-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;margin-top:24px}
+  .join-item{display:flex;flex-direction:column;align-items:flex-start;padding:24px;border:1px solid var(--line2);border-radius:16px;background:#fff}
+  .join-item h3{margin:14px 0 8px}
+  .join-item p{color:#55677e;margin:0 0 18px}
+  .join-btn{margin-top:auto}
+
+  @media (max-width:900px){
+    .home-hero-grid{grid-template-columns:1fr;min-height:0;padding-block:38px 24px;gap:24px}
+    .home-hero-copy{order:1}
+    .home-hero-visual{order:2;min-height:300px}
+    .home-hero-copy h1{font-size:clamp(2.1rem,7vw,2.6rem)}
+    .vision-editorial{grid-template-columns:1fr}
+    .ve-item,.ve-item + .ve-item{border-right:0;border-bottom:1px solid var(--line2);padding:18px 0}
+    .dir-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+    .home-network-grid{grid-template-columns:1fr}
+    .network-map{max-height:340px}
+    .join-grid{grid-template-columns:1fr}
+    .scale-grid{gap:20px 32px}
+  }
+</style>

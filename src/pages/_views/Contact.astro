@@ -1,6 +1,5 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import Hero from '../../components/Hero.astro';
 import ContactForm from '../../components/ContactForm.astro';
 import Faq from '../../components/Faq.astro';
 import { SITE } from '../../config/site';
@@ -9,37 +8,54 @@ interface Props { lang: Lang }
 const { lang } = Astro.props;
 const L = (k: string) => t(lang, k);
 const faqs = [{ q: L('contact.faq.q1'), a: L('contact.faq.a1') }, { q: L('contact.faq.q2'), a: L('contact.faq.a2') }];
+const generalEmail = SITE.contactEmail || 'contact@singaporeyouth.com';
+const partnershipEmail = SITE.partnershipEmail || 'partner@singaporeyouth.com';
 ---
 
 <BaseLayout lang={lang} pageId="contact" title={L('seo.contact.title')} description={L('seo.contact.desc')}>
-  <Hero lang={lang} compact eyebrow={L('contact.hero.eyebrow')} titleHtml={L('contact.hero.title')} lead={L('contact.hero.lead')} image="/assets/workshop.jpg" />
-  <ContactForm lang={lang} />
-
-  <section class="section section--compact">
+  <section class="section section--compact contact-intro">
     <div class="container narrow">
-      <div class="section-head"><h2>{L('contact.channels.title')}</h2></div>
-      <div class="contact-channel-card">
-        <span class="contact-channel-icon"><svg class="icon"><use href="#i-mail"></use></svg></span>
-        <div class="contact-channel-body">
-          <div class="contact-channel-top">
-            <strong>{L('contact.email.generalLabel')}</strong>
-          </div>
-          {SITE.contactEmail
-            ? <a class="contact-channel-value" href={`mailto:${SITE.contactEmail}`}>{SITE.contactEmail}</a>
-            : <span class="contact-channel-value">{L('contact.channel3.body')}</span>}
-          <span class="contact-channel-note">{L('contact.channel.showcaseNote')}</span>
+      <div class="eyebrow"><svg class="icon"><use href="#i-spark"></use></svg> {L('contact.hero.eyebrow')}</div>
+      <h1>{L('contact.hero.title')}</h1>
+      <p class="lead">{L('contact.hero.lead')}</p>
+    </div>
+  </section>
+
+  <section class="section contact-main">
+    <div class="container">
+      <div class="contact-grid">
+        <div class="contact-channels">
+          <article class="contact-channel-card" data-copy-channel data-copy-ok={L('contact.form.copiedEmail')} data-copy-fail={L('contact.form.copyFail')}>
+            <span class="contact-channel-icon"><svg class="icon"><use href="#i-mail"></use></svg></span>
+            <div class="contact-channel-body">
+              <strong class="contact-channel-name">{L('contact.channel1.title')}</strong>
+              <p class="contact-channel-desc">{L('contact.channel1.body')}</p>
+              <a class="contact-channel-value" href={`mailto:${generalEmail}`}>{generalEmail}</a>
+              <div class="contact-channel-actions">
+                <a class="btn btn--primary btn--small" href={`mailto:${generalEmail}`}>{L('contact.channel.showcaseTitle')} <svg class="icon"><use href="#i-arrow"></use></svg></a>
+                <button type="button" class="btn btn--outline btn--small" data-copy-email-btn data-copy-email={generalEmail}>{L('contact.channel.showcaseNote')}</button>
+              </div>
+              <p class="form-copy-feedback" data-channel-feedback role="status" hidden></p>
+            </div>
+          </article>
+
+          <article class="contact-channel-card" data-copy-channel data-copy-ok={L('contact.form.copiedEmail')} data-copy-fail={L('contact.form.copyFail')}>
+            <span class="contact-channel-icon"><svg class="icon"><use href="#i-mail"></use></svg></span>
+            <div class="contact-channel-body">
+              <strong class="contact-channel-name">{L('contact.channel2.title')}</strong>
+              <p class="contact-channel-desc">{L('contact.channel2.body')}</p>
+              <a class="contact-channel-value" href={`mailto:${partnershipEmail}`}>{partnershipEmail}</a>
+              <div class="contact-channel-actions">
+                <a class="btn btn--primary btn--small" href={`mailto:${partnershipEmail}`}>{L('cta.emailPartnershipsTeam')} <svg class="icon"><use href="#i-arrow"></use></svg></a>
+                <button type="button" class="btn btn--outline btn--small" data-copy-email-btn data-copy-email={partnershipEmail}>{L('contact.channel.showcaseNote')}</button>
+              </div>
+              <p class="form-copy-feedback" data-channel-feedback role="status" hidden></p>
+            </div>
+          </article>
         </div>
-      </div>
-      <div class="contact-channel-card">
-        <span class="contact-channel-icon"><svg class="icon"><use href="#i-mail"></use></svg></span>
-        <div class="contact-channel-body">
-          <div class="contact-channel-top">
-            <strong>{L('contact.email.partnershipLabel')}</strong>
-          </div>
-          {SITE.partnershipEmail
-            ? <a class="contact-channel-value" href={`mailto:${SITE.partnershipEmail}`}>{SITE.partnershipEmail}</a>
-            : <span class="contact-channel-value">{L('contact.channel3.body')}</span>}
-          <span class="contact-channel-note">{L('contact.channel.showcaseNote')}</span>
+
+        <div class="contact-form-col">
+          <ContactForm lang={lang} />
         </div>
       </div>
     </div>
@@ -52,3 +68,37 @@ const faqs = [{ q: L('contact.faq.q1'), a: L('contact.faq.a1') }, { q: L('contac
     </div>
   </section>
 </BaseLayout>
+
+<script>
+  document.querySelectorAll<HTMLButtonElement>('[data-copy-email-btn]').forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const card = btn.closest<HTMLElement>('[data-copy-channel]');
+      const feedback = card?.querySelector<HTMLElement>('[data-channel-feedback]');
+      const email = btn.getAttribute('data-copy-email') || '';
+      const ok = card?.getAttribute('data-copy-ok') || '';
+      const fail = card?.getAttribute('data-copy-fail') || '';
+      const flash = (msg: string) => {
+        if (!feedback) return;
+        feedback.textContent = msg;
+        feedback.hidden = false;
+        window.setTimeout(() => { feedback.hidden = true; }, 4000);
+      };
+      if (navigator.clipboard?.writeText) {
+        navigator.clipboard.writeText(email).then(() => flash(ok)).catch(() => flash(fail));
+      } else {
+        flash(fail);
+      }
+    });
+  });
+</script>
+
+<style>
+  .contact-intro h1 { margin: 10px 0 14px; }
+  .contact-channels { display: flex; flex-direction: column; gap: 16px; min-width: 0; }
+  .contact-form-col { min-width: 0; }
+  .contact-channel-name { color: var(--navy); font-size: 1.05rem; }
+  .contact-channel-desc { margin: 4px 0 6px; color: var(--muted); font-size: .86rem; line-height: 1.6; }
+  .contact-channel-actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 10px; }
+  .contact-channel-actions .btn:focus-visible { outline: 2px solid var(--accent, #24A6B5); outline-offset: 3px; }
+  .form-copy-feedback { margin: 10px 0 0; color: #0a6b50; font-size: .82rem; font-weight: 700; }
+</style>

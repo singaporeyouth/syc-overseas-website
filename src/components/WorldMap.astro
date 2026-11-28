@@ -54,7 +54,7 @@ const active = nodes[hubIndex];
         <p data-detail-note>{active.note}</p>
         {teamBaseHref && (
           <a class="link-arrow map-team-link" data-detail-team href={`${teamBaseHref}?country=${encodeURIComponent(active.country)}`}>
-            {viewTeamLabel ?? t(lang, 'network.map.viewTeam')} <svg class="icon"><use href="#i-arrow"></use></svg>
+            {viewTeamLabel ?? t(lang, 'network.teamBtn')} <svg class="icon"><use href="#i-arrow"></use></svg>
           </a>
         )}
       </div>

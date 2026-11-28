@@ -10,7 +10,7 @@ interface Props {
   image?: string;
   type?: 'website' | 'organization';
 }
-const { lang, title, description, pageId, image = '/assets/hero-people.jpg', type = 'website' } = Astro.props;
+const { lang, title, description, pageId, image = '/assets/hero-ai-youth.jpg', type = 'website' } = Astro.props;
 const is404 = pageId === '404';
 const canonical = new URL(Astro.url.pathname, Astro.site).href;
 const ogImage = new URL(image, Astro.site).href;

@@ -9,31 +9,43 @@ const partnershipEmail = SITE.partnershipEmail || 'partner@singaporeyouth.com';
 const i18n = {
   errRequired: t(lang, 'contact.form.errRequired'),
   errEmail: t(lang, 'contact.form.errEmail'),
+  errSubject: t(lang, 'contact.form.errSubject'),
   errMessage: t(lang, 'contact.form.errMessage'),
   subjectPrefix: t(lang, 'contact.mailto.subjectPrefix'),
   labelName: t(lang, 'contact.form.name'),
   labelEmail: t(lang, 'contact.form.email'),
   labelOrg: t(lang, 'contact.form.org'),
   labelTopic: t(lang, 'contact.form.topic'),
+  labelSubject: t(lang, 'contact.form.subject'),
   labelMessage: t(lang, 'contact.form.message'),
+  recipientLabel: t(lang, 'contact.form.recipientLabel'),
+  copyBtn: t(lang, 'contact.form.copyBtn'),
+  copiedEmail: t(lang, 'contact.form.copiedEmail'),
+  copiedDraft: t(lang, 'contact.form.copiedDraft'),
+  copyFail: t(lang, 'contact.form.copyFail'),
 };
 ---
 
-<section class="section section--ice">
-  <div class="container narrow">
-    <div class="card" style="padding:clamp(24px,4vw,48px)">
-      <div class="kicker">{t(lang, 'contact.form.title')}</div>
-      <h2 style="margin-bottom:8px">{t(lang, 'contact.form.title')}</h2>
-      <a class="contact-email-lead" href={`mailto:${email}`}>
-        <svg class="icon"><use href="#i-mail"></use></svg>
-        <span>{email}</span>
-        <svg class="icon contact-email-lead-arrow"><use href="#i-arrow"></use></svg>
-      </a>
-      <p class="form-demo-note" role="note"><svg class="icon"><use href="#i-shield"></use></svg> {t(lang, 'contact.form.mailtoNote')}</p>
+<div class="card" style="padding:clamp(24px,4vw,48px)">
+  <h2 style="margin:0 0 8px">{t(lang, 'contact.form.title')}</h2>
+  <p class="form-recipient" data-form-recipient-line>
+    <span data-form-recipient-label>{t(lang, 'contact.form.recipientLabel')}</span>
+    <strong data-form-recipient>{email}</strong>
+  </p>
+  <p class="form-demo-note" role="note"><svg class="icon"><use href="#i-shield"></use></svg> {t(lang, 'contact.form.mailtoNote')}</p>
       <form id="enquiryForm" class="contact-form" novalidate
         data-contact-email={email}
         data-partnership-email={partnershipEmail}
-        data-form-i18n={JSON.stringify(i18n)}>
+        data-form-i18n={JSON.stringify(i18n)}
+        data-topic-map={JSON.stringify({
+          'general': email,
+          'youth-participation': email,
+          'country-team': email,
+          'programme': email,
+          'media': email,
+          'other': email,
+          'partnership': partnershipEmail,
+        })}>
         <div class="form-row">
           <label class="field">{t(lang, 'contact.form.name')}<input name="name" type="text" autocomplete="name" required placeholder=" " /></label>
           <label class="field">{t(lang, 'contact.form.email')}<input name="email" type="email" autocomplete="email" required placeholder=" " /></label>
@@ -42,19 +54,24 @@ const i18n = {
           <label class="field">{t(lang, 'contact.form.org')}<input name="organisation" type="text" autocomplete="organization" placeholder=" " /></label>
           <label class="field">{t(lang, 'contact.form.topic')}
             <select name="topic">
-              <option value="partnership">{t(lang, 'contact.topic.partnership')}</option>
+              <option value="general">{t(lang, 'contact.topic.general')}</option>
+              <option value="youth-participation">{t(lang, 'contact.topic.youth')}</option>
+              <option value="country-team">{t(lang, 'contact.topic.country')}</option>
               <option value="programme">{t(lang, 'contact.topic.programme')}</option>
               <option value="media">{t(lang, 'contact.topic.media')}</option>
               <option value="other">{t(lang, 'contact.topic.other')}</option>
+              <option value="partnership">{t(lang, 'contact.topic.partnership')}</option>
             </select>
           </label>
         </div>
-        <label class="field">{t(lang, 'contact.form.message')}<textarea name="message" rows="6" required placeholder=" "></textarea></label>
+        <label class="field">{t(lang, 'contact.form.subject')}<input name="subject" type="text" required placeholder={t(lang, 'contact.form.subjectPlaceholder')} /></label>
+        <label class="field">{t(lang, 'contact.form.message')}<textarea name="message" rows="6" required placeholder={t(lang, 'contact.form.messagePlaceholder')}></textarea></label>
         <div class="actions">
           <button type="submit" class="btn btn--primary" data-submit-btn>{t(lang, 'contact.form.submit')} <svg class="icon"><use href="#i-arrow"></use></svg></button>
+          <button type="button" class="btn btn--outline" data-copy-draft>{t(lang, 'contact.form.copyBtn')}</button>
         </div>
+        <p class="form-copy-feedback" data-copy-feedback role="status" hidden></p>
+        <p class="form-fallback" data-form-fallback>{t(lang, 'contact.form.fallback')}</p>
         <p class="field-error-summary" data-form-summary role="alert" hidden></p>
       </form>
-    </div>
-  </div>
-</section>
+</div>

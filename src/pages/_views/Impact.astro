@@ -2,25 +2,69 @@
 import { getCollection } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Hero from '../../components/Hero.astro';
-import StatsBar from '../../components/StatsBar.astro';
 import SectionHeader from '../../components/SectionHeader.astro';
-import CaseGrid from '../../components/CaseGrid.astro';
 import { t, pick, type Lang } from '../../i18n/ui';
 interface Props { lang: Lang }
 const { lang } = Astro.props;
 const L = (k: string) => t(lang, k);
-const [cases, metrics] = await Promise.all([getCollection('caseStudies'), getCollection('metrics')]);
-const stats = metrics.map((m) => ({ display: m.data.display, label: pick(m.data, 'label', lang), icon: m.data.icon }));
+const platforms = (await getCollection('platforms')).map((p) => p.data);
+
+const areas = [
+  { title: L('impact.area1.title'), body: L('impact.area1.body'), cta: L('impact.area1.cta'), href: '/contact/?topic=partnership&area=exchange' },
+  { title: L('impact.area2.title'), body: L('impact.area2.body'), cta: L('impact.area2.cta'), href: '/contact/?topic=partnership&area=entrepreneurship' },
+  { title: L('impact.area3.title'), body: L('impact.area3.body'), cta: L('impact.area3.cta'), href: '/contact/?topic=partnership&area=community' },
+];
 ---
 
 <BaseLayout lang={lang} pageId="impact" title={L('seo.impact.title')} description={L('seo.impact.desc')}>
-  <Hero lang={lang} compact eyebrow={L('impact.hero.eyebrow')} titleHtml={L('impact.hero.title')} lead={L('impact.hero.lead')} image="/assets/workshop.jpg" />
-  <StatsBar stats={stats} />
+  <!-- 首屏：eyebrow OUR WORK + H1 From Shared Ideas / to Practical Action. + subheading -->
+  <Hero lang={lang} compact eyebrow={L('impact.hero.eyebrow')} titleHtml={L('impact.hero.titleHtml')} lead={L('impact.hero.lead')} />
 
-  <section class="section">
+  <!-- 区块1：Areas of Action（3 项，逐字文案 + CTA 带 topic/area 参数） -->
+  <section class="section" aria-labelledby="impact-areas-title">
     <div class="container">
-      <SectionHeader kicker={L('impact.library.kicker')} title={L('impact.library.title')} lead={L('impact.library.lead')} />
-      <CaseGrid lang={lang} cases={cases.map((c) => c.data)} />
+      <SectionHeader title={L('impact.cases.title')} lead={L('impact.cases.note')} id="impact-areas-title" />
+      <div class="card-grid">
+        {areas.map((area) => (
+          <article class="card"><div class="card-body">
+            <h3>{area.title}</h3>
+            <p>{area.body}</p>
+            <a class="link-arrow" href={area.href}>{area.cta} <svg class="icon"><use href="#i-arrow"></use></svg></a>
+          </div></article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- 区块2：Platforms in the Ecosystem（4 平台，真实外链，文字标识，Explore Platform） -->
+  <section class="section section--ice" aria-labelledby="impact-platforms-title">
+    <div class="container">
+      <SectionHeader kicker={L('impact.library.kicker')} title={L('impact.library.title')} lead={L('impact.library.lead')} id="impact-platforms-title" />
+      <div class="card-grid">
+        {platforms.map((p) => (
+          <article class="card"><div class="card-body">
+            <h3>{p.name}</h3>
+            <p>{pick(p, 'description', lang)}</p>
+            <a class="link-arrow" href={p.url} target="_blank" rel="noopener noreferrer" aria-label={`${L('impact.platform.explore')} ${p.name} (external)`}>
+              {L('impact.platform.explore')} <svg class="icon"><use href="#i-arrow"></use></svg>
+            </a>
+          </div></article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- 区块3：Connect Your Idea with Our Work.（双 CTA） -->
+  <section class="section section--compact" aria-labelledby="impact-connect-title">
+    <div class="container">
+      <div class="impact-connect">
+        <h2 id="impact-connect-title">{L('impact.connect.title')}</h2>
+        <p class="lead">{L('impact.connect.body')}</p>
+        <div class="actions">
+          <a class="btn btn--primary" href="/contact/">{L('cta.btn')} <svg class="icon"><use href="#i-arrow"></use></svg></a>
+          <a class="btn btn--outline" href="/partnerships/">{L('impact.connect.secondary')} <svg class="icon"><use href="#i-arrow"></use></svg></a>
+        </div>
+      </div>
     </div>
   </section>
 </BaseLayout>

@@ -555,28 +555,8 @@ a:focus-visible,button:focus-visible,summary:focus-visible,input:focus-visible,s
 /* ---- P0-4: brand slogan beside logo ---- */
 .brand-slogan{font-size:.64rem;line-height:1.3;color:var(--accent-ink);font-weight:700;letter-spacing:.02em;margin-top:2px;opacity:.9}
 @media(max-width:600px){.brand-slogan{display:none}}
-/* ---- P1-6: Explore by Region cards ---- */
-.region-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
-.region-card{
-  display:block;width:100%;text-align:left;cursor:pointer;padding:0;
-  background:#fff;border:1px solid var(--line2);border-radius:16px;overflow:hidden;
-  box-shadow:0 8px 22px rgba(16,43,76,.07);
-  transition:transform .25s ease,box-shadow .25s ease,border-color .25s ease;
-}
-.region-card:hover,.region-card:focus-visible{transform:translateY(-4px);border-color:rgba(38,180,207,.5);box-shadow:0 16px 34px rgba(16,43,76,.14)}
-.region-card.active{border-color:var(--accent);box-shadow:0 0 0 2px rgba(38,180,207,.28)}
-.region-card-media{height:150px;overflow:hidden;background:#e8f1fa}
-.region-card-media img{width:100%;height:100%;object-fit:cover;display:block}
-.region-card-body{padding:15px 17px}
-.region-card-body h3{margin:0 0 7px;font-size:1.02rem;color:var(--navy)}
-.region-card .link-arrow{font-size:.78rem}
-/* ---- P1-9 + P1-6: mobile horizontal scroll for region + country cards ---- */
-@media(max-width:870px){
-  .region-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
-}
+/* ---- P1-9: mobile horizontal scroll for country cards ---- */
 @media(max-width:600px){
-  .region-grid{display:flex;gap:12px;overflow-x:auto;scroll-snap-type:x mandatory;padding-bottom:10px;-webkit-overflow-scrolling:touch}
-  .region-card{flex:0 0 78%;scroll-snap-align:start}
   .card-grid--scroll{display:flex;gap:12px;overflow-x:auto;scroll-snap-type:x mandatory;padding-bottom:10px;-webkit-overflow-scrolling:touch}
   .card-grid--scroll>.card{flex:0 0 78%;scroll-snap-align:start}
 }
@@ -617,7 +597,7 @@ a:focus-visible,button:focus-visible,summary:focus-visible,input:focus-visible,s
 @keyframes mapFlow{from{stroke-dashoffset:0}to{stroke-dashoffset:-18}}
 @media(prefers-reduced-motion:reduce){
   .ai-cube,.map-canvas .map-links line.map-link{animation:none}
-  .region-card,.card-grid--scroll>.card{transition:none}
+  .card-grid--scroll>.card{transition:none}
 }
 
 /* ==========================================================================

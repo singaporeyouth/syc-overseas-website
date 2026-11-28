@@ -1,7 +1,6 @@
 ---
 import { getCollection } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import Hero from '../../components/Hero.astro';
 import TeamDirectory from '../../components/TeamDirectory.astro';
 import { t, type Lang } from '../../i18n/ui';
 interface Props { lang: Lang }
@@ -12,26 +11,51 @@ const countries = (await getCollection('countries')).map((c) => c.data);
 ---
 
 <BaseLayout lang={lang} pageId="people" title={L('seo.people.title')} description={L('seo.people.desc')}>
-  <Hero
-    lang={lang}
-    compact
-    eyebrow={L('nav.people')}
-    titleHtml={L('people.hero.title')}
-    lead={L('people.hero.lead')}
-    image="/assets/hero-people.jpg"
-  />
+  <!-- 阶段2A-3：删除大合影首屏，改 140-180px 简洁页头，首卡目标 top <= 400px -->
+  <header class="people-hero">
+    <div class="container">
+      <div class="eyebrow"><svg class="icon"><use href="#i-spark"></use></svg> {L('people.hero.eyebrow')}</div>
+      <h1>{L('people.hero.title')}</h1>
+      <p class="lead">{L('people.hero.lead')}</p>
+    </div>
+  </header>
 
-  <section class="section section--compact">
+  <section class="section section--compact people-dir-section">
     <div class="container">
       <div class="callout callout--note td-demo-note" role="note">
         <svg class="icon"><use href="#i-spark"></use></svg>
-        <div>
-          <strong>{L('people.preview.notice')}</strong>
-          <span>{L('people.preview.note')}</span>
-        </div>
+        <span>{L('home.team.demoNote')}</span>
       </div>
 
       <TeamDirectory lang={lang} people={people} countries={countries} />
     </div>
   </section>
 </BaseLayout>
+
+<style>
+  .people-hero {
+    padding: 18px 0 8px;
+    background: linear-gradient(180deg, #F5F8FB, #fff);
+    border-bottom: 1px solid var(--line2);
+  }
+  .people-hero h1 {
+    font-size: clamp(32px, 4.2vw, 50px);
+    line-height: 1.12;
+    letter-spacing: -.02em;
+    margin: 10px 0 8px;
+  }
+  .people-hero .lead {
+    font-size: 16px;
+    line-height: 1.6;
+    color: var(--muted);
+    max-width: 760px;
+    margin: 0;
+  }
+  section.people-dir-section { padding-top: 12px; }
+  .people-dir-section .td-demo-note { margin: 6px 0 8px; padding: 8px 14px; }
+  .people-dir-section .td-meta { margin-top: 8px; margin-bottom: 2px; }
+  @media (max-width: 600px) {
+    .people-hero { padding: 16px 0 10px; }
+    .people-hero h1 { font-size: 34px; }
+  }
+</style>

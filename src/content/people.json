@@ -10,9 +10,13 @@
     "roleKo": "국가 대표",
     "country": "Singapore",
     "region": "Asia",
-    "photo": "/assets/person-1.jpg",
+    "photo": "/assets/avatars/singapore-1.svg",
     "isDemo": true,
-    "verificationStatus": "sample_unverified"
+    "verificationStatus": "sample_unverified",
+    "memberId": "singapore-1",
+    "avatar": "/assets/avatars/singapore-1.svg",
+    "avatarAlt": "Illustrated portrait of Wei Ling Tan",
+    "profileStatus": "demo"
   },
   {
     "id": "singapore-2",
@@ -25,9 +29,13 @@
     "roleKo": "AI 프로그램 코디네이터",
     "country": "Singapore",
     "region": "Asia",
-    "photo": "/assets/person-2.jpg",
+    "photo": "/assets/avatars/singapore-2.svg",
     "isDemo": true,
-    "verificationStatus": "sample_unverified"
+    "verificationStatus": "sample_unverified",
+    "memberId": "singapore-2",
+    "avatar": "/assets/avatars/singapore-2.svg",
+    "avatarAlt": "Illustrated portrait of Jia Hao Lim",
+    "profileStatus": "demo"
   },
   {
     "id": "singapore-3",
@@ -40,9 +48,13 @@
     "roleKo": "파트너십 리드",
     "country": "Singapore",
     "region": "Asia",
-    "photo": "/assets/person-3.jpg",
+    "photo": "/assets/avatars/singapore-3.svg",
     "isDemo": true,
-    "verificationStatus": "sample_unverified"
+    "verificationStatus": "sample_unverified",
+    "memberId": "singapore-3",
+    "avatar": "/assets/avatars/singapore-3.svg",
+    "avatarAlt": "Illustrated portrait of Priya Nair",
+    "profileStatus": "demo"
   },
   {
     "id": "japan-1",
@@ -55,9 +67,13 @@
     "roleKo": "청년 참여 코디네이터",
     "country": "Japan",
     "region": "Asia",
-    "photo": "/assets/person-4.jpg",
+    "photo": "/assets/avatars/japan-1.svg",
     "isDemo": true,
-    "verificationStatus": "sample_unverified"
+    "verificationStatus": "sample_unverified",
+    "memberId": "japan-1",
+    "avatar": "/assets/avatars/japan-1.svg",
+    "avatarAlt": "Illustrated portrait of Haruka Sato",
+    "profileStatus": "demo"
   },
   {
     "id": "japan-2",
@@ -70,9 +86,13 @@
     "roleKo": "혁신 및 창업 리드",
     "country": "Japan",
     "region": "Asia",
-    "photo": "/assets/person-5.jpg",
+    "photo": "/assets/avatars/japan-2.svg",
     "isDemo": true,
-    "verificationStatus": "sample_unverified"
+    "verificationStatus": "sample_unverified",
+    "memberId": "japan-2",
+    "avatar": "/assets/avatars/japan-2.svg",
+    "avatarAlt": "Illustrated portrait of Kenji Watanabe",
+    "profileStatus": "demo"
   },
   {
     "id": "japan-3",
@@ -85,9 +105,13 @@
     "roleKo": "국가 대표",
     "country": "Japan",
     "region": "Asia",
-    "photo": "/assets/person-6.jpg",
+    "photo": "/assets/avatars/japan-3.svg",
     "isDemo": true,
-    "verificationStatus": "sample_unverified"
+    "verificationStatus": "sample_unverified",
+    "memberId": "japan-3",
+    "avatar": "/assets/avatars/japan-3.svg",
+    "avatarAlt": "Illustrated portrait of Yuki Tanaka",
+    "profileStatus": "demo"
   },
   {
     "id": "china-1",
@@ -100,9 +124,13 @@
     "roleKo": "AI 프로그램 코디네이터",
     "country": "China",
     "region": "Asia",
-    "photo": "/assets/person-1.jpg",
+    "photo": "/assets/avatars/china-1.svg",
     "isDemo": true,
-    "verificationStatus": "sample_unverified"
+    "verificationStatus": "sample_unverified",
+    "memberId": "china-1",
+    "avatar": "/assets/avatars/china-1.svg",
+    "avatarAlt": "Illustrated portrait of Li Wei",
+    "profileStatus": "demo"
   },
   {
     "id": "china-2",
@@ -115,9 +143,13 @@
     "roleKo": "파트너십 리드",
     "country": "China",
     "region": "Asia",
-    "photo": "/assets/person-2.jpg",
+    "photo": "/assets/avatars/china-2.svg",
     "isDemo": true,
-    "verificationStatus": "sample_unverified"
+    "verificationStatus": "sample_unverified",
+    "memberId": "china-2",
+    "avatar": "/assets/avatars/china-2.svg",
+    "avatarAlt": "Illustrated portrait of Zhang Jing",
+    "profileStatus": "demo"
   },
   {
     "id": "china-3",
@@ -130,9 +162,13 @@
     "roleKo": "청년 참여 코디네이터",
     "country": "China",
     "region": "Asia",
-    "photo": "/assets/person-3.jpg",
+    "photo": "/assets/avatars/china-3.svg",
     "isDemo": true,
-    "verificationStatus": "sample_unverified"
+    "verificationStatus": "sample_unverified",
+    "memberId": "china-3",
+    "avatar": "/assets/avatars/china-3.svg",
+    "avatarAlt": "Illustrated portrait of Chen Yuhan",
+    "profileStatus": "demo"
   },
   {
     "id": "south-korea-1",
@@ -145,9 +181,13 @@
     "roleKo": "혁신 및 창업 리드",
     "country": "South Korea",
     "region": "Asia",
-    "photo": "/assets/person-4.jpg",
+    "photo": "/assets/avatars/south-korea-1.svg",
     "isDemo": true,
-    "verificationStatus": "sample_unverified"
+    "verificationStatus": "sample_unverified",
+    "memberId": "south-korea-1",
+    "avatar": "/assets/avatars/south-korea-1.svg",
+    "avatarAlt": "Illustrated portrait of Ji-woo Kim",
+    "profileStatus": "demo"
   },
   {
     "id": "south-korea-2",
@@ -160,9 +200,13 @@
     "roleKo": "국가 대표",
     "country": "South Korea",
     "region": "Asia",
-    "photo": "/assets/person-5.jpg",
+    "photo": "/assets/avatars/south-korea-2.svg",
     "isDemo": true,
-    "verificationStatus": "sample_unverified"
+    "verificationStatus": "sample_unverified",
+    "memberId": "south-korea-2",
+    "avatar": "/assets/avatars/south-korea-2.svg",
+    "avatarAlt": "Illustrated portrait of Min-jun Park",
+    "profileStatus": "demo"
   },
   {
     "id": "south-korea-3",
@@ -175,9 +219,13 @@
     "roleKo": "AI 프로그램 코디네이터",
     "country": "South Korea",
     "region": "Asia",
-    "photo": "/assets/person-6.jpg",
+    "photo": "/assets/avatars/south-korea-3.svg",
     "isDemo": true,
-    "verificationStatus": "sample_unverified"
+    "verificationStatus": "sample_unverified",
+    "memberId": "south-korea-3",
+    "avatar": "/assets/avatars/south-korea-3.svg",
+    "avatarAlt": "Illustrated portrait of So-yeon Lee",
+    "profileStatus": "demo"
   },
   {
     "id": "india-1",
@@ -190,9 +238,13 @@
     "roleKo": "파트너십 리드",
     "country": "India",
     "region": "Asia",
-    "photo": "/assets/person-1.jpg",
+    "photo": "/assets/avatars/india-1.svg",
     "isDemo": true,
-    "verificationStatus": "sample_unverified"
+    "verificationStatus": "sample_unverified",
+    "memberId": "india-1",
+    "avatar": "/assets/avatars/india-1.svg",
+    "avatarAlt": "Illustrated portrait of Aarav Sharma",
+    "profileStatus": "demo"
   },
   {
     "id": "india-2",
@@ -205,9 +257,13 @@
     "roleKo": "청년 참여 코디네이터",
     "country": "India",
     "region": "Asia",
-    "photo": "/assets/person-2.jpg",
+    "photo": "/assets/avatars/india-2.svg",
     "isDemo": true,
-    "verificationStatus": "sample_unverified"
+    "verificationStatus": "sample_unverified",
+    "memberId": "india-2",
+    "avatar": "/assets/avatars/india-2.svg",
+    "avatarAlt": "Illustrated portrait of Diya Patel",
+    "profileStatus": "demo"
   },
   {
     "id": "india-3",
@@ -220,9 +276,13 @@
     "roleKo": "혁신 및 창업 리드",
     "country": "India",
     "region": "Asia",
-    "photo": "/assets/person-3.jpg",
+    "photo": "/assets/avatars/india-3.svg",
     "isDemo": true,
-    "verificationStatus": "sample_unverified"
+    "verificationStatus": "sample_unverified",
+    "memberId": "india-3",
+    "avatar": "/assets/avatars/india-3.svg",
+    "avatarAlt": "Illustrated portrait of Rohan Mehta",
+    "profileStatus": "demo"
   },
   {
     "id": "indonesia-1",
@@ -235,9 +295,13 @@
     "roleKo": "국가 대표",
     "country": "Indonesia",
     "region": "Asia",
-    "photo": "/assets/person-4.jpg",
+    "photo": "/assets/avatars/indonesia-1.svg",
     "isDemo": true,
-    "verificationStatus": "sample_unverified"
+    "verificationStatus": "sample_unverified",
+    "memberId": "indonesia-1",
+    "avatar": "/assets/avatars/indonesia-1.svg",
+    "avatarAlt": "Illustrated portrait of Putri Ayu",
+    "profileStatus": "demo"
   },
   {
     "id": "indonesia-2",
@@ -250,9 +314,13 @@
     "roleKo": "AI 프로그램 코디네이터",
     "country": "Indonesia",
     "region": "Asia",
-    "photo": "/assets/person-5.jpg",
+    "photo": "/assets/avatars/indonesia-2.svg",
     "isDemo": true,
-    "verificationStatus": "sample_unverified"
+    "verificationStatus": "sample_unverified",
+    "memberId": "indonesia-2",
+    "avatar": "/assets/avatars/indonesia-2.svg",
+    "avatarAlt": "Illustrated portrait of Bagas Pratama",
+    "profileStatus": "demo"
   },
   {
     "id": "indonesia-3",
@@ -265,9 +333,13 @@
     "roleKo": "파트너십 리드",
     "country": "Indonesia",
     "region": "Asia",
-    "photo": "/assets/person-6.jpg",
+    "photo": "/assets/avatars/indonesia-3.svg",
     "isDemo": true,
-    "verificationStatus": "sample_unverified"
+    "verificationStatus": "sample_unverified",
+    "memberId": "indonesia-3",
+    "avatar": "/assets/avatars/indonesia-3.svg",
+    "avatarAlt": "Illustrated portrait of Siti Rahma",
+    "profileStatus": "demo"
   },
   {
     "id": "malaysia-1",
@@ -280,9 +352,13 @@
     "roleKo": "청년 참여 코디네이터",
     "country": "Malaysia",
     "region": "Asia",
-    "photo": "/assets/person-1.jpg",
+    "photo": "/assets/avatars/malaysia-1.svg",
     "isDemo": true,
-    "verificationStatus": "sample_unverified"
+    "verificationStatus": "sample_unverified",
+    "memberId": "malaysia-1",
+    "avatar": "/assets/avatars/malaysia-1.svg",
+    "avatarAlt": "Illustrated portrait of Nur Aisyah",
+    "profileStatus": "demo"
   },
   {
     "id": "malaysia-2",
@@ -295,9 +371,13 @@
     "roleKo": "혁신 및 창업 리드",
     "country": "Malaysia",
     "region": "Asia",
-    "photo": "/assets/person-2.jpg",
+    "photo": "/assets/avatars/malaysia-2.svg",
     "isDemo": true,
-    "verificationStatus": "sample_unverified"
+    "verificationStatus": "sample_unverified",
+    "memberId": "malaysia-2",
+    "avatar": "/assets/avatars/malaysia-2.svg",
+    "avatarAlt": "Illustrated portrait of Wei Jian Lee",
+    "profileStatus": "demo"
   },
   {
     "id": "malaysia-3",
@@ -310,9 +390,13 @@
     "roleKo": "국가 대표",
     "country": "Malaysia",
     "region": "Asia",
-    "photo": "/assets/person-3.jpg",
+    "photo": "/assets/avatars/malaysia-3.svg",
     "isDemo": true,
-    "verificationStatus": "sample_unverified"
+    "verificationStatus": "sample_unverified",
+    "memberId": "malaysia-3",
+    "avatar": "/assets/avatars/malaysia-3.svg",
+    "avatarAlt": "Illustrated portrait of Arun Kumar",
+    "profileStatus": "demo"
   },
   {
     "id": "thailand-1",
@@ -325,9 +409,13 @@
     "roleKo": "AI 프로그램 코디네이터",
     "country": "Thailand",
     "region": "Asia",
-    "photo": "/assets/person-4.jpg",
+    "photo": "/assets/avatars/thailand-1.svg",
     "isDemo": true,
-    "verificationStatus": "sample_unverified"
+    "verificationStatus": "sample_unverified",
+    "memberId": "thailand-1",
+    "avatar": "/assets/avatars/thailand-1.svg",
+    "avatarAlt": "Illustrated portrait of Napat Srisai",
+    "profileStatus": "demo"
   },
   {
     "id": "thailand-2",
@@ -340,9 +428,13 @@
     "roleKo": "파트너십 리드",
     "country": "Thailand",
     "region": "Asia",
-    "photo": "/assets/person-5.jpg",
+    "photo": "/assets/avatars/thailand-2.svg",
     "isDemo": true,
-    "verificationStatus": "sample_unverified"
+    "verificationStatus": "sample_unverified",
+    "memberId": "thailand-2",
+    "avatar": "/assets/avatars/thailand-2.svg",
+    "avatarAlt": "Illustrated portrait of Chutima Kaew",
+    "profileStatus": "demo"
   },
   {
     "id": "thailand-3",
@@ -355,9 +447,13 @@
     "roleKo": "청년 참여 코디네이터",
     "country": "Thailand",
     "region": "Asia",
-    "photo": "/assets/person-6.jpg",
+    "photo": "/assets/avatars/thailand-3.svg",
     "isDemo": true,
-    "verificationStatus": "sample_unverified"
+    "verificationStatus": "sample_unverified",
+    "memberId": "thailand-3",
+    "avatar": "/assets/avatars/thailand-3.svg",
+    "avatarAlt": "Illustrated portrait of Thanakorn Jit",
+    "profileStatus": "demo"
   },
   {
     "id": "vietnam-1",
@@ -370,9 +466,13 @@
     "roleKo": "혁신 및 창업 리드",
     "country": "Vietnam",
     "region": "Asia",
-    "photo": "/assets/person-1.jpg",
+    "photo": "/assets/avatars/vietnam-1.svg",
     "isDemo": true,
-    "verificationStatus": "sample_unverified"
+    "verificationStatus": "sample_unverified",
+    "memberId": "vietnam-1",
+    "avatar": "/assets/avatars/vietnam-1.svg",
+    "avatarAlt": "Illustrated portrait of Nguyen Minh Anh",
+    "profileStatus": "demo"
   },
   {
     "id": "vietnam-2",
@@ -385,9 +485,13 @@
     "roleKo": "국가 대표",
     "country": "Vietnam",
     "region": "Asia",
-    "photo": "/assets/person-2.jpg",
+    "photo": "/assets/avatars/vietnam-2.svg",
     "isDemo": true,
-    "verificationStatus": "sample_unverified"
+    "verificationStatus": "sample_unverified",
+    "memberId": "vietnam-2",
+    "avatar": "/assets/avatars/vietnam-2.svg",
+    "avatarAlt": "Illustrated portrait of Tran Thi Mai",
+    "profileStatus": "demo"
   },
   {
     "id": "vietnam-3",
@@ -400,9 +504,13 @@
     "roleKo": "AI 프로그램 코디네이터",
     "country": "Vietnam",
     "region": "Asia",
-    "photo": "/assets/person-3.jpg",
+    "photo": "/assets/avatars/vietnam-3.svg",
     "isDemo": true,
-    "verificationStatus": "sample_unverified"
+    "verificationStatus": "sample_unverified",
+    "memberId": "vietnam-3",
+    "avatar": "/assets/avatars/vietnam-3.svg",
+    "avatarAlt": "Illustrated portrait of Le Hoang Phuc",
+    "profileStatus": "demo"
   },
   {
     "id": "philippines-1",
@@ -415,9 +523,13 @@
     "roleKo": "파트너십 리드",
     "country": "Philippines",
     "region": "Asia",
-    "photo": "/assets/person-4.jpg",
+    "photo": "/assets/avatars/philippines-1.svg",
     "isDemo": true,
-    "verificationStatus": "sample_unverified"
+    "verificationStatus": "sample_unverified",
+    "memberId": "philippines-1",
+    "avatar": "/assets/avatars/philippines-1.svg",
+    "avatarAlt": "Illustrated portrait of Juan Dela Cruz",
+    "profileStatus": "demo"
   },
   {
     "id": "philippines-2",
@@ -430,9 +542,13 @@
     "roleKo": "청년 참여 코디네이터",
     "country": "Philippines",
     "region": "Asia",
-    "photo": "/assets/person-5.jpg",
+    "photo": "/assets/avatars/philippines-2.svg",
     "isDemo": true,
-    "verificationStatus": "sample_unverified"
+    "verificationStatus": "sample_unverified",
+    "memberId": "philippines-2",
+    "avatar": "/assets/avatars/philippines-2.svg",
+    "avatarAlt": "Illustrated portrait of Maria Santos",
+    "profileStatus": "demo"
   },
   {
     "id": "philippines-3",
@@ -445,9 +561,13 @@
     "roleKo": "혁신 및 창업 리드",
     "country": "Philippines",
     "region": "Asia",
-    "photo": "/assets/person-6.jpg",
+    "photo": "/assets/avatars/philippines-3.svg",
     "isDemo": true,
-    "verificationStatus": "sample_unverified"
+    "verificationStatus": "sample_unverified",
+    "memberId": "philippines-3",
+    "avatar": "/assets/avatars/philippines-3.svg",
+    "avatarAlt": "Illustrated portrait of Alyssa Reyes",
+    "profileStatus": "demo"
   },
   {
     "id": "united-kingdom-1",
@@ -460,9 +580,13 @@
     "roleKo": "국가 대표",
     "country": "United Kingdom",
     "region": "Europe",
-    "photo": "/assets/person-1.jpg",
+    "photo": "/assets/avatars/united-kingdom-1.svg",
     "isDemo": true,
-    "verificationStatus": "sample_unverified"
+    "verificationStatus": "sample_unverified",
+    "memberId": "united-kingdom-1",
+    "avatar": "/assets/avatars/united-kingdom-1.svg",
+    "avatarAlt": "Illustrated portrait of Oliver Bennett",
+    "profileStatus": "demo"
   },
   {
     "id": "united-kingdom-2",
@@ -475,9 +599,13 @@
     "roleKo": "AI 프로그램 코디네이터",
     "country": "United Kingdom",
     "region": "Europe",
-    "photo": "/assets/person-2.jpg",
+    "photo": "/assets/avatars/united-kingdom-2.svg",
     "isDemo": true,
-    "verificationStatus": "sample_unverified"
+    "verificationStatus": "sample_unverified",
+    "memberId": "united-kingdom-2",
+    "avatar": "/assets/avatars/united-kingdom-2.svg",
+    "avatarAlt": "Illustrated portrait of Amelia Clarke",
+    "profileStatus": "demo"
   },
   {
     "id": "united-kingdom-3",
@@ -490,9 +618,13 @@
     "roleKo": "파트너십 리드",
     "country": "United Kingdom",
     "region": "Europe",
-    "photo": "/assets/person-3.jpg",
+    "photo": "/assets/avatars/united-kingdom-3.svg",
     "isDemo": true,
-    "verificationStatus": "sample_unverified"
+    "verificationStatus": "sample_unverified",
+    "memberId": "united-kingdom-3",
+    "avatar": "/assets/avatars/united-kingdom-3.svg",
+    "avatarAlt": "Illustrated portrait of Ethan Walsh",
+    "profileStatus": "demo"
   },
   {
     "id": "germany-1",
@@ -505,9 +637,13 @@
     "roleKo": "청년 참여 코디네이터",
     "country": "Germany",
     "region": "Europe",
-    "photo": "/assets/person-4.jpg",
+    "photo": "/assets/avatars/germany-1.svg",
     "isDemo": true,
-    "verificationStatus": "sample_unverified"
+    "verificationStatus": "sample_unverified",
+    "memberId": "germany-1",
+    "avatar": "/assets/avatars/germany-1.svg",
+    "avatarAlt": "Illustrated portrait of Lena Müller",
+    "profileStatus": "demo"
   },
   {
     "id": "germany-2",
@@ -520,9 +656,13 @@
     "roleKo": "혁신 및 창업 리드",
     "country": "Germany",
     "region": "Europe",
-    "photo": "/assets/person-5.jpg",
+    "photo": "/assets/avatars/germany-2.svg",
     "isDemo": true,
-    "verificationStatus": "sample_unverified"
+    "verificationStatus": "sample_unverified",
+    "memberId": "germany-2",
+    "avatar": "/assets/avatars/germany-2.svg",
+    "avatarAlt": "Illustrated portrait of Jonas Weber",
+    "profileStatus": "demo"
   },
   {
     "id": "germany-3",
@@ -535,9 +675,13 @@
     "roleKo": "국가 대표",
     "country": "Germany",
     "region": "Europe",
-    "photo": "/assets/person-6.jpg",
+    "photo": "/assets/avatars/germany-3.svg",
     "isDemo": true,
-    "verificationStatus": "sample_unverified"
+    "verificationStatus": "sample_unverified",
+    "memberId": "germany-3",
+    "avatar": "/assets/avatars/germany-3.svg",
+    "avatarAlt": "Illustrated portrait of Sophie Fischer",
+    "profileStatus": "demo"
   },
   {
     "id": "france-1",
@@ -550,9 +694,13 @@
     "roleKo": "AI 프로그램 코디네이터",
     "country": "France",
     "region": "Europe",
-    "photo": "/assets/person-1.jpg",
+    "photo": "/assets/avatars/france-1.svg",
     "isDemo": true,
-    "verificationStatus": "sample_unverified"
+    "verificationStatus": "sample_unverified",
+    "memberId": "france-1",
+    "avatar": "/assets/avatars/france-1.svg",
+    "avatarAlt": "Illustrated portrait of Camille Dubois",
+    "profileStatus": "demo"
   },
   {
     "id": "france-2",
@@ -565,9 +713,13 @@
     "roleKo": "파트너십 리드",
     "country": "France",
     "region": "Europe",
-    "photo": "/assets/person-2.jpg",
+    "photo": "/assets/avatars/france-2.svg",
     "isDemo": true,
-    "verificationStatus": "sample_unverified"
+    "verificationStatus": "sample_unverified",
+    "memberId": "france-2",
+    "avatar": "/assets/avatars/france-2.svg",
+    "avatarAlt": "Illustrated portrait of Hugo Martin",
+    "profileStatus": "demo"
   },
   {
     "id": "france-3",
@@ -580,9 +732,13 @@
     "roleKo": "청년 참여 코디네이터",
     "country": "France",
     "region": "Europe",
-    "photo": "/assets/person-3.jpg",
+    "photo": "/assets/avatars/france-3.svg",
     "isDemo": true,
-    "verificationStatus": "sample_unverified"
+    "verificationStatus": "sample_unverified",
+    "memberId": "france-3",
+    "avatar": "/assets/avatars/france-3.svg",
+    "avatarAlt": "Illustrated portrait of Léa Bernard",
+    "profileStatus": "demo"
   },
   {
     "id": "italy-1",
@@ -595,9 +751,13 @@
     "roleKo": "혁신 및 창업 리드",
     "country": "Italy",
     "region": "Europe",
-    "photo": "/assets/person-4.jpg",
+    "photo": "/assets/avatars/italy-1.svg",
     "isDemo": true,
-    "verificationStatus": "sample_unverified"
+    "verificationStatus": "sample_unverified",
+    "memberId": "italy-1",
+    "avatar": "/assets/avatars/italy-1.svg",
+    "avatarAlt": "Illustrated portrait of Giulia Rossi",
+    "profileStatus": "demo"
   },
   {
     "id": "italy-2",
@@ -610,9 +770,13 @@
     "roleKo": "국가 대표",
     "country": "Italy",
     "region": "Europe",
-    "photo": "/assets/person-5.jpg",
+    "photo": "/assets/avatars/italy-2.svg",
     "isDemo": true,
-    "verificationStatus": "sample_unverified"
+    "verificationStatus": "sample_unverified",
+    "memberId": "italy-2",
+    "avatar": "/assets/avatars/italy-2.svg",
+    "avatarAlt": "Illustrated portrait of Marco Bianchi",
+    "profileStatus": "demo"
   },
   {
     "id": "italy-3",
@@ -625,9 +789,13 @@
     "roleKo": "AI 프로그램 코디네이터",
     "country": "Italy",
     "region": "Europe",
-    "photo": "/assets/person-6.jpg",
+    "photo": "/assets/avatars/italy-3.svg",
     "isDemo": true,
-    "verificationStatus": "sample_unverified"
+    "verificationStatus": "sample_unverified",
+    "memberId": "italy-3",
+    "avatar": "/assets/avatars/italy-3.svg",
+    "avatarAlt": "Illustrated portrait of Sofia Conti",
+    "profileStatus": "demo"
   },
   {
     "id": "spain-1",
@@ -640,9 +808,13 @@
     "roleKo": "파트너십 리드",
     "country": "Spain",
     "region": "Europe",
-    "photo": "/assets/person-1.jpg",
+    "photo": "/assets/avatars/spain-1.svg",
     "isDemo": true,
-    "verificationStatus": "sample_unverified"
+    "verificationStatus": "sample_unverified",
+    "memberId": "spain-1",
+    "avatar": "/assets/avatars/spain-1.svg",
+    "avatarAlt": "Illustrated portrait of Lucía Fernández",
+    "profileStatus": "demo"
   },
   {
     "id": "spain-2",
@@ -655,9 +827,13 @@
     "roleKo": "청년 참여 코디네이터",
     "country": "Spain",
     "region": "Europe",
-    "photo": "/assets/person-2.jpg",
+    "photo": "/assets/avatars/spain-2.svg",
     "isDemo": true,
-    "verificationStatus": "sample_unverified"
+    "verificationStatus": "sample_unverified",
+    "memberId": "spain-2",
+    "avatar": "/assets/avatars/spain-2.svg",
+    "avatarAlt": "Illustrated portrait of Diego García",
+    "profileStatus": "demo"
   },
   {
     "id": "spain-3",
@@ -670,9 +846,13 @@
     "roleKo": "혁신 및 창업 리드",
     "country": "Spain",
     "region": "Europe",
-    "photo": "/assets/person-3.jpg",
+    "photo": "/assets/avatars/spain-3.svg",
     "isDemo": true,
-    "verificationStatus": "sample_unverified"
+    "verificationStatus": "sample_unverified",
+    "memberId": "spain-3",
+    "avatar": "/assets/avatars/spain-3.svg",
+    "avatarAlt": "Illustrated portrait of Marta López",
+    "profileStatus": "demo"
   },
   {
     "id": "netherlands-1",
@@ -685,9 +865,13 @@
     "roleKo": "국가 대표",
     "country": "Netherlands",
     "region": "Europe",
-    "photo": "/assets/person-4.jpg",
+    "photo": "/assets/avatars/netherlands-1.svg",
     "isDemo": true,
-    "verificationStatus": "sample_unverified"
+    "verificationStatus": "sample_unverified",
+    "memberId": "netherlands-1",
+    "avatar": "/assets/avatars/netherlands-1.svg",
+    "avatarAlt": "Illustrated portrait of Sanne de Vries",
+    "profileStatus": "demo"
   },
   {
     "id": "netherlands-2",
@@ -700,9 +884,13 @@
     "roleKo": "AI 프로그램 코디네이터",
     "country": "Netherlands",
     "region": "Europe",
-    "photo": "/assets/person-5.jpg",
+    "photo": "/assets/avatars/netherlands-2.svg",
     "isDemo": true,
-    "verificationStatus": "sample_unverified"
+    "verificationStatus": "sample_unverified",
+    "memberId": "netherlands-2",
+    "avatar": "/assets/avatars/netherlands-2.svg",
+    "avatarAlt": "Illustrated portrait of Daan Jansen",
+    "profileStatus": "demo"
   },
   {
     "id": "netherlands-3",
@@ -715,9 +903,13 @@
     "roleKo": "파트너십 리드",
     "country": "Netherlands",
     "region": "Europe",
-    "photo": "/assets/person-6.jpg",
+    "photo": "/assets/avatars/netherlands-3.svg",
     "isDemo": true,
-    "verificationStatus": "sample_unverified"
+    "verificationStatus": "sample_unverified",
+    "memberId": "netherlands-3",
+    "avatar": "/assets/avatars/netherlands-3.svg",
+    "avatarAlt": "Illustrated portrait of Noor Bakker",
+    "profileStatus": "demo"
   },
   {
     "id": "sweden-1",
@@ -730,9 +922,13 @@
     "roleKo": "청년 참여 코디네이터",
     "country": "Sweden",
     "region": "Europe",
-    "photo": "/assets/person-1.jpg",
+    "photo": "/assets/avatars/sweden-1.svg",
     "isDemo": true,
-    "verificationStatus": "sample_unverified"
+    "verificationStatus": "sample_unverified",
+    "memberId": "sweden-1",
+    "avatar": "/assets/avatars/sweden-1.svg",
+    "avatarAlt": "Illustrated portrait of Elsa Lindberg",
+    "profileStatus": "demo"
   },
   {
     "id": "sweden-2",
@@ -745,9 +941,13 @@
     "roleKo": "혁신 및 창업 리드",
     "country": "Sweden",
     "region": "Europe",
-    "photo": "/assets/person-2.jpg",
+    "photo": "/assets/avatars/sweden-2.svg",
     "isDemo": true,
-    "verificationStatus": "sample_unverified"
+    "verificationStatus": "sample_unverified",
+    "memberId": "sweden-2",
+    "avatar": "/assets/avatars/sweden-2.svg",
+    "avatarAlt": "Illustrated portrait of Oscar Nilsson",
+    "profileStatus": "demo"
   },
   {
     "id": "sweden-3",
@@ -760,9 +960,13 @@
     "roleKo": "국가 대표",
     "country": "Sweden",
     "region": "Europe",
-    "photo": "/assets/person-3.jpg",
+    "photo": "/assets/avatars/sweden-3.svg",
     "isDemo": true,
-    "verificationStatus": "sample_unverified"
+    "verificationStatus": "sample_unverified",
+    "memberId": "sweden-3",
+    "avatar": "/assets/avatars/sweden-3.svg",
+    "avatarAlt": "Illustrated portrait of Freja Andersson",
+    "profileStatus": "demo"
   },
   {
     "id": "switzerland-1",
@@ -775,9 +979,13 @@
     "roleKo": "AI 프로그램 코디네이터",
     "country": "Switzerland",
     "region": "Europe",
-    "photo": "/assets/person-4.jpg",
+    "photo": "/assets/avatars/switzerland-1.svg",
     "isDemo": true,
-    "verificationStatus": "sample_unverified"
+    "verificationStatus": "sample_unverified",
+    "memberId": "switzerland-1",
+    "avatar": "/assets/avatars/switzerland-1.svg",
+    "avatarAlt": "Illustrated portrait of Lena Frei",
+    "profileStatus": "demo"
   },
   {
     "id": "switzerland-2",
@@ -790,9 +998,13 @@
     "roleKo": "파트너십 리드",
     "country": "Switzerland",
     "region": "Europe",
-    "photo": "/assets/person-5.jpg",
+    "photo": "/assets/avatars/switzerland-2.svg",
     "isDemo": true,
-    "verificationStatus": "sample_unverified"
+    "verificationStatus": "sample_unverified",
+    "memberId": "switzerland-2",
+    "avatar": "/assets/avatars/switzerland-2.svg",
+    "avatarAlt": "Illustrated portrait of Noah Steiner",
+    "profileStatus": "demo"
   },
   {
     "id": "switzerland-3",
@@ -805,9 +1017,13 @@
     "roleKo": "청년 참여 코디네이터",
     "country": "Switzerland",
     "region": "Europe",
-    "photo": "/assets/person-6.jpg",
+    "photo": "/assets/avatars/switzerland-3.svg",
     "isDemo": true,
-    "verificationStatus": "sample_unverified"
+    "verificationStatus": "sample_unverified",
+    "memberId": "switzerland-3",
+    "avatar": "/assets/avatars/switzerland-3.svg",
+    "avatarAlt": "Illustrated portrait of Mia Zimmermann",
+    "profileStatus": "demo"
   },
   {
     "id": "poland-1",
@@ -820,9 +1036,13 @@
     "roleKo": "혁신 및 창업 리드",
     "country": "Poland",
     "region": "Europe",
-    "photo": "/assets/person-1.jpg",
+    "photo": "/assets/avatars/poland-1.svg",
     "isDemo": true,
-    "verificationStatus": "sample_unverified"
+    "verificationStatus": "sample_unverified",
+    "memberId": "poland-1",
+    "avatar": "/assets/avatars/poland-1.svg",
+    "avatarAlt": "Illustrated portrait of Zofia Kowalski",
+    "profileStatus": "demo"
   },
   {
     "id": "poland-2",
@@ -835,9 +1055,13 @@
     "roleKo": "국가 대표",
     "country": "Poland",
     "region": "Europe",
-    "photo": "/assets/person-2.jpg",
+    "photo": "/assets/avatars/poland-2.svg",
     "isDemo": true,
-    "verificationStatus": "sample_unverified"
+    "verificationStatus": "sample_unverified",
+    "memberId": "poland-2",
+    "avatar": "/assets/avatars/poland-2.svg",
+    "avatarAlt": "Illustrated portrait of Piotr Nowak",
+    "profileStatus": "demo"
   },
   {
     "id": "poland-3",
@@ -850,9 +1074,13 @@
     "roleKo": "AI 프로그램 코디네이터",
     "country": "Poland",
     "region": "Europe",
-    "photo": "/assets/person-3.jpg",
+    "photo": "/assets/avatars/poland-3.svg",
     "isDemo": true,
-    "verificationStatus": "sample_unverified"
+    "verificationStatus": "sample_unverified",
+    "memberId": "poland-3",
+    "avatar": "/assets/avatars/poland-3.svg",
+    "avatarAlt": "Illustrated portrait of Julia Wiśniewski",
+    "profileStatus": "demo"
   },
   {
     "id": "united-states-1",
@@ -865,9 +1093,13 @@
     "roleKo": "파트너십 리드",
     "country": "United States",
     "region": "Americas",
-    "photo": "/assets/person-4.jpg",
+    "photo": "/assets/avatars/united-states-1.svg",
     "isDemo": true,
-    "verificationStatus": "sample_unverified"
+    "verificationStatus": "sample_unverified",
+    "memberId": "united-states-1",
+    "avatar": "/assets/avatars/united-states-1.svg",
+    "avatarAlt": "Illustrated portrait of Jordan Blake",
+    "profileStatus": "demo"
   },
   {
     "id": "united-states-2",
@@ -880,9 +1112,13 @@
     "roleKo": "청년 참여 코디네이터",
     "country": "United States",
     "region": "Americas",
-    "photo": "/assets/person-5.jpg",
+    "photo": "/assets/avatars/united-states-2.svg",
     "isDemo": true,
-    "verificationStatus": "sample_unverified"
+    "verificationStatus": "sample_unverified",
+    "memberId": "united-states-2",
+    "avatar": "/assets/avatars/united-states-2.svg",
+    "avatarAlt": "Illustrated portrait of Maya Rodriguez",
+    "profileStatus": "demo"
   },
   {
     "id": "united-states-3",
@@ -895,9 +1131,13 @@
     "roleKo": "혁신 및 창업 리드",
     "country": "United States",
     "region": "Americas",
-    "photo": "/assets/person-6.jpg",
+    "photo": "/assets/avatars/united-states-3.svg",
     "isDemo": true,
-    "verificationStatus": "sample_unverified"
+    "verificationStatus": "sample_unverified",
+    "memberId": "united-states-3",
+    "avatar": "/assets/avatars/united-states-3.svg",
+    "avatarAlt": "Illustrated portrait of Ethan Chen",
+    "profileStatus": "demo"
   },
   {
     "id": "canada-1",
@@ -910,9 +1150,13 @@
     "roleKo": "국가 대표",
     "country": "Canada",
     "region": "Americas",
-    "photo": "/assets/person-1.jpg",
+    "photo": "/assets/avatars/canada-1.svg",
     "isDemo": true,
-    "verificationStatus": "sample_unverified"
+    "verificationStatus": "sample_unverified",
+    "memberId": "canada-1",
+    "avatar": "/assets/avatars/canada-1.svg",
+    "avatarAlt": "Illustrated portrait of Liam Tremblay",
+    "profileStatus": "demo"
   },
   {
     "id": "canada-2",
@@ -925,9 +1169,13 @@
     "roleKo": "AI 프로그램 코디네이터",
     "country": "Canada",
     "region": "Americas",
-    "photo": "/assets/person-2.jpg",
+    "photo": "/assets/avatars/canada-2.svg",
     "isDemo": true,
-    "verificationStatus": "sample_unverified"
+    "verificationStatus": "sample_unverified",
+    "memberId": "canada-2",
+    "avatar": "/assets/avatars/canada-2.svg",
+    "avatarAlt": "Illustrated portrait of Chloé Martin",
+    "profileStatus": "demo"
   },
   {
     "id": "canada-3",
@@ -940,9 +1188,13 @@
     "roleKo": "파트너십 리드",
     "country": "Canada",
     "region": "Americas",
-    "photo": "/assets/person-3.jpg",
+    "photo": "/assets/avatars/canada-3.svg",
     "isDemo": true,
-    "verificationStatus": "sample_unverified"
+    "verificationStatus": "sample_unverified",
+    "memberId": "canada-3",
+    "avatar": "/assets/avatars/canada-3.svg",
+    "avatarAlt": "Illustrated portrait of Noah Beaulieu",
+    "profileStatus": "demo"
   },
   {
     "id": "brazil-1",
@@ -955,9 +1207,13 @@
     "roleKo": "청년 참여 코디네이터",
     "country": "Brazil",
     "region": "Americas",
-    "photo": "/assets/person-4.jpg",
+    "photo": "/assets/avatars/brazil-1.svg",
     "isDemo": true,
-    "verificationStatus": "sample_unverified"
+    "verificationStatus": "sample_unverified",
+    "memberId": "brazil-1",
+    "avatar": "/assets/avatars/brazil-1.svg",
+    "avatarAlt": "Illustrated portrait of Ana Silva",
+    "profileStatus": "demo"
   },
   {
     "id": "brazil-2",
@@ -970,9 +1226,13 @@
     "roleKo": "혁신 및 창업 리드",
     "country": "Brazil",
     "region": "Americas",
-    "photo": "/assets/person-5.jpg",
+    "photo": "/assets/avatars/brazil-2.svg",
     "isDemo": true,
-    "verificationStatus": "sample_unverified"
+    "verificationStatus": "sample_unverified",
+    "memberId": "brazil-2",
+    "avatar": "/assets/avatars/brazil-2.svg",
+    "avatarAlt": "Illustrated portrait of Lucas Costa",
+    "profileStatus": "demo"
   },
   {
     "id": "brazil-3",
@@ -985,9 +1245,13 @@
     "roleKo": "국가 대표",
     "country": "Brazil",
     "region": "Americas",
-    "photo": "/assets/person-6.jpg",
+    "photo": "/assets/avatars/brazil-3.svg",
     "isDemo": true,
-    "verificationStatus": "sample_unverified"
+    "verificationStatus": "sample_unverified",
+    "memberId": "brazil-3",
+    "avatar": "/assets/avatars/brazil-3.svg",
+    "avatarAlt": "Illustrated portrait of Beatriz Oliveira",
+    "profileStatus": "demo"
   },
   {
     "id": "mexico-1",
@@ -1000,9 +1264,13 @@
     "roleKo": "AI 프로그램 코디네이터",
     "country": "Mexico",
     "region": "Americas",
-    "photo": "/assets/person-1.jpg",
+    "photo": "/assets/avatars/mexico-1.svg",
     "isDemo": true,
-    "verificationStatus": "sample_unverified"
+    "verificationStatus": "sample_unverified",
+    "memberId": "mexico-1",
+    "avatar": "/assets/avatars/mexico-1.svg",
+    "avatarAlt": "Illustrated portrait of Sofía Hernández",
+    "profileStatus": "demo"
   },
   {
     "id": "mexico-2",
@@ -1015,9 +1283,13 @@
     "roleKo": "파트너십 리드",
     "country": "Mexico",
     "region": "Americas",
-    "photo": "/assets/person-2.jpg",
+    "photo": "/assets/avatars/mexico-2.svg",
     "isDemo": true,
-    "verificationStatus": "sample_unverified"
+    "verificationStatus": "sample_unverified",
+    "memberId": "mexico-2",
+    "avatar": "/assets/avatars/mexico-2.svg",
+    "avatarAlt": "Illustrated portrait of Diego Ramírez",
+    "profileStatus": "demo"
   },
   {
     "id": "mexico-3",
@@ -1030,9 +1302,13 @@
     "roleKo": "청년 참여 코디네이터",
     "country": "Mexico",
     "region": "Americas",
-    "photo": "/assets/person-3.jpg",
+    "photo": "/assets/avatars/mexico-3.svg",
     "isDemo": true,
-    "verificationStatus": "sample_unverified"
+    "verificationStatus": "sample_unverified",
+    "memberId": "mexico-3",
+    "avatar": "/assets/avatars/mexico-3.svg",
+    "avatarAlt": "Illustrated portrait of Valentina Cruz",
+    "profileStatus": "demo"
   },
   {
     "id": "argentina-1",
@@ -1045,9 +1321,13 @@
     "roleKo": "혁신 및 창업 리드",
     "country": "Argentina",
     "region": "Americas",
-    "photo": "/assets/person-4.jpg",
+    "photo": "/assets/avatars/argentina-1.svg",
     "isDemo": true,
-    "verificationStatus": "sample_unverified"
+    "verificationStatus": "sample_unverified",
+    "memberId": "argentina-1",
+    "avatar": "/assets/avatars/argentina-1.svg",
+    "avatarAlt": "Illustrated portrait of Camila Fernández",
+    "profileStatus": "demo"
   },
   {
     "id": "argentina-2",
@@ -1060,9 +1340,13 @@
     "roleKo": "국가 대표",
     "country": "Argentina",
     "region": "Americas",
-    "photo": "/assets/person-5.jpg",
+    "photo": "/assets/avatars/argentina-2.svg",
     "isDemo": true,
-    "verificationStatus": "sample_unverified"
+    "verificationStatus": "sample_unverified",
+    "memberId": "argentina-2",
+    "avatar": "/assets/avatars/argentina-2.svg",
+    "avatarAlt": "Illustrated portrait of Matías Gómez",
+    "profileStatus": "demo"
   },
   {
     "id": "argentina-3",
@@ -1075,9 +1359,13 @@
     "roleKo": "AI 프로그램 코디네이터",
     "country": "Argentina",
     "region": "Americas",
-    "photo": "/assets/person-6.jpg",
+    "photo": "/assets/avatars/argentina-3.svg",
     "isDemo": true,
-    "verificationStatus": "sample_unverified"
+    "verificationStatus": "sample_unverified",
+    "memberId": "argentina-3",
+    "avatar": "/assets/avatars/argentina-3.svg",
+    "avatarAlt": "Illustrated portrait of Valentina Rossi",
+    "profileStatus": "demo"
   },
   {
     "id": "chile-1",
@@ -1090,9 +1378,13 @@
     "roleKo": "파트너십 리드",
     "country": "Chile",
     "region": "Americas",
-    "photo": "/assets/person-1.jpg",
+    "photo": "/assets/avatars/chile-1.svg",
     "isDemo": true,
-    "verificationStatus": "sample_unverified"
+    "verificationStatus": "sample_unverified",
+    "memberId": "chile-1",
+    "avatar": "/assets/avatars/chile-1.svg",
+    "avatarAlt": "Illustrated portrait of Antonia Muñoz",
+    "profileStatus": "demo"
   },
   {
     "id": "chile-2",
@@ -1105,9 +1397,13 @@
     "roleKo": "청년 참여 코디네이터",
     "country": "Chile",
     "region": "Americas",
-    "photo": "/assets/person-2.jpg",
+    "photo": "/assets/avatars/chile-2.svg",
     "isDemo": true,
-    "verificationStatus": "sample_unverified"
+    "verificationStatus": "sample_unverified",
+    "memberId": "chile-2",
+    "avatar": "/assets/avatars/chile-2.svg",
+    "avatarAlt": "Illustrated portrait of Ignacio Silva",
+    "profileStatus": "demo"
   },
   {
     "id": "chile-3",
@@ -1120,9 +1416,13 @@
     "roleKo": "혁신 및 창업 리드",
     "country": "Chile",
     "region": "Americas",
-    "photo": "/assets/person-3.jpg",
+    "photo": "/assets/avatars/chile-3.svg",
     "isDemo": true,
-    "verificationStatus": "sample_unverified"
+    "verificationStatus": "sample_unverified",
+    "memberId": "chile-3",
+    "avatar": "/assets/avatars/chile-3.svg",
+    "avatarAlt": "Illustrated portrait of Catalina Rojas",
+    "profileStatus": "demo"
   },
   {
     "id": "colombia-1",
@@ -1135,9 +1435,13 @@
     "roleKo": "국가 대표",
     "country": "Colombia",
     "region": "Americas",
-    "photo": "/assets/person-4.jpg",
+    "photo": "/assets/avatars/colombia-1.svg",
     "isDemo": true,
-    "verificationStatus": "sample_unverified"
+    "verificationStatus": "sample_unverified",
+    "memberId": "colombia-1",
+    "avatar": "/assets/avatars/colombia-1.svg",
+    "avatarAlt": "Illustrated portrait of Valentina García",
+    "profileStatus": "demo"
   },
   {
     "id": "colombia-2",
@@ -1150,9 +1454,13 @@
     "roleKo": "AI 프로그램 코디네이터",
     "country": "Colombia",
     "region": "Americas",
-    "photo": "/assets/person-5.jpg",
+    "photo": "/assets/avatars/colombia-2.svg",
     "isDemo": true,
-    "verificationStatus": "sample_unverified"
+    "verificationStatus": "sample_unverified",
+    "memberId": "colombia-2",
+    "avatar": "/assets/avatars/colombia-2.svg",
+    "avatarAlt": "Illustrated portrait of Santiago Ruiz",
+    "profileStatus": "demo"
   },
   {
     "id": "colombia-3",
@@ -1165,9 +1473,13 @@
     "roleKo": "파트너십 리드",
     "country": "Colombia",
     "region": "Americas",
-    "photo": "/assets/person-6.jpg",
+    "photo": "/assets/avatars/colombia-3.svg",
     "isDemo": true,
-    "verificationStatus": "sample_unverified"
+    "verificationStatus": "sample_unverified",
+    "memberId": "colombia-3",
+    "avatar": "/assets/avatars/colombia-3.svg",
+    "avatarAlt": "Illustrated portrait of Isabella Moreno",
+    "profileStatus": "demo"
   },
   {
     "id": "kenya-1",
@@ -1180,9 +1492,13 @@
     "roleKo": "청년 참여 코디네이터",
     "country": "Kenya",
     "region": "Africa",
-    "photo": "/assets/person-1.jpg",
+    "photo": "/assets/avatars/kenya-1.svg",
     "isDemo": true,
-    "verificationStatus": "sample_unverified"
+    "verificationStatus": "sample_unverified",
+    "memberId": "kenya-1",
+    "avatar": "/assets/avatars/kenya-1.svg",
+    "avatarAlt": "Illustrated portrait of Amina Hassan",
+    "profileStatus": "demo"
   },
   {
     "id": "kenya-2",
@@ -1195,9 +1511,13 @@
     "roleKo": "혁신 및 창업 리드",
     "country": "Kenya",
     "region": "Africa",
-    "photo": "/assets/person-2.jpg",
+    "photo": "/assets/avatars/kenya-2.svg",
     "isDemo": true,
-    "verificationStatus": "sample_unverified"
+    "verificationStatus": "sample_unverified",
+    "memberId": "kenya-2",
+    "avatar": "/assets/avatars/kenya-2.svg",
+    "avatarAlt": "Illustrated portrait of Brian Kiptoo",
+    "profileStatus": "demo"
   },
   {
     "id": "kenya-3",
@@ -1210,9 +1530,13 @@
     "roleKo": "국가 대표",
     "country": "Kenya",
     "region": "Africa",
-    "photo": "/assets/person-3.jpg",
+    "photo": "/assets/avatars/kenya-3.svg",
     "isDemo": true,
-    "verificationStatus": "sample_unverified"
+    "verificationStatus": "sample_unverified",
+    "memberId": "kenya-3",
+    "avatar": "/assets/avatars/kenya-3.svg",
+    "avatarAlt": "Illustrated portrait of Wanjiku Njeri",
+    "profileStatus": "demo"
   },
   {
     "id": "nigeria-1",
@@ -1225,9 +1549,13 @@
     "roleKo": "AI 프로그램 코디네이터",
     "country": "Nigeria",
     "region": "Africa",
-    "photo": "/assets/person-4.jpg",
+    "photo": "/assets/avatars/nigeria-1.svg",
     "isDemo": true,
-    "verificationStatus": "sample_unverified"
+    "verificationStatus": "sample_unverified",
+    "memberId": "nigeria-1",
+    "avatar": "/assets/avatars/nigeria-1.svg",
+    "avatarAlt": "Illustrated portrait of Chinedu Okafor",
+    "profileStatus": "demo"
   },
   {
     "id": "nigeria-2",
@@ -1240,9 +1568,13 @@
     "roleKo": "파트너십 리드",
     "country": "Nigeria",
     "region": "Africa",
-    "photo": "/assets/person-5.jpg",
+    "photo": "/assets/avatars/nigeria-2.svg",
     "isDemo": true,
-    "verificationStatus": "sample_unverified"
+    "verificationStatus": "sample_unverified",
+    "memberId": "nigeria-2",
+    "avatar": "/assets/avatars/nigeria-2.svg",
+    "avatarAlt": "Illustrated portrait of Aisha Bello",
+    "profileStatus": "demo"
   },
   {
     "id": "nigeria-3",
@@ -1255,9 +1587,13 @@
     "roleKo": "청년 참여 코디네이터",
     "country": "Nigeria",
     "region": "Africa",
-    "photo": "/assets/person-6.jpg",
+    "photo": "/assets/avatars/nigeria-3.svg",
     "isDemo": true,
-    "verificationStatus": "sample_unverified"
+    "verificationStatus": "sample_unverified",
+    "memberId": "nigeria-3",
+    "avatar": "/assets/avatars/nigeria-3.svg",
+    "avatarAlt": "Illustrated portrait of Tunde Adeyemi",
+    "profileStatus": "demo"
   },
   {
     "id": "south-africa-1",
@@ -1270,9 +1606,13 @@
     "roleKo": "혁신 및 창업 리드",
     "country": "South Africa",
     "region": "Africa",
-    "photo": "/assets/person-1.jpg",
+    "photo": "/assets/avatars/south-africa-1.svg",
     "isDemo": true,
-    "verificationStatus": "sample_unverified"
+    "verificationStatus": "sample_unverified",
+    "memberId": "south-africa-1",
+    "avatar": "/assets/avatars/south-africa-1.svg",
+    "avatarAlt": "Illustrated portrait of Thabo Mokoena",
+    "profileStatus": "demo"
   },
   {
     "id": "south-africa-2",
@@ -1285,9 +1625,13 @@
     "roleKo": "국가 대표",
     "country": "South Africa",
     "region": "Africa",
-    "photo": "/assets/person-2.jpg",
+    "photo": "/assets/avatars/south-africa-2.svg",
     "isDemo": true,
-    "verificationStatus": "sample_unverified"
+    "verificationStatus": "sample_unverified",
+    "memberId": "south-africa-2",
+    "avatar": "/assets/avatars/south-africa-2.svg",
+    "avatarAlt": "Illustrated portrait of Lerato Dlamini",
+    "profileStatus": "demo"
   },
   {
     "id": "south-africa-3",
@@ -1300,9 +1644,13 @@
     "roleKo": "AI 프로그램 코디네이터",
     "country": "South Africa",
     "region": "Africa",
-    "photo": "/assets/person-3.jpg",
+    "photo": "/assets/avatars/south-africa-3.svg",
     "isDemo": true,
-    "verificationStatus": "sample_unverified"
+    "verificationStatus": "sample_unverified",
+    "memberId": "south-africa-3",
+    "avatar": "/assets/avatars/south-africa-3.svg",
+    "avatarAlt": "Illustrated portrait of Sipho Ndlovu",
+    "profileStatus": "demo"
   },
   {
     "id": "egypt-1",
@@ -1315,9 +1663,13 @@
     "roleKo": "파트너십 리드",
     "country": "Egypt",
     "region": "Africa",
-    "photo": "/assets/person-4.jpg",
+    "photo": "/assets/avatars/egypt-1.svg",
     "isDemo": true,
-    "verificationStatus": "sample_unverified"
+    "verificationStatus": "sample_unverified",
+    "memberId": "egypt-1",
+    "avatar": "/assets/avatars/egypt-1.svg",
+    "avatarAlt": "Illustrated portrait of Omar Hassan",
+    "profileStatus": "demo"
   },
   {
     "id": "egypt-2",
@@ -1330,9 +1682,13 @@
     "roleKo": "청년 참여 코디네이터",
     "country": "Egypt",
     "region": "Africa",
-    "photo": "/assets/person-5.jpg",
+    "photo": "/assets/avatars/egypt-2.svg",
     "isDemo": true,
-    "verificationStatus": "sample_unverified"
+    "verificationStatus": "sample_unverified",
+    "memberId": "egypt-2",
+    "avatar": "/assets/avatars/egypt-2.svg",
+    "avatarAlt": "Illustrated portrait of Layla Mohamed",
+    "profileStatus": "demo"
   },
   {
     "id": "egypt-3",
@@ -1345,9 +1701,13 @@
     "roleKo": "혁신 및 창업 리드",
     "country": "Egypt",
     "region": "Africa",
-    "photo": "/assets/person-6.jpg",
+    "photo": "/assets/avatars/egypt-3.svg",
     "isDemo": true,
-    "verificationStatus": "sample_unverified"
+    "verificationStatus": "sample_unverified",
+    "memberId": "egypt-3",
+    "avatar": "/assets/avatars/egypt-3.svg",
+    "avatarAlt": "Illustrated portrait of Karim Samy",
+    "profileStatus": "demo"
   },
   {
     "id": "ghana-1",
@@ -1360,9 +1720,13 @@
     "roleKo": "국가 대표",
     "country": "Ghana",
     "region": "Africa",
-    "photo": "/assets/person-1.jpg",
+    "photo": "/assets/avatars/ghana-1.svg",
     "isDemo": true,
-    "verificationStatus": "sample_unverified"
+    "verificationStatus": "sample_unverified",
+    "memberId": "ghana-1",
+    "avatar": "/assets/avatars/ghana-1.svg",
+    "avatarAlt": "Illustrated portrait of Kwame Mensah",
+    "profileStatus": "demo"
   },
   {
     "id": "ghana-2",
@@ -1375,9 +1739,13 @@
     "roleKo": "AI 프로그램 코디네이터",
     "country": "Ghana",
     "region": "Africa",
-    "photo": "/assets/person-2.jpg",
+    "photo": "/assets/avatars/ghana-2.svg",
     "isDemo": true,
-    "verificationStatus": "sample_unverified"
+    "verificationStatus": "sample_unverified",
+    "memberId": "ghana-2",
+    "avatar": "/assets/avatars/ghana-2.svg",
+    "avatarAlt": "Illustrated portrait of Akosua Boateng",
+    "profileStatus": "demo"
   },
   {
     "id": "ghana-3",
@@ -1390,9 +1758,13 @@
     "roleKo": "파트너십 리드",
     "country": "Ghana",
     "region": "Africa",
-    "photo": "/assets/person-3.jpg",
+    "photo": "/assets/avatars/ghana-3.svg",
     "isDemo": true,
-    "verificationStatus": "sample_unverified"
+    "verificationStatus": "sample_unverified",
+    "memberId": "ghana-3",
+    "avatar": "/assets/avatars/ghana-3.svg",
+    "avatarAlt": "Illustrated portrait of Yaw Asante",
+    "profileStatus": "demo"
   },
   {
     "id": "australia-1",
@@ -1405,9 +1777,13 @@
     "roleKo": "청년 참여 코디네이터",
     "country": "Australia",
     "region": "Oceania",
-    "photo": "/assets/person-4.jpg",
+    "photo": "/assets/avatars/australia-1.svg",
     "isDemo": true,
-    "verificationStatus": "sample_unverified"
+    "verificationStatus": "sample_unverified",
+    "memberId": "australia-1",
+    "avatar": "/assets/avatars/australia-1.svg",
+    "avatarAlt": "Illustrated portrait of Isla Thompson",
+    "profileStatus": "demo"
   },
   {
     "id": "australia-2",
@@ -1420,9 +1796,13 @@
     "roleKo": "혁신 및 창업 리드",
     "country": "Australia",
     "region": "Oceania",
-    "photo": "/assets/person-5.jpg",
+    "photo": "/assets/avatars/australia-2.svg",
     "isDemo": true,
-    "verificationStatus": "sample_unverified"
+    "verificationStatus": "sample_unverified",
+    "memberId": "australia-2",
+    "avatar": "/assets/avatars/australia-2.svg",
+    "avatarAlt": "Illustrated portrait of Jack Wilson",
+    "profileStatus": "demo"
   },
   {
     "id": "australia-3",
@@ -1435,9 +1815,13 @@
     "roleKo": "국가 대표",
     "country": "Australia",
     "region": "Oceania",
-    "photo": "/assets/person-6.jpg",
+    "photo": "/assets/avatars/australia-3.svg",
     "isDemo": true,
-    "verificationStatus": "sample_unverified"
+    "verificationStatus": "sample_unverified",
+    "memberId": "australia-3",
+    "avatar": "/assets/avatars/australia-3.svg",
+    "avatarAlt": "Illustrated portrait of Ruby Ferguson",
+    "profileStatus": "demo"
   },
   {
     "id": "new-zealand-1",
@@ -1450,9 +1834,13 @@
     "roleKo": "AI 프로그램 코디네이터",
     "country": "New Zealand",
     "region": "Oceania",
-    "photo": "/assets/person-1.jpg",
+    "photo": "/assets/avatars/new-zealand-1.svg",
     "isDemo": true,
-    "verificationStatus": "sample_unverified"
+    "verificationStatus": "sample_unverified",
+    "memberId": "new-zealand-1",
+    "avatar": "/assets/avatars/new-zealand-1.svg",
+    "avatarAlt": "Illustrated portrait of Aria Ngata",
+    "profileStatus": "demo"
   },
   {
     "id": "new-zealand-2",
@@ -1465,9 +1853,13 @@
     "roleKo": "파트너십 리드",
     "country": "New Zealand",
     "region": "Oceania",
-    "photo": "/assets/person-2.jpg",
+    "photo": "/assets/avatars/new-zealand-2.svg",
     "isDemo": true,
-    "verificationStatus": "sample_unverified"
+    "verificationStatus": "sample_unverified",
+    "memberId": "new-zealand-2",
+    "avatar": "/assets/avatars/new-zealand-2.svg",
+    "avatarAlt": "Illustrated portrait of Finn O'Sullivan",
+    "profileStatus": "demo"
   },
   {
     "id": "new-zealand-3",
@@ -1480,9 +1872,13 @@
     "roleKo": "청년 참여 코디네이터",
     "country": "New Zealand",
     "region": "Oceania",
-    "photo": "/assets/person-3.jpg",
+    "photo": "/assets/avatars/new-zealand-3.svg",
     "isDemo": true,
-    "verificationStatus": "sample_unverified"
+    "verificationStatus": "sample_unverified",
+    "memberId": "new-zealand-3",
+    "avatar": "/assets/avatars/new-zealand-3.svg",
+    "avatarAlt": "Illustrated portrait of Kauri Bennett",
+    "profileStatus": "demo"
   },
   {
     "id": "uae-1",
@@ -1495,9 +1891,13 @@
     "roleKo": "혁신 및 창업 리드",
     "country": "United Arab Emirates",
     "region": "Middle East",
-    "photo": "/assets/person-4.jpg",
+    "photo": "/assets/avatars/uae-1.svg",
     "isDemo": true,
-    "verificationStatus": "sample_unverified"
+    "verificationStatus": "sample_unverified",
+    "memberId": "uae-1",
+    "avatar": "/assets/avatars/uae-1.svg",
+    "avatarAlt": "Illustrated portrait of Layla Al-Mansouri",
+    "profileStatus": "demo"
   },
   {
     "id": "uae-2",
@@ -1510,9 +1910,13 @@
     "roleKo": "국가 대표",
     "country": "United Arab Emirates",
     "region": "Middle East",
-    "photo": "/assets/person-5.jpg",
+    "photo": "/assets/avatars/uae-2.svg",
     "isDemo": true,
-    "verificationStatus": "sample_unverified"
+    "verificationStatus": "sample_unverified",
+    "memberId": "uae-2",
+    "avatar": "/assets/avatars/uae-2.svg",
+    "avatarAlt": "Illustrated portrait of Omar Al-Farsi",
+    "profileStatus": "demo"
   },
   {
     "id": "uae-3",
@@ -1525,9 +1929,13 @@
     "roleKo": "AI 프로그램 코디네이터",
     "country": "United Arab Emirates",
     "region": "Middle East",
-    "photo": "/assets/person-6.jpg",
+    "photo": "/assets/avatars/uae-3.svg",
     "isDemo": true,
-    "verificationStatus": "sample_unverified"
+    "verificationStatus": "sample_unverified",
+    "memberId": "uae-3",
+    "avatar": "/assets/avatars/uae-3.svg",
+    "avatarAlt": "Illustrated portrait of Fatima Al-Sayegh",
+    "profileStatus": "demo"
   },
   {
     "id": "saudi-arabia-1",
@@ -1540,9 +1948,13 @@
     "roleKo": "파트너십 리드",
     "country": "Saudi Arabia",
     "region": "Middle East",
-    "photo": "/assets/person-1.jpg",
+    "photo": "/assets/avatars/saudi-arabia-1.svg",
     "isDemo": true,
-    "verificationStatus": "sample_unverified"
+    "verificationStatus": "sample_unverified",
+    "memberId": "saudi-arabia-1",
+    "avatar": "/assets/avatars/saudi-arabia-1.svg",
+    "avatarAlt": "Illustrated portrait of Nour Al-Zahrani",
+    "profileStatus": "demo"
   },
   {
     "id": "saudi-arabia-2",
@@ -1555,9 +1967,13 @@
     "roleKo": "청년 참여 코디네이터",
     "country": "Saudi Arabia",
     "region": "Middle East",
-    "photo": "/assets/person-2.jpg",
+    "photo": "/assets/avatars/saudi-arabia-2.svg",
     "isDemo": true,
-    "verificationStatus": "sample_unverified"
+    "verificationStatus": "sample_unverified",
+    "memberId": "saudi-arabia-2",
+    "avatar": "/assets/avatars/saudi-arabia-2.svg",
+    "avatarAlt": "Illustrated portrait of Khalid Al-Otaibi",
+    "profileStatus": "demo"
   },
   {
     "id": "saudi-arabia-3",
@@ -1570,9 +1986,13 @@
     "roleKo": "혁신 및 창업 리드",
     "country": "Saudi Arabia",
     "region": "Middle East",
-    "photo": "/assets/person-3.jpg",
+    "photo": "/assets/avatars/saudi-arabia-3.svg",
     "isDemo": true,
-    "verificationStatus": "sample_unverified"
+    "verificationStatus": "sample_unverified",
+    "memberId": "saudi-arabia-3",
+    "avatar": "/assets/avatars/saudi-arabia-3.svg",
+    "avatarAlt": "Illustrated portrait of Reem Al-Ghamdi",
+    "profileStatus": "demo"
   },
   {
     "id": "israel-1",
@@ -1585,9 +2005,13 @@
     "roleKo": "국가 대표",
     "country": "Israel",
     "region": "Middle East",
-    "photo": "/assets/person-4.jpg",
+    "photo": "/assets/avatars/israel-1.svg",
     "isDemo": true,
-    "verificationStatus": "sample_unverified"
+    "verificationStatus": "sample_unverified",
+    "memberId": "israel-1",
+    "avatar": "/assets/avatars/israel-1.svg",
+    "avatarAlt": "Illustrated portrait of Noa Cohen",
+    "profileStatus": "demo"
   },
   {
     "id": "israel-2",
@@ -1600,9 +2024,13 @@
     "roleKo": "AI 프로그램 코디네이터",
     "country": "Israel",
     "region": "Middle East",
-    "photo": "/assets/person-5.jpg",
+    "photo": "/assets/avatars/israel-2.svg",
     "isDemo": true,
-    "verificationStatus": "sample_unverified"
+    "verificationStatus": "sample_unverified",
+    "memberId": "israel-2",
+    "avatar": "/assets/avatars/israel-2.svg",
+    "avatarAlt": "Illustrated portrait of Liam Levi",
+    "profileStatus": "demo"
   },
   {
     "id": "israel-3",
@@ -1615,8 +2043,12 @@
     "roleKo": "파트너십 리드",
     "country": "Israel",
     "region": "Middle East",
-    "photo": "/assets/person-6.jpg",
+    "photo": "/assets/avatars/israel-3.svg",
     "isDemo": true,
-    "verificationStatus": "sample_unverified"
+    "verificationStatus": "sample_unverified",
+    "memberId": "israel-3",
+    "avatar": "/assets/avatars/israel-3.svg",
+    "avatarAlt": "Illustrated portrait of Maya Rosen",
+    "profileStatus": "demo"
   }
 ]
